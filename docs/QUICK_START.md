@@ -28,10 +28,10 @@ cd ..
 
 ### Option 1 : Script Automatique (Recommandé)
 
-Double-cliquez sur `start.bat` ou lancez depuis un terminal :
+Double-cliquez sur `scripts/start.bat` ou lancez depuis un terminal :
 
 ```bash
-start.bat
+scripts/start.bat
 ```
 
 Ce script :
@@ -178,10 +178,19 @@ RFactorChampionshipCreator/
 │   ├── models/            # Modèles de données
 │   └── parsers/           # Parsers rFactor
 │
-├── start.bat              # Script de lancement automatique
+├── scripts/               # Scripts utilitaires et de démarrage
+│   ├── start.bat          # Script de lancement automatique
+│   ├── start_dev.bat      # Script de lancement dev
+│   ├── setup_config.py    # Assistant de configuration
+│   ├── kill_ports.bat     # Libérer des ports
+│   ├── cleanup_and_recreate.py
+│   ├── cleanup_and_recreate_with_patch.py
+│   ├── fix_and_test.py
+│   └── fix_and_test_v2.py
 ├── pyproject.toml         # Dépendances Python (uv)
 ├── config.json            # Configuration rFactor
-└── README.md
+├── README.md
+└── docs/                  # Documentation (index: docs/README.md)
 ```
 
 ## Commandes Utiles
@@ -211,9 +220,9 @@ uv lock                # Mettre à jour le lockfile
 
 ## Documentation Complète
 
-- 📖 [START_HERE.md](START_HERE.md) - Guide détaillé dev/prod
-- 📖 [MIGRATION_SUMMARY.md](frontend/MIGRATION_SUMMARY.md) - Détails de la migration React
-- 📖 [CLAUDE.md](CLAUDE.md) - Contexte projet pour développement
+- 📖 [START_HERE.md](archive/START_HERE.md) - Guide détaillé dev/prod (historique)
+- 📖 [MIGRATION_SUMMARY.md](../frontend/MIGRATION_SUMMARY.md) - Détails de la migration React
+- 📖 [CLAUDE.md](../CLAUDE.md) - Contexte projet pour développement
 
 ---
 

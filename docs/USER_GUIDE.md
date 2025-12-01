@@ -34,7 +34,7 @@
 Lors du premier lancement, vous devez configurer l'application :
 
 ```bash
-python setup_config.py
+python scripts/setup_config.py
 ```
 
 #### Étapes de Configuration
@@ -93,15 +93,15 @@ Configuration Complete!
 
 ### Méthode 1 : Script de Démarrage (Recommandé)
 
-Double-cliquez sur `start.bat` ou exécutez :
+Double-cliquez sur `scripts/start.bat` ou exécutez :
 
 ```bash
-start.bat
+scripts/start.bat
 ```
 
 Le script va :
 - Vérifier que Python est installé
-- Vérifier la configuration (lance setup_config.py si nécessaire)
+- Vérifier la configuration (lance scripts/setup_config.py si nécessaire)
 - Démarrer le serveur web
 
 ### Méthode 2 : Démarrage Manuel
@@ -537,7 +537,7 @@ Le préfixe est appliqué à :
 
 **Solution** :
 ```bash
-python setup_config.py
+python scripts/setup_config.py
 ```
 
 #### "Invalid rFactor path"
@@ -549,14 +549,14 @@ python setup_config.py
 
 **Réinitialiser** :
 ```bash
-python setup_config.py
+python scripts/setup_config.py
 ```
 
 ### Problèmes de Serveur
 
 #### Port 5000 déjà utilisé
 
-**Modifier le port** dans `start.bat` :
+**Modifier le port** dans `scripts/start.bat` :
 ```batch
 python -m uvicorn src.web.app:app --host 127.0.0.1 --port 8000 --reload
 ```

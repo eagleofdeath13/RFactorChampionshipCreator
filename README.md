@@ -61,19 +61,23 @@ RFactorChampionshipCreator/
 
 ### 📚 Guides Principaux
 
-- **[USER_GUIDE.md](USER_GUIDE.md)** - Guide utilisateur complet (installation, utilisation, dépannage)
-- **[DEVELOPER_GUIDE.md](DEVELOPER_GUIDE.md)** - Guide développeur (architecture, composants, tests)
+- **[Guide Utilisateur](docs/USER_GUIDE.md)** - Installation, utilisation, dépannage
+- **[Guide Développeur](docs/DEVELOPER_GUIDE.md)** - Architecture, composants, tests
 - **[CHANGELOG.md](CHANGELOG.md)** - Historique des versions et changements
 
 ### 📖 Documentation Technique
 
-- **[SPECIFICATIONS.md](SPECIFICATIONS.md)** - Spécifications fonctionnelles et techniques
-- **[FILE_FORMATS.md](FILE_FORMATS.md)** - Formats de fichiers rFactor (.cch, .rcd, .veh, .gdb, .rfm)
-- **[CLAUDE.md](CLAUDE.md)** - Contexte développement (pour Claude AI)
+- **[Spécifications](docs/SPECIFICATIONS.md)** - Spécifications fonctionnelles et techniques
+- **[Formats de fichiers](docs/FILE_FORMATS.md)** - rFactor (.cch, .rcd, .veh, .gdb, .rfm)
+- **[CLAUDE.md](CLAUDE.md)** - Contexte développement (outil IA) — reste à la racine
 
 ### 📁 Archives
 
-- **docs/archive/** - Documentation de travail et historique sprints
+- **[docs/archive/](docs/archive/)** - Documentation de travail et historique sprints
+
+### 🧭 Navigation de la documentation
+
+- Point d'entrée: **[docs/README.md](docs/README.md)**
 
 ## Formats de fichiers rFactor
 
