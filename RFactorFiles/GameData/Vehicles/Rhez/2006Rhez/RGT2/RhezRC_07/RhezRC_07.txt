@@ -1,3 +1,0 @@
-Description="2006 #07 Palmer"
-
-Painter=ISI

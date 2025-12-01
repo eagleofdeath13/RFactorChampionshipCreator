@@ -1,3 +1,0 @@
-Description="Team Gray #05 Default Skin"
-
-Painter="ISI Brad"

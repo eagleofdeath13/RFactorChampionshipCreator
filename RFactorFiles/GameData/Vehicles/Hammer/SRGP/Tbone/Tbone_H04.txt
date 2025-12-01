@@ -1,3 +1,0 @@
-Description="# 4 BW Racing Hammer"
-
-Painter="ISI Mike D"

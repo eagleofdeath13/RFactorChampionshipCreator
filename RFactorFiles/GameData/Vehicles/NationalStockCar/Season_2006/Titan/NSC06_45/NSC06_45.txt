@@ -1,3 +1,0 @@
-Description="NSC 2006 #45 Domino Red Titan"
-
-Painter=

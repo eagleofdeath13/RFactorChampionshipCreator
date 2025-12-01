@@ -1,3 +1,0 @@
-Description="NSC 2006 #18 Green Brakes Centennial"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="OutDoor Adventures Inc #15 Default Skin"
-
-Painter="ISI Brad"

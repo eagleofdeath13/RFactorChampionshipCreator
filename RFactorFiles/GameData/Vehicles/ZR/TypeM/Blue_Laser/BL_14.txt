@@ -1,3 +1,0 @@
-Description="Team Blue Laser #14 Default Skin"
-
-Painter="ISI Brad"

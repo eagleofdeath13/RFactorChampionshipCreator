@@ -1,3 +1,0 @@
-Description="Team ISI #35 Default Skin"
-
-Painter="ISI Brad"

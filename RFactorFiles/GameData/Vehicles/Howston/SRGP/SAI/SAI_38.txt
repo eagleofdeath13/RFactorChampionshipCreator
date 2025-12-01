@@ -1,3 +1,0 @@
-Description="SAI Tech #38"
-
-Painter="Craig Budwitz"

@@ -1,3 +1,0 @@
-Description="NSC 2006 #11 Jude Centennial"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="Team ISM #16 Default Skin"
-
-Painter="ISI Brad"

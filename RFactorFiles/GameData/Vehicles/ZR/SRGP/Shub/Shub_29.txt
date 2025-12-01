@@ -1,3 +1,0 @@
-Description="Team Shub #29 Default Skin"
-
-Painter="ISI Brad"

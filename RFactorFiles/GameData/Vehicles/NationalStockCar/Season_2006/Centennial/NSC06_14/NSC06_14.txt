@@ -1,3 +1,0 @@
-Description="NSC 2006 #14 Ignite Centennial"
-
-Painter=

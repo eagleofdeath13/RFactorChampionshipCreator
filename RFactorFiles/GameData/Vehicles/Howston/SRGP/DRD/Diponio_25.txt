@@ -1,3 +1,0 @@
-Description="DRD #25 Default Skin"
-
-Painter="ISI Mike D"

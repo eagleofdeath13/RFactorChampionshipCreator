@@ -1,3 +1,0 @@
-Description="Team Blue #04 Default Skin"
-
-Painter="ISI Brad"

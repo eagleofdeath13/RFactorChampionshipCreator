@@ -1,3 +1,0 @@
-Description="Team white #07 Default Skin"
-
-Painter="ISI Brad"

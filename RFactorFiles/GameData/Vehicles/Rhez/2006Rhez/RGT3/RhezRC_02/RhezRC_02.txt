@@ -1,3 +1,0 @@
-Description="2006 #02 Zekering"
-
-Painter=ISI

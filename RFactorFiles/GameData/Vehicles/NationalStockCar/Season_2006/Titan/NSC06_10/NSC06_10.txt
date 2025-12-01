@@ -1,3 +1,0 @@
-Description="NSC 2006 #10 Haper's Milkshakes Titan"
-
-Painter=

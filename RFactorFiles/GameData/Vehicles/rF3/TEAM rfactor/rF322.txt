@@ -1,3 +1,0 @@
-Description="rF3 number 22"
-
-Painter="L2o"

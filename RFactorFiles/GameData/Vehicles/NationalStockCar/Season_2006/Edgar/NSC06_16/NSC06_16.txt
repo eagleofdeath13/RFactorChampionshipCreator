@@ -1,3 +1,0 @@
-Description="NSC 2006 #16 Rasp's Edgar"
-
-Painter=

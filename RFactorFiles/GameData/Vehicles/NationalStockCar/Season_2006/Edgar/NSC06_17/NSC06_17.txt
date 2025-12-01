@@ -1,3 +1,0 @@
-Description="NSC 2006 #17 SportsWerx Edgar"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="XTreme DDF #21 Default Skin"
-
-Painter="ISI Brad"

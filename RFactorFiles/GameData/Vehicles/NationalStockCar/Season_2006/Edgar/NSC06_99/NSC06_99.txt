@@ -1,3 +1,0 @@
-Description="NSC 2006 #99 Osco Power Tools Edgar"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="Team Black #03 Default Skin"
-
-Painter="ISI Brad"

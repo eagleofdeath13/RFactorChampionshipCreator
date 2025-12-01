@@ -1,3 +1,0 @@
-Description="NSC 2006 #01 rFactor Centennial"
-
-Painter=

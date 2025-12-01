@@ -1,3 +1,0 @@
-Description="Team LAM Racing #15 Default Skin"
-
-Painter="ISI Brad"

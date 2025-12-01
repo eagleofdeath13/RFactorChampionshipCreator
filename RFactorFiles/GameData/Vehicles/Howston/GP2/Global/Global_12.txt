@@ -1,3 +1,0 @@
-Description="Global Systems Inc #12 Default Skin"
-
-Painter="ISI Brad"

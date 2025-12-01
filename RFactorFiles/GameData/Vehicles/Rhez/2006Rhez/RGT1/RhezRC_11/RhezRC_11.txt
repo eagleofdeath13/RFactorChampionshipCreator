@@ -1,3 +1,0 @@
-Description="2006 #11 Callisto"
-
-Painter=ISI

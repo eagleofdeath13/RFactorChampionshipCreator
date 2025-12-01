@@ -1,3 +1,0 @@
-Description="NSC 2006 #22 TCI Auto Titan"
-
-Painter=

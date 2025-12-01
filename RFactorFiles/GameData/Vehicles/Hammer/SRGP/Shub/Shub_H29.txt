@@ -1,3 +1,0 @@
-Description="#29 Shub Racing Hammer"
-
-Painter="ISI Mike D"

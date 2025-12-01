@@ -1,3 +1,0 @@
-Description="NSC 2006 #41 Red Alert Titan"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="#17 Detroit Racing Components"
-
-Painter="ISI Mike D"

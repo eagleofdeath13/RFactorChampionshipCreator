@@ -1,3 +1,0 @@
-Description="NSC 2006 #43 Beachcombers Titan"
-
-Painter=

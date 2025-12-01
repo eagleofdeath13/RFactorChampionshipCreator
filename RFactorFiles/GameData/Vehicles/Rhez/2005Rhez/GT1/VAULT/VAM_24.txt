@@ -1,3 +1,0 @@
-Description="Vault of Midnight #24 Default Skin"
-
-Painter="ISI Brad"

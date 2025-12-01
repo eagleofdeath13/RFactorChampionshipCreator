@@ -1,3 +1,0 @@
-Description="NSC 2006 #20 J.Miller Spark Plugs Centennial"
-
-Painter=

@@ -1,3 +1,0 @@
-Description="Grey Paint"
-
-Painter=""

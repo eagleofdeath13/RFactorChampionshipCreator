@@ -1,3 +1,0 @@
-Description="Team JS Supply #22 Default Skin"
-
-Painter="ISI Brad"

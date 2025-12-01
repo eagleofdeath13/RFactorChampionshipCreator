@@ -1,3 +1,0 @@
-Description="NSC 2006 #15 Yellow Precision Components Centennial"
-
-Painter=

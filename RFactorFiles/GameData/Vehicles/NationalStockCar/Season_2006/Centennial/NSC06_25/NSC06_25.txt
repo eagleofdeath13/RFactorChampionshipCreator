@@ -1,3 +1,0 @@
-Description="NSC 2006 #25 Black Ice Centennial"
-
-Painter=

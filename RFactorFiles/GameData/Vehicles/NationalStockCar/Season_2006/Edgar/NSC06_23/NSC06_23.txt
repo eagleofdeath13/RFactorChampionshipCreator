@@ -1,3 +1,0 @@
-Description="NSC 2006 #23 Duisburg Edgar"
-
-Painter=

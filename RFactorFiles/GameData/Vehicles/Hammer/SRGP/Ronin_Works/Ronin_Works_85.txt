@@ -1,3 +1,0 @@
-Description="#85 Ronin Works Team"
-
-Painter="ISI Mike D"

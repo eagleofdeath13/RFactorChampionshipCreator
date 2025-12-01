@@ -1,3 +1,0 @@
-Description="2006 #05 Impact"
-
-Painter=ISI

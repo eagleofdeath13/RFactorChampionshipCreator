@@ -1,3 +1,0 @@
-Description="Team pHil Tech #11 Default Skin"
-
-Painter="ISI Brad"

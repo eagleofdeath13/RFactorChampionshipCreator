@@ -1,3 +1,0 @@
-Description="Team SKend 30 Default Skin"
-
-Painter="ISI Brad"

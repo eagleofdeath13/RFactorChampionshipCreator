@@ -1,3 +1,0 @@
-Description="2006 #03 Habu"
-
-Painter=ISI

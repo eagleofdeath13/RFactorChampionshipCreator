@@ -1,3 +1,0 @@
-Description="Greene Brakes #17 Default Skin"
-
-Painter="ISI Brad"

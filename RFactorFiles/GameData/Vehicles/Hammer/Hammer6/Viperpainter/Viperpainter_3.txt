@@ -1,3 +1,0 @@
-Description="#3 Viperpainter Racing"
-
-Painter="ISI Mike D"

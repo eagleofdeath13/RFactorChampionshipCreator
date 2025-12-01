@@ -1,3 +1,0 @@
-Description="Team America #46 Default Skin"
-
-Painter="ISI Brad"

@@ -1,3 +1,0 @@
-Description="#30 Skend Racing Hammer"
-
-Painter="ISI Mike D"
