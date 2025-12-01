@@ -1,0 +1,21 @@
+Oslo Rogers
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=16-5-1979
+  Starts=56
+  Poles=5
+  Wins=5
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=27.20
+  Reputation=50.53
+  Courtesy=81.19
+  Composure=79.10
+  Speed=96.65
+  Crash=7.51
+  Recovery=81.31
+  CompletedLaps=93.97
+  MinRacingSkill=92.75
+}

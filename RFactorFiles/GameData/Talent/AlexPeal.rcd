@@ -1,0 +1,21 @@
+Alex Peal
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=22-9-1982
+  Starts=45
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=39.62
+  Reputation=65.25
+  Courtesy=32.74
+  Composure=69.20
+  Speed=92.06
+  Crash=7.26
+  Recovery=77.43
+  CompletedLaps=93.05
+  MinRacingSkill=84.33
+}

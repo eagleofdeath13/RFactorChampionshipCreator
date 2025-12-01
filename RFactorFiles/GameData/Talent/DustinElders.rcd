@@ -1,0 +1,21 @@
+Dustin Elders
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=25-3-1970
+  Starts=82
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=69.58
+  Reputation=55.06
+  Courtesy=74.11
+  Composure=72.86
+  Speed=94.08
+  Crash=7.74
+  Recovery=66.69
+  CompletedLaps=93.64
+  MinRacingSkill=87.82
+}

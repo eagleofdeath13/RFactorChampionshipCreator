@@ -1,0 +1,21 @@
+Drake Spencer
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=4-12-1980
+  Starts=54
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=52.20
+  Reputation=34.68
+  Courtesy=65.50
+  Composure=60.04
+  Speed=94.24
+  Crash=5.09
+  Recovery=81.02
+  CompletedLaps=102.03
+  MinRacingSkill=87.78
+}

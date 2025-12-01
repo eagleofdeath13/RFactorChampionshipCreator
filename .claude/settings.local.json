@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\Users\\vallloic\\PycharmProjects\\RFactorChampionshipCreator\\RFactorFiles\" /B)",
+      "Bash(python -m pytest:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(dir:*)",
+      "Bash(curl:*)",
+      "Bash(find:*)",
+      "Bash(findstr:*)",
+      "Bash(more:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Skill(frontend-design:frontend-design)",
+      "Bash(npm install)",
+      "Bash(npm --version:*)",
+      "Bash(tasklist:*)",
+      "Bash(timeout /t 3 /nobreak)",
+      "Bash(uv sync:*)",
+      "Bash(uv add:*)",
+      "Bash(ping:*)",
+      "Bash(npm run dev:*)",
+      "Bash(start.bat)",
+      "Bash(cmd /c start.bat)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

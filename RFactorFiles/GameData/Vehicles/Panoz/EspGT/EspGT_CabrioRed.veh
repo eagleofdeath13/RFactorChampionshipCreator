@@ -1,0 +1,50 @@
+//
+// The first section defines what maps to load for the new vehicle skinning technology.
+// The first line defines a "prefix" to be used for all generic maps.
+// Currently, generic maps are used for the livery, wing, driver, driver arms,
+// driver helmet, and pit crew.  The second line will replace the default livery
+// with the new specified, for the track specified.  The format is as follows:
+//
+// DefaultLivery="PREFIX"       // PREFIX is the base texture map name, assumed to be BMP unless specified
+// PitCrewLivery="PREFIX"       // This is only needed if it differs from the default livery PREFIX
+// TrackLivery="TRACK, PREFIX"  // TRACK is the track name as defined in the event GDB
+// TrackLivery="TRACK, PREFIX"  // For example, "2004_Toban"
+// TrackLivery="TRACK, PREFIX"  // You can have an infinite # of these lines
+//
+
+DefaultLivery="Esp_Red.DDS"
+
+HDVehicle=EsperanteGT.hdv
+Graphics=EspCabriolet_Upgrades.gen
+Spinner=EspCabriolet_Spinner.gen
+Upgrades=EspGTCabriolet_Upgrades.ini // Vehicle upgrades information
+GenString=                       // Used to generate GMT names in *.gen file
+Cameras=Esp_Cams.cam             // Defaults to cams.cfg in UserData directory
+Sounds=Esp.sfx                   //Sounds=default.sfx
+HeadPhysics=HeadPhysics.ini      // Affects driver eyepoint only
+Cockpit=Esp_CockpitInfo.ini
+AIUpgradeClass=GT
+
+//BaseVehiclePrice=97360
+
+//////////////////////////TEAM HISTORY AND INFORMATION///////////////////////////////////////////
+
+Number=20
+Team="Panoz GT Cabriolet"
+PitGroup="Group11"
+Driver="Mike Mook"
+Description="Red Esperante"
+Engine="Ford V8"
+Manufacturer="Panoz Auto"
+Classes="Panoz,Esperante,GT"
+
+FullTeamName="Panoz Esperante GT Cabriolet"
+TeamFounded=2003
+TeamHeadquarters="Sparta, Wisconsin"
+TeamStarts=100
+TeamPoles=70
+TeamWins=50
+TeamWorldChampionships=2
+
+
+Category="Panoz,Esperante,GT"

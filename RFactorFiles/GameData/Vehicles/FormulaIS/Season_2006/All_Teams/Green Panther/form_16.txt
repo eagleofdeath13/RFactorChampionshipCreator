@@ -1,0 +1,3 @@
+Description="Formula Green Panther Tyres #16 Default Skin"
+
+Painter="ISI Peal"

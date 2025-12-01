@@ -1,0 +1,3 @@
+Description="#25 DiPonio Racing Hammer"
+
+Painter="ISI Mike D"

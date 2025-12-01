@@ -1,0 +1,21 @@
+Roy Winger
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=18-4-1975
+  Starts=64
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=56.02
+  Reputation=67.26
+  Courtesy=73.17
+  Composure=93.67
+  Speed=94.55
+  Crash=4.42
+  Recovery=72.41
+  CompletedLaps=99.19
+  MinRacingSkill=87.84
+}

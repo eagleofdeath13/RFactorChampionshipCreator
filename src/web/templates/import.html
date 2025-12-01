@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Import CSV{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4"><i class="bi bi-upload"></i> Import CSV</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Importer des talents</h5>
+                <p>Téléchargez un fichier CSV contenant des talents.</p>
+
+                <div class="mb-3">
+                    <a href="/api/template/talents" class="btn btn-info btn-sm">
+                        <i class="bi bi-download"></i> Télécharger template
+                    </a>
+                </div>
+
+                <form id="import-form">
+                    <div class="mb-3">
+                        <label for="csv-file" class="form-label">Fichier CSV</label>
+                        <input type="file" class="form-control" id="csv-file" accept=".csv" required>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="skip-existing" checked>
+                        <label class="form-check-label" for="skip-existing">
+                            Ignorer les talents existants
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-upload"></i> Importer
+                    </button>
+                </form>
+
+                <div id="import-result" class="mt-3" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.getElementById('import-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const fileInput = document.getElementById('csv-file');
+    const skipExisting = document.getElementById('skip-existing').checked;
+
+    if (!fileInput.files[0]) {
+        ToastNotification.warning('Veuillez sélectionner un fichier');
+        return;
+    }
+
+    try {
+        LoadingOverlay.show('Import en cours...');
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        const response = await fetch(`/api/import/talents?skip_existing=${skipExisting}`, {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+
+        const resultDiv = document.getElementById('import-result');
+        resultDiv.innerHTML = `
+            <div class="alert alert-${result.error_count > 0 ? 'warning' : 'success'}">
+                <h6>Résultat de l'import</h6>
+                <p>Succès: ${result.success_count} / ${result.total}</p>
+                <p>Erreurs: ${result.error_count}</p>
+                ${result.errors.length > 0 ? `
+                    <details>
+                        <summary>Voir les erreurs</summary>
+                        <ul class="mt-2">
+                            ${result.errors.map(e => `<li>Ligne ${e.row}: ${e.error}</li>`).join('')}
+                        </ul>
+                    </details>
+                ` : ''}
+            </div>
+        `;
+        resultDiv.style.display = 'block';
+
+        if (result.success_count > 0) {
+            Toast Notification.success(`${result.success_count} talents importés`);
+        }
+
+    } catch (error) {
+        ToastNotification.error(`Erreur: ${error.message}`);
+    } finally {
+        LoadingOverlay.hide();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+James Fritz
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=15-6-1976
+  Starts=66
+  Poles=14
+  Wins=12
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=89.49
+  Reputation=69.50
+  Courtesy=59.24
+  Composure=50.92
+  Speed=97.68
+  Crash=7.74
+  Recovery=74.83
+  CompletedLaps=96.86
+  MinRacingSkill=93.50
+}

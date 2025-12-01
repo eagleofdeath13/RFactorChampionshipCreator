@@ -1,0 +1,3 @@
+Description="Team Red #01 Default Skin"
+
+Painter="ISI Brad"

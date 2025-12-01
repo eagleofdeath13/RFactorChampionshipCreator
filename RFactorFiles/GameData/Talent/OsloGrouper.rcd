@@ -1,0 +1,21 @@
+Oslo Grouper
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=13-12-1980
+  Starts=43
+  Poles=15
+  Wins=16
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=53.97
+  Reputation=60.05
+  Courtesy=80.38
+  Composure=93.79
+  Speed=98.54
+  Crash=5.49
+  Recovery=80.09
+  CompletedLaps=94.86
+  MinRacingSkill=98.12
+}

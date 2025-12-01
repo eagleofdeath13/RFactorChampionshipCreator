@@ -1,0 +1,368 @@
+{% extends "base.html" %}
+
+{% block title %}Championship Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4" id="championship-name">
+            <i class="bi bi-trophy-fill"></i> <span class="spinner-border spinner-border-sm"></span>
+        </h1>
+        <a href="/championships" class="btn btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Retour
+        </a>
+    </div>
+</div>
+
+<div id="championship-details" style="display: none;">
+    <!-- Details will be loaded here -->
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+const champName = "{{ championship_name }}";
+
+async function loadDetails() {
+    try {
+        LoadingOverlay.show();
+        const champ = await APIClient.get(`/api/championships/${encodeURIComponent(champName)}`);
+
+        document.getElementById('championship-name').innerHTML = `
+            <i class="bi bi-trophy-fill"></i> ${champ.name}
+        `;
+
+        // Note: Based on real .cch files analysis, SeasonStatus=2 means "in progress", not "completed"
+        // The actual mapping appears to be: 0=not started, 1=unknown/unused, 2=in progress
+        const statusNames = ['Non démarré', 'Inconnu', 'En cours'];
+        const statusColors = ['secondary', 'warning', 'primary'];
+
+        let html = `
+            <!-- Basic Info -->
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-info-circle"></i> Informations générales</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Statut:</dt>
+                        <dd class="col-sm-9"><span class="badge bg-${statusColors[champ.status]}">${statusNames[champ.status]}</span></dd>
+
+                        <dt class="col-sm-3">Course actuelle:</dt>
+                        <dd class="col-sm-9">${champ.current_race}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Player Info -->
+            ${champ.player ? `
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-fill"></i> Joueur</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Nom:</dt>
+                        <dd class="col-sm-9">${champ.player.name}</dd>
+
+                        <dt class="col-sm-3">Véhicule:</dt>
+                        <dd class="col-sm-9"><code>${champ.player.veh_file || 'N/A'}</code></dd>
+
+                        <dt class="col-sm-3">Points:</dt>
+                        <dd class="col-sm-9">${champ.player.season_points}</dd>
+
+                        <dt class="col-sm-3">Position:</dt>
+                        <dd class="col-sm-9">${champ.player.points_position}</dd>
+
+                        <dt class="col-sm-3">Poles:</dt>
+                        <dd class="col-sm-9">${champ.player.poles_taken}</dd>
+                    </dl>
+                </div>
+            </div>
+            ` : ''}
+
+            <!-- Game Options -->
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-gear-fill"></i> Options de jeu</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Paramètres de course</h6>
+                            <dl class="row">
+                                <dt class="col-sm-6">Tours par course:</dt>
+                                <dd class="col-sm-6">${champ.game_options.race_laps}</dd>
+
+                                <dt class="col-sm-6">Force IA:</dt>
+                                <dd class="col-sm-6">${champ.game_options.ai_strength}%</dd>
+
+                                <dt class="col-sm-6">Opposants:</dt>
+                                <dd class="col-sm-6">${champ.game_options.opponents}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Réalisme</h6>
+                            <dl class="row">
+                                <dt class="col-sm-6">Dégâts:</dt>
+                                <dd class="col-sm-6">${champ.game_options.damage_multiplier}%</dd>
+
+                                <dt class="col-sm-6">Usure pneus (mult):</dt>
+                                <dd class="col-sm-6">${champ.game_options.tire_mult}x</dd>
+
+                                <dt class="col-sm-6">Consommation (mult):</dt>
+                                <dd class="col-sm-6">${champ.game_options.fuel_mult}x</dd>
+
+                                <dt class="col-sm-6">Taux de pannes:</dt>
+                                <dd class="col-sm-6">${champ.game_options.mechfail_rate}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Race Conditions -->
+            <div class="card mb-3">
+                <div class="card-header bg-warning text-dark">
+                    <h5 class="mb-0"><i class="bi bi-calendar-event"></i> Conditions de course</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Paramètres généraux</h6>
+                            <dl class="row">
+                                <dt class="col-sm-6">Météo:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.weather}</dd>
+
+                                <dt class="col-sm-6">Reconnaissance:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.reconnaissance}</dd>
+
+                                <dt class="col-sm-6">Formation:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.formation}</dd>
+
+                                <dt class="col-sm-6">Walkthrough:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.walkthrough}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Course</h6>
+                            <dl class="row">
+                                <dt class="col-sm-6">Heure départ:</dt>
+                                <dd class="col-sm-6">${Math.floor(champ.race_conditions.race_starting_time / 60)}h${String(champ.race_conditions.race_starting_time % 60).padStart(2, '0')}</dd>
+
+                                <dt class="col-sm-6">Échelle temps:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.race_timescale}x</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Règles & Sécurité</h6>
+                            <dl class="row">
+                                <dt class="col-sm-6">Drapeaux:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.flag_rules}</dd>
+
+                                <dt class="col-sm-6">Drapeaux bleus:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.blue_flags}</dd>
+
+                                <dt class="col-sm-6">Safety car:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.safetycar_collision}</dd>
+
+                                <dt class="col-sm-6">Parc fermé:</dt>
+                                <dd class="col-sm-6">${champ.race_conditions.parc_ferme}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opponents -->
+            ${champ.opponents.length > 0 ? `
+            <div class="card mb-3">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0"><i class="bi bi-people-fill"></i> Opposants (${champ.opponents.length})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nom</th>
+                                    <th>Véhicule</th>
+                                    <th>Points</th>
+                                    <th>Position</th>
+                                    <th>Poles</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${champ.opponents.map(opp => `
+                                <tr>
+                                    <td>${opp.opponent_id}</td>
+                                    <td>
+                                        <a href="/talents/${encodeURIComponent(opp.name)}" class="text-decoration-none">
+                                            <strong>${opp.name}</strong>
+                                        </a>
+                                    </td>
+                                    <td>${opp.veh_file ? `<a href="/vehicles/${encodeURIComponent(opp.veh_file)}"><code>${opp.veh_file}</code></a>` : 'N/A'}</td>
+                                    <td>${opp.season_points}</td>
+                                    <td>${opp.points_position || 'N/A'}</td>
+                                    <td>${opp.poles_taken}</td>
+                                </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+
+            <!-- Vehicle Entries -->
+            ${champ.vehicle_entries.length > 0 ? `
+            <div class="card mb-3">
+                <div class="card-header" style="background-color: #6c757d; color: white;">
+                    <h5 class="mb-0"><i class="bi bi-car-front-fill"></i> Entrées véhicules (${champ.vehicle_entries.length})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Fichier véhicule</th>
+                                    <th>Skin</th>
+                                    <th>Kilomètres parcourus</th>
+                                    <th>Argent dépensé</th>
+                                    <th>Véhicule gratuit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${champ.vehicle_entries.map(ve => `
+                                <tr>
+                                    <td>${ve.vehicle_id}</td>
+                                    <td>${ve.file ? `<a href="/vehicles/${encodeURIComponent(ve.file)}"><code>${ve.file}</code></a>` : 'N/A'}</td>
+                                    <td>${ve.skin || 'N/A'}</td>
+                                    <td>${(ve.meters_driven / 1000).toFixed(1)} km</td>
+                                    <td>${ve.money_spent}</td>
+                                    <td>${ve.free_vehicle ? 'Oui' : 'Non'}</td>
+                                </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+
+            <!-- Track Stats -->
+            ${champ.track_stats.length > 0 ? `
+            <div class="card mb-3">
+                <div class="card-header" style="background-color: #28a745; color: white;">
+                    <h5 class="mb-0"><i class="bi bi-flag-fill"></i> Circuits du championnat (${champ.track_stats.length})</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 80px;">#</th>
+                                    <th>Circuit</th>
+                                    <th>Fichier</th>
+                                    <th style="width: 150px;">Records</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${champ.track_stats.map((ts, index) => {
+                                    const isCurrent = index === champ.current_race;
+                                    const isPast = index < champ.current_race;
+                                    const rowClass = isCurrent ? 'table-primary' : (isPast ? 'table-success' : '');
+                                    const badge = isCurrent ? '<span class="badge bg-primary ms-2">En cours</span>' : (isPast ? '<span class="badge bg-success ms-2">Terminée</span>' : '<span class="badge bg-secondary ms-2">À venir</span>');
+                                    return `
+                                    <tr class="${rowClass}">
+                                        <td><strong>${index + 1}</strong></td>
+                                        <td><strong>${ts.track_name || 'N/A'}</strong> ${badge}</td>
+                                        <td>${ts.track_file ? `<a href="/tracks/${encodeURIComponent(ts.track_file)}"><code>${ts.track_file}</code></a>` : 'N/A'}</td>
+                                        <td>${ts.class_records.length} record(s)</td>
+                                    </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+
+            <!-- Career Stats -->
+            ${champ.career_stats ? `
+            <div class="card mb-3">
+                <div class="card-header" style="background-color: #17a2b8; color: white;">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart-fill"></i> Statistiques carrière</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <dl class="row">
+                                <dt class="col-sm-6">Expérience:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.experience}</dd>
+
+                                <dt class="col-sm-6">Argent:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.money}</dd>
+
+                                <dt class="col-sm-6">Total courses:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_races}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-3">
+                            <dl class="row">
+                                <dt class="col-sm-6">Victoires:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_wins}</dd>
+
+                                <dt class="col-sm-6">Poles:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_poles}</dd>
+
+                                <dt class="col-sm-6">Records tour:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_lap_records}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-3">
+                            <dl class="row">
+                                <dt class="col-sm-6">Total tours:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_laps}</dd>
+
+                                <dt class="col-sm-6">Total points:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_points_scored}</dd>
+
+                                <dt class="col-sm-6">Championnats:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.total_championships}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-md-3">
+                            <dl class="row">
+                                <dt class="col-sm-6">Pos. moy. départ:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.avg_start_position.toFixed(2)}</dd>
+
+                                <dt class="col-sm-6">Pos. moy. arrivée:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.avg_finish_position.toFixed(2)}</dd>
+
+                                <dt class="col-sm-6">Saisons abandonnées:</dt>
+                                <dd class="col-sm-6">${champ.career_stats.aborted_seasons}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+        `;
+
+        document.getElementById('championship-details').innerHTML = html;
+
+        document.getElementById('championship-details').style.display = 'block';
+    } catch (error) {
+        ToastNotification.error('Erreur de chargement');
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadDetails);
+</script>
+{% endblock %}

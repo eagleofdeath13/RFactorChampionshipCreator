@@ -1,0 +1,3 @@
+Description="Formula LUCAS Pro Comp #19 Default Skin"
+
+Painter="ISI Peal"

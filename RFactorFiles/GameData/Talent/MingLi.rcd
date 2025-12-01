@@ -1,0 +1,21 @@
+Ming Li
+{
+//Driver Info
+  Nationality=Chinese
+  DateofBirth=29-9-1975
+  Starts=36
+  Poles=1
+  Wins=1
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=97.83
+  Reputation=41.10
+  Courtesy=94.96
+  Composure=53.73
+  Speed=96.56
+  Crash=4.66
+  Recovery=76.03
+  CompletedLaps=97.12
+  MinRacingSkill=87.80
+}

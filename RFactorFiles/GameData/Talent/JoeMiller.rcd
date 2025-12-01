@@ -1,0 +1,21 @@
+Joe Miller
+{
+//Driver Info
+  Nationality=Canadian
+  DateofBirth=4-8-1970
+  Starts=74
+  Poles=9
+  Wins=10
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=27.36
+  Reputation=60.96
+  Courtesy=62.86
+  Composure=53.50
+  Speed=96.66
+  Crash=6.19
+  Recovery=74.64
+  CompletedLaps=94.25
+  MinRacingSkill=92.23
+}

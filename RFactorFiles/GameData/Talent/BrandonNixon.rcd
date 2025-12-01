@@ -1,0 +1,21 @@
+Brandon Nixon
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=24-5-1977
+  Starts=48
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=89.51
+  Reputation=43.05
+  Courtesy=55.47
+  Composure=83.45
+  Speed=94.12
+  Crash=6.38
+  Recovery=81.87
+  CompletedLaps=91.50
+  MinRacingSkill=87.84
+}

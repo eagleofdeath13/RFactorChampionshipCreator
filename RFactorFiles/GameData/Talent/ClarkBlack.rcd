@@ -1,0 +1,21 @@
+Clark Black
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=23-5-1979
+  Starts=52
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=53.65
+  Reputation=31.62
+  Courtesy=83.37
+  Composure=57.11
+  Speed=91.52
+  Crash=5.00
+  Recovery=77.05
+  CompletedLaps=97.02
+  MinRacingSkill=82.51
+}

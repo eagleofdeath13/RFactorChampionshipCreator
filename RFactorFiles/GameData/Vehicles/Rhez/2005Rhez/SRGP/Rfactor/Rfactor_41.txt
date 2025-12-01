@@ -1,0 +1,3 @@
+Description="Team Rfactor #41 Default Skin"
+
+Painter="ISI Brad"

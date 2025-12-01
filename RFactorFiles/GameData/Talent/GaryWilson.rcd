@@ -1,0 +1,21 @@
+Gary Wilson
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=8-5-1966
+  Starts=106
+  Poles=0
+  Wins=0
+  DriversChampionships=1
+
+//Driver Stats
+  Aggression=65.33
+  Reputation=83.04
+  Courtesy=46.30
+  Composure=96.97
+  Speed=95.81
+  Crash=8.53
+  Recovery=76.06
+  CompletedLaps=101.63
+  MinRacingSkill=92.25
+}

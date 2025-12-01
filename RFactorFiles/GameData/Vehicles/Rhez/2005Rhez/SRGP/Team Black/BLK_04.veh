@@ -1,0 +1,50 @@
+//
+// The first section defines what maps to load for the new vehicle skinning
+// technology.  The first line defines a "prefix" to be used for all generic maps.
+// Currently, generic maps are used for the livery, wing, driver, driver arms,
+// driver helmet, and pit crew.  The second line will replace the default livery
+// with the new specified, for the track specified.  The format is as follows:
+//
+// DefaultLivery="PREFIX"       // PREFIX is the base texture map name, assumed to be BMP unless specified
+// PitCrewLivery="PREFIX"       // This is only needed if it differs from the default livery PREFIX
+// TrackLivery="TRACK, PREFIX"  // TRACK is the track name as defined in the event GDB
+// TrackLivery="TRACK, PREFIX"  // For example, "2004_Toban"
+// TrackLivery="TRACK, PREFIX"  // You can have an infinite # of these lines
+//
+
+DefaultLivery="Blk_04.DDS"
+
+HDVehicle=Rhez.hdv          
+Graphics=Rhez_upgrades.gen
+Spinner=Rhez_Spinner.gen            
+GenString=                          // Used to generate GMT names in *.gen file
+Sounds=Rhez.sfx                     // Sounds=default.sfx
+Cameras=Rhez_cams.cam               // Defaults to cams.cfg in UserData directory
+Upgrades=Rhez_Upgrades.ini          // Vehicle upgrades information
+HeadPhysics=headphysics.ini         // Affects driver eyepoint only
+Cockpit=Rhez_cockpitinfo.ini
+AIUpgradeClass=GT3
+
+
+//////////////////////////TEAM HISTORY AND INFORMATION///////////////////////////////////////////
+
+
+Number=04
+Team="Rhez Team Black Racing"
+PitGroup="Group2"
+Driver="Britt Shah"          
+Description="Team Black #4"
+Engine="VL TEK"
+Manufacturer="Vayline"
+Classes="SRGP 2005 Rhez GT3"
+
+FullTeamName="Team Black"
+TeamFounded=2004          
+TeamHeadquarters="Casper, Wyoming"
+TeamStarts=200
+TeamPoles=25
+TeamWins=40
+TeamWorldChampionships=0          
+
+
+Category="Vayline,2005 Rhez"

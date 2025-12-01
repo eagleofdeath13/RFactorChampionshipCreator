@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Talent Details - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4" id="talent-name">
+            <i class="bi bi-person"></i> <span class="spinner-border spinner-border-sm"></span>
+        </h1>
+        <a href="/talents" class="btn btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Retour à la liste
+        </a>
+        <a href="/talents/{{ talent_name }}/edit" class="btn btn-primary mb-3 ms-2">
+            <i class="bi bi-pencil"></i> Éditer
+        </a>
+    </div>
+</div>
+
+<div id="talent-details" style="display: none;">
+    <!-- Talent details will be loaded here -->
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+const talentName = "{{ talent_name }}";
+
+async function loadTalentDetails() {
+    try {
+        LoadingOverlay.show('Chargement...');
+        const talent = await APIClient.get(`/api/talents/${encodeURIComponent(talentName)}`);
+
+        document.getElementById('talent-name').innerHTML = `
+            <i class="bi bi-person"></i> ${talent.name}
+        `;
+
+        document.getElementById('talent-details').innerHTML = `
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Informations personnelles</h5>
+                    <dl class="row">
+                        <dt class="col-sm-3">Nationalité:</dt>
+                        <dd class="col-sm-9">${talent.personal_info.nationality}</dd>
+
+                        <dt class="col-sm-3">Date de naissance:</dt>
+                        <dd class="col-sm-9">${formatDate(talent.personal_info.date_of_birth)}</dd>
+
+                        <dt class="col-sm-3">Départs:</dt>
+                        <dd class="col-sm-9">${talent.personal_info.starts}</dd>
+
+                        <dt class="col-sm-3">Poles:</dt>
+                        <dd class="col-sm-9">${talent.personal_info.poles}</dd>
+
+                        <dt class="col-sm-3">Victoires:</dt>
+                        <dd class="col-sm-9">${talent.personal_info.wins}</dd>
+
+                        <dt class="col-sm-3">Championnats:</dt>
+                        <dd class="col-sm-9">${talent.personal_info.drivers_championships}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Statistiques de course</h5>
+                    ${Object.entries(talent.stats).map(([key, value]) => `
+                        <div class="mb-2">
+                            <label class="form-label">${key}:</label>
+                            <div class="progress" style="height: 25px;">
+                                <div class="progress-bar ${value < 40 ? 'bg-danger' : value < 70 ? 'bg-warning' : 'bg-success'}"
+                                     role="progressbar"
+                                     style="width: ${value}%"
+                                     aria-valuenow="${value}"
+                                     aria-valuemin="0"
+                                     aria-valuemax="100">
+                                    ${value.toFixed(1)}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        document.getElementById('talent-details').style.display = 'block';
+    } catch (error) {
+        ToastNotification.error('Erreur lors du chargement du talent');
+        console.error(error);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadTalentDetails);
+</script>
+{% endblock %}

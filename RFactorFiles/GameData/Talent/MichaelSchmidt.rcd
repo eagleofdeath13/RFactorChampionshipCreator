@@ -1,0 +1,21 @@
+Michael Schmidt
+{
+//Driver Info
+  Nationality=Australian
+  DateofBirth=12-12-1985
+  Starts=35
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=80.59
+  Reputation=90.30
+  Courtesy=60.85
+  Composure=95.13
+  Speed=97.21
+  Crash=1.21
+  Recovery=90.40
+  CompletedLaps=87.39
+  MinRacingSkill=92.67
+}

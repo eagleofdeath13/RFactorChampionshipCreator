@@ -1,0 +1,21 @@
+Roy Hines
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=2-10-1979
+  Starts=47
+  Poles=5
+  Wins=4
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=60.76
+  Reputation=36.78
+  Courtesy=61.07
+  Composure=83.90
+  Speed=96.03
+  Crash=3.91
+  Recovery=72.20
+  CompletedLaps=90.79
+  MinRacingSkill=92.15
+}

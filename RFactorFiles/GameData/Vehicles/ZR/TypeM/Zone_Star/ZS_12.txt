@@ -1,0 +1,3 @@
+Description="Team Zone Star #12 Default Skin"
+
+Painter="ISI Brad"

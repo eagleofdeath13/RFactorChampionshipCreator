@@ -1,0 +1,3 @@
+Description="Team White #06 Default Skin"
+
+Painter="ISI Brad"

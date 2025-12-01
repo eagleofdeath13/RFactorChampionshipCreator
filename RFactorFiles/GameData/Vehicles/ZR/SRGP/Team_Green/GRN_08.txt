@@ -1,0 +1,3 @@
+Description="Team Green #08 Default Skin"
+
+Painter="ISI"

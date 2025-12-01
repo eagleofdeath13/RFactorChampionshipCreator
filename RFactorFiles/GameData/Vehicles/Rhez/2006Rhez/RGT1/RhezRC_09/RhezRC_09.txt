@@ -1,0 +1,3 @@
+Description="2006 #09 Magna Ignitions"
+
+Painter=ISI

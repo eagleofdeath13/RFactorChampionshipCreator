@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Véhicules - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-car-front-fill"></i> Gestion des Véhicules
+        </h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-4">
+        <input type="text" id="search-input" class="form-control" placeholder="Rechercher un véhicule...">
+    </div>
+    <div class="col-md-3">
+        <select id="class-filter" class="form-select">
+            <option value="">Toutes les classes</option>
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select id="manufacturer-filter" class="form-select">
+            <option value="">Tous les constructeurs</option>
+        </select>
+    </div>
+    <div class="col-md-2 text-end">
+        <button class="btn btn-secondary" onclick="reloadVehicles()" title="Recharger depuis le disque">
+            <i class="bi bi-arrow-clockwise"></i> Recharger
+        </button>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            <strong id="vehicle-count">Chargement...</strong>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Pilote</th>
+                        <th>Équipe</th>
+                        <th>Constructeur</th>
+                        <th>Classes</th>
+                        <th>Fichier</th>
+                    </tr>
+                </thead>
+                <tbody id="vehicles-table-body">
+                    <tr>
+                        <td colspan="6" class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let allVehicles = [];
+let allClasses = [];
+let allManufacturers = [];
+
+async function loadVehicles() {
+    try {
+        LoadingOverlay.show('Chargement des véhicules...');
+
+        // Load vehicles, classes, and manufacturers in parallel
+        const [vehicles, classes, manufacturers] = await Promise.all([
+            APIClient.get('/api/vehicles/'),
+            APIClient.get('/api/vehicles/classes'),
+            APIClient.get('/api/vehicles/manufacturers')
+        ]);
+
+        allVehicles = vehicles;
+        allClasses = classes;
+        allManufacturers = manufacturers;
+
+        // Populate filters
+        populateFilters();
+
+        // Render initial view
+        renderVehicles(vehicles);
+
+        // Update count
+        document.getElementById('vehicle-count').textContent =
+            `${vehicles.length} véhicule(s) trouvé(s)`;
+
+    } catch (error) {
+        ToastNotification.error('Erreur lors du chargement des véhicules');
+        console.error(error);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+function populateFilters() {
+    // Populate class filter
+    const classFilter = document.getElementById('class-filter');
+    classFilter.innerHTML = '<option value="">Toutes les classes</option>';
+    allClasses.forEach(cls => {
+        const option = document.createElement('option');
+        option.value = cls.class_name;
+        option.textContent = `${cls.class_name} (${cls.count})`;
+        classFilter.appendChild(option);
+    });
+
+    // Populate manufacturer filter
+    const manufacturerFilter = document.getElementById('manufacturer-filter');
+    manufacturerFilter.innerHTML = '<option value="">Tous les constructeurs</option>';
+    allManufacturers.forEach(mfr => {
+        const option = document.createElement('option');
+        option.value = mfr.manufacturer;
+        option.textContent = `${mfr.manufacturer} (${mfr.count})`;
+        manufacturerFilter.appendChild(option);
+    });
+}
+
+function renderVehicles(vehicles) {
+    const tbody = document.getElementById('vehicles-table-body');
+
+    if (vehicles.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center">Aucun véhicule trouvé</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = vehicles.map(veh => `
+        <tr onclick="window.location.href='/vehicles/${encodeURIComponent(veh.relative_path || veh.file_name)}'" style="cursor: pointer;">
+            <td><strong>${veh.number}</strong></td>
+            <td>${veh.driver ? `<a href='/talents/${encodeURIComponent(veh.driver)}' class='text-decoration-none' onclick='event.stopPropagation();'>${veh.driver}</a>` : 'N/A'}</td>
+            <td>${veh.team || 'N/A'}</td>
+            <td>${veh.manufacturer || 'N/A'}</td>
+            <td><small>${veh.classes || 'N/A'}</small></td>
+            <td><code>${veh.file_name}</code></td>
+        </tr>
+    `).join('');
+
+    // Update count
+    document.getElementById('vehicle-count').textContent =
+        `${vehicles.length} véhicule(s) affiché(s)`;
+}
+
+function filterVehicles() {
+    const searchQuery = document.getElementById('search-input').value.toLowerCase();
+    const selectedClass = document.getElementById('class-filter').value;
+    const selectedManufacturer = document.getElementById('manufacturer-filter').value;
+
+    let filtered = allVehicles;
+
+    // Filter by search query
+    if (searchQuery) {
+        filtered = filtered.filter(v =>
+            (v.driver && v.driver.toLowerCase().includes(searchQuery)) ||
+            (v.team && v.team.toLowerCase().includes(searchQuery)) ||
+            (v.display_name && v.display_name.toLowerCase().includes(searchQuery)) ||
+            (v.file_name && v.file_name.toLowerCase().includes(searchQuery))
+        );
+    }
+
+    // Filter by class
+    if (selectedClass) {
+        filtered = filtered.filter(v =>
+            v.classes && v.classes.includes(selectedClass)
+        );
+    }
+
+    // Filter by manufacturer
+    if (selectedManufacturer) {
+        filtered = filtered.filter(v =>
+            v.manufacturer === selectedManufacturer
+        );
+    }
+
+    renderVehicles(filtered);
+}
+
+async function reloadVehicles() {
+    try {
+        LoadingOverlay.show('Rechargement...');
+        await APIClient.post('/api/vehicles/reload');
+        await loadVehicles();
+        ToastNotification.success('Véhicules rechargés avec succès');
+    } catch (error) {
+        ToastNotification.error('Erreur lors du rechargement');
+        console.error(error);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+// Event listeners
+document.getElementById('search-input').addEventListener('input', filterVehicles);
+document.getElementById('class-filter').addEventListener('change', filterVehicles);
+document.getElementById('manufacturer-filter').addEventListener('change', filterVehicles);
+
+// Load on page load
+document.addEventListener('DOMContentLoaded', loadVehicles);
+</script>
+{% endblock %}

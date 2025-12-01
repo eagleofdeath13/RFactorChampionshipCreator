@@ -1,0 +1,21 @@
+Brad Washington
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=5-8-1976
+  Starts=51
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=32.70
+  Reputation=31.29
+  Courtesy=72.71
+  Composure=69.29
+  Speed=92.96
+  Crash=6.16
+  Recovery=79.39
+  CompletedLaps=92.71
+  MinRacingSkill=86.24
+}

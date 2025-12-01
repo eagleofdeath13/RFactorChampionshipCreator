@@ -1,0 +1,21 @@
+Bruce Jones
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=13-9-1976
+  Starts=74
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=91.53
+  Reputation=77.92
+  Courtesy=33.75
+  Composure=98.02
+  Speed=92.20
+  Crash=6.60
+  Recovery=89.96
+  CompletedLaps=91.22
+  MinRacingSkill=83.17
+}

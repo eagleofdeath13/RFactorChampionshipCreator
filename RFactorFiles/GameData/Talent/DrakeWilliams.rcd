@@ -1,0 +1,21 @@
+Drake Williams
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=1-7-1979
+  Starts=43
+  Poles=5
+  Wins=6
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=71.20
+  Reputation=72.59
+  Courtesy=39.64
+  Composure=91.86
+  Speed=96.95
+  Crash=2.38
+  Recovery=73.54
+  CompletedLaps=89.36
+  MinRacingSkill=87.46
+}

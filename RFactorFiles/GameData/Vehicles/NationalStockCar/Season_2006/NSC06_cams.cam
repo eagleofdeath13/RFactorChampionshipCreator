@@ -1,0 +1,165 @@
+//National Stock Car Racing Series Onboard Cams
+
+LocalCam=NOSECAM
+{
+  Fov=(62.500000, 62.500000)
+  Clear=TRUE
+  Color=(164, 218, 249)
+  ClipPlanes=(0.900000, 700.000000)
+  LODMultiplier=(1.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(90.000000, 90.000000, 90.000000)
+  PositionOffset=(0.000000, 0.300000, 0.000000)
+  OrientationOffset=(0.000000, 0.000000, 0.000000)
+  Radius=(0.000000)
+}
+LocalCam=COCKPIT
+{
+  Fov=(75.000000, 72.500000)
+  Clear=TRUE
+  Color=(164, 218, 249)
+  ClipPlanes=(0.200000, 700.000000)
+  LODMultiplier=(1.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(999.000000, 999.000000, 999.000000)
+  PositionOffset=(0.0, 0.0, 0.0)  // should always be zero ... make changes in the cockpitinfo.ini file
+  OrientationOffset=(-0.030000, 0.000000, 0.000000)
+  Radius=(0.000000)
+}
+LocalCam=TVCOCKPIT
+{
+  Fov=(87.000000, 62.000000)
+  Clear=TRUE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.305000, 700.000000)
+  LODMultiplier=(1.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(-0.600000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(35.000000, 35.000000, 25.000000)
+  PositionOffset=(0.005253, 0.145022, -0.321267)
+  OrientationOffset=(-0.072533, 0.028567, 0.000000)
+  Radius=(0.000000)
+}
+LocalCam=SWINGMAN
+{
+  Fov=(62.500000, 62.500000)
+  Clear=TRUE
+  Color=(164, 218, 249)
+  ClipPlanes=(0.500000, 500.000000)
+  LODMultiplier=(2.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(2.000000, 20.000000)
+  OrientationRate=(1.250000, 2.250000, 0.000000)
+  PositionOffset=(0.000000, 0.2500000, 0.850000)
+  OrientationOffset=(-0.20000, 0.000000, 0.000000)
+  Radius=(7.5)
+}
+LocalCam=ONBOARD001 // DRIVER SIDE CAM
+{
+  Fov=(60.000000, 45.000000)
+  Clear=FALSE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.500000, 2000.000000)
+  LODMultiplier=(2.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(360.000000, 360.000000, 360.000000)
+  PositionOffset=(1.294508, 0.390186, 2.228229)
+  OrientationOffset=(-0.079059, 0.104553, -0.001180)
+  Radius=(0.000000)
+}
+LocalCam=ONBOARD002 // ROOF CAM
+{
+  Fov=(60.000000, 45.000000)
+  Clear=FALSE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.500000, 1500.000000)
+  LODMultiplier=(1.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(360.000000, 360.000000, 360.000000)
+  PositionOffset=(-0.006447, 1.111243, -0.319915)
+  OrientationOffset=(-0.099708, 3.166134, 0.001234)
+  Radius=(0.000000)
+}
+LocalCam=ONBOARD003 // REAR WINDOW CAM
+{
+  Fov=(60.000000, 45.000000)
+  Clear=FALSE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.500000, 2000.000000)
+  LODMultiplier=(2.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(360.000000, 360.000000, 360.000000)
+  PositionOffset=(-0.503214, 0.776169, 2.530826)
+  OrientationOffset=(-0.150901, -0.208814, -0.001180)
+  Radius=(0.000000)
+}
+LocalCam=ONBOARD004 // OVERHEAD CAM
+{
+  Fov=(60.000000, 45.000000)
+  Clear=FALSE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.500000, 500.000000)
+  LODMultiplier=(2.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(360.000000, 360.000000, 360.000000)
+  PositionOffset=(-1.754580, 10.870190, -0.563986)
+  OrientationOffset=(-1.366235, 4.691907, -0.001180)
+  Radius=(0.000000)
+}
+LocalCam=ONBOARD005 // DRIVER CAM
+{
+  Fov=(60.000000, 45.000000)
+  Clear=FALSE
+  Color=(0, 0, 0)
+  ClipPlanes=(0.500000, 1500.000000)
+  LODMultiplier=(1.000000)
+  Size=(1.000000, 1.000000)
+  Center=(0.500000, 0.500000)
+  MipmapLODBias=(0.000000)
+  Flags1=(0)
+  Flags2=(0)
+  RadiusLimits=(0.000000, 0.000000)
+  OrientationRate=(360.000000, 360.000000, 360.000000)
+  PositionOffset=(0.327292, 0.538229, -3.546020)
+  OrientationOffset=(0.025715, 3.340701, 0.001236)
+  Radius=(0.000000)
+}
+

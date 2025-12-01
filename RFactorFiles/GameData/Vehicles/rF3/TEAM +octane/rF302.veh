@@ -1,0 +1,46 @@
+//
+// The first section defines what maps to load for the new vehicle skinning
+// technology.  The first line defines a "prefix" to be used for all generic maps.
+// Currently, generic maps are used for the livery, wing, driver, driver arms,
+// driver helmet, and pit crew.  The second line will replace the default livery
+// with the new specified, for the track specified.  The format is as follows:
+//
+// DefaultLivery="PREFIX"       // PREFIX is the base texture map name, assumed to be BMP unless specified
+// PitCrewLivery="PREFIX"       // This is only needed if it differs from the default livery PREFIX
+// TrackLivery="TRACK, PREFIX"  // TRACK is the track name as defined in the event GDB
+// TrackLivery="TRACK, PREFIX"  // For example, "2001_Monza"
+// TrackLivery="TRACK, PREFIX"  // You can have an infinite # of these lines
+//
+
+DefaultLivery="rF302.dds"
+
+HDVehicle=rF3\rF3.hdv
+Graphics=rF3\rF3.gen
+Spinner=rF3\rF3_spinner.gen
+GenString=                          // Used to generate GMT names in *.gen file
+Sounds=rF3.sfx                  // Sounds=default.sfx
+Cameras=rF3_cam.cam            // Defaults to default.cfg in UserData directory
+HeadPhysics=headphysics.ini         // Affects driver eyepoint only
+Cockpit=rF3_cockpitinfo.ini
+Upgrades=rF3_upgrades.ini
+
+Number=2
+Team="Team +octane"
+PitGroup="Group01"
+Driver="Wanda Paringua"
+Description="Team +octane #2"
+Engine="ISM"
+Manufacturer="RaceWorks"
+
+Classes="OWC 2006 rF3"
+
+FullTeamName="Team +octane"
+TeamFounded=
+TeamHeadquarters=""
+TeamStarts=246
+TeamPoles=81
+TeamWins=83
+TeamWorldChampionships=4
+
+Category="RaceWorks,2006 rF3"
+

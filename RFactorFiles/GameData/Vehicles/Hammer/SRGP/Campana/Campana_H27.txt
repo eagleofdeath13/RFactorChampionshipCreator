@@ -1,0 +1,3 @@
+Description="Campana Racing"
+
+Painter="ISI Mike D"

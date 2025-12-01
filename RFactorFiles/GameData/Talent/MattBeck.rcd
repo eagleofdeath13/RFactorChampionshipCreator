@@ -1,0 +1,21 @@
+Matt Beck
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=3-8-1976
+  Starts=46
+  Poles=9
+  Wins=14
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=80.59
+  Reputation=90.30
+  Courtesy=60.85
+  Composure=95.13
+  Speed=97.21
+  Crash=1.21
+  Recovery=90.40
+  CompletedLaps=87.39
+  MinRacingSkill=92.67
+}

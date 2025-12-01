@@ -1,0 +1,21 @@
+Thor Benton
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=23-3-1972
+  Starts=94
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=75.36
+  Reputation=54.20
+  Courtesy=75.05
+  Composure=95.51
+  Speed=93.63
+  Crash=5.95
+  Recovery=80.69
+  CompletedLaps=92.29
+  MinRacingSkill=88.17
+}

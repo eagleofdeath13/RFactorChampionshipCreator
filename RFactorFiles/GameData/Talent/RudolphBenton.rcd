@@ -1,0 +1,21 @@
+Rudolph Benton
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=2-7-1976
+  Starts=63
+  Poles=21
+  Wins=21
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=41.38
+  Reputation=73.38
+  Courtesy=65.22
+  Composure=90.76
+  Speed=98.55
+  Crash=5.26
+  Recovery=83.36
+  CompletedLaps=94.68
+  MinRacingSkill=92.84
+}

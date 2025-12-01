@@ -1,0 +1,713 @@
+{% extends "base.html" %}
+
+{% block title %}Créer un Championnat Custom - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-plus-circle"></i> Créer un Championnat Custom
+        </h1>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/championships">Championnats</a></li>
+                <li class="breadcrumb-item active">Nouveau</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<!-- Progress Steps -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="d-flex justify-content-between">
+            <div class="step active" data-step="1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Informations</div>
+            </div>
+            <div class="step" data-step="2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Véhicules</div>
+            </div>
+            <div class="step" data-step="3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Pilotes</div>
+            </div>
+            <div class="step" data-step="4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Circuits</div>
+            </div>
+            <div class="step" data-step="5">
+                <div class="step-circle">5</div>
+                <div class="step-label">Confirmation</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Step 1: Basic Information -->
+<div class="row step-content" id="step-1">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informations de base</h5>
+                <form id="championship-info-form">
+                    <div class="mb-3">
+                        <label for="championship-name" class="form-label">Nom du championnat *</label>
+                        <input type="text" class="form-control" id="championship-name" required
+                               pattern="[A-Za-z0-9_]+" maxlength="12"
+                               placeholder="TC2025">
+                        <div class="form-text">
+                            Max 12 caractères (alphanumérique et underscores seulement).<br>
+                            Préfixe automatique : RFTOOL_
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="championship-full-name" class="form-label">Nom complet</label>
+                        <input type="text" class="form-control" id="championship-full-name"
+                               placeholder="Test Championship 2025">
+                        <div class="form-text">Optionnel. Sera utilisé comme nom affiché dans rFactor.</div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-primary" onclick="nextStep()">
+                            Suivant <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Step 2: Vehicle Selection -->
+<div class="row step-content d-none" id="step-2">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sélection des véhicules</h5>
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="vehicle-search" placeholder="Rechercher un véhicule...">
+                </div>
+                <div id="vehicles-list" class="list-group" style="max-height: 400px; overflow-y: auto;">
+                    <div class="text-center p-4">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-info mt-3" id="selected-vehicles-count">
+                    <strong>0</strong> véhicule(s) sélectionné(s)
+                </div>
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                        <i class="bi bi-arrow-left"></i> Précédent
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()" id="btn-step-2">
+                        Suivant <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Step 3: Driver Assignment -->
+<div class="row step-content d-none" id="step-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Attribution des pilotes</h5>
+                <p class="text-muted">Assignez un pilote à chaque véhicule sélectionné.</p>
+                <div id="driver-assignments-list">
+                    <!-- Will be populated dynamically -->
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                        <i class="bi bi-arrow-left"></i> Précédent
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()">
+                        Suivant <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Step 4: Track Selection -->
+<div class="row step-content d-none" id="step-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Sélection des circuits</h5>
+                <p class="text-muted">Sélectionnez et ordonnez les circuits du championnat.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Circuits disponibles</h6>
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="track-search" placeholder="Rechercher...">
+                        </div>
+                        <div id="available-tracks-list" class="list-group" style="max-height: 400px; overflow-y: auto;">
+                            <div class="text-center p-4">
+                                <div class="spinner-border" role="status">
+                                    <span class="visually-hidden">Chargement...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Circuits sélectionnés (ordre de course)</h6>
+                        <div id="selected-tracks-list" class="list-group" style="min-height: 200px;">
+                            <div class="alert alert-secondary">
+                                Aucun circuit sélectionné
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                        <i class="bi bi-arrow-left"></i> Précédent
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep()" id="btn-step-4">
+                        Suivant <i class="bi bi-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Step 5: Confirmation -->
+<div class="row step-content d-none" id="step-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Confirmation</h5>
+                <div id="confirmation-summary">
+                    <!-- Will be populated dynamically -->
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                        <i class="bi bi-arrow-left"></i> Précédent
+                    </button>
+                    <button type="button" class="btn btn-success" onclick="createChampionship()" id="btn-create">
+                        <i class="bi bi-check-circle"></i> Créer le Championnat
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_styles %}
+<style>
+/* Racing-themed progress steps */
+.step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+.step-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 0;
+    background: var(--carbon-light);
+    border: 2px solid var(--chrome-silver);
+    color: var(--chrome-silver);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    clip-path: polygon(
+        0 0,
+        calc(100% - 10px) 0,
+        100% 10px,
+        100% 100%,
+        0 100%
+    );
+}
+
+.step.active .step-circle {
+    background: var(--gradient-racing);
+    border-color: var(--racing-red);
+    color: var(--pure-white);
+    box-shadow: var(--glow-racing);
+    transform: scale(1.1);
+}
+
+.step.completed .step-circle {
+    background: var(--status-success);
+    border-color: var(--status-success);
+    color: var(--carbon-black);
+}
+
+.step.completed .step-circle::after {
+    content: '✓';
+    position: absolute;
+    font-size: 1.5rem;
+}
+
+.step-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--chrome-silver);
+}
+
+.step.active .step-label {
+    color: var(--racing-red);
+    font-weight: 700;
+}
+
+.step.completed .step-label {
+    color: var(--status-success);
+}
+
+/* Racing-themed vehicle/track items */
+.vehicle-item, .track-item {
+    cursor: pointer;
+    background: var(--carbon-light) !important;
+    border: var(--border-ghost) !important;
+    border-left: 4px solid transparent !important;
+    color: var(--pure-white) !important;
+    transition: all 0.3s ease;
+}
+
+.vehicle-item:hover, .track-item:hover {
+    background: var(--metal-gray) !important;
+    border-left-color: var(--chrome-silver) !important;
+    transform: translateX(5px);
+}
+
+.vehicle-item.selected, .track-item.selected {
+    background: var(--metal-gray) !important;
+    border-left-color: var(--racing-red) !important;
+    box-shadow: 0 0 15px var(--racing-red-glow);
+}
+
+.vehicle-item.selected::before, .track-item.selected::before {
+    content: '✓';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--racing-red);
+    font-weight: 900;
+    font-size: 1.5rem;
+}
+
+/* Breadcrumb racing theme */
+.breadcrumb {
+    background: var(--carbon-light);
+    border: var(--border-ghost);
+    border-left: 3px solid var(--racing-red);
+    padding: 0.75rem 1rem;
+}
+
+.breadcrumb-item a {
+    color: var(--chrome-silver);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: var(--racing-red);
+}
+
+.breadcrumb-item.active {
+    color: var(--pure-white);
+}
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let currentStep = 1;
+const championshipData = {
+    name: '',
+    full_name: '',
+    vehicle_assignments: [],
+    tracks: []
+};
+
+let allVehicles = [];
+let allTracks = [];
+
+// Utility function to escape HTML
+function escapeHtml(text) {
+    if (!text) return '';
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return String(text).replace(/[&<>"']/g, m => map[m]);
+}
+
+// Load vehicles and tracks on page load
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadVehicles();
+    await loadTracks();
+});
+
+async function loadVehicles() {
+    try {
+        allVehicles = await APIClient.get('/api/vehicles/');
+        renderVehiclesList();
+    } catch (error) {
+        console.error('Error loading vehicles:', error);
+        ToastNotification.error('Erreur lors du chargement des véhicules');
+    }
+}
+
+async function loadTracks() {
+    try {
+        allTracks = await APIClient.get('/api/tracks/');
+        renderTracksList();
+    } catch (error) {
+        console.error('Error loading tracks:', error);
+        ToastNotification.error('Erreur lors du chargement des circuits');
+    }
+}
+
+function renderVehiclesList() {
+    const container = document.getElementById('vehicles-list');
+    if (!allVehicles || allVehicles.length === 0) {
+        container.innerHTML = '<div class="alert alert-warning">Aucun véhicule trouvé</div>';
+        return;
+    }
+
+    container.innerHTML = allVehicles.map((vehicle, index) => `
+        <div class="list-group-item list-group-item-action vehicle-item"
+             data-index="${index}"
+             data-path="${escapeHtml(vehicle.relative_path)}">
+            <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1">${escapeHtml(vehicle.team_info?.description || vehicle.file_name)}</h6>
+                <small class="text-muted">${escapeHtml(vehicle.team_info?.classes || '')}</small>
+            </div>
+            <small class="text-muted">${escapeHtml(vehicle.relative_path)}</small>
+        </div>
+    `).join('');
+
+    // Add click event listeners after rendering
+    container.querySelectorAll('.vehicle-item').forEach((item, index) => {
+        item.addEventListener('click', () => toggleVehicle(index));
+    });
+}
+
+function renderTracksList() {
+    const container = document.getElementById('available-tracks-list');
+    if (!allTracks || allTracks.length === 0) {
+        container.innerHTML = '<div class="alert alert-warning">Aucun circuit trouvé</div>';
+        return;
+    }
+
+    container.innerHTML = allTracks.map((track, index) => `
+        <div class="list-group-item list-group-item-action track-item"
+             data-index="${index}"
+             data-name="${escapeHtml(track.track_name)}">
+            <h6 class="mb-1">${escapeHtml(track.track_name)}</h6>
+            <small class="text-muted">${escapeHtml(track.event_name || '')}</small>
+        </div>
+    `).join('');
+
+    // Add click event listeners after rendering
+    container.querySelectorAll('.track-item').forEach((item, index) => {
+        item.addEventListener('click', () => toggleTrack(index));
+    });
+}
+
+function toggleVehicle(index) {
+    const item = document.querySelector(`.vehicle-item[data-index="${index}"]`);
+    if (!item) return;
+
+    item.classList.toggle('selected');
+    updateSelectedVehiclesCount();
+}
+
+function toggleTrack(index) {
+    const selectedList = document.getElementById('selected-tracks-list');
+    const item = document.querySelector(`.track-item[data-index="${index}"]`);
+    if (!item) return;
+
+    const track = allTracks[index];
+    const trackName = track.track_name;
+
+    if (item.classList.contains('selected')) {
+        // Remove
+        item.classList.remove('selected');
+        const selectedItem = selectedList.querySelector(`[data-track-index="${index}"]`);
+        if (selectedItem) selectedItem.remove();
+
+        // Show alert if no tracks selected
+        if (selectedList.children.length === 0) {
+            selectedList.innerHTML = '<div class="alert alert-secondary">Aucun circuit sélectionné</div>';
+        }
+    } else {
+        // Add
+        item.classList.add('selected');
+
+        // Remove alert if present
+        if (selectedList.querySelector('.alert')) {
+            selectedList.innerHTML = '';
+        }
+
+        const selectedItem = document.createElement('div');
+        selectedItem.className = 'list-group-item';
+        selectedItem.setAttribute('data-track-index', index);
+        selectedItem.setAttribute('data-name', trackName);
+        selectedItem.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center">
+                <span>${escapeHtml(trackName)}</span>
+                <button class="btn btn-sm btn-danger" type="button">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+        `;
+
+        // Add click event to remove button
+        selectedItem.querySelector('button').addEventListener('click', () => toggleTrack(index));
+
+        selectedList.appendChild(selectedItem);
+    }
+}
+
+function updateSelectedVehiclesCount() {
+    const selected = document.querySelectorAll('.vehicle-item.selected');
+    document.getElementById('selected-vehicles-count').innerHTML =
+        `<strong>${selected.length}</strong> véhicule(s) sélectionné(s)`;
+}
+
+function nextStep() {
+    // Validate current step
+    if (!validateStep(currentStep)) {
+        return;
+    }
+
+    // Save current step data
+    saveStepData(currentStep);
+
+    // Hide current step
+    document.getElementById(`step-${currentStep}`).classList.add('d-none');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('completed');
+
+    // Show next step
+    currentStep++;
+    document.getElementById(`step-${currentStep}`).classList.remove('d-none');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+
+    // Prepare step
+    prepareStep(currentStep);
+}
+
+function prevStep() {
+    // Hide current step
+    document.getElementById(`step-${currentStep}`).classList.add('d-none');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
+
+    // Show previous step
+    currentStep--;
+    document.getElementById(`step-${currentStep}`).classList.remove('d-none');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('completed');
+}
+
+function validateStep(step) {
+    switch(step) {
+        case 1:
+            const name = document.getElementById('championship-name').value;
+            if (!name || name.length > 12 || !/^[A-Za-z0-9_]+$/.test(name)) {
+                ToastNotification.error('Nom invalide (max 12 caractères, alphanumérique)');
+                return false;
+            }
+            return true;
+        case 2:
+            const selected = document.querySelectorAll('.vehicle-item.selected');
+            if (selected.length === 0) {
+                ToastNotification.error('Sélectionnez au moins un véhicule');
+                return false;
+            }
+            return true;
+        case 3:
+            // Validate all drivers assigned
+            const drivers = document.querySelectorAll('.driver-input');
+            for (let input of drivers) {
+                if (!input.value.trim()) {
+                    ToastNotification.error('Assignez un pilote à tous les véhicules');
+                    return false;
+                }
+            }
+            return true;
+        case 4:
+            const tracks = document.querySelectorAll('#selected-tracks-list .list-group-item');
+            if (tracks.length === 0) {
+                ToastNotification.error('Sélectionnez au moins un circuit');
+                return false;
+            }
+            return true;
+    }
+    return true;
+}
+
+function saveStepData(step) {
+    switch(step) {
+        case 1:
+            championshipData.name = document.getElementById('championship-name').value;
+            championshipData.full_name = document.getElementById('championship-full-name').value || championshipData.name;
+            break;
+        case 2:
+            // Vehicle assignments will be created in step 3
+            break;
+        case 3:
+            championshipData.vehicle_assignments = Array.from(document.querySelectorAll('.driver-assignment')).map(el => {
+                const index = el.dataset.index;
+                const vehicle = allVehicles[index];
+                return {
+                    vehicle_path: vehicle.relative_path,
+                    driver_name: el.querySelector('.driver-input').value
+                };
+            });
+            break;
+        case 4:
+            championshipData.tracks = Array.from(document.querySelectorAll('#selected-tracks-list [data-name]'))
+                .map(el => el.dataset.name);
+            break;
+    }
+}
+
+function prepareStep(step) {
+    switch(step) {
+        case 3:
+            renderDriverAssignments();
+            break;
+        case 5:
+            renderConfirmation();
+            break;
+    }
+}
+
+function renderDriverAssignments() {
+    const container = document.getElementById('driver-assignments-list');
+    const selectedVehicles = document.querySelectorAll('.vehicle-item.selected');
+
+    container.innerHTML = Array.from(selectedVehicles).map(item => {
+        const index = item.dataset.index;
+        const vehicle = allVehicles[index];
+        const path = vehicle.relative_path;
+        return `
+            <div class="card mb-2 driver-assignment" data-index="${index}" data-path="${escapeHtml(path)}">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <strong>${escapeHtml(vehicle?.team_info?.description || vehicle?.file_name)}</strong><br>
+                            <small class="text-muted">${escapeHtml(path)}</small>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control driver-input"
+                                   placeholder="Nom du pilote" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderConfirmation() {
+    const container = document.getElementById('confirmation-summary');
+    container.innerHTML = `
+        <div class="alert alert-info">
+            <h6><i class="bi bi-info-circle"></i> Récapitulatif</h6>
+            <hr>
+            <dl class="row mb-0">
+                <dt class="col-sm-3">Nom :</dt>
+                <dd class="col-sm-9"><code>RFTOOL_${championshipData.name}</code></dd>
+
+                <dt class="col-sm-3">Nom complet :</dt>
+                <dd class="col-sm-9">${championshipData.full_name}</dd>
+
+                <dt class="col-sm-3">Véhicules :</dt>
+                <dd class="col-sm-9">${championshipData.vehicle_assignments.length}</dd>
+
+                <dt class="col-sm-3">Circuits :</dt>
+                <dd class="col-sm-9">${championshipData.tracks.length}</dd>
+
+                <dt class="col-sm-3">Cash de départ :</dt>
+                <dd class="col-sm-9">500,000,000</dd>
+            </dl>
+        </div>
+
+        <h6>Véhicules et Pilotes :</h6>
+        <ul class="list-group mb-3">
+            ${championshipData.vehicle_assignments.map(va => `
+                <li class="list-group-item">
+                    <strong>${va.driver_name}</strong> - ${va.vehicle_path}
+                </li>
+            `).join('')}
+        </ul>
+
+        <h6>Circuits (ordre) :</h6>
+        <ol class="list-group list-group-numbered">
+            ${championshipData.tracks.map(track => `
+                <li class="list-group-item">${track}</li>
+            `).join('')}
+        </ol>
+    `;
+}
+
+async function createChampionship() {
+    const btn = document.getElementById('btn-create');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Création...';
+
+    try {
+        const response = await APIClient.post('/api/championships/custom', championshipData);
+        ToastNotification.success('Championnat créé avec succès !');
+        setTimeout(() => {
+            window.location.href = '/championships';
+        }, 1500);
+    } catch (error) {
+        ToastNotification.error('Erreur lors de la création : ' + (error.message || 'Erreur inconnue'));
+        btn.disabled = false;
+        btn.innerHTML = '<i class="bi bi-check-circle"></i> Créer le Championnat';
+    }
+}
+
+// Search filters
+document.addEventListener('DOMContentLoaded', () => {
+    const vehicleSearch = document.getElementById('vehicle-search');
+    if (vehicleSearch) {
+        vehicleSearch.addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            document.querySelectorAll('.vehicle-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? '' : 'none';
+            });
+        });
+    }
+
+    const trackSearch = document.getElementById('track-search');
+    if (trackSearch) {
+        trackSearch.addEventListener('input', (e) => {
+            const search = e.target.value.toLowerCase();
+            document.querySelectorAll('.track-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(search) ? '' : 'none';
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

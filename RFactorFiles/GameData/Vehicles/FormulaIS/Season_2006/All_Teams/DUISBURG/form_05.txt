@@ -1,0 +1,3 @@
+Description="Formula DUISBURG #05 Default Skin"
+
+Painter="ISI Peal"

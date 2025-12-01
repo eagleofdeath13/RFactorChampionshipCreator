@@ -1,0 +1,21 @@
+Terry Matthews
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=12-11-1969
+  Starts=120
+  Poles=29
+  Wins=31
+  DriversChampionships=1
+
+//Driver Stats
+  Aggression=94.39
+  Reputation=90.33
+  Courtesy=75.26
+  Composure=95.93
+  Speed=98.14
+  Crash=2.68
+  Recovery=74.36
+  CompletedLaps=97.58
+  MinRacingSkill=91.79
+}

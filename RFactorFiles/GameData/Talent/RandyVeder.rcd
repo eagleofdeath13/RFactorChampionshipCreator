@@ -1,0 +1,21 @@
+Randy Veder
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=7-2-1979
+  Starts=57
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=48.89
+  Reputation=49.38
+  Courtesy=51.39
+  Composure=90.57
+  Speed=94.10
+  Crash=9.49
+  Recovery=75.54
+  CompletedLaps=91.45
+  MinRacingSkill=85.54
+}

@@ -1,0 +1,21 @@
+Geoffrey Lewis
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=4-7-1975
+  Starts=64
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=83.83
+  Reputation=49.27
+  Courtesy=66.94
+  Composure=72.28
+  Speed=93.86
+  Crash=5.86
+  Recovery=73.19
+  CompletedLaps=93.16
+  MinRacingSkill=88.27
+}

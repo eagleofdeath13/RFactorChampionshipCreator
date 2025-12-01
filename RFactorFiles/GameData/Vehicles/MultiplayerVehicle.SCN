@@ -1,0 +1,46 @@
+
+// This is a temporary vehicle used when a multiplayer client is 
+// loaded.  We create a pool of these vehicles at track initialization
+// time.  The number of vehicles in the pool is configurable through
+// the player file.  It is preferable if this is a simple vehicle with
+// low-resolution DDS textures that can be loaded quickly to reduce
+// overall track load times.  Technically, this vehicle only needs a
+// body and four wheels.
+
+SearchPath=GameData\Vehicles
+
+MASFile=Multicar.mas
+
+// Do not change these instance names
+Instance=TEMPNETVEH
+{
+  Moveable=True
+  MeshFile=Multicar.gmt CollTarget=True HATTarget=False LODIn=(0.0) LODOut=(1000.0)
+
+  Actor=VEHICLE
+
+  Instance=LFTIRE
+  {
+    Moveable=True
+    MeshFile=tr_lf_lvl1.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(500.00)
+  }
+
+  Instance=RFTIRE
+  {
+    Moveable=True
+    MeshFile=tr_rf_lvl1.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(500.00)
+  }
+
+  Instance=LRTIRE
+  {
+    Moveable=True
+    MeshFile=tr_lr_lvl1.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(500.00)
+  }
+
+  Instance=RRTIRE
+  {
+    Moveable=True
+    MeshFile=tr_rr_lvl1.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(500.00)
+  }
+}
+

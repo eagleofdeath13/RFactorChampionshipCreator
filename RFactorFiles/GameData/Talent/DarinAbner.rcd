@@ -1,0 +1,21 @@
+Darin Abner
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=13-9-1981
+  Starts=35
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=25.77
+  Reputation=49.22
+  Courtesy=47.08
+  Composure=87.74
+  Speed=93.71
+  Crash=1.97
+  Recovery=75.96
+  CompletedLaps=96.68
+  MinRacingSkill=89.62
+}

@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+
+{% block title %}Circuits - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-flag"></i> Circuits
+        </h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" id="search-input" class="form-control" placeholder="Rechercher un circuit (nom, lieu, layout)...">
+    </div>
+    <div class="col-md-6 text-end">
+        <button class="btn btn-secondary" onclick="reloadTracks()" title="Recharger depuis le disque">
+            <i class="bi bi-arrow-clockwise"></i> Recharger
+        </button>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i>
+            <strong id="track-count">Chargement...</strong>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Lieu</th>
+                        <th>Layout</th>
+                        <th>Fichier</th>
+                    </tr>
+                </thead>
+                <tbody id="tracks-table-body">
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let allTracks = [];
+
+async function loadTracks() {
+    try {
+        LoadingOverlay.show('Chargement des circuits...');
+        const tracks = await APIClient.get('/api/tracks/');
+        allTracks = tracks;
+        renderTracks(tracks);
+        document.getElementById('track-count').textContent = `${tracks.length} circuit(s) trouvé(s)`;
+    } catch (e) {
+        ToastNotification.error('Erreur lors du chargement des circuits');
+        console.error(e);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+function renderTracks(tracks) {
+    const tbody = document.getElementById('tracks-table-body');
+    if (tracks.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="4" class="text-center">Aucun circuit trouvé</td></tr>';
+        return;
+    }
+    tbody.innerHTML = tracks.map(t => `
+        <tr onclick="window.location.href='/tracks/${encodeURIComponent(t.relative_path || t.file_name)}'" style="cursor: pointer;">
+            <td><strong>${t.display_name || t.file_name}</strong></td>
+            <td>${t.venue_name || '—'}</td>
+            <td>${t.layout || '—'}</td>
+            <td><code>${t.file_name}</code></td>
+        </tr>
+    `).join('');
+}
+
+function filterTracks() {
+    const q = document.getElementById('search-input').value.toLowerCase();
+    const filtered = allTracks.filter(t =>
+        (t.display_name && t.display_name.toLowerCase().includes(q)) ||
+        (t.venue_name && t.venue_name.toLowerCase().includes(q)) ||
+        (t.layout && t.layout.toLowerCase().includes(q)) ||
+        (t.file_name && t.file_name.toLowerCase().includes(q))
+    );
+    renderTracks(filtered);
+    document.getElementById('track-count').textContent = `${filtered.length} circuit(s) affiché(s)`;
+}
+
+async function reloadTracks() {
+    try {
+        LoadingOverlay.show('Rechargement...');
+        // Pas de point spécifique de reload côté API; utiliser le paramètre reload
+        const tracks = await APIClient.get('/api/tracks/?reload=true');
+        allTracks = tracks;
+        renderTracks(tracks);
+        ToastNotification.success('Circuits rechargés avec succès');
+    } catch (e) {
+        ToastNotification.error('Erreur lors du rechargement');
+        console.error(e);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+document.getElementById('search-input').addEventListener('input', filterTracks);
+document.addEventListener('DOMContentLoaded', loadTracks);
+</script>
+{% endblock %}

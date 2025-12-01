@@ -1,0 +1,5 @@
+### Get Championships
+GET http://localhost/api/championships/
+
+>> Get_Championships/response-{{$timestamp}}.json
+

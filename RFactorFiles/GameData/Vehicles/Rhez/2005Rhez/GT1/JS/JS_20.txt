@@ -1,0 +1,3 @@
+Description="JS Suppply #20 Default Skin"
+
+Painter="ISI Brad"

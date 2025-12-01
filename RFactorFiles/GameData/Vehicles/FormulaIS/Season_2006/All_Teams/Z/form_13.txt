@@ -1,0 +1,3 @@
+Description="Formula Z auto parts #13 Default Skin"
+
+Painter="ISI Peal"

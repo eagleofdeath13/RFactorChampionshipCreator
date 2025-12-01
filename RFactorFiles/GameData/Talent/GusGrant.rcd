@@ -1,0 +1,21 @@
+Gus Grant
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=28-4-1974
+  Starts=62
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=68.54
+  Reputation=52.09
+  Courtesy=80.83
+  Composure=89.43
+  Speed=95.54
+  Crash=5.52
+  Recovery=77.75
+  CompletedLaps=98.37
+  MinRacingSkill=87.35
+}

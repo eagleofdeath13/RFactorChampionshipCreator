@@ -1,0 +1,160 @@
+// Tire brand found in *.hdv files refer to file name.
+//
+// Slip curves do not represent the coefficient of grip.  Instead they represent
+// the reaction to the current slip.  Regardless of the peak value in this curve,
+// it will be automatically normalized to have a peak of 1.0.
+//
+// The peak of the slip curve is dynamically adjusted to higher or lower slip
+// values based on current load and speed.  The second value of "SpeedEffects"
+// is an equivalency value for load and speed.  To calculate the slip peak, we
+// use the following input which is a combination of load and speed:
+//   <load/speed combination> = <load> + (<speed> * <equivalency>)
+// Obviously a larger equivalency value will make speed a more dominant factor
+// in the calculation of the peak.  See the SpeedEffects, LatPeak, and
+// LongPeak tire parameters for more info.
+//
+// Slip curve data points are connected using a cubic spline, so there is no
+// need to use a massive amount of data points unless the curve is really busy.
+//
+// Lateral slip angles are normalized so that you need to take the sine of the
+// angle to get the slip.  For example, 12 degrees is a slip of 0.208 and vice
+// versa.  Longitudinal slip ratios closely match the SAE definition.
+//
+// All curves should probably go out to at least a slip of 2.0, even the lateral
+// and braking curves.  Although locking up your brakes is a slip of 1.0, there
+// are situations where you can spin your wheels in the opposite direction of
+// your velocity (like shifting into reverse while moving forwards).
+//
+// Note that the initial slope of the curve may have an effect on how some
+// features behave, such as traction control, ABS, skids, and tire smoke.
+//
+// The "DropoffFunction" is a new feature in the [SLIPCURVE] section.  It
+// describes how the slip curve dropoff is affected when the peak of the
+// slip curve changes.  The peak of the slip curve may move to a smaller
+// or larger slip when load or speed changes.  When this happens, the
+// slip curve is stretched or shrunk to match.  The DropoffFunction parameter
+// allows you to affect the behavior beyond the peak when this happens:
+//  -1.0 = dropoff occurs faster when peak increases
+//   0.0 = dropoff curve does NOT change shape when the peak changes
+//   1.0 = dropoff curve is stretched or shrunk with the rest of the curve,
+//         which means the dropoff may feel more gradual as the peak increases.
+//         This is the default.
+// Note that you can pick in-between values for a blend of behaviors.
+
+[SLIPCURVE]
+Name="Default"
+Step=0.009000                  // Slip step
+DropoffFunction=-0.50          // See explanation above
+Data:
+0.000000 0.174836 0.349483 0.518060 0.668882 0.790665 0.878928 0.936783 0.971287 0.989751
+0.997978 1.000000 0.999865 0.999478 0.998839 0.997952 0.996820 0.995447 0.993838 0.992000
+0.989937 0.987659 0.985172 0.982486 0.979609 0.976552 0.973322 0.969932 0.966391 0.962709
+0.958897 0.954965 0.950924 0.946785 0.942557 0.938251 0.933876 0.929442 0.924958 0.920432
+0.915874 0.911292 0.906693 0.902084 0.897473 0.892866 0.888269 0.883688 0.879128 0.874595
+0.870092 0.865624 0.861195 0.856808 0.852466 0.848173 0.843931 0.839741 0.835607 0.831529
+0.827510 0.823550 0.819651 0.815813 0.812037 0.808324 0.804674 0.801087 0.797563 0.794103
+0.790705 0.787371 0.784098 0.780888 0.777739 0.774651 0.771624 0.768656 0.765747 0.762895
+0.760102 0.757364 0.754682 0.752055 0.749482 0.746961 0.744492 0.742074 0.739707 0.737388
+0.735117 0.732894 0.730717 0.728585 0.726497 0.724453 0.722452 0.720492 0.718572 0.716693
+0.714852 0.713050 0.711285 0.709556 0.707863 0.706205 0.704581 0.702990 0.701431 0.699904
+0.698409 0.696943 0.695508 0.694101 0.692722 0.691371 0.690047 0.688750 0.687478 0.686231
+0.685009 0.683811 0.682636 0.681484 0.680355 0.679247 0.678161 0.677095 0.676050 0.675025
+0.674020 0.673033 0.672065 0.671115 0.670183 0.669268 0.668370 0.667489 0.666624 0.665775
+0.664941 0.664123 0.663319 0.662530 0.661754 0.660993 0.660245 0.659511 0.658789 0.658080
+0.657383 0.656699 0.656026 0.655365 0.654716 0.654077 0.653449 0.652832 0.652226 0.651629
+0.651043 0.650466 0.649899 0.649341 0.648793 0.648253 0.647722 0.647200 0.646686 0.646181
+0.645683 0.645194 0.644712 0.644238 0.643771 0.643312 0.642860 0.642415 0.641977 0.641545
+0.641120 0.640702 0.640290 0.639884 0.639484 0.639091 0.638703 0.638321 0.637945 0.637574
+0.637209 0.636849 0.636494 0.636145 0.635800 0.635461 0.635126 0.634796 0.634471 0.634151
+0.633835 0.633523 0.633216 0.632913 0.632614 0.632320 0.632029 0.631742 0.631460 0.631181
+0.630906 0.630635 0.630367 0.630103 0.629842 0.629585 0.629332 0.629081 0.628834 0.628590
+0.628350 0.628112 0.627878 0.627646 0.627418 0.627192 0.626970 0.626750 0.626533 0.626319
+0.626107 0.625898 0.625692 0.625488 0.625286 0.625088 0.625000
+
+
+// Note that the dry and wet performance numbers are NOT
+// relative.  They will still be scaled by the terrain dry/wet values
+// in terrain.tdf.  For example, if normal pavement has the scaling
+// parameters dry=1.0 and wet=0.8, and a rain tire has scaling
+// parameters of dry=1.30 and wet=1.35, then the overall grip in
+// the dry will be (1.0 * 1.30) = 1.30, while the overall grip in
+// the wet will be (0.8 * 1.35) = 1.08.
+
+// FYI - we may add "Compound" to each name in order to translate it,
+// because these names are not necessarily unique to tire compounds.
+
+
+[COMPOUND]
+Name="Race"
+FRONT:                                // Arguments: ALL, FRONT, REAR, LEFT, RIGHT, FRONTLEFT, FRONTRIGHT, REARLEFT, REARRIGHT
+DryLatLong=(1.400, 1.400)             // Lateral/longitudinal coefficients in dry weather
+WetLatLong=(1.030, 1.030)             // Lateral/longitudinal coefficients in wet weather
+Radius=0.249                          // Radius of tire
+RadiusRPM=2.01e-6                     // Increased radius per unit RPM
+Width=0.215                           // Width of tire
+SpringBase=43740.0                    // Base spring rate with no pressure
+SpringkPa=1396.58                     // Spring rate per unit pressure
+Damper=1345.0                         // Damping rate of tire
+SpeedEffects=(350.0, 10.0)            // Speed at which grip drops to half (m/s, 0.0 to disable), speed load equivalency (see above)
+LoadSens=(-1.31e-5, 0.38, 22000.0)    // Load sensitivity of tire (initial slope, final grip multiplier, final load)
+LatPeak=(0.077, 0.245, 9500.0)        // Slip range where lateral peak force occurs depending on load
+LongPeak=(0.077, 0.245, 9500.0)       // Slip range where longitudinal peak force occurs depending on load
+LatCurve="Default"                    // Slip angle curve (data uses normalized angle)
+BrakingCurve="Default"                // Slip ratio curve under braking
+TractiveCurve="Default"               // Slip ratio curve under acceleration
+CamberLatLong=(2.50, 0.09, 0.35)      // Peak camber angle, lateral gain at peak, longitudinal loss at 90 degrees
+RollingResistance=3050.0              // Resistance torque (Nm) per unit deflection (m) on ground
+PneumaticTrail=0.000001               // Pneumatic trail per unit load (m/N), adjusted based on slip
+HeatBasePeak=(0.17, 0.03)             // Base peak slip to compute friction heat, fraction of base to use (0.0=use dynamic peak slip only)
+Heating=(7.70e-1, 7.20e-3)            // Heat caused by (rolling, friction)
+Transfer=(9.00e-3, 1.80e-3, 3.00e-4)  // Heat transfer to (road, static air, moving air)
+HeatDistrib=(12.0, 95.0)              // (Max camber angle, max off-pressure) that affects heat distribution (higher number -> less temperature difference)
+AirTreadRate=0.013                    // Heat transfer between tread and inside air
+WearRate=0.255e-6                     // Wear rate constant
+WearGrip=(0.961,0.922,0.883,0.844,0.805,0.766,0.727,0.688) // Grip fraction at 13% wear, 25%, 38%, 50%, 63%, 75%, 88%, 100% (tire will burst at 100% wear)
+Softness=0.65                         // Softness is now just for AI strategic use
+AIGripMult=1.040                      // Grip multiplier for AI vehicles (due to tire model simplification)
+AIPeakSlip=0.092                      // Simple peak slip angle for AI vehicles
+AITireModel=0.4                       // 0.0 = original AI tire model in terms of slip, 1.0 = more similar to player tire model
+AIWear=0.102e-6                       // AI wear rate constant
+Temperatures=(99.0, 20.0)             // Optimum operating temperature for peak forces (Celsius), starting temperature
+OptimumPressure=(154.0, 0.0170)       // Base pressure to remain flat on ground at zero deflection, and multiplier by load to stay flat on ground
+GripTempPress=(1.6, 0.9, 0.50)        // Grip effects of being below temp, above temp, and off-pressure (higher number -> faster grip dropoff)
+Rim=(0.200, 750000.0, 7500.0, 3.0)    // Rim radius, spring rate, damping rate, and minimum velocity to kick out sparks
+//
+REAR:
+DryLatLong=(1.400, 1.400)
+WetLatLong=(1.030, 1.030)
+Radius=0.249                          // Radius of tire
+RadiusRPM=2.01e-6
+Width=0.215
+SpringBase=43740.0
+SpringkPa=1396.58 
+Damper=1345.0
+SpeedEffects=(350.0, 10.0)
+LoadSens=(-1.31e-5, 0.38, 22000.0)
+LatPeak=(0.077, 0.245, 9500.0)
+LongPeak=(0.077, 0.245, 9500.0)
+LatCurve="Default"
+BrakingCurve="Default"
+TractiveCurve="Default"
+CamberLatLong=(2.50, 0.09, 0.35)
+RollingResistance=3050.0
+PneumaticTrail=0.000001
+HeatBasePeak=(0.17, 0.03)
+Heating=(7.70e-1, 7.30e-3)
+Transfer=(9.00e-3, 1.80e-3, 1.50e-4)
+HeatDistrib=(12.0, 95.0)
+AirTreadRate=0.013
+WearRate=0.265e-6
+WearGrip=(0.961,0.922,0.883,0.844,0.805,0.766,0.727,0.688)
+Softness=0.65
+AIGripMult=1.080
+AIPeakSlip=0.092
+AITireModel=0.4
+AIWear=0.106e-6
+Temperatures=(99.0, 20.0)
+OptimumPressure=(154.0, 0.0170)
+GripTempPress=(1.6, 0.9, 0.50)
+Rim=(0.200, 750000.0, 7500.0, 3.0)
+

@@ -1,0 +1,21 @@
+Parker Pennington
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=26-2-1984
+  Starts=23
+  Poles=5
+  Wins=1
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=74.38
+  Reputation=40.25
+  Courtesy=52.97
+  Composure=87.47
+  Speed=96.51
+  Crash=2.84
+  Recovery=76.03
+  CompletedLaps=91.19
+  MinRacingSkill=92.12
+}

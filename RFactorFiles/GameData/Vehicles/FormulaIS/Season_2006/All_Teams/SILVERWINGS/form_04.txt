@@ -1,0 +1,3 @@
+Description="Formula SilverWings #04 Default Skin"
+
+Painter="ISI Peal"

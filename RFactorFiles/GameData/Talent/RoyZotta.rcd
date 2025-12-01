@@ -1,0 +1,21 @@
+Roy Zotta
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=15-3-1978
+  Starts=60
+  Poles=10
+  Wins=10
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=91.64
+  Reputation=62.19
+  Courtesy=79.29
+  Composure=77.57
+  Speed=97.71
+  Crash=10.65
+  Recovery=84.47
+  CompletedLaps=90.91
+  MinRacingSkill=91.25
+}

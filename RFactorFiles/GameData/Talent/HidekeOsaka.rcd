@@ -1,0 +1,21 @@
+Hideke Osaka
+{
+//Driver Info
+  Nationality=Japanese
+  DateofBirth=29-2-1972
+  Starts=116
+  Poles=9
+  Wins=6
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=90.48
+  Reputation=75.16
+  Courtesy=62.42
+  Composure=69.55
+  Speed=96.52
+  Crash=6.79
+  Recovery=79.89
+  CompletedLaps=92.15
+  MinRacingSkill=93.37
+}

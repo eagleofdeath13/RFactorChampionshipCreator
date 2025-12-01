@@ -1,0 +1,3 @@
+Description="Formula DUISBUTG #06 Default Skin"
+
+Painter="ISI Peal"

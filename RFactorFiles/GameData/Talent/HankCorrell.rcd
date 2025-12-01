@@ -1,0 +1,21 @@
+Hank Correll
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=7-12-1978
+  Starts=67
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=43.90
+  Reputation=35.13
+  Courtesy=79.39
+  Composure=67.57
+  Speed=94.42
+  Crash=9.74
+  Recovery=79.26
+  CompletedLaps=93.29
+  MinRacingSkill=90.81
+}

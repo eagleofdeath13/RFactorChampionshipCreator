@@ -1,0 +1,257 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// This file specifices how to generate the vehicle graphics.
+// It is pointed to by one or more *.veh files.
+//
+// All information except tokens are copied directly.
+// Tokens have the format "<value>" where value is one of the following:
+//   ID        - this is replaced by the proper slot identification (000, 001, etc.), or
+//   1,2,3,etc - this is replaced by the first 1,2,3 characters of the
+//               vehicle filename
+//   VEHDIR    - this is replaced with the proper vehicles directory (e.g. E:\Data\season01\vehicles)
+//   TEAMDIR   - this is replaced with the proper team directory (e.g. season01\vehicles\williams)
+//   SPIN      - for the vehicle spinner in the options only
+//   NOTSPIN   - for everything EXCEPT the vehicle spinner
+//   LOW       - low detail only
+//   MED       - medium detail only
+//   HIGH      - high detail only
+//   MAX       - maximum detail only
+//   DASHLOW   - low detail dash
+//   DASHHIGH  - high detail dash
+//
+// Example:
+//   For slot #2 using the vehicle file "nicecar.veh", the line
+//   "Instance=SLOT<ID>   MeshFile=<123>gva.gmt" would be replaced with
+//   "Instance=SLOT002   MeshFile=nicgva.gmt"
+//
+//  NOTE: <UPNUMBER> needs to preceed instance name if it is an upgradeable part.
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//----------------------------------------
+
+SearchPath=<VEHDIR>
+MASFile=Panoz\ESP_LIGHTS.mas
+MASFile=Panoz\Esp.mas
+MASFile=cmaps.mas
+
+//----------------------------------------
+
+Instance=SLOT<ID>
+{
+  Moveable=True
+//------------------------------------MAX CAR SETTINGS---------------------------------------------
+<MAX> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(10.0) ShadowReceiver=True
+<MAX> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(20.0) ShadowReceiver=True
+<MAX> MeshFile=Esp_carbodyb.gmt CollTarget=False HATTarget=False LODIn=(20.0) LODOut=(100.0) ShadowReceiver=True
+<MAX> MeshFile=Esp_carbodyc.gmt CollTarget=False HATTarget=False LODIn=(100.0) LODOut=(500.0) ShadowReceiver=True
+//------------------------------------HIGH CAR SETTINGS--------------------------------------------
+<HIGH> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<HIGH> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(10.0) ShadowReceiver=True
+<HIGH> MeshFile=Esp_carbodyb.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(20.0) ShadowReceiver=True
+<HIGH> MeshFile=Esp_carbodyc.gmt CollTarget=False HATTarget=False LODIn=(20.0) LODOut=(500.0) ShadowReceiver=True
+//------------------------------------MED CAR SETTINGS---------------------------------------------
+<MED> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<MED> MeshFile=Esp_carbodyb.gmt CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(50.0) ShadowReceiver=True
+<MED> MeshFile=Esp_carbodyc.gmt CollTarget=False HATTarget=False LODIn=(50.0) LODOut=(500.0) ShadowReceiver=True
+//------------------------------------LOW CAR SETTINGS---------------------------------------------
+<LOW> MeshFile=Esp_carbody.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<LOW> MeshFile=Esp_carbodyb.gmt CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(20.0) ShadowReceiver=True
+<LOW> MeshFile=Esp_carbodyc.gmt CollTarget=False HATTarget=False LODIn=(20.0) LODOut=(500.0) ShadowReceiver=True
+//------------------------------------SHADOW AND COLLISION OBJECTS---------------------------------
+MeshFile=ESP_coll.gmt CollTarget=False HATTarget=False ShadowObject=(True, Solid, 512, 512, ESP_UNDERSHADOW.TGA) LODIn=(0.0) LODOut=(200.0)
+MeshFile=ESP_coll.gmt Render=False CollTarget=True HATTarget=False LODIn=(0.0) LODOut=(200.0)
+
+  Actor=VEHICLE
+
+Instance=COCKPIT
+{
+   Moveable=True
+    MeshFile=Esp_cockpit.gmt CollTarget=False HATTarget=False ShadowCaster=False  LODIn=(0.00) LODOut=(5.0)
+}
+
+//------------------------------------Headlights and Tail Lights------------------------------------------------//
+
+  Projector=Headlight
+  {
+    Moveable=True Dyn=True Active=False Pos=(0.0, 0.0, -17.0) Dir=(0.0, -.3, -.7) Radius=(6.5) Blend=(InvDstColor, One) Texmap=HEADLIGHT2.DDS
+  }
+  
+//////////////////////////////////////Headlight Projectors/////////////////////////////////////////////
+  Instance=HLIGHTDS
+  {
+    Moveable=True
+    MeshFile=ESP_HL_DS.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 256, 256)  LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+    MeshFile=hlglo_DS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(350.0) 
+  }
+  
+  
+  Instance=HLIGHTPS
+  {
+    Moveable=True
+    MeshFile=ESP_HL_PS.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 256, 256)  LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+    MeshFile=hlglo_PS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(350.0) 	
+  }
+  
+    Instance=BLIGHTDS   //Brakelights -Driver Side
+  {
+    Moveable=True
+    MeshFile=blglo_DS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) 
+  }
+
+  Instance=BLIGHTPS   //Brakelights -Passenger Side
+  {
+    Moveable=True
+    MeshFile=blglo_PS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) 
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//----------------------------------END OF HEADLIGHTS AND TAILLIGHTS------------------------------//
+
+//---------------------------------------------UPGRADES-------------------------------------------//
+
+<STARTUPGRADES>
+
+////////////////////////////////////Front Bumper/////////////////
+
+  Instance=FWING
+  {
+    Moveable=True
+    MeshFile=<FWING> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+////////////////////////////////////Rear Bumper/////////////////
+
+  Instance=RBUMP
+  {
+    Moveable=True
+    MeshFile=<RBUMP> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+///////////////////////////////////HOOD//////////////////////////
+
+///////////////////////////////////ROOF//////////////////////////
+
+  Instance=ROOF
+  {
+    Moveable=True
+    MeshFile=<ROOF> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+
+  }
+
+///////////////////////////////////Exhaust//////////////////////////
+
+///////////////////////////////////Rearwing//////////////////////////
+ 
+/////////////////////////////////Side Skirts//////////////////////////////////////////////////
+
+  Instance=SSKIRTS
+  {
+    Moveable=True
+    MeshFile=<SSKIRTS> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////Weight Reduction//////////////////////////////////////////////////
+
+
+/////////////////////////////////Left Front Tire and Spindle//////////////////////////////////////////////////
+  Instance=LFTIRE
+  {
+    Moveable=True
+    MeshFile=LFTIRE.gmt  CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(150.0) ShadowReceiver=True
+  }
+
+
+/////////////////////////////////Right Front Tire and Spindle//////////////////////////////////////////////////
+  Instance=RFTIRE
+  {
+   Moveable=True
+   MeshFile=RFTIRE.gmt  CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(150.0) ShadowReceiver=True
+  }
+
+
+/////////////////////////////////Left Rear Tire and Spindle//////////////////////////////////////////////////
+  Instance=LRTIRE
+  {
+    Moveable=True
+    MeshFile=LRTIRE.gmt  CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(150.0) ShadowReceiver=True
+  }
+
+
+/////////////////////////////////Right Rear Tire and Spindle//////////////////////////////////////////////////
+  Instance=RRTIRE
+  {
+    Moveable=True
+    MeshFile=RRTIRE.gmt  CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128)  LODIn=(0.00) LODOut=(150.0) ShadowReceiver=True
+  }
+
+
+
+///////////////////////////////////Inside//////////////////////////////////////////////////////////////////////
+
+Instance=INSIDE
+  {
+    Moveable=True
+    MeshFile=Esp_inside.gmt CollTarget=true HATTarget=False ShadowCaster=(True, Solid, 128, 128)  LODIn=(0.00) LODOut=(30.0)
+    MeshFile=Esp_insideb.gmt CollTarget=true HATTarget=False ShadowCaster=(True, Solid, 128, 128)  LODIn=(30.00) LODOut=(100.0)
+	MeshFile=Esp_insidec.gmt CollTarget=true HATTarget=False ShadowCaster=False  LODIn=(100.00) LODOut=(500.0)
+  }
+///////////////////////////////////Windows//////////////////////////////////////////////////////////////////////
+  Instance=Windows<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=ESP_windshield.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(350.0) ShadowReceiver=True
+  }
+
+
+
+//--------------------------------------------End Of Upgrades--------------------------------------------//
+
+   Instance=WHEEL
+  {
+    Moveable=True
+    MeshFile=ESP_wheel.gmt CollTarget=False HATTarget=False ShadowCaster=False LODIn=(0.0) LODOut=(1.5) ShadowReceiver=True
+    MeshFile=ESP_wheel_low.gmt CollTarget=False HATTarget=False ShadowCaster=False LODIn=(1.5) LODOut=(150.0) ShadowReceiver=True
+	}
+
+
+  Instance=Helmet
+  {
+    Moveable=True
+//--------------------------------MAX HELMET SETTINGS------------------------------------------------------------------
+<MAX>MeshFile=ESP_HELMET_HIGH.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(10.0) ShadowReceiver=True
+<MAX>MeshFile=ESP_HELMET_MED.gmt  CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(200.0) ShadowReceiver=True
+//--------------------------------HIGH HELMET SETTINGS------------------------------------------------------------------
+<HIGH>MeshFile=ESP_HELMET_HIGH.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<HIGH>MeshFile=ESP_HELMET_MED.gmt  CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(150.0) ShadowReceiver=True
+//--------------------------------MED HELMET SETTINGS------------------------------------------------------------------
+<MED>MeshFile=ESP_HELMET_MED.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(10.0) ShadowReceiver=True
+<MED>MeshFile=ESP_HELMET_LOW.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(200.0) ShadowReceiver=True
+//--------------------------------LOW HELMET SETTINGS------------------------------------------------------------------
+<LOW>MeshFile=ESP_HELMET_MED.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<LOW>MeshFile=ESP_HELMET_LOW.gmt CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(200.0) ShadowReceiver=True
+  }
+
+  Instance=Driver
+  {
+    Moveable=True
+    MeshFile=ESP_Driver.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(200.0) ShadowReceiver=True
+  }
+
+  Instance=Dseat    //Driver Seat
+  {
+    Moveable=True
+    MeshFile=ESP_seats.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(100.0) ShadowReceiver=True
+  }
+
+  Instance=DEBRIS8  //Side Mirror -Driver Side
+  {
+    Moveable=True
+    MeshFile=ESP_SM_DS.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(100.0) ShadowReceiver=True
+  }
+
+  Instance=DEBRIS9  //Side Mirror -Passenger Side
+  {
+    Moveable=True
+    MeshFile=ESP_SM_PS.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(100.0) ShadowReceiver=True
+  }
+}

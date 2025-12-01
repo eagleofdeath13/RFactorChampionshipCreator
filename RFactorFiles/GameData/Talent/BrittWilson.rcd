@@ -1,0 +1,21 @@
+Britt Wilson
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=23-8-1969
+  Starts=107
+  Poles=11
+  Wins=12
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=51.17
+  Reputation=81.33
+  Courtesy=60.37
+  Composure=56.10
+  Speed=96.42
+  Crash=7.48
+  Recovery=70.70
+  CompletedLaps=94.46
+  MinRacingSkill=87.29
+}

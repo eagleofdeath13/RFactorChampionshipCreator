@@ -1,0 +1,21 @@
+Abdul Roberts
+{
+//Driver Info
+  Nationality=British
+  DateofBirth=26-7-1983
+  Starts=31
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=32.27
+  Reputation=27.59
+  Courtesy=62.80
+  Composure=59.60
+  Speed=92.74
+  Crash=7.19
+  Recovery=79.71
+  CompletedLaps=96.25
+  MinRacingSkill=88.38
+}

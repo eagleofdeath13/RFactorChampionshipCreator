@@ -1,0 +1,21 @@
+Tim Zotta
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=9-5-1971
+  Starts=102
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=68.99
+  Reputation=65.99
+  Courtesy=78.22
+  Composure=87.57
+  Speed=94.77
+  Crash=9.32
+  Recovery=76.96
+  CompletedLaps=96.52
+  MinRacingSkill=89.00
+}

@@ -1,0 +1,21 @@
+Larry Fowler
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=31-9-1976
+  Starts=63
+  Poles=6
+  Wins=6
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=97.22
+  Reputation=39.03
+  Courtesy=39.54
+  Composure=86.11
+  Speed=96.38
+  Crash=4.30
+  Recovery=75.92
+  CompletedLaps=91.34
+  MinRacingSkill=94.94
+}

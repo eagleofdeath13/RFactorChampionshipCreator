@@ -1,0 +1,21 @@
+Sal Philips
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=7-7-1976
+  Starts=55
+  Poles=8
+  Wins=7
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=63.92
+  Reputation=60.34
+  Courtesy=56.07
+  Composure=53.20
+  Speed=96.87
+  Crash=6.92
+  Recovery=73.36
+  CompletedLaps=92.12
+  MinRacingSkill=90.86
+}

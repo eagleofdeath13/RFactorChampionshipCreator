@@ -1,0 +1,166 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// This file specifices how to generate the vehicle graphics for the options car spinner only.
+// It is pointed to by one or more *.veh files.
+//
+// All information except tokens are copied directly.
+// Tokens have the format "<value>" where value is one of the following:
+//   ID        - this is replaced by the proper slot identification (000, 001, etc.), or
+//   1,2,3,etc - this is replaced by the first 1,2,3 characters of the
+//               vehicle filename
+//   VEHDIR    - this is replaced with the proper vehicles directory (e.g. E:\Data\season01\vehicles)
+//   TEAMDIR   - this is replaced with the proper team directory (e.g. season01\vehicles\williams)
+//   SPIN      - for the vehicle spinner in the options only
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//----------------------------------------
+
+SearchPath=<VEHDIR>
+SearchPath=<VEHDIR>\Rhez\2005Rhez\
+
+MASFile=Rhez.mas
+MASFile=cmaps.mas
+
+ReflectPlane=(0.0, -1.0, 0.0, 0.0)
+
+//----------------------------------------
+
+Instance=SLOT<ID>
+{
+  Moveable=True
+  MeshFile=Rhez_carbody_spinner.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) ShadowCaster=(Dynamic, Solid, 256, 256) Reflect=True
+  MeshFile=Rhez_cockpit_spin.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True
+  MeshFile=Rhez_windows.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(50.0) Reflect=False
+  MeshFile=Rhez_trunk.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True 
+  MeshFile=Rhez_DS_hlight.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True 
+  MeshFile=Rhez_PS_hlight.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True
+  MeshFile=Rhez_DS_tlight.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True 
+  MeshFile=Rhez_PS_tlight.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True 
+  MeshFile=Rhez_DS_Seat.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(50.0) Reflect=True
+  MeshFile=swheel_spin.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True
+  MeshFile=Rhez_nmirror.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(50.0) Reflect=True
+
+  Actor=VEHICLE
+
+//------------------------------------UPGRADES-------------------------------------------//
+
+<STARTUPGRADES>
+
+////////////////////////////////////Front Bumper///////////////////////////////////////////////////////////////////////////
+  Instance=FWING<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<FBUMPER> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True 
+  }
+////////////////////////////////////Rear Bumper///////////////////////////////////////////////////////////////////////////
+  Instance=DEBRIS1<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<RBUMPER> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True 
+  }
+///////////////////////////////////HOOD///////////////////////////////////////////////////////////////////////////
+  Instance=DEBRIS2<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<HOOD> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) Reflect=True 
+  }
+///////////////////////////////////Exhaust///////////////////////////////////////////////////////////////////////////
+  Instance=Exhaust<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<EXHAUST> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True 
+  }
+///////////////////////////////////Rearwing///////////////////////////////////////////////////////////////////////////
+<RWINGEXISTS>  Instance=rwing<UPNUMBER>
+<RWINGEXISTS>  {
+<RWINGEXISTS>    Moveable=True
+<RWINGEXISTS>    MeshFile=<RWING> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True
+<RWINGEXISTS>  }
+/////////////////////////////////Left Front Tire and Spindle/////////////////////////////////////////////////////////////////
+  Instance=LFTIRE<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<LFTIRESa> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True 
+  }
+
+  Instance=LFSpindle<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<LFBCAL> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+    MeshFile=<LFBDISC> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+  }
+/////////////////////////////////Right Front Tire and Spindle////////////////////////////////////////////////////////////////
+  Instance=RFTIRE<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<RFTIRESa> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True
+  }
+
+  Instance=RFSpindle<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<RFBDISC> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+    MeshFile=<RFBCAL> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+  }
+/////////////////////////////////Left Rear Tire and Spindle//////////////////////////////////////////////////////////////////
+  Instance=LRTIRE<UPNUMBER>
+  {
+   Moveable=True
+    MeshFile=<LRTIRESa> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True
+  }
+
+  Instance=LRSpindle<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<LRBDISC> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+    MeshFile=<LRBCAL> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+
+  }
+/////////////////////////////////Right Rear Tire and Spindle/////////////////////////////////////////////////////////////////
+  Instance=RRTIRE<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<RRTIRESa> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True
+  }
+
+ Instance=RRSpindle<UPNUMBER>
+  {
+    Moveable=True
+    MeshFile=<RRBDISC> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+    MeshFile=<RRBCAL> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.00) Reflect=True
+  }
+/////////////////////////////////Side Skirts///////////////////////////////////////////////////////////////////////////
+<SKIRTEXISTS>  Instance=sideskirts<UPNUMBER>
+<SKIRTEXISTS>  {
+<SKIRTEXISTS>    Moveable=True
+<SKIRTEXISTS>    MeshFile=<SKIRT> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) ShadowCaster=(Dynamic, Solid, 64, 64) Reflect=True
+<SKIRTEXISTS>  }
+/////////////////////////////////Weight Reduction///////////////////////////////////////////////////////////////////////////
+<PSEATEXISTS>  Instance=Pseat<UPNUMBER>
+<PSEATEXISTS>  {
+<PSEATEXISTS>    Moveable=True
+<PSEATEXISTS>    MeshFile=<PSeat> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) Reflect=True
+<PSEATEXISTS>  }
+
+///////////////////////////////////Roll Cage//////////////////////////////////////////////////////////////////////
+<RCAGEEXISTS>  Instance=Rcage<UPNUMBER>
+<RCAGEEXISTS>  {
+<RCAGEEXISTS>    Moveable=True
+<RCAGEEXISTS>    MeshFile=<RCAGE> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(100.0) Reflect=True
+<RCAGEEXISTS>  }
+
+<STOPUPGRADES>
+
+//---------------------------END OF UPGRADES-------------------------------------------//
+
+  Instance=MirrorDS  //Side Mirror -Driver Side
+  {
+    Moveable=True
+    MeshFile=Rhez_MrDS.gmt CollTarget=False HATTarget=False ShadowCaster=(Dynamic, Solid, 64,64) LODIn=(0.0) LODOut=(350.0) Reflect=True 
+  }
+
+  Instance=MirrorPS  //Side Mirror -Passenger Side
+  {
+    Moveable=True
+    MeshFile=Rhez_MrPS.gmt CollTarget=False HATTarget=False ShadowCaster=(Dynamic, Solid, 64,64) LODIn=(0.0) LODOut=(350.0) Reflect=True 
+  }
+}

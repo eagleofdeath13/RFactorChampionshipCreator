@@ -1,0 +1,256 @@
+{% extends "base.html" %}
+
+{% block title %}{{ 'Créer' if mode == 'create' else 'Éditer' }} un talent - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-person"></i> {{ 'Créer un nouveau talent' if mode == 'create' else 'Éditer le talent' }}
+        </h1>
+        <a href="/talents" class="btn btn-secondary mb-3">
+            <i class="bi bi-arrow-left"></i> Retour à la liste
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <form id="talent-form">
+            <!-- Nom du talent -->
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0"><i class="bi bi-info-circle"></i> Informations générales</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nom du talent *</label>
+                        <input type="text" class="form-control" id="name" name="name" required
+                               {% if mode == 'edit' %}readonly{% endif %}>
+                        <div class="form-text">Le nom du talent (ne peut pas être modifié après création)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informations personnelles -->
+            <div class="card mb-3">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0"><i class="bi bi-person-badge"></i> Informations personnelles</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="nationality" class="form-label">Nationalité *</label>
+                            <input type="text" class="form-control" id="nationality" name="nationality" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="date_of_birth" class="form-label">Date de naissance *</label>
+                            <input type="text" class="form-control" id="date_of_birth" name="date_of_birth"
+                                   pattern="\d{1,2}-\d{1,2}-\d{4}" placeholder="DD-MM-YYYY" required>
+                            <div class="form-text">Format: JJ-MM-AAAA (ex: 15-3-1990)</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="starts" class="form-label">Départs</label>
+                            <input type="number" class="form-control" id="starts" name="starts" min="0" value="0">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="poles" class="form-label">Pole positions</label>
+                            <input type="number" class="form-control" id="poles" name="poles" min="0" value="0">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="wins" class="form-label">Victoires</label>
+                            <input type="number" class="form-control" id="wins" name="wins" min="0" value="0">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="drivers_championships" class="form-label">Championnats</label>
+                            <input type="number" class="form-control" id="drivers_championships" name="drivers_championships" min="0" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistiques de course -->
+            <div class="card mb-3">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0"><i class="bi bi-speedometer2"></i> Statistiques de course</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="speed" class="form-label">Vitesse (0-100)</label>
+                            <input type="range" class="form-range" id="speed" name="speed" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="speed-value">50.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="aggression" class="form-label">Agressivité (0-100)</label>
+                            <input type="range" class="form-range" id="aggression" name="aggression" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="aggression-value">50.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="reputation" class="form-label">Réputation (0-100)</label>
+                            <input type="range" class="form-range" id="reputation" name="reputation" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="reputation-value">50.0</span></strong></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="courtesy" class="form-label">Courtoisie (0-100)</label>
+                            <input type="range" class="form-range" id="courtesy" name="courtesy" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="courtesy-value">50.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="composure" class="form-label">Sang-froid (0-100)</label>
+                            <input type="range" class="form-range" id="composure" name="composure" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="composure-value">50.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="crash" class="form-label">Accidents (0-100, plus bas = mieux)</label>
+                            <input type="range" class="form-range" id="crash" name="crash" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="crash-value">50.0</span></strong></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="recovery" class="form-label">Récupération (0-100)</label>
+                            <input type="range" class="form-range" id="recovery" name="recovery" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="recovery-value">50.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="completed_laps" class="form-label">Tours complétés (0-100)</label>
+                            <input type="range" class="form-range" id="completed_laps" name="completed_laps" min="0" max="100" step="0.1" value="90">
+                            <div class="text-center"><strong><span id="completed_laps-value">90.0</span></strong></div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="min_racing_skill" class="form-label">Compétence min. course (0-100)</label>
+                            <input type="range" class="form-range" id="min_racing_skill" name="min_racing_skill" min="0" max="100" step="0.1" value="50">
+                            <div class="text-center"><strong><span id="min_racing_skill-value">50.0</span></strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="row">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> {{ 'Créer' if mode == 'create' else 'Enregistrer' }}
+                    </button>
+                    <a href="/talents" class="btn btn-secondary ms-2">
+                        <i class="bi bi-x-circle"></i> Annuler
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+const mode = "{{ mode }}";
+const talentName = "{{ talent_name if mode == 'edit' else '' }}";
+
+// Update range values display
+const ranges = ['speed', 'aggression', 'reputation', 'courtesy', 'composure', 'crash', 'recovery', 'completed_laps', 'min_racing_skill'];
+ranges.forEach(name => {
+    const range = document.getElementById(name);
+    const valueSpan = document.getElementById(`${name}-value`);
+    range.addEventListener('input', () => {
+        valueSpan.textContent = parseFloat(range.value).toFixed(1);
+    });
+});
+
+// Load talent data if editing
+async function loadTalentData() {
+    if (mode === 'edit') {
+        try {
+            LoadingOverlay.show('Chargement...');
+            const talent = await APIClient.get(`/api/talents/${encodeURIComponent(talentName)}`);
+
+            // Fill form with talent data
+            document.getElementById('name').value = talent.name;
+            document.getElementById('nationality').value = talent.personal_info.nationality;
+            document.getElementById('date_of_birth').value = talent.personal_info.date_of_birth;
+            document.getElementById('starts').value = talent.personal_info.starts;
+            document.getElementById('poles').value = talent.personal_info.poles;
+            document.getElementById('wins').value = talent.personal_info.wins;
+            document.getElementById('drivers_championships').value = talent.personal_info.drivers_championships;
+
+            // Fill stats
+            Object.keys(talent.stats).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.value = talent.stats[key];
+                    const valueSpan = document.getElementById(`${key}-value`);
+                    if (valueSpan) {
+                        valueSpan.textContent = parseFloat(talent.stats[key]).toFixed(1);
+                    }
+                }
+            });
+        } catch (error) {
+            ToastNotification.error('Erreur lors du chargement du talent');
+            console.error(error);
+        } finally {
+            LoadingOverlay.hide();
+        }
+    }
+}
+
+// Form submission
+document.getElementById('talent-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        name: document.getElementById('name').value,
+        personal_info: {
+            nationality: document.getElementById('nationality').value,
+            date_of_birth: document.getElementById('date_of_birth').value,
+            starts: parseInt(document.getElementById('starts').value),
+            poles: parseInt(document.getElementById('poles').value),
+            wins: parseInt(document.getElementById('wins').value),
+            drivers_championships: parseInt(document.getElementById('drivers_championships').value)
+        },
+        stats: {
+            speed: parseFloat(document.getElementById('speed').value),
+            aggression: parseFloat(document.getElementById('aggression').value),
+            reputation: parseFloat(document.getElementById('reputation').value),
+            courtesy: parseFloat(document.getElementById('courtesy').value),
+            composure: parseFloat(document.getElementById('composure').value),
+            crash: parseFloat(document.getElementById('crash').value),
+            recovery: parseFloat(document.getElementById('recovery').value),
+            completed_laps: parseFloat(document.getElementById('completed_laps').value),
+            min_racing_skill: parseFloat(document.getElementById('min_racing_skill').value)
+        }
+    };
+
+    try {
+        LoadingOverlay.show(mode === 'create' ? 'Création...' : 'Mise à jour...');
+
+        if (mode === 'create') {
+            await APIClient.post('/api/talents/', formData);
+            ToastNotification.success(`Talent "${formData.name}" créé avec succès`);
+            window.location.href = '/talents';
+        } else {
+            // For update, don't send name
+            const updateData = {
+                personal_info: formData.personal_info,
+                stats: formData.stats
+            };
+            await APIClient.put(`/api/talents/${encodeURIComponent(talentName)}`, updateData);
+            ToastNotification.success(`Talent "${talentName}" mis à jour avec succès`);
+            window.location.href = `/talents/${encodeURIComponent(talentName)}`;
+        }
+    } catch (error) {
+        ToastNotification.error(`Erreur: ${error.message}`);
+        console.error(error);
+    } finally {
+        LoadingOverlay.hide();
+    }
+});
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadTalentData);
+</script>
+{% endblock %}

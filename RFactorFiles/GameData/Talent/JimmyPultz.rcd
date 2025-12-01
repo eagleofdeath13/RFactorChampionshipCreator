@@ -1,0 +1,21 @@
+Jimmy Pultz
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=23-7-1977
+  Starts=58
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=85.10
+  Reputation=61.77
+  Courtesy=70.44
+  Composure=85.34
+  Speed=92.42
+  Crash=3.73
+  Recovery=69.00
+  CompletedLaps=97.94
+  MinRacingSkill=87.39
+}

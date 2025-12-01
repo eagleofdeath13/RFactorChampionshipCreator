@@ -1,0 +1,21 @@
+Clark Jefferson
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=29-6-1973
+  Starts=73
+  Poles=11
+  Wins=5
+  DriversChampionships=1
+
+//Driver Stats
+  Aggression=91.66
+  Reputation=92.31
+  Courtesy=91.39
+  Composure=82.08
+  Speed=96.48
+  Crash=5.42
+  Recovery=74.68
+  CompletedLaps=92.75
+  MinRacingSkill=89.20
+}

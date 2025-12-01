@@ -1,0 +1,23 @@
+# Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+jinja2==3.1.2
+python-multipart==0.0.6
+
+# Data validation
+pydantic==2.5.0
+
+# File handling
+chardet==5.2.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+
+# Development
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+
+# Packaging (for future executable)
+pyinstaller==6.3.0

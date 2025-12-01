@@ -1,0 +1,21 @@
+Vince Evans
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=29-6-1974
+  Starts=78
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=41.32
+  Reputation=61.06
+  Courtesy=79.50
+  Composure=55.71
+  Speed=94.31
+  Crash=5.07
+  Recovery=79.00
+  CompletedLaps=93.53
+  MinRacingSkill=89.94
+}

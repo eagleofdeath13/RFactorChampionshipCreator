@@ -1,0 +1,243 @@
+
+// This file specifices how to generate the vehicle graphics.
+// It is pointed to by one or more *.veh files.
+//
+// All information except tokens are copied directly.
+// Tokens have the format "<value>" where value is one of the following:
+//   ID        - this is replaced by the proper slot identification (000, 001, etc.), or
+//   1,2,3,etc - this is replaced by the first 1,2,3 characters of the
+//               vehicle filename
+//   VEHDIR    - this is replaced with the proper vehicles directory (e.g. E:\Data\season01\vehicles)
+//   TEAMDIR   - this is replaced with the proper team directory (e.g. season01\vehicles\williams)
+//   SPIN      - for the vehicle spinner in the options only
+//   NOTSPIN   - for everything EXCEPT the vehicle spinner
+//   LOW       - low detail only
+//   MED       - medium detail only
+//   HIGH      - high detail only
+//   MAX       - maximum detail only
+//   DASHLOW   - low detail dash
+//   DASHHIGH  - high detail dash
+//
+// Example:
+//   For slot #2 using the vehicle file "nicecar.veh", the line
+//   "Instance=SLOT<ID>   MeshFile=<123>gva.gmt" would be replaced with
+//   "Instance=SLOT002   MeshFile=nicgva.gmt"
+
+
+//----------------------------------------
+
+SearchPath=<VEHDIR>
+
+MASFile=rTrainer\Trainer.mas
+MASFile=cmaps.mas
+
+//----------------------------------------
+
+Instance=SLOT<ID>
+{
+  Moveable=True
+//------------------------------------MAX CAR SETTINGS---------------------------------------------
+<MAX> MeshFile=ft_carbody_a.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(10.0) ShadowReceiver=True
+<MAX> MeshFile=ft_carbody_b.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(20.0) ShadowReceiver=True
+<MAX> MeshFile=ft_carbody_c.gmt CollTarget=False HATTarget=False LODIn=(20.0) LODOut=(500.0) ShadowReceiver=True
+//------------------------------------HIGH CAR SETTINGS--------------------------------------------
+<HIGH> MeshFile=ft_carbody_a.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+<HIGH> MeshFile=ft_carbody_b.gmt CollTarget=False HATTarget=False LODIn=(5.0) LODOut=(10.0) ShadowReceiver=True
+<HIGH> MeshFile=ft_carbody_d.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(400.0) ShadowReceiver=True
+//------------------------------------MED CAR SETTINGS---------------------------------------------
+<MED> MeshFile=ft_carbody_b.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(6.5) ShadowReceiver=True
+<MED> MeshFile=ft_carbody_c.gmt CollTarget=False HATTarget=False LODIn=(6.5) LODOut=(10.0) ShadowReceiver=True
+<MED> MeshFile=ft_carbody_d.gmt CollTarget=False HATTarget=False LODIn=(10.0) LODOut=(350.0) ShadowReceiver=True
+//------------------------------------LOW CAR SETTINGS---------------------------------------------
+<LOW> MeshFile=ft_carbody_b.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(7.0) ShadowReceiver=True
+<LOW> MeshFile=ft_carbody_d.gmt CollTarget=False HATTarget=False LODIn=(7.0) LODOut=(200.0) ShadowReceiver=True
+//------------------------------------SHADOW AND COLLISION OBJECTS---------------------------------
+MeshFile=ft_shadobj.gmt CollTarget=False HATTarget=False ShadowObject=(True, Solid, 256, 256, rt_undershadow.tga) LODIn=(0.0) LODOut=(200.0)
+MeshFile=ft_collision.gmt Render=False CollTarget=True HATTarget=False LODIn=(0.0) LODOut=(0.0)
+
+  Actor=VEHICLE
+
+Instance=COCKPIT
+{
+  Moveable=True
+  MeshFile=cockpit_ft.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+  MeshFile=Trainer_cpitlegs.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(5.0) ShadowReceiver=True
+  MeshFile=<DASHBOARD> CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+}
+
+Instance=WHEEL
+  {
+    Moveable=True VisGroups=(32)
+    MeshFile=steering_wheel_ft.GMT CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(2.00) ShadowReceiver=True
+  }
+
+<STARTUPGRADES>
+  Instance=DASHBOARD
+  {
+    Moveable=True
+ MeshFile=<DASHBOARD> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+/////////////////////////////////////////////////TIRES////////////////////////////////////////////////////////
+/////////////////////////////////LEFT FRONT TIRE AND SPINDLE//////////////////////////////////////////////////
+  Instance=LFTIRE
+  {
+    Moveable=True
+    MeshFile=<LFTIRESa> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(5.00) ShadowReceiver=True
+    MeshFile=<LFTIRESb> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(5.00) LODOut=(15.0) ShadowReceiver=True
+    MeshFile=<LFTIRESc> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(15.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+  Instance=LFSPINDLE
+  {
+    Moveable=True
+MeshFile=ft_lfspindle.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////RIGHT FRONT TIRE AND SPINDLE/////////////////////////////////////////////////
+  Instance=RFTIRE
+  {
+    Moveable=True
+    MeshFile=<RFTIRESa> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(5.00) ShadowReceiver=True
+    MeshFile=<RFTIRESb> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(5.00) LODOut=(15.0) ShadowReceiver=True
+    MeshFile=<RFTIRESc> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(15.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+  Instance=RFSPINDLE
+  {
+    Moveable=True
+MeshFile=ft_rfspindle.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////LEFT REAR TIRE//////////////////////////////////////////////////////////////
+
+  Instance=LRTIRE
+  {
+    Moveable=True
+    MeshFile=<LRTIRESa> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(5.00) ShadowReceiver=True
+    MeshFile=<LRTIRESb> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(5.00) LODOut=(15.0) ShadowReceiver=True
+    MeshFile=<LRTIRESc> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(15.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////RIGHT REAR TIRE/////////////////////////////////////////////////////////////
+
+  Instance=RRTIRE
+  {
+    Moveable=True
+    MeshFile=<RRTIRESa> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(0.00) LODOut=(5.00) ShadowReceiver=True
+    MeshFile=<RRTIRESb> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(5.00) LODOut=(15.0) ShadowReceiver=True
+    MeshFile=<RRTIRESc> CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 128, 128) LODIn=(15.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+<STOPUPGRADES>
+
+///////////////////////////////////SPOILER/REARWING//////////////////////////
+
+  Instance=RWING
+  {
+    Moveable=True
+    MeshFile=rearwing_ft_b.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+///////////////////////////////////ROLLCAGE/////////////////////////////////
+  Instance=ROLLCAGE
+  {
+    Moveable=True
+    MeshFile=rt_rollcage_b.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+//////////////////////////////////POPUP/////////////////////////////////////
+  Instance=POPUP
+  {
+    Moveable=True
+    MeshFile=rt_rollcage_popups.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+////////////////////////////////////FRONT WING////////////////////
+  Instance=FWING
+  {
+    Moveable=True
+    MeshFile=frontwing_ft.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 256, 256)  LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+////////////////////////////////////SUSPENSION///////////////////
+  Instance=DEBRIS1
+  {
+    Moveable=True
+    MeshFile=rft_lf_susp.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+  Instance=DEBRIS2
+  {
+    Moveable=True
+    MeshFile=rft_lr_susp.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+  Instance=DEBRIS3
+  {
+    Moveable=True
+    MeshFile=rft_rf_susp.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+  Instance=DEBRIS4
+  {
+    Moveable=True
+    MeshFile=rft_rr_susp.gmt CollTarget=False HATTarget=False ShadowCaster=(True, Solid, 64, 64) LODIn=(0.0) LODOut=(350.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////ENGINE BLOCK AND EXHAUST///////////////////////////////////////////////////
+
+  Instance=ENGINE
+  {
+    Moveable=True
+MeshFile=engineblock_ft.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+  Instance=EXHAUST
+  {
+    Moveable=True
+MeshFile=exhaust.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+/////////////////////////////////DEBRIS/////////////////////////////////////////////////////////////////
+
+Instance=DEBRIS5
+  {
+    Moveable=True
+    MeshFile=rt_wingplate_ps.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(350.00) ShadowReceiver=True
+  }
+
+Instance=DEBRIS6
+  {
+    Moveable=True
+    MeshFile=rt_wingplate_ds.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(350.00) ShadowReceiver=True
+  }
+
+////////////////////////////////DRIVER/////////////////////////////////////////////////////////////////////
+
+  Instance=HELMET
+  {
+    Moveable=True
+MeshFile=rtrainer_helmet_high.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(15.0) ShadowReceiver=True
+MeshFile=rtrainer_helmet_med.gmt CollTarget=False HATTarget=False LODIn=(15.0) LODOut=(100.0) ShadowReceiver=True
+MeshFile=rtrainer_helmet_low.gmt CollTarget=False HATTarget=False LODIn=(100.0) LODOut=(500.0) ShadowReceiver=True
+  }
+
+  Instance=BODY
+  {
+    Moveable=True
+    MeshFile=trainer_driver.gmt CollTarget=False HATTarget=False LODIn=(0.00) LODOut=(500.0) ShadowReceiver=True
+  }
+
+////////////////////////////////BRAKELIGHTS///////////////////////////////////////////////////////////////
+
+  Instance=BLIGHTDS
+  {
+    Moveable=True
+MeshFile=blglo_DS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(75.0)
+  }
+
+  Instance=BLIGHTPS
+  {
+    Moveable=True
+MeshFile=blglo_PS.gmt CollTarget=False HATTarget=False LODIn=(0.0) LODOut=(75.0)
+  }
+}

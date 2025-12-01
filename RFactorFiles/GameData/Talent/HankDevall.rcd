@@ -1,0 +1,21 @@
+Hank Devall
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=5-12-1974
+  Starts=67
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=26.73
+  Reputation=66.09
+  Courtesy=38.31
+  Composure=54.24
+  Speed=90.82
+  Crash=5.08
+  Recovery=85.13
+  CompletedLaps=90.61
+  MinRacingSkill=88.48
+}

@@ -1,0 +1,293 @@
+// Game/Season Info:
+Mod Name = OW Challenge 2006
+Track Filter = OWChallenge
+Vehicle Filter = OR: FormulaIS AcademyRacer rF3
+SafetyCar = Hammer_PC.veh
+
+Matchmaker = match.rfactor.net
+Matchmaker TCP Port = 39001
+Matchmaker UDP Port = 39002
+Loading Bar Color = 16750848
+RaceCast Location = racecast.rfactor.net
+
+Max Opponents = 21   // maximum opponents in practice/quick race/grand prix/championship
+Min Championship Opponents = 5 // minimum opponents in championship only
+
+ConfigOverrides
+{
+  // Remove the comment marks "//" and set the appropriate dir if you wish to override where 
+  //   this rFm looks for that data.
+  // At this time, I do not see a reasonable case for changing GameDir, SaveDir or LogDir
+  // Because of this new capability, I would no longer make changes to the Config.ini file 
+  //   except for debug reasons.
+
+  //SoundDir=GAMEDATA\SOUNDS\
+  //VehicleSound=GAMEDATA\SOUNDS\
+  //OptionsAnim=UIDATA\MOVIES\
+  //OptionsFlags=GAMEDATA\NATIONS\
+  //OptionsSounds=UIDATA\UISOUNDS\
+  //OSCFile=UI.OSC
+  //OptionsDir=UIDATA\
+  //ReplayDir=REPLAYFRIDGE\REPLAYS\
+  //ReplayPluginsDir=REPLAYFRIDGE\PLUGINS\
+  //PluginsDir=PLUGINS\
+  //MovieDir=MOVIEFILES\
+  //TracksDir=GAMEDATA\LOCATIONS\
+  //PitsDir=GAMEDATA\SCRIPTS\
+  //VehiclesDir=GAMEDATA\VEHICLES\
+  //DriversDir=GAMEDATA\TALENT\
+  //HelmetsDir=GAMEDATA\HELMETS\
+  //GamesDir=RFM\
+  //LogDir=USERDATA\LOG\
+  //SaveDir=USERDATA\
+  //MusicDir=MUSIC\
+  //ShadersDir=GAMEDATA\SHARED\
+  //ControllerDir=USERDATA\CONTROLLER\
+  //ScreenShotsDir=USERDATA\SCREENSHOTS\
+  //SupportDir=SUPPORT\
+  //LanguagesDir=SUPPORT\LANGUAGES\
+  //LanguagesFile=GAME.DIC
+}
+
+// Race season definitions
+Season = Trainer1
+{
+  FullSeasonName = rFactor Trainer Series
+  Vehicle Filter = &AcademyRacer&rtSchool
+  Max Opponents = 23   // maximum opponents in championship
+
+  SceneOrder
+  {
+    Mills_Short
+    JoesVille_Speedway
+    Toban_Short
+  }
+}
+
+Season = Trainer2
+{
+  FullSeasonName = Advanced Trainer Series
+  BaseCreditMult = 10.0
+  MinExperience = 500
+  EntryFee = 2500
+  Vehicle Filter = &AcademyRacer|rtSchool|rtAdvanced
+  Max Opponents = 23   // maximum opponents in championship
+
+  SceneOrder
+  {
+    Toban_Long_Rev
+    Nuer_Sprint
+    Orchard_Lake_Oval
+    Mills_Long_Rev
+    Toban_Short
+    NAS_National
+  }
+}
+
+Season = Factor 3 
+{
+  FullSeasonName = Factor 3 Ultimate Driver Challenge
+  BaseCreditMult = 75.0
+  MinExperience = 50000
+  EntryFee = 45000
+  Vehicle Filter = |rF3
+
+  FormationSpeedKPH = 110
+  PitSpeedingAllowance = 1.0
+
+  SceneOrder
+  {
+    NAS_International
+    S_Heights_Long
+    Mills_Long
+    Nuer_Sprint
+    Toban_Long
+    Toban_Long_Rev
+    Orchard_Lake_RC
+    Essington_Long
+  }
+}
+
+Season = Formula IS 2006
+{
+  FullSeasonName = Formula IS 2006 Championship
+  BaseCreditMult = 100.0
+  MinExperience = 60000
+  EntryFee = 50000
+  Vehicle Filter = |FormulaIS
+
+  RacePitKPH = 100
+  QualPitKPH = 100
+  NormalPitKPH = 80
+  FormationSpeedKPH = 180
+  QualifyDuration = 50
+  PitSpeedingAllowance = 1.0
+  ParcFermeSetup = 1
+
+  SceneOrder
+  {
+    Mills_Long
+    Toban_Long
+    Nuer_EuropeanGP
+    Barcelona_GP
+    Essington_Long
+    Orchard_Lake_Oval
+    Mills_Short
+    NAS_BritishGP
+    Montreal_GP
+    Orchard_Lake_RC
+    Toban_Long_Rev
+  }
+}
+
+
+// The base # is a simple multiplier that has a clear effect on the draft.
+// The exponent numbers, though, control the curve of the effect vs. distance.
+// Higher numbers make the effect drop off at a shorter distance.
+// NOTE: all these variables can now be overridden within HDV files, for
+// vehicle-specific drafting (in addition to new HDV parameters to affect the
+// response to drafting in terms of balance and downforce loss).
+Drafting 
+{ 
+  BaseDropoff=0.180 // higher number -> more drafting effect (default=0.185)
+  LeadingExponent=1.95 // higher number -> lower effect on leader (default=2.0)
+  FollowingExponent=1.8 // higher number -> lower effect on followers (default=2.0)
+  VehicleWidth=1.8 // helps determine base width of wake (default=1.9)
+  SideEffect=0.35 // negative effects of side-by-side drafting (default=0.35, used to be ~3.0 which was way too strong!)
+  SideLeadingExponent=2.0 // added to regular LeadingExponent to affect the side wake (default=2.0, used to be 0.0)
+  SideFollowingExponent=5.0 // added to regular FollowingExponent to affect the side wake (default=5.0, used to be 0.0)
+}
+
+// Default scoring entries can be overridden by season entries, which in turn can be
+// overridden by track GDB entries.  In general we would recommend as few overrides in
+// the track GDB as possible because they will affect every series that races there.
+// Note that you do not copy "DefaultScoring{}" in the track GDB, just the variables.
+DefaultScoring
+{
+  RacePitKPH = 80
+  NormalPitKPH = 60
+  FormationSpeedKPH = 95
+  Practice1Day = Friday
+  Practice1Start = 11:00
+  Practice1Duration = 60
+  Practice2Day = Friday
+  Practice2Start = 14:00
+  Practice2Duration = 60
+  Practice3Day = Saturday
+  Practice3Start = 11:00
+  Practice3Duration = 60
+  Practice4Day = Saturday
+  Practice4Start = 13:15
+  Practice4Duration = 15
+  QualifyDay = Saturday
+  QualifyStart = 14:00
+  QualifyDuration = 60
+  QualifyLaps = 12
+  WarmupDay = Sunday
+  WarmupStart = 9:00
+  WarmupDuration = 30
+  RaceDay = Sunday
+  RaceStart = 14:00
+  RaceLaps = 50
+  RaceTime = 120
+
+  //RULES (See "NSCRS06.rfm", for full rules list and descriptions)
+
+  PitSpeedingAllowance = 3.0
+
+  // 1 = steering lock, 2 = brake pressure, 4 = starting fuel, 8 = fuel strategy, 16 = tire compound, 32 = brake bias, 64 = front wing, 128 = engine settings (rev limit, boost, and engine braking)
+  FreeSettings = 238
+
+}
+
+// Money and experience accumulation (mostly multipliers for hard-coded values
+// which have various factors taken into account like number of competitors)
+StartingMoney = 1250        // always start with zero experience, but you need some money
+StartingVehicle=r_trainer01,r_trainer02,r_trainer03,r_trainer04,r_trainer05,r_trainer06,r_trainer07,r_trainer08,r_trainer09,r_trainer10,r_trainer11,r_trainer12
+StartingVehicle=bmw_16
+StartingVehicle=bmw_17
+DriveAnyUnlocked = 0         // 0 = must own to drive, 1 = must be unlocked to drive, 2 = drive anything
+BaseCreditMult = 1.0         // base which is multiplied by all the other multipliers
+LapMoneyMult = 1.0           // laps completed (based roughly on expected lap times)
+LapExpMult = 1.0
+FineMoneyMult = 1.0          // fines
+FineExpMult = 0.0
+PoleSingleMoneyMult = 1.0    // pole positions in single player
+PoleSingleExpMult = 1.0
+PoleCareerMoneyMult = 1.0    // pole positions in career mode
+PoleCareerExpMult = 1.0
+PoleMultiMoneyMult = 1.0     // pole positions in multiplayer
+PoleMultiExpMult = 1.0
+WinSingleMoneyMult = 1.0     // wins in single player
+WinSingleExpMult = 1.0
+WinCareerMoneyMult = 1.0     // wins in career mode
+WinCareerExpMult = 1.0
+WinMultiMoneyMult = 1.0      // wins in multiplayer
+WinMultiExpMult = 1.0
+PointsSingleMoneyMult = 1.0  // points in single player
+PointsSingleExpMult = 1.0
+PointsCareerMoneyMult = 1.0  // points in career mode
+PointsCareerExpMult = 1.0
+PointsMultiMoneyMult = 1.0   // points in multiplayer
+PointsMultiExpMult = 1.0
+
+// Season scoring info
+SeasonScoringInfo
+{
+  FirstPlace = 10
+  SecondPlace = 8
+  ThirdPlace = 6
+  FourthPlace = 5
+  FifthPlace = 4
+  SixthPlace = 3
+  SeventhPlace = 2
+  EighthPlace = 1
+}
+
+SceneOrder // first one in the list will be the default track when loading up the first time
+{
+  NAS_BritishGP
+  NAS_International
+  NAS_National
+  Nuer_EuropeanGP
+  Nuer_Sprint
+  Toban_Long
+  Toban_Short
+  Mills_Long
+  Mills_Short
+  Orchard_Lake_Oval
+  Orchard_Lake_RC
+  S_Heights_short
+  Joesville_Speedway
+}
+
+// Pitstop locations in order from front to back, with the number
+// of vehicles sharing each pit ... if the order needs to be
+// reversed on an individual track, set "ReversePitOrder=1" in
+// the track-specific GDB file.
+// These are now "pit group" names, not necessarily team names.
+// In the VEH file, the pit group defaults to the team name but
+// can be overridden by defining "PitGroup=<name>".
+PitGroupOrder
+{
+  // format is: PitGroup = <# of vehicles sharing pit>, <groupname>
+  PitGroup = 2, Group1
+  PitGroup = 2, Group2
+  PitGroup = 2, Group3
+  PitGroup = 2, Group4
+  PitGroup = 2, Group5
+  PitGroup = 2, Group6
+  PitGroup = 2, Group7
+  PitGroup = 2, Group8
+  PitGroup = 2, Group9
+  PitGroup = 2, Group10
+  PitGroup = 2, Group11
+  PitGroup = 2, Group12
+  PitGroup = 2, Group13
+  PitGroup = 2, Group14
+  PitGroup = 2, Group15
+  PitGroup = 2, Group16
+  PitGroup = 2, Group17
+}
+
+

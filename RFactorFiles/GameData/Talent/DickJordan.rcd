@@ -1,0 +1,21 @@
+Dick Jordan
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=2-7-1977
+  Starts=61
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=30.59
+  Reputation=59.12
+  Courtesy=55.97
+  Composure=76.58
+  Speed=95.15
+  Crash=4.94
+  Recovery=69.39
+  CompletedLaps=92.19
+  MinRacingSkill=86.71
+}

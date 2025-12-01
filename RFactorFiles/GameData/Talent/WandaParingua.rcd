@@ -1,0 +1,21 @@
+Wanda Paringua
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=16-4-1973
+  Starts=74
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=43.64
+  Reputation=75.07
+  Courtesy=60.70
+  Composure=52.30
+  Speed=92.73
+  Crash=8.54
+  Recovery=68.88
+  CompletedLaps=93.83
+  MinRacingSkill=85.26
+}

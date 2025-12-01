@@ -1,0 +1,21 @@
+Liz Dellarocco
+{
+ //Driver Info
+ Nationality=American
+ DateofBirth=3-4-75
+ Starts=28
+ Poles=2
+ Wins=1
+ DriversChampionships=0
+ 
+//Driver Stats
+  Aggression=61.66
+  Reputation=82.24
+  Courtesy=80.43
+  Composure=89.46
+  Speed=98.12
+  Crash=6.82
+  Recovery=98.85
+  CompletedLaps=92.66
+  MinRacingSkill=95.64
+}

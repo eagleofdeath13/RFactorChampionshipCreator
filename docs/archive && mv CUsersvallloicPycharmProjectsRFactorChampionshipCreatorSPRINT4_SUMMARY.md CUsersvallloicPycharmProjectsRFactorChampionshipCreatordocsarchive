@@ -1,0 +1,259 @@
+# Résumé de l'analyse - rFactor Championship Creator
+
+## Analyse effectuée
+
+### Date
+26 novembre 2025
+
+### Fichiers analysés
+1. `SRGrandPrix05.cch` - Fichier de championnat exemple
+2. `BrandonLang.rcd` - Fichier de talent (pilote) exemple
+3. `RD_01.VEH` - Fichier de véhicule exemple
+4. `Mills_Short.gdb` - Fichier de circuit exemple
+
+## Découvertes principales
+
+### 1. Format de fichier championnat (.cch)
+
+**Type** : INI étendu, texte brut
+
+**Sections identifiées** :
+- `[CAREER]` : Statistiques globales de carrière (unique)
+- `[VEHICLE]` : Véhicules possédés (multiple, un par véhicule)
+- `[CAREERSEASON]` : Configuration du championnat actuel (unique)
+- `[PLAYER]` : Configuration du joueur (unique)
+- `[OPPONENTxx]` : Configuration des adversaires (multiple, numérotés 00-08...)
+- `[PLAYERTRACKSTAT]` : Statistiques par circuit (multiple)
+
+**Points clés** :
+- Le pilote est assigné dans `[PLAYER]` ou `[OPPONENTxx]` via le champ `Name`
+- Le véhicule est assigné via `VehFile` (chemin vers `.veh`)
+- Si `RCDFile=""`, rFactor cherche automatiquement `[Name].rcd` dans `GameData/Talent/`
+- Tous les paramètres de course sont dans `[CAREERSEASON]` (préfixes `RACECOND_` et `GAMEOPT_`)
+
+### 2. Format de fichier talent (.rcd)
+
+**Type** : Dictionnaire avec accolades, texte brut
+
+**Structure** :
+```
+Nom du pilote
+{
+  // Informations personnelles
+  Nationality, DateofBirth, Starts, Poles, Wins, DriversChampionships
+
+  // Statistiques (valeurs décimales 0-100)
+  Aggression, Reputation, Courtesy, Composure, Speed, Crash, Recovery,
+  CompletedLaps, MinRacingSkill
+}
+```
+
+**Points clés** :
+- Le nom dans le fichier doit correspondre au nom utilisé dans le `.cch`
+- Nom de fichier : Nom sans espaces (ex: "Brandon Lang" → `BrandonLang.rcd`)
+- ~230 talents disponibles dans `GameData/Talent/`
+- Fichier `Dialog.ini` séparé pour les dialogues IA
+
+### 3. Format de fichier véhicule (.veh)
+
+**Type** : INI avec commentaires, texte brut
+
+**Sections principales** :
+- Livrées (DefaultLivery, PitCrewLivery, TrackLivery)
+- Références aux fichiers (HDVehicle, Graphics, Sounds, Cameras, Upgrades, Cockpit)
+- Informations du véhicule (Number, Team, Driver, Classes, Category)
+- Historique de l'équipe
+
+**Points clés** :
+- Le champ `Driver` définit le pilote par défaut
+- Dans un championnat, le `Name` du `.cch` remplace le `Driver` du `.veh`
+- Les `Classes` définissent les catégories de compétition
+- Architecture : `Vehicles/[Marque]/[Modèle]/[Catégorie]/[Équipe]/[Fichier].veh`
+
+### 4. Format de fichier circuit (.gdb)
+
+**Type** : Dictionnaire avec accolades, texte brut
+
+**Structure** :
+```
+Nom_du_circuit
+{
+  // Informations du circuit
+  TrackName, EventName, Location, Length, TrackType, Track Record
+
+  // Configuration par défaut
+  RaceLaps, RaceTime
+
+  // Environnement
+  Latitude, NorthDirection, RaceDate
+
+  // Éclairage (RGB pour sunrise, day, sunset, night)
+
+  // Configuration IA
+  SettingsAI, Qualify Laptime, Race Laptime
+}
+```
+
+**Points clés** :
+- ~18 circuits disponibles avec variantes
+- Configuration complète de l'environnement (météo, éclairage, temps)
+- Architecture : `Locations/[Circuit]/[Variante]/[Nom].gdb`
+
+## Relations entre fichiers
+
+```
+.cch (Championship)
+├── Référence N véhicules via VehFile → .veh
+│   └── Chaque .veh a un Driver par défaut
+├── Assigne N pilotes via Name
+│   └── Si RCDFile="", cherche [Name].rcd → .rcd
+└── Référence des circuits via TrackFile → .gdb
+```
+
+## Architecture des données rFactor
+
+```
+RFactorFiles/
+├── GameData/
+│   ├── Talent/           (~230 fichiers .rcd)
+│   ├── Vehicles/         (Hiérarchie : Marque/Modèle/Catégorie/Équipe/*.veh)
+│   └── Locations/        (~18 circuits avec variantes/*.gdb)
+└── UserData/
+    └── [Player]/         (Fichiers .cch des championnats du joueur)
+```
+
+## Implications pour le développement
+
+### Parser requis
+1. **Parser INI étendu** pour `.cch` et `.veh`
+   - Gérer sections multiples avec même nom
+   - Gérer sections numérotées (`[OPPONENTxx]`)
+   - Préserver commentaires optionnellement
+
+2. **Parser dictionnaire avec accolades** pour `.rcd` et `.gdb`
+   - Structure `Nom { key=value }`
+   - Gestion des commentaires `//`
+
+### Modèles de données nécessaires
+
+```python
+# Modèles principaux
+- Championship (représente un .cch)
+  - CareerStats
+  - Vehicles (liste)
+  - Season (configuration course)
+  - Player
+  - Opponents (liste)
+  - TrackStats (liste)
+
+- Talent (représente un .rcd)
+  - PersonalInfo
+  - DriverStats
+
+- Vehicle (représente un .veh)
+  - Livery
+  - FileReferences
+  - VehicleInfo
+  - TeamHistory
+
+- Track (représente un .gdb)
+  - TrackInfo
+  - Environment
+  - Lighting
+  - AISettings
+```
+
+### Fonctionnalités prioritaires
+
+#### Phase 2 (immédiate)
+1. Parser pour `.cch`
+2. Parser pour `.rcd`
+3. Lister tous les talents disponibles
+4. Lister tous les véhicules disponibles
+5. Lister tous les circuits disponibles
+6. Générateur de `.cch` basique
+
+#### Phase 3
+1. Créer/modifier un championnat
+2. Créer/modifier un talent
+3. Assigner pilotes à véhicules
+4. Sélectionner circuits
+
+#### Phase 4
+1. Import CSV pilotes → créer fichiers `.rcd`
+2. Export configuration championnat
+
+#### Phase 5-6
+1. Interface web Flask/FastAPI
+2. Packaging exécutable
+
+## Format CSV proposé pour import pilotes
+
+```csv
+name,nationality,date_of_birth,aggression,reputation,courtesy,composure,speed,crash,recovery,completed_laps,min_racing_skill
+Brandon Lang,American,28-11-1984,74.73,57.89,61.88,88.35,95.13,4.87,83.62,91.71,89.00
+```
+
+## Points d'attention
+
+### Encodage
+- Fichiers rFactor : **Windows-1252** ou ASCII
+- Fin de ligne : **CRLF** (`\r\n`)
+- Parser Python doit spécifier `encoding='cp1252'`
+
+### Chemins
+- Tous les chemins dans les fichiers sont relatifs à `RFactorFiles/`
+- Séparateur : **backslash** `\`
+- Insensibles à la casse (Windows)
+
+### Validation
+- Vérifier que le pilote existe (fichier `.rcd`) avant génération
+- Vérifier que le véhicule existe (fichier `.veh`)
+- Vérifier que le circuit existe (fichier `.gdb`)
+- Valider les plages de valeurs (ex: AIStrength 0-120, stats pilotes 0-100)
+
+### Compatibilité
+- Ne pas modifier les fichiers originaux du jeu
+- Générer dans `UserData/[Player]/`
+- Tester avec rFactor après génération
+
+## Outils Python recommandés
+
+- **configparser** : Pour parser fichiers INI (`.cch`, `.veh`)
+- **re** (regex) : Pour parser `.rcd` et `.gdb` (format personnalisé)
+- **pathlib** : Pour gestion des chemins
+- **csv** : Pour import/export CSV
+- **dataclasses** : Pour modèles de données
+- **Flask/FastAPI** : Pour interface web
+- **Jinja2** : Pour templates HTML
+
+## Prochaines étapes
+
+1. Créer structure de dossiers `src/`
+2. Développer parser `.cch` avec tests
+3. Développer parser `.rcd` avec tests
+4. Développer scanner de dossiers (lister talents/véhicules/circuits)
+5. Créer modèles de données Python
+6. Développer générateur `.cch`
+7. Créer interface web basique
+
+## Questions en suspens
+
+- [ ] Encodage exact (tester avec caractères accentués)
+- [ ] Limite max d'adversaires dans un championnat
+- [ ] Gestion des upgrades de véhicules
+- [ ] Format exact du champ `UpgradeList:`
+- [ ] Règles exactes du filtrage (`SinglePlayerFilter`, `MultiPlayerFilter`)
+- [ ] Comment rFactor gère les pilotes sans fichier `.rcd`
+
+## Fichiers de référence
+
+- `FILE_FORMATS.md` : Documentation exhaustive des formats
+- `SPECIFICATIONS.md` : Spécifications complètes du projet
+- `CLAUDE.md` : Contexte pour l'IA
+- `README.md` : Documentation utilisateur
+
+---
+
+**Analyse complétée le** : 26 novembre 2025
+**Prêt pour** : Phase 2 - Développement du parser

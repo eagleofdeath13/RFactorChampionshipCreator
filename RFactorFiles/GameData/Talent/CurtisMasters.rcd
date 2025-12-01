@@ -1,0 +1,21 @@
+Curtis Masters
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=26-1-1974
+  Starts=81
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=57.39
+  Reputation=73.55
+  Courtesy=46.44
+  Composure=82.86
+  Speed=94.63
+  Crash=6.97
+  Recovery=83.23
+  CompletedLaps=89.90
+  MinRacingSkill=89.11
+}

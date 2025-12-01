@@ -1,0 +1,21 @@
+Harold Stump
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=6-3-1973
+  Starts=79
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=36.21
+  Reputation=59.87
+  Courtesy=69.82
+  Composure=70.01
+  Speed=94.83
+  Crash=4.58
+  Recovery=76.52
+  CompletedLaps=95.15
+  MinRacingSkill=92.72
+}

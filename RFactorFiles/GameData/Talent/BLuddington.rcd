@@ -1,0 +1,21 @@
+Basil Luddington
+{
+//Driver Info
+  Nationality=Irish
+  DateofBirth=29-4-1973
+  Starts=80
+  Poles=1
+  Wins=3
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=96.61
+  Reputation=48.45
+  Courtesy=67.45
+  Composure=71.32
+  Speed=95.71
+  Crash=5.04
+  Recovery=75.27
+  CompletedLaps=97.61
+  MinRacingSkill=85.05
+}

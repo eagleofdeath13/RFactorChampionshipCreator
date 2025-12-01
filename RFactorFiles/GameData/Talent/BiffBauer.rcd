@@ -1,0 +1,21 @@
+Biff Bauer
+{
+//Driver Info
+  Nationality=British
+  DateofBirth=22-6-1974
+  Starts=77
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=68.90
+  Reputation=56.38
+  Courtesy=46.48
+  Composure=76.11
+  Speed=93.41
+  Crash=8.74
+  Recovery=70.43
+  CompletedLaps=94.34
+  MinRacingSkill=90.20
+}

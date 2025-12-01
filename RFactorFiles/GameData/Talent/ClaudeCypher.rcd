@@ -1,0 +1,21 @@
+Claude Cypher
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=15-2-1981
+  Starts=40
+  Poles=16
+  Wins=12
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=69.37
+  Reputation=57.93
+  Courtesy=76.88
+  Composure=69.84
+  Speed=98.16
+  Crash=6.91
+  Recovery=71.49
+  CompletedLaps=96.59
+  MinRacingSkill=94.74
+}

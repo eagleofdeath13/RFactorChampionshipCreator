@@ -1,0 +1,21 @@
+Fred Corleone
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=26-2-1970
+  Starts=97
+  Poles=2
+  Wins=0
+  DriversChampionships=1
+
+//Driver Stats
+  Aggression=80.25
+  Reputation=91.69
+  Courtesy=43.26
+  Composure=91.73
+  Speed=95.65
+  Crash=6.51
+  Recovery=78.35
+  CompletedLaps=99.19
+  MinRacingSkill=91.53
+}

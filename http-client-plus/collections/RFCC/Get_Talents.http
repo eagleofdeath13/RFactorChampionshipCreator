@@ -1,0 +1,5 @@
+### Get Talents
+GET http://localhost/api/talents/
+
+>> Get_Talents/response-{{$timestamp}}.json
+

@@ -1,0 +1,21 @@
+Chris Lang
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=7-7-1982
+  Starts=21
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=60.82
+  Reputation=41.67
+  Courtesy=58.09
+  Composure=99.79
+  Speed=92.85
+  Crash=5.83
+  Recovery=80.30
+  CompletedLaps=93.45
+  MinRacingSkill=87.28
+}

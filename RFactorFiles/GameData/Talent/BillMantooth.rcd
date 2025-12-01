@@ -1,0 +1,21 @@
+Bill Mantooth
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=28-7-1978
+  Starts=43
+  Poles=8
+  Wins=5
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=50.25
+  Reputation=60.15
+  Courtesy=66.84
+  Composure=80.62
+  Speed=96.52
+  Crash=6.73
+  Recovery=86.31
+  CompletedLaps=92.48
+  MinRacingSkill=90.75
+}

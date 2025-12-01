@@ -1,0 +1,21 @@
+Ricky Jefferson
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=10-10-1978
+  Starts=57
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=63.31
+  Reputation=29.84
+  Courtesy=59.24
+  Composure=77.15
+  Speed=95.11
+  Crash=6.92
+  Recovery=78.11
+  CompletedLaps=95.63
+  MinRacingSkill=89.63
+}

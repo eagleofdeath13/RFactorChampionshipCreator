@@ -1,0 +1,275 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h1 class="mb-4">
+            <i class="bi bi-speedometer2"></i> Dashboard
+        </h1>
+    </div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row">
+    <!-- Talents Card -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card border-primary">
+            <div class="card-body dashboard-stat">
+                <h5 class="card-title">
+                    <i class="bi bi-people text-info"></i> Talents
+                </h5>
+                <p class="card-text display-4" id="talents-count">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                </p>
+                <a href="/talents" class="btn btn-primary btn-sm">
+                    Gérer les talents <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Championships Card -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card border-success">
+            <div class="card-body dashboard-stat">
+                <h5 class="card-title">
+                    <i class="bi bi-trophy-fill" style="color: var(--status-success);"></i> Championnats
+                </h5>
+                <p class="card-text display-4" id="championships-count">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                </p>
+                <a href="/championships" class="btn btn-success btn-sm">
+                    Gérer les championnats <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vehicles Card -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card border-warning">
+            <div class="card-body dashboard-stat">
+                <h5 class="card-title">
+                    <i class="bi bi-car-front text-fluo"></i> Véhicules
+                </h5>
+                <p class="card-text display-4" id="vehicles-count">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                </p>
+                <a href="/vehicles" class="btn btn-warning btn-sm">
+                    Voir les véhicules <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tracks Card -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card border-danger">
+            <div class="card-body dashboard-stat">
+                <h5 class="card-title">
+                    <i class="bi bi-flag" style="color: var(--status-danger);"></i> Circuits
+                </h5>
+                <p class="card-text display-4" id="tracks-count">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                </p>
+                <a href="/tracks" class="btn btn-info btn-sm">
+                    Voir les circuits <i class="bi bi-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions Section -->
+<div class="row mt-4">
+    <div class="col-12 mb-3">
+        <h3 class="text-chrome">
+            <i class="bi bi-lightning-fill text-fluo"></i> Actions Rapides
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="list-group">
+            <a href="/championships/create/new" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-plus-circle-fill"></i> Créer un nouveau championnat
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Configurer et lancer un championnat personnalisé</p>
+            </a>
+
+            <a href="/talents/new" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-person-plus"></i> Créer un nouveau talent
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Ajouter un nouveau pilote à votre liste</p>
+            </a>
+
+            <a href="/import" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-file-earmark-arrow-up"></i> Importer depuis CSV
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Importer plusieurs pilotes d'un coup depuis un fichier CSV</p>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-6 mb-4">
+        <div class="list-group">
+            <a href="/vehicles" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-car-front-fill"></i> Explorer les véhicules
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Parcourir et filtrer tous les véhicules disponibles</p>
+            </a>
+
+            <a href="/tracks" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-geo-alt-fill"></i> Explorer les circuits
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Découvrir tous les circuits disponibles</p>
+            </a>
+
+            <a href="/config" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h5 class="mb-1">
+                        <i class="bi bi-gear-fill"></i> Configuration
+                    </h5>
+                    <i class="bi bi-chevron-right text-racing"></i>
+                </div>
+                <p class="mb-1 text-chrome">Configurer les chemins rFactor</p>
+                <p class="mb-0" id="config-status-detail">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                </p>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- System Status -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-info">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="bi bi-info-circle-fill" style="color: var(--status-info);"></i> Statut du Système
+                </h5>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <strong class="text-chrome">Version:</strong>
+                        <span class="text-fluo ms-2">1.0.0</span>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <strong class="text-chrome">Tests:</strong>
+                        <span class="badge bg-success ms-2">68 passants</span>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <strong class="text-chrome">API:</strong>
+                        <a href="/api/docs" target="_blank" class="text-racing ms-2">Documentation <i class="bi bi-box-arrow-up-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    // Counter animation function
+    function animateCounter(element, targetValue, duration = 1000) {
+        const startValue = 0;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+
+            // Easing function (ease-out)
+            const easeOut = 1 - Math.pow(1 - progress, 3);
+            const currentValue = Math.floor(startValue + (targetValue - startValue) * easeOut);
+
+            element.textContent = currentValue;
+
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                element.textContent = targetValue;
+            }
+        }
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    try {
+        // Load talents count
+        const talentsResp = await fetch('/api/talents/');
+        const talents = await talentsResp.json();
+        const talentsCountEl = document.getElementById('talents-count');
+        animateCounter(talentsCountEl, talents.length);
+
+        // Load championships count
+        const champsResp = await fetch('/api/championships/');
+        const championships = await champsResp.json();
+        const champsCountEl = document.getElementById('championships-count');
+        animateCounter(champsCountEl, championships.length);
+
+        // Load vehicles count
+        const vehiclesResp = await fetch('/api/vehicles/');
+        const vehicles = await vehiclesResp.json();
+        const vehiclesCountEl = document.getElementById('vehicles-count');
+        animateCounter(vehiclesCountEl, vehicles.length);
+
+        // Load tracks count
+        const tracksResp = await fetch('/api/tracks/');
+        const tracks = await tracksResp.json();
+        const tracksCountEl = document.getElementById('tracks-count');
+        animateCounter(tracksCountEl, tracks.length);
+
+        // Load configuration status
+        const configResp = await fetch('/api/config/');
+        const config = await configResp.json();
+        const configStatusEl = document.getElementById('config-status-detail');
+
+        if (config.is_configured) {
+            configStatusEl.innerHTML = '<span class="badge bg-success"><i class="bi bi-check-circle"></i> Configuré</span>';
+        } else {
+            configStatusEl.innerHTML = '<span class="badge bg-danger"><i class="bi bi-exclamation-triangle"></i> Non configuré</span>';
+        }
+    } catch (error) {
+        console.error('Error loading dashboard data:', error);
+
+        // Error handling with racing theme
+        document.getElementById('talents-count').innerHTML = '<i class="bi bi-exclamation-triangle text-warning"></i>';
+        document.getElementById('championships-count').innerHTML = '<i class="bi bi-exclamation-triangle text-warning"></i>';
+        document.getElementById('vehicles-count').innerHTML = '<i class="bi bi-exclamation-triangle text-warning"></i>';
+        document.getElementById('tracks-count').innerHTML = '<i class="bi bi-exclamation-triangle text-warning"></i>';
+        document.getElementById('config-status-detail').innerHTML = '<span class="badge bg-danger">Erreur de connexion</span>';
+
+        // Show error notification
+        if (window.ToastNotification) {
+            ToastNotification.error('Erreur lors du chargement des données du dashboard');
+        }
+    }
+});
+</script>
+{% endblock %}

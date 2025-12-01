@@ -1,0 +1,21 @@
+Klause Goble
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=6-11-1980
+  Starts=34
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=60.50
+  Reputation=46.08
+  Courtesy=38.43
+  Composure=80.96
+  Speed=94.19
+  Crash=9.08
+  Recovery=75.32
+  CompletedLaps=92.65
+  MinRacingSkill=88.67
+}

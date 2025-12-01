@@ -1,0 +1,21 @@
+Jackson Hills
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=3-8-1976
+  Starts=46
+  Poles=9
+  Wins=14
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=82.59
+  Reputation=98.30
+  Courtesy=70.85
+  Composure=92.13
+  Speed=99.21
+  Crash=1.21
+  Recovery=80.40
+  CompletedLaps=87.39
+  MinRacingSkill=97.67
+}

@@ -1,0 +1,21 @@
+Ronald Lee
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=18-12-1977
+  Starts=42
+  Poles=7
+  Wins=4
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=37.00
+  Reputation=32.79
+  Courtesy=46.36
+  Composure=78.31
+  Speed=96.07
+  Crash=8.74
+  Recovery=66.93
+  CompletedLaps=92.26
+  MinRacingSkill=85.94
+}

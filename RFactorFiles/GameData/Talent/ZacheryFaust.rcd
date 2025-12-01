@@ -1,0 +1,21 @@
+Zachery Faust
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=10-6-1973
+  Starts=57
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=51.65
+  Reputation=71.94
+  Courtesy=75.95
+  Composure=96.15
+  Speed=94.51
+  Crash=4.49
+  Recovery=75.71
+  CompletedLaps=94.47
+  MinRacingSkill=92.07
+}

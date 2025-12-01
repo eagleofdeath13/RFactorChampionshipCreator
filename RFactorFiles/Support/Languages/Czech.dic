@@ -1,0 +1,2616 @@
+// rFactor ¸ 2005-6 All Rights Reserved.
+// Version 1.057 27-Dec-05
+"Sector Splits"                                                                    ="Mezicasy"
+"Realtime Splits"                                                                  ="Aktualne mezicasy"
+"Standings Wraparound Off"                                                         ="Pretaceni vysledku zap."
+"Standings Wraparound On"                                                          ="Pretaceni vysledku vyp."
+"Standings Autoscroll On"                                                          ="Rolovani vysledku zap."
+"Vehicle"                                                                          ="Vuz"
+"All"                                                                              ="Vsechno"
+"Show all setups or only setups for current vehicle"                               ="Zobrazit vsechna nastaveni nebo jen pro tento vuz"
+"Autoscroll"                                                                       ="Rolovani zap."
+"No Autoscroll"                                                                    ="Rolovani vyp."
+"Toggle whether window auto-scrolls for new chats"                                 ="Prepinac automatickeho rolovani okna chatu pro nove prispevky"
+": server allows mismatches"                                                       =": server dovoluje neshody"
+": will be kicked from race"                                                       =": bude vyhozen ze zavodu"
+": will be kicked from qualifying or race"                                         =": bude vyhozen ze zavodu nebo kvalifikace"
+"AM"                                                                               ="dopo."
+"PM"                                                                               ="odpo."
+"Fixed Upgrades:"                                                                  ="Pevne dane vylepseni:"
+"Fixed Upgrades"                                                                   ="Pevne dane vylepseni"
+"FIXED UPGRADES"                                                                   ="PEVNE DANE VYLEPSENI"
+"FIXED SETUP"                                                                      ="PEVNE DANY SETUP"
+"CLASS PACKAGES"                                                                   ="BALICKY KATEGORII"
+"SECTORS"                                                                          ="SEKTORY"
+"This is a standard class package which is used by AIs.  It is also used in multipl="Toto je standartni balicek kategorie vozu, ktery pouzivaji pocitacovi oponenti. Je take pouzit ve hre pro vice hracu v pripade ze server je nastaven pro
+"<Fixed Setup>"                                                                    ="<Pevne dane nastaveni>"
+"Fixed Setups:"                                                                    ="Pevne dane nastaveni:"
+"Fixed Setups"                                                                     ="Pevne dane nastaveni"
+"SETUP"                                                                            ="Nastaveni"
+"Send Garage Setup"                                                                ="Poslat nastaveni vozu"
+"Send setup to everybody or player selected in grid"                               ="Poslat nastaveni vsem nebo vybranemu pilotovi"
+"Speed Limiter:"                                                                   ="Omezovac rycholsti:"
+"sent a garage setup (see Received folder)"                                        ="poslano nastaveni (viz. adresar Received/Dorucene)"
+"Failed to send fixed setup to"                                                    ="Nastaveni nelze dorucit pilotum:"
+"Server sent a fixed setup"                                                        ="Server zaslal pevne dane nastaveni"
+"Received"                                                                         ="Dorucene"
+"* OVERALL *"                                                                      ="* CELKOVY *"
+"Class"                                                                            ="Kategorie"
+"Best"                                                                             ="Nejlepsi"
+"BOOT"                                                                             ="VYKOPNOUT"
+"Boot Selected Driver"                                                             ="VYKOPNOUT vybraneho pilota"
+"Click on driver in grid then click this button to boot"                           ="Klikni na pilota na listine a potom na tlacitko pro vykopnuti"
+"BAN"                                                                              ="ZABANOVAT"
+"Ban Selected Driver"                                                              ="Zabanovat urceneho pilota"
+"Click on driver in grid then click this button to permanently ban"                ="Klikni na pilota na listine a potom na tlacitko pro trvaly ban"
+"WEEKEND"                                                                          ="VIKEND"
+"Restart Weekend"                                                                  ="Restartuj Vikend"
+"Reset FFB"                                                                        ="Resetuj FFB"
+"Force Feedback Reset"                                                             ="Force Feedback Reset"
+"Running RaceCast:"                                                                ="Bezi odesilani vysledku na RaceCast:"
+"has left the game but vehicle has been stored in the garage"                      ="opustil hru, ale jeho auto zustalo uschovano v garazi"
+"Sort games by Race Series"                                                        ="Serad hry podle zavodnich serii"
+"Race Series"                                                                      ="Zavodni serie"
+"Vehicle Upgrade Code:"                                                            ="Trida vozu:"
+"Press Enter For Fullscreen"                                                       ="Stiskni enter pro celou obrazovku"
+"moved to position"                                                                ="se posunul na pozici"
+"on the grid by the administrator"                                                 ="na startovni rost administratorem"
+"Sector"                                                                           ="Sektor"
+"Gear:"                                                                            ="Rychlostni stupen:"
+"VERTICAL FOV"                                                                     ="VERTIKALNI UHEL POHLEDU"
+"Default"                                                                          ="Puvodni"
+"CIRCUIT"                                                                          ="OKRUH"
+"Go to Next Circuit"                                                               ="Jdi na Dasli Okruh"
+"load next circuit"                                                                ="nacti dalsi okruh"
+"Load Next Circuit"                                                                ="Nacti Dalsi Okruh"
+"Green Flag!"                                                                      ="Zelena Vlajka!"
+"Full-Course Yellow Pending"                                                       ="Ocekava se plna zluta"
+"Full-Course Yellow"                                                               ="Plna zluta"
+"Red Flag Detected"                                                                ="Cervena vlajka"
+"Administrator Password:"                                                          ="Heslo Administratora"
+"has become the administrator"                                                     ="se stal administratorem"
+"is no longer the administrator"                                                   ="uz neni administratorem"
+"Administrator password is not set on the server"                                  ="Server nema nastaveno administratorske heslo"
+"Non-administrators cannot call votes on this server"                              ="Na tomto serveru smi zacit hlasovani pouze administratori"
+"Non-administrators cannot call votes on this server when administrator is present"="Nelze zacit hlasovani, pokud je na serveru pritomen administrator"
+"Chat Server"                                                                      ="Server pro pokec"
+"Pitstop Requested"                                                                ="Vydan pozadavek na zastavku v boxech"
+"Pitstop Unrequested"                                                              ="Pozadavek na zastavku je zrusen"
+"Crew Is Ready For Pitstop"                                                        ="Team je na zastavku pripraven"
+"Cannot find the current track (or rFm mismatch):"                                 ="Nelze najit prislusnou trat (nebo rFm neshoda):"
+"You are not allowed to drive the current vehicle"                                 ="Nemas opravneni ridit tento vuz"
+"Additional experience points needed:"                                             ="Je zapotrebi vice bodu zkusenosti:"
+"Cash:"                                                                            ="Hotovost:"
+// First time player profile
+"ENTER PLAYER INFORMATION"                                                         ="VLOZ INFORMACE O PILOTOVI"
+"This name will represent you throughout your career in rFactor."                  ="Zvolene jmeno te bude reprezentovat v cele kariere rFactor"
+"DATE OF BIRTH (OPTIONAL)"                                                         ="DATUM NAROZENI (NEPOVINNE)"
+"LOCATION (OPTIONAL)"                                                              ="MESTO (NEPOVINNE)"
+"This Player Already Exists"                                                       ="Tento Pilot jiz Existuje"
+"(and is pretty good!)"                                                            ="(a je dost dobry!)"
+"RACING SERIES"                                                                    ="ZAVODNI SERIE"
+"SERIES SELECT"                                                                    ="VYBER SERII"
+"SERIES INFORMATION"                                                               ="INFORMACE O ZAVODNICH SERII"
+"Select from the list on the left.  You will find"                                 ="Vyber ze seznamu nalevo. Najdes"
+"a description of each on the right."                                              ="popis kazdeho napravo."
+"Advanced series select"                                                           ="Rozsireny vyber zavodnich serii"
+"TEAM SELECT"                                                                      ="VYBER TYMU"
+"Use the tabs to gain further information or make"                                 ="Pouzij TAB pro dalš¡ informace nebo vytvoreni"
+"additional selections."                                                           ="dalš¡ vybery."
+"Advanced helmet select"                                                           ="Rozsireny vyber helmy"
+"HELMET"                                                                           ="HELMA"
+"HELMET INFORMATION"                                                               ="INFORMACE O HELME"
+"HELMET SELECT"                                                                    ="VYBER HELMY"
+"NATIONALITY SELECT"                                                               ="VYBER NARODNOSTI"
+"NATIONALITY"                                                                      ="NARODNOST"
+"NATIONALITY FLAG"                                                                 ="STATNI VLAJKA"
+"NATIONALITY INFORMATION"                                                          ="INFORMACE O NARODNOSTI"
+"Advanced nationality select"                                                      ="Rozsirene moznosti vyberu narodnosti"
+// messages
+"a description of each on the right."                                              ="popis pro kazdeho napravo."
+"A multiplayer event can not be paused "                                           ="Nelze pouzit pausu v rezimu vice hracu "
+"AI added after qualifying positions were manually edited.  Please re-check qualify="AI byli pridani az pote, co byly kvalifikacni pozice manualne upraveny. Prosim prekontrolovat poradi! "
+"Another instance of rFactor is already running."                                  ="rFactor je jiz spusten."
+"Cannot Skip Formation Lap, Running Start Locations Do Not Exist "                 ="Nelze preskocit zavadeci kolo"
+"Client rejoined after qualifying positions were manually edited.  Please re-check ="Pilot se pripojil az pote, co byly kvalifikacni pozice manualne upraveny. Prosim prekontrolovat poradi! "
+"Could not add vehicle filter(s)"                                                  ="Nebylo mozne pridat filtr(y) vozu"
+"Could not connect to registration server "                                        ="Nelze se spojit s registracnim serverem "
+"Could not determine the status of your connection "                               ="Nebylo mozne rozpoznat stav vaseho spojeni "
+"Could not switch to AutoJoin wait page...  Autojoin was not attempted "           ="Nelze se prepnout na cekaci stranku automatickeho pripojeni… "
+"Couldn't initialize matching plugin. "                                            ="Nebylo mozne inicializovat srovnavaci plugin. "
+"Enter Pits To Avoid Exceeding Lap Allowance "                                     ="Zajed do boxu, jinak prekrocis povoleny limit odjetych kol "
+"Harddrive space is cheap always set to Full"                                      ="Dochazi volne misto na disku"
+"is currently used for  "                                                          ="je momentalne vyuzivan pro "
+"is disabled "                                                                     ="je vypnuto "
+" is no longer riding with you. "                                                  ="jiz dale s tebou nejede. "
+" is now riding with you. "                                                        ="nyni jede s tebou. "
+"least one active season.  Are you sure"                                           ="nejmene jedna aktivni sezona. Ses si jisty"
+// Driving Aids
+"Auto Clutch"                                                                      ="Automaticka Spojka"
+"AUTO CLUTCH  "                                                                    ="AUTOMATICKA SPOJKA "
+"AUTO CLUTCH"                                                                      ="AUTOMATICKA SPOJKA"
+"Auto Pit Lane"                                                                    ="Autoamticka zastavka v boxech"
+"AUTO PIT LANE  "                                                                  ="AUTOMATICKA ZASTAVKA V BOXECH  "
+"AUTO PIT LANE"                                                                    ="AUTOMATICKA ZASTAVKA V BOXECH "
+"AUTO REVERSE"                                                                     ="AUTOMATICKE OTACENI"
+"Auto Shifting"                                                                    ="Automaticke Razeni"
+"AUTO SHIFTING  "                                                                  ="AUTOMATICKE RAZENI  "
+"AUTO SHIFTING"                                                                    ="AUTOMATICKE RAZENI "
+"Braking Help"                                                                     ="Asistent Brzd"
+"BRAKING HELP  "                                                                   ="ASISTENT BRZD  "
+"BRAKING HELP"                                                                     ="ASISTENT BRZD "
+"Invulnerability"                                                                  ="Nerozbitnost"
+"INVULNERABILITY  "                                                                ="NEROZBITNOST  "
+"INVULNERABILITY"                                                                  ="NEROZBITNOST "
+// Version 1.020
+" (All Teams Displayed)"                                                           ="(Zobrazeny Vsechny Tymy)"
+" (Only Owned Teams Displayed)"                                                    ="(Zobrazeny Pouze Vlastnene Tymy )"
+"*LIVE*"                                                                           ="*LIVE*"
+"/ping "                                                                           ="/odezva "
+"/vote no "                                                                        ="/hlasuj ne "
+"/vote yes "                                                                       ="/hlasuj ano "
+"<Factory Defaults> "                                                              ="<Puvodni tovarni nastaveni> "
+"1st GEAR"                                                                         ="1. RYCHLOST"
+"2nd Gear"                                                                         ="2. Rychlost"
+"2x "                                                                              ="2x "
+"3rd GEAR"                                                                         ="3. RYCHLOST"
+"3x "                                                                              ="3x "
+"4th GEAR"                                                                         ="4. RYCHLOST"
+"4x "                                                                              ="4x "
+"56K Modem "                                                                       ="56K Modem "
+"5th GEAR"                                                                         ="5. RYCHLOST"
+"5x "                                                                              ="5x "
+"6th GEAR"                                                                         ="6. RYCHLOST"
+"6x "                                                                              ="6x "
+"7th GEAR"                                                                         ="7. RYCHLOST"
+"7x "                                                                              ="7x "
+"ACCELERATION"                                                                     ="ZRYCHLENI"
+"Accept"                                                                           ="Prijmout"
+"ACCEPT"                                                                           ="PRIJMOUT"
+"ACTION"                                                                           ="AKCE"
+"Add 5 AI Drivers"                                                                 ="Pridat 5 AI Pilotu"
+"Add a game to the list using an IP address"                                       ="Pridej hru do seznamu pomoci IP adresy"
+"add AI"                                                                           ="pridej AI"
+"Add AI"                                                                           ="Pridej AI"
+"ADD AI"                                                                           ="PRIDEJ AI"
+"Add AI Driver"                                                                    ="Pridej AI Pilota"
+"Add bookmark to current clip"                                                     ="Pridej zalozku do klipu"
+"Add friend to friends list"                                                       ="Pridej hrace do seznamu pratel"
+"ADD GAME"                                                                         ="PRIDEJ HRU"
+"Add team/vehicle to your owned list"                                              ="Pridej tym/vuz do seznamu koupenych"
+"Adjust Seat Aft"                                                                  ="Posun sedadlo dozadu"
+"Adjust Seat Down"                                                                 ="Posun sedadlo dolu"
+"Adjust Seat Fore"                                                                 ="Posun sedadlo vpred"
+"Adjust Seat Up"                                                                   ="Posun sedadlo nahoru"
+"advanced"                                                                         ="rozsirene"
+"ADVANCED"                                                                         ="ROZSIRENE"
+"advanced audio"                                                                   ="rozsirene audio"
+"Advanced audio"                                                                   ="Rozsirene audio"
+"Advanced audio settings"                                                          ="Rozsirene nastaveni audio"
+"ADVANCED AUDIO SETTINGS"                                                          ="ROZSIRENE NASTAVENI AUDIO"
+"Advanced control settings"                                                        ="Rozsirene nastaveni ovladani"
+"Advanced controls"                                                                ="Rozsirene ovladani"
+"advanced difficulty"                                                              ="rozsirena obtiznost"
+"Advanced difficulty"                                                              ="Rozsirena obtiznost"
+"ADVANCED DIFFICULTY"                                                              ="ROZSIREANA OBTIZNOST"
+"Advanced difficulty settings"                                                     ="Rozsirene nastaveni obtiznosti"
+"advanced display"                                                                 ="rozsirene zobrazeni"
+"Advanced display"                                                                 ="Rozsirene zobrazeni"
+"ADVANCED DISPLAY"                                                                 ="ROZSIRENE ZOBRAZENI"
+"Advanced display settings"                                                        ="Rozsirene nastaveni zobrazeni"
+"advanced rules"                                                                   ="rozsirena pravidla"
+"Advanced rules"                                                                   ="Rozsirena pravidla"
+"ADVANCED RULES"                                                                   ="ROZSIRENA PRAVIDLA"
+"advanced select"                                                                  ="rozsireny vyber"
+"Advanced setup"                                                                   ="Rozsirene nastaveni"
+"ADVANCED SETUP"                                                                   ="ROZSIRENE NASTAVENI"
+"Advanced team select"                                                             ="Rozsireny vyber tymu"
+"Advanced vehicle select"                                                          ="Rozsireny vyber vozu"
+"AERODYNAMICS"                                                                     ="AERODYNAMIKA"
+"AI AGGRESSION"                                                                    ="AGRESIVITA AI"
+"AI Control: "                                                                     ="Nastaveni AI: "
+"AI DRIVER STRENGTH"                                                               ="VYKONOST AI PILOTA"
+"AI DRIVERS"                                                                       ="AI PILOTI"
+"AI STRENGTH"                                                                      ="VYKONOST AI"
+"Allowable Vehicles: "                                                             ="Dostupne vozy: "
+"Allowed"                                                                          ="Povoleno"
+"Ambient Temperature: "                                                            ="Teplota okoli: "
+"Ambient Temperature:"                                                             ="Teplota okoli:"
+"ANNOUNCE GAME"                                                                    ="ZVEREJNIT HRU"
+"AntiAliasing"                                                                     ="AntiAliasing"
+"Anti-lock Brakes"                                                                 ="ABS"
+"ANTI-LOCK BRAKES  "                                                               ="ABS  "
+"ANTI-LOCK BRAKES"                                                                 ="ABS"
+"ANTI-ROLL BAR"                                                                    ="ZKRUTNY STABILIZATOR"
+"any related seasons?"                                                             ="n?jak‚ souvisej¡c¡ sezony?"
+"are available"                                                                    ="je dostupny"
+"Are you sure you want to exit? "                                                  ="Opravdu chces opustit hru? "
+"Are You Sure You want to Quit? Unsaved changes will be lost"                      ="Opravdu chces odejit? Neulozene zmeny budou ztraceny."
+"Assign"                                                                           ="Priradit"
+"Assign as favorite"                                                               ="Priradit jako oblibeny"
+"Audio"                                                                            ="Audio"
+"AUDIO"                                                                            ="AUDIO"
+"Auto"                                                                             ="Auto"
+"Available "                                                                       ="Dostupny "
+"AVG. SPEED"                                                                       ="PRUM. RYCHL."
+"Back"                                                                             ="Zpet"
+"BACK"                                                                             ="ZPET"
+"BALANCE"                                                                          ="VYVAZENI"
+"Balanced (DX8)"                                                                   ="Vyvazene (DX8)"
+"base selector."                                                                   ="zakladni radici paka."
+"Basic"                                                                            ="Zakladni"
+"BASIC"                                                                            ="ZAKLADNI"
+"basic settings"                                                                   ="zakladni nastaveni"
+"BASIC SETTINGS"                                                                   ="ZAKLADNI NASTAVENI"
+"Be careful at the first corner "                                                  ="Bud opatrny v prvni zatacce "
+"Begin creating video this could take a LONG time..."                              ="Zacinam vytvaret video, to muze trvat DELSI DOBU..."
+"Begin Formation Lap "                                                             ="Zacina zavadeci kolo "
+"Beginner"                                                                         ="Zacatecnik"
+"Best Lap : "                                                                      ="Nej. kolo : "
+"Best Lap:"                                                                        ="Nej. kolo:"
+"BEST SPLIT:"                                                                      ="Nej. mezicas:"
+"Best: "                                                                           ="Nejlepsi: "
+"bevel "                                                                           ="kuzelove kolo "
+"Bilinear"                                                                         ="Bilinearni"
+"Black Only "                                                                      ="Pouze cerna "
+"Black Only"                                                                       ="Pouze cerna"
+"Bookmark"                                                                         ="Zalozka"
+"BOOKMARK"                                                                         ="ZALOZKA"
+"Bookmark Server"                                                                  ="Server zalozek"
+"BOOKMARKS"                                                                        ="ZALOZKY"
+"BOOST MAPPING"                                                                    ="BOOST MAPOVANI"
+"Boot"                                                                             ="Vykopnout"
+"Boot player"                                                                      ="Vykopnuti hrace"
+"Brake"                                                                            ="Brzdy"
+"Brake Bias (F)"                                                                   ="Vyvazeni brzd (Dopredu)"
+"BRAKE BIAS (F:R)"                                                                 ="VYVAZ. BRZD (P:Z)"
+"Brake Bias (R)"                                                                   ="Vyvazeni brzd (Dozadu)"
+"BRAKE DISC"                                                                       ="BRZDOVE KOTOUCE"
+"BRAKE DUCT SIZE"                                                                  ="VELIKOST CHLAZENI BRZD"
+"BRAKE PRESSURE"                                                                   ="TLAK V BRZDACH"
+"BRAKES"                                                                           ="BRZDY"
+"BRAKES: "                                                                         ="BRZDY: "
+"Buy Car"                                                                          ="Koupit Auto"
+"Buy Upgrade"                                                                      ="Koupit vylepseni"
+"c"                                                                                ="c"
+"Cable/DSL 128 kbps upload "                                                       ="Kabel/DSL 128 kbps upload "
+"Cable/DSL 128K Up"                                                                ="Kabel/DSL 128K Up"
+"Cable/DSL 256 kbps upload "                                                       ="Kabel/DSL 256 kbps upload "
+"Cable/DSL 256K Up"                                                                ="Kabel/DSL 256K Up"
+"Call a vote to advance the race session"                                          ="Zadat hlasovani pro prepnuti do zavodu"
+"Call a vote to advance the session"                                               ="Zadat hlasovani pro postup v sezone"
+"Call a vote to advance to next circuit"                                           ="Zadat hlasovani pro dalsi okruh"
+"Call a vote to advance to the next circuit"                                       ="Zadat hlasovani pro prepnuti na dalsi okruh"
+"Call a vote to restart the current race"                                          ="Zadat hlasovani pro restart zavodu"
+"Call a vote to restart the race weekend"                                          ="Zadat hlasovani pro restart celeho vikendu"
+"Call Event Vote"                                                                  ="Zadat hlasovani k udalosti"
+"Call Session Vote"                                                                ="Zadat hlasovani k sezone"
+"Cam Move Backward"                                                                ="Pohyb kamery dozadu"
+"Cam Move Down"                                                                    ="Pohyb kamery dolu"
+"Cam Move Forward"                                                                 ="Pohyb kamery dopredu"
+"Cam Move Left"                                                                    ="Pohyb kamery vlevo"
+"Cam Move Right"                                                                   ="Pohyb kamery vpravo"
+"Cam Move Slowly"                                                                  ="Zpomaleny pohyb kamery"
+"Cam Move Up"                                                                      ="Pohyb kamery nahoru"
+"Cam Tilt Down"                                                                    ="Nakloneni kamery dolu"
+"Cam Tilt Left"                                                                    ="Nakloneni kamery vlevo"
+"Cam Tilt Right"                                                                   ="Nakloneni kamery vpravo"
+"Cam Tilt Up"                                                                      ="Nakloneni kamery nahoru"
+"Cam Turn Left"                                                                    ="Otoceni kamrery vlevo"
+"Cam Turn Right"                                                                   ="Otoceni kamrery vpravo"
+"Cam Zoom In"                                                                      ="Priblizeni"
+"Cam Zoom Out"                                                                     ="Oddaleni"
+"CAMBER"                                                                           ="ODKLON"
+"Camera Change"                                                                    ="Zmena kamery"
+"Cancel"                                                                           ="Zrusit"
+"Cannot boot server. "                                                             ="Nelze nabootovat server. "
+"Cannot call vote: "                                                               ="Nelze zacit hlasovani: "
+"Cannot call vote: cannot advance session past race "                              ="Nelze zacit hlasovani: neni zadna dalsi udalost po zavode "
+"Cannot call vote: cannot restart race before race starts "                        ="Nelze zacit hlasovani: nelze restartova zavod pred jeho zacatkem "
+"Cannot call vote: must be server or active participant "                          ="Nelze zacit hlasovani: musi byt server nebo aktivni ucastnik "
+"Cannot call vote: no more AIs can be added "                                      ="Nelze zacit hlasovani: nelze pridat dalsi AI piloty"
+"Cannot call vote: no more race restarts allowed "                                 ="Nelze zacit hlasovani: dalsi restart zavodu neni povolen "
+"Cannot call vote: player specified not found "                                    ="Nelze zacit hlasovani: urceny hrac nenalezen "
+"Cannot call vote: there is a vote in progress "                                   ="Nelze zacit hlasovani: jine hlasovani prave probiha"
+"Cannot call vote: vote just ended (wait "                                         ="Nelze zacit hlasovani: jine hlasovani prave skoncilo (cekej "
+"Cannot call vote: voting for "                                                    ="Nelze zacit hlasovani: hlasovani pro "
+"CASTER"                                                                           ="SKLON SVISLE OSY CEPU RIZENI"
+"Casual"                                                                           ="Nahodny"
+"Caution Lap: "                                                                    ="Vystraha Kolo: "
+"Change"                                                                           ="Zmena"
+"Change Season"                                                                    ="Zmen sezonu"
+"Change the vehicle currently being viewed"                                        ="Zmen zobrazeny vuz"
+"Change to selected circuit"                                                       ="Zmen na vybrany okruh"
+"Changes Will Be Lost!"                                                            ="Zmeny budou ztraceny!"
+"chat"                                                                             ="pokec"
+"CHAT"                                                                             ="POKEC"
+"Chat: "                                                                           ="Pokec: "
+"Chatting Disallowed "                                                             ="Chat zakazan "
+"Choose another season to participate in"                                          ="Vyber jinou sezonu pro tvoji ucast"
+"choose series"                                                                    ="vyber herni serii"
+"choose team"                                                                      ="vyber tym"
+"CHOOSE VEHICLE"                                                                   ="VYBER VUZ"
+"CIRCUIT"                                                                          ="OKRUH"
+"Circuit : "                                                                       ="Okruh : "
+"CIRCUIT DETAIL"                                                                   ="DETAILY OKRUHU"
+"CIRCUIT INFORMATION"                                                              ="INFORMACE O OKRUHU"
+"Circuit Length:"                                                                  ="Delka okruhu:"
+"Circuit map"                                                                      ="Mapa okruhu"
+"CIRCUIT MAP"                                                                      ="MAPA OKRUHU"
+"Circuit Name:"                                                                    ="Nazev okruhu:"
+"CIRCUIT SELECT"                                                                   ="VYBER OKRUHU"
+"CIRCUIT WEATHER"                                                                  ="POCASI NA OKRUHU"
+"Circuit:"                                                                         ="Okruh:"
+"Class as configured: "                                                            ="Kategorie podle konfigurace: "
+"CLASSIFICATION "                                                                  ="KLASIFIKACE "
+"CLOCK: "                                                                          ="HODINY: "
+"Close advanced options"                                                           ="Zavri rozsirene volby"
+"Close advanced settings"                                                          ="Zavri rozsirene nastaveni"
+"Clutch"                                                                           ="Spojka"
+"COAST"                                                                            ="VOLNOBEH"
+"Cockpit"                                                                          ="Kokpit"
+"complete "                                                                        ="kompletni "
+"CONFIGURATION"                                                                    ="KONFIGURACE"
+"Connect"                                                                          ="Pripojit"
+"Connect to chat server"                                                           ="Pripojit se na server pro pokec"
+"Connection lost "                                                                 ="Spojeni ztraceno "
+"CONNECTION TYPE"                                                                  ="TYP SPOJENI"
+"CONTINUE"                                                                         ="POKRACUJ"
+"Control + Left Arrow: "                                                           ="Ctrl + sipka doleva: "
+"controller 1"                                                                     ="ovladac 1"
+"Controller 1"                                                                     ="Ovladac 1"
+"CONTROLLER 1"                                                                     ="OVLADAC 1"
+"Controller 1 deadzone settings"                                                   ="Ovladac 1 - nastaveni mrtve zony"
+"Controller 1 sensitivity settings"                                                ="Ovladac 1 - nastaveni citlivosti"
+"controller 2"                                                                     ="ovladac 2"
+"Controller 2"                                                                     ="Ovladac 2"
+"CONTROLLER 2"                                                                     ="OVLADAC 2"
+"Controller 2 deadzone settings"                                                   ="Ovladac 2 - nastaveni mrtve zony"
+"Controller 2 sensitivity settings"                                                ="Ovladac 2 - nastaveni citlivosti"
+"Controller assignments"                                                           ="Prirazeni ovladacu"
+"CONTROLLER ASSIGNMENTS"                                                           ="PRIRAZENI OVLADACU"
+"Controller file already exists "                                                  ="Soubor ovladace uz existuje "
+"Controller rates"                                                                 ="Meritka ovladace"
+"CONTROLLER RATES"                                                                 ="MERITKA OVLADACE"
+"Controls"                                                                         ="Ovladani"
+"CONTROLS"                                                                         ="OVLADANI"
+"Copy"                                                                             ="Kopiruj"
+"Create"                                                                           ="Vytvor"
+"Create a new profile"                                                             ="Vytvor novy profil"
+"Create new season"                                                                ="Vytvor novou sezonu"
+"CREATE SEASON"                                                                    ="VYTVOR SEZONU"
+"Creates new season"                                                               ="Vytvari novou sezonu"
+"credits "                                                                         ="kredity "
+"Credits earned: "                                                                 ="Obdrzeno kreditu: "
+"Credits spent: "                                                                  ="Utraceno kreditu: "
+"Credits: "                                                                        ="Kredity: "
+"Current Conditions:"                                                              ="Soucasne podminky:"
+"CURRENT ORDER"                                                                    ="SOUCASNE PORADI"
+"Current Time: "                                                                   ="Aktualni cas: "
+"Current: "                                                                        ="Nyni: "
+"CURRENT:"                                                                         ="NYNI:"
+"Current: <Factory Defaults>"                                                      ="Nyni: <Tovarni nastaveni>"
+"Custom "                                                                          ="Vlastni "
+"Custom"                                                                           ="Vlastni"
+"DAMAGE MULTIPLIER"                                                                ="VELIKOST POSKOZENI"
+"DAMAGE:"                                                                          ="POSKOZENI:"
+"DATA RATE"                                                                        ="DATOVY TOK"
+"Deadzone"                                                                         ="Mrtva zona"
+"Deadzone lock"                                                                    ="Zamek pro mrtvou zonu"
+"DEADZONE LOCK"                                                                    ="ZAMEK PRO MRTVOU ZONU"
+"Decrement Boost"                                                                  ="Sniz plnici tlak motoru"
+"Default "                                                                         ="Puvodni "
+"DEFAULT VIEW"                                                                     ="PUVODNI POHLED"
+"Default: "                                                                        ="Puvodni: "
+"Default: <Factory Defaults>"                                                      ="Puvodni: <Tovarni nastaveni>"
+"Defaults"                                                                         ="Puvodni"
+"Delete"                                                                           ="Smaz"
+"Delete current clip"                                                              ="Smaz klip"
+"Delete Player?"                                                                   ="Smazat hrace?"
+"Delete Replay?"                                                                   ="Smazat opak. zaznam?"
+"Delete selected replay file"                                                      ="Smaz vybrany opak. zaznam"
+"Delete the current profile all stats will be lost"                                ="Smaz vybrany profil. Statistika bude ztracena"
+"Delete Vehicle Setup?"                                                            ="Smazat nastaveni auta?"
+"Description: "                                                                    ="Popis: "
+"Detached "                                                                        ="Odmontovano "
+"DEV - BLANK"                                                                      ="DEV - BLANK"
+"DEV ONLY"                                                                         ="DEV ONLY"
+"DIFFERENTIAL LOCK"                                                                ="UZAVERKA DIFERENCIALU"
+"DIFFICULTY"                                                                       ="OBTIZNOST"
+"DIGITAL BRAKE RATE"                                                               ="VELIKOST STUPNOVANI DIGITALNI BRZDY"
+"DIGITAL CLUTCH RATE"                                                              ="VELIKOST STUPNOVANI DIGITALNI SPOJKY"
+"DIGITAL STEERING RATE"                                                            ="VELIKOST STUPNOVANI DIGITALNIHO ZATACENI"
+"DIGITAL THROTTLE RATE"                                                            ="VELIKOST STUPNOVANI DIGITALNIHO PLYNU"
+"Disallowed"                                                                       ="Zakazano"
+"Disconnect"                                                                       ="Odpojit"
+"Disconnect from chat server"                                                      ="Odpojit od kecaciho serveru"
+"DISPLAY"                                                                          ="ZOBRAZIT"
+"DISTRIBUTION (F:R)"                                                               ="POMER (P:Z)"
+"Do not delete existing season"                                                    ="Nemaz existujici sezonu"
+"Do Not Repair "                                                                   ="Neopravovat "
+"Do You Wish To Continue?"                                                         ="Prejes si pokracovat?"
+"Down "                                                                            ="Dolu "
+"Down Arrow + Left Arrow: "                                                        ="Sipka dolu + Sipka vlevo: "
+"Down Arrow: "                                                                     ="Sipka dolu: "
+"DOWNFORCE"                                                                        ="PRITLAK"
+"Download news banner and other online components"                                 ="Stahnout bannery a dalsi online komponenty"
+"Download range is 10 to 10000 kbps "                                              ="Rychlost stahovani je od 10 do 10 000 kbps "
+"DOWNLOAD RATING"                                                                  ="HODNOCENI STAHOVANI"
+"Downshifts"                                                                       ="Podrazovani"
+"Drive"                                                                            ="Jizda"
+"DRIVE"                                                                            ="JIZDA"
+"DRIVER "                                                                          ="PILOT "
+"DRIVER"                                                                           ="PILOT"
+"Driver Hot Swap"                                                                  ="Prepinani pilotu behem hry"
+"Driver:"                                                                          ="Pilot:"
+"DRIVER:"                                                                          ="PILOT:"
+"Driving Aids Undone"                                                              ="Asistenti rizeni uvolneni"
+"Driving Cameras"                                                                  ="Kamery pro rizeni"
+"Driving Too Slow: Moved To End Of Line "                                          ="Jsi prilis pomaly: Jsi presunut na konec jezdeckeho pole "
+"Dry"                                                                              ="Suchy"
+"Duplicate selected clip"                                                          ="Duplikuj vybrany klip"
+"Edit Grid"                                                                        ="Uprav rost"
+"Edit starting grid"                                                               ="Uprav startovni rost"
+"EDIT TOOLS"                                                                       ="NASTROJE PRO UPRAVU"
+"-EMPTY-"                                                                          ="-PRAZDNY-"
+"ENGINE"                                                                           ="MOTOR"
+"Engine boost adjustment not available "                                           ="Zmena plnicich tlaku motoru zakazana "
+"ENGINE BRAKE MAP"                                                                 ="BRZDENI MOTOREM"
+"ENGINE VOLUME"                                                                    ="HLASITOST MOTORU"
+"ENTER GAME NAME"                                                                  ="VLOZ JMENO HRY"
+"Enter IP Address"                                                                 ="Vloz IP adresu"
+"Enter IP address of host or"                                                      ="Vloz IP adresu hostitele nebo"
+"enter name"                                                                       ="vloz jmeno"
+"Enter Name"                                                                       ="Vloz Jmeno"
+"Enter new controller name"                                                        ="Vloz jmeno noveho ovladace"
+"Enter New Name"                                                                   ="Vloz nove jmeno"
+"Enter Password"                                                                   ="Vloz heslo"
+"enter player name"                                                                ="vloz jmeno hrace"
+"Entering "                                                                        ="Vkladani "
+"Entry Fee: "                                                                      ="Vstupni poplatek: "
+"Error"                                                                            ="Chyba"
+"EST. ACCEL. (0-150 kph):"                                                         ="ODHAD. AKCEL.  (0-150 km/h):"
+"EST. CORNERING:"                                                                  ="ODHAD. MAX ZATACENI:"
+"EST. TOP SPEED:"                                                                  ="ODHAD MAXIMALKY:"
+"EXAGGERATE YAW"                                                                   ="PREHNANE STACENI VOZU"
+"existing season in progress"                                                      ="existuje otevrena sezona"
+"Existing season will be aborted"                                                  ="existujici otevrena sezona bude zrusena"
+"             EXIT"                                                                ="             EXIT"
+"Exit Confirmation "                                                               ="Opravdu ukoncit hru "
+"Exit game"                                                                        ="Opustit hru"
+"EXIT REPLAY"                                                                      ="OPUST REPLAY"
+"Experience (Laps):"                                                               ="Zkusenosti (odjetych kol):"
+"Export"                                                                           ="Export"
+"Exporting..."                                                                     ="Exportuji..."
+"Extra Info Unavailable"                                                           ="Dalsi infomace nedostupne"
+"F TIRES:"                                                                         ="PREDNI PNEU:"
+"Factory Defaults Loaded "                                                         ="Nacteno tovarni nastaveni "
+"FAST BUMP"                                                                        ="RYCHLY NARAZ"
+"Fast forward"                                                                     ="Rychle vpred"
+"FAST REBOUND"                                                                     ="RYCHLY ODSKOK"
+"Fast reverse"                                                                     ="Rychle vzad"
+"FENDER FLARE"                                                                     ="ODLESKY NARAZNIKU"
+"Fifth Gear"                                                                       ="Pata rychlost"
+"FILE MANAGER"                                                                     ="SPRAVCE SOUBORU"
+"FINAL"                                                                            ="KONECNY"
+"Finish"                                                                           ="Konec"
+"Finish session"                                                                   ="Dokonci sezonu"
+"Finished "                                                                        ="Dokonceno "
+"First Gear"                                                                       ="Prvni rychlost"
+"First Grand Prix:"                                                                ="Prvni Velka Cena:"
+"FLAG RULES"                                                                       ="PRAVIDLA VLAJEK"
+"FOLDERS"                                                                          ="SLOZKY"
+"FORCE COCKPIT VIEW  "                                                             ="VYNUTIT POHLED Z KOKPITU  "
+"Force feedback"                                                                   ="Force feedback"
+"FORCE FEEDBACK EFFECTS"                                                           ="FORCE FEEDBACK EFFEKTY"
+"FORCE FEEDBACK STRENGTH"                                                          ="SILA FORCE FEEDBACKU"
+"FORCE FEEDBACK TYPE"                                                              ="TYP FORCE FEEDBACKU"
+"FORCE FEEDBACK"                                                                   ="FORCE FEEDBACK"
+"Formation Lap: "                                                                  ="Zavadeci kolo: "
+"Formation/Standing "                                                              ="Zavadeci kolo/pevny start "
+"Forward "                                                                         ="Vpred "
+"Fourth Gear"                                                                      ="Ctvrta rychlost"
+"frames per second"                                                                ="snimku za sekundu"
+"FRIEND LIST"                                                                      ="SEZNAM PRATEL"
+"FRIEND LIST STATUS"                                                               ="STAV SEZNAMU PRATEL"
+"FRIENDS"                                                                          ="PRATELE"
+"FRIENDS LIST"                                                                     ="SEZNAM PRATEL"
+"FRONT"                                                                            ="PREDNI"
+"FRONT DOWNFORCE"                                                                  ="PREDNI PRITLAK"
+"FRONT LEFT"                                                                       ="PREDNI LEVY"
+"FRONT RIGHT"                                                                      ="PREDNI PRAVY"
+"FRONT THIRD SPRING"                                                               ="PREDNI TRETI PRUZENI"
+"FRONT TOE IN"                                                                     ="PREDNI SBIHAVOST"
+"ft-lbs "                                                                          ="ft-lbs "
+"FUEL USAGE"                                                                       ="SPOTREBA"
+"FUEL:"                                                                            ="PALIVO:"
+"Full "                                                                            ="Plny "
+"Full"                                                                             ="Plny"
+"GAME NAME"                                                                        ="JMENO HRY"
+"Game Pad"                                                                         ="Game Pad"
+"GAP"                                                                              ="ODSTUP"
+"Garage"                                                                           ="Garaz"
+"GARAGE"                                                                           ="GARAZ"
+"Gear"                                                                             ="Prevod"
+"GEARING BIAS"                                                                     ="PREVOD. POMER"
+"GEARS"                                                                            ="PREVODY"
+"GENERAL"                                                                          ="OBECNY"
+"Go Left "                                                                         ="Bez vlevo "
+"Go Right "                                                                        ="Bez vpravo "
+"Go to Next Race"                                                                  ="Bez na dalsi zavod"
+"Go to next race of current season"                                                ="Bez na dalsi zavod v sezone"
+"Go to Next Session"                                                               ="Bez na dalsi sezonu"
+"GO! "                                                                             ="GO! "
+"Good job "                                                                        ="Dobra prace "
+"Good race "                                                                       ="Dobry zavod "
+"Green Flag! "                                                                     ="Zelena vlajka! "
+"grid status"                                                                      ="stav na rostu"
+"GRIP"                                                                             ="PRILNAVOST"
+"Handbrake"                                                                        ="Rucni brzda"
+"HANDBRAKE PRESSURE"                                                               ="UCINNOST RUCNI BRZDY"
+"Hardware Plugins Disabled "                                                       ="Hardwarove pluginy zakazany "
+"Hardware Plugins Enabled  "                                                       ="Hardwarove pluginy povoleny  "
+"has entered the game. "                                                           ="vstoupil do hry. "
+"has some player selectable cars."                                                 ="mit vozy, ktere si muzes zvolit."
+"HEAD MOVEMENT"                                                                    ="POHYB HLAVY"
+"Headlights"                                                                       ="Svetlomety"
+"HEADS UP DISPLAY"                                                                 ="HORNI DISPLAY"
+"High"                                                                             ="Vysoky"
+"Horn"                                                                             ="Klakson"
+"HOT LAP "                                                                         ="NEJRYCHL. KOLO "
+"HotSwapping Disallowed "                                                          ="Prepinani pilotu behem hry zakazano"
+"hours "                                                                           ="hodin "
+"hp "                                                                              ="koni "
+"IDENTICAL PERFORMANCE  "                                                          ="STEJNY VYKON  "
+"Ignition"                                                                         ="Zapalovani"
+"In Progress "                                                                     ="Bezici "
+"Incompatible game versions."                                                      ="Nekompatibilni (ruzne) verze hry."
+"Increment Boost"                                                                  ="Pridat na plnicim tlaku motoru"
+"INFORMATION"                                                                      ="INFORMACE"
+"Install"                                                                          ="Instaluj"
+"Instant Replay"                                                                   ="Rychly opak. zaznam"
+"INSTANT REPLAY"                                                                   ="RYCHLY OPAK ZAZN."
+"Instant replay length in seconds"                                                 ="Delka rychl. opak. zazn. v sec."
+"Instant Replay: "                                                                 ="Rychly opak. zazn.: "
+"Insufficient Funds "                                                              ="Nedostatek hotovosti "
+"Intermediate"                                                                     ="Prechodne"
+"Internet"                                                                         ="Internet"
+"Internet Matchmaking for rFactor is no longer available. "                        ="Internetove porovnavani pro rFactor uz neni dostupne. "
+"Internet Matchmaking for rFactor is temporarily unavailable. "                    ="Internetove porovnavani pro rFactor neni docasne dostupne. "
+"Internet Update Complete"                                                         ="Updatovani z Internetu hotovo"
+"Invert"                                                                           ="Otoc"
+"IP ADDRESS"                                                                       ="IP ADRESA"
+"ISDN "                                                                            ="ISDN "
+"ISDN"                                                                             ="ISDN"
+"Joining Session "                                                                 ="Pripojuji se k sezone "
+"Joystick"                                                                         ="Joystick"
+"Jump back to previous bookmark"                                                   ="Skoc zpet na predchozi zalozku"
+"Jump forward to next bookmark"                                                    ="Skoc vpred na nasled. zalozku"
+"Jump to another vehicle"                                                          ="Skoc na dalsi vuz"
+"Jump to end"                                                                      ="Skoc na konec"
+"Jump to next clip"                                                                ="Jdi na dalsi klip"
+"Jump to previous clip"                                                            ="Jdi na predchozi klip"
+"kbps "                                                                            ="kb/s "
+"Keyboard"                                                                         ="Klavesnice"
+"kg "                                                                              ="kg "
+"km "                                                                              ="km "
+"kph"                                                                              ="km/h"
+"KPH"                                                                              ="KM/H"
+"KPH / MPH"                                                                        ="KM/H / M/H"
+"kW "                                                                              ="kW "
+"L"                                                                                ="L"
+"LAN "                                                                             ="LAN "
+"LAN"                                                                              ="LAN"
+"lap "                                                                             ="kolo "
+"Lap "                                                                             ="Kolo "
+"Lap Record:"                                                                      ="Nejrychlejsi kolo:"
+"Lap Will Not Count "                                                              ="Kolo se nebude pocitat "
+"laps "                                                                            ="kol "
+"Laps "                                                                            ="Kol "
+"LAPS"                                                                             ="KOL"
+"Laps and Time "                                                                   ="Kola a Cas "
+"LAPS REMAINING"                                                                   ="KOL DO KONCE"
+"LATERAL (L:R)"                                                                    ="LATERALNI (L:P)"
+"Launch Control"                                                                   ="Kontrola Startu"
+"Launch control is not available on this vehicle "                                 ="Kontrola startu neni na tomto vozu mozna "
+"lbs "                                                                             ="lbs "
+"LCD Decrease"                                                                     ="LCD Snizit"
+"LCD Down"                                                                         ="LCD Dolu"
+"LCD Increase"                                                                     ="LCD Zvysit"
+"LCD Mode"                                                                         ="LCD Mod"
+"LCD Up"                                                                           ="LCD Nahoru"
+"LDR LAP: "                                                                        ="LDR KOLO: "
+"LDR LAPS: "                                                                       ="LDR KOL: "
+"LEADER: "                                                                         ="LEADER: "
+"leave blank to search."                                                           ="pro hledani ponechte prazdne."
+"Leave circuit"                                                                    ="Opustit okruh"
+"Leave track"                                                                      ="Opustit trat"
+"      LEAVE TRACK"                                                                ="      OPUSTIT OKRUH"
+"      LEAVE TRACK"                                                                ="      OPUSTIT TRAT"
+"Leaving pits "                                                                    ="Opousteni pitu "
+"Left Arrow: "                                                                     ="Sipka Vlevo: "
+"left the game. "                                                                  ="opustil hru. "
+"Length (hr:min:sec)"                                                              ="Delka (h:m:s)"
+"Level1"                                                                           ="Level1"
+"Level2"                                                                           ="Level2"
+"Level3"                                                                           ="Level3"
+"Live Update"                                                                      ="Live Update"
+"Load"                                                                             ="Nahrat"
+"Load circuit"                                                                     ="Nacist okruh"
+"LOAD CIRCUIT"                                                                     ="NACIST OKRUH"
+"Load currently selected circuit"                                                  ="Nacist vybrany okruh"
+"LOAD GAME"                                                                        ="NACIST HRU"
+"Load selected replay file"                                                        ="Nacist vybrany soubor zaznamu"
+"Loading Grid... "                                                                 ="Nacitam Startovni Pole... "
+"Loading vehicle for "                                                             ="Nacitam vuz pro "
+"Location:"                                                                        ="Umisteni:"
+"Lock icon above car"                                                              ="Uzamknout ikonu nad vozem"
+"Locked "                                                                          ="Zamknuto "
+"LOCKED:"                                                                          ="ZAMKNUTO:"
+"Logged out of RaceCast "                                                          ="Odhl šen z RaceCast "
+"LOOK AHEAD"                                                                       ="DIVAT SE DOPREDU"
+"Look Behind"                                                                      ="Divat se Dozadu"
+"Look Down"                                                                        ="Divat se Dolu"
+"Look Left"                                                                        ="Divat se Vlevo"
+"Look Right"                                                                       ="Divat se Vpravo"
+"Look Roll Left"                                                                   ="Natocit Vlevo"
+"Look Roll Right"                                                                  ="Natocit Vpravo"
+"Look Up"                                                                          ="Divat se Nahoru"
+"Low"                                                                              ="Nizky"
+"main"                                                                             ="hlavni"
+"MAP"                                                                              ="MAPA"
+"mapping"                                                                          ="mapovani"
+"MAPPING"                                                                          ="MAPOVANI"
+"MAPPINGS"                                                                         ="MAPOVANI"
+"MATCHMAKER ADDRESS"                                                               ="ADRESA MATCHMAKERU"
+"Max"                                                                              ="Max"
+"maximize"                                                                         ="Maximalizovat"
+"MECH. FAILURES"                                                                   ="MECH. PORUCHY"
+"Mechanical and aero"                                                              ="Mechanika a aero"
+"MECHANICAL FAILURES"                                                              ="MECHANICKE PORUCHY"
+"Medium"                                                                           ="Stredni"
+"MESSAGE CENTER"                                                                   ="CENTRUM ZPRAV"
+"MESSAGE OF THE DAY (optional)"                                                    ="ZPRAVA DNE (volitelne)"
+"miles "                                                                           ="mile "
+"MILLS METROPARK LONG"                                                             ="MILLS METROPARK LONG"
+"minimize"                                                                         ="minimalizovat"
+"Minimum"                                                                          ="Minimum"
+"mins "                                                                            ="min "
+"minutes "                                                                         ="minut "
+"Mirror Position:  "                                                               ="Pozice Zrcatek:  "
+"MIRRORS"                                                                          ="ZRCATKA"
+"mismatch "                                                                        ="chyba "
+"Missing email password."                                                          ="Chybi heslo emailu."
+"Modem < 56K"                                                                      ="Modem < 56K"
+"Modem 56K"                                                                        ="Modem 56K"
+"MODIFIED ORDER"                                                                   ="PORADI ZMENENO"
+"MODIFIERS"                                                                        ="MODIFIKATORY"
+"Monitor"                                                                          ="Monitor"
+"MONITOR"                                                                          ="MONITOR"
+"Monsoon "                                                                         ="Monzun "
+"Monsoon"                                                                          ="Monzun"
+"more to pass "                                                                    ="ke schvaleni "
+"MOTD: "                                                                           ="MOTTO: "
+"Move Left"                                                                        ="Pohyb Vlevo"
+"Move Right"                                                                       ="Pohyb Vpravo"
+"MOVIES"                                                                           ="FILMY"
+"Moving shadows only "                                                             ="Jenom pohyblive stiny "
+"mph"                                                                              ="mph"
+"MPH"                                                                              ="MPH"
+"MULTIPLAYER DIFFICULTY"                                                           ="OBTIZNOST MULTIPLAYERU"
+"MULTIPLAYER RULES"                                                                ="PRAVIDLA MULTIPLAYERU"
+"MUSIC VOLUME"                                                                     ="HLASITOST HUDBY"
+"N/A "                                                                             ="N/A "
+"N/A"                                                                              ="N/A"
+"Need A Vehicle:  "                                                                ="Potrebuji Vuz:  "
+"NETWORK SETTINGS"                                                                 ="NASTAVENI SITE"
+"Neutral"                                                                          ="Neutral"
+"NEW CIRCUIT"                                                                      ="NOVY OKRUH"
+"NEW CIRCUIT SELECT"                                                               ="VYBER NOVEHO OKRUHU"
+"New client joined after qualifying positions were manually edited.  Please re-chec="Novy klient se pripojil po provedeni zmen v kvalifikacnich pozicich. Prosim zkontrolujte poradi kvalifikace! "
+"NEWS/INFO"                                                                        ="NOVINKY/INFO"
+"Next"                                                                             ="Dalsi"
+"Next Clip"                                                                        ="Dalsi Klip"
+"Next Race"                                                                        ="Dalsi Zavod"
+"Next session "                                                                    ="Dalsi udalost "
+"Next session"                                                                     ="Dalsi udalost"
+"Next Track "                                                                      ="Dalsi Trat "
+"Next Track:  "                                                                    ="Dalsi Trat:  "
+"Nm "                                                                              ="Nm "
+"No "                                                                              ="?¡slo "
+"No"                                                                               ="?¡slo"
+"No Change "                                                                       ="Beze Zmeny "
+"No Games Available "                                                              ="Zadna hra "
+"No Join Failure"                                                                  ="Zadna chyba pripojeni"
+"No Opponents Selected"                                                            ="Nejsou vybrani oponenti"
+"No port specified for autojoin, will not enable the feature "                     ="Neni urcen port pro autojoin, nemohu povolit tuto moznost "
+"No response from registration server "                                            ="Zadna odpoved z registracniho serveru "
+"No vote in progress "                                                             ="Neprobiha zadne hlasovani "
+"None "                                                                            ="Zadny "
+"None"                                                                             ="Zadny"
+"Normal "                                                                          ="Normalni "
+"Normal"                                                                           ="Normalni"
+"Nose"                                                                             ="Nos"
+"Not Available In Demo "                                                           ="V demoverzi neni povoleno "
+"NOT AVAILABLE IN DEMO"                                                            ="V DEMOVERZI NENI POVOLENO"
+"Not loading vehicle, filenames differ but an alternate vehicle has been loaded "  ="Vuz nelze nahrat, jmena souboru se lisi, ale nahral se alternativni vuz "
+"NOT OWNED:"                                                                       ="NEKOUPENO:"
+"Not Started "                                                                     ="Nezacal "
+"Not Started"                                                                      ="Nezacal"
+"Nothing"                                                                          ="Nic"
+"Novice"                                                                           ="Novacek"
+"Number of AI: "                                                                   ="Pocet AI: "
+"NUMBER OF EFFECTS"                                                                ="POCET EFEKTU"
+"NUMBER OF STOPS"                                                                  ="POCET ZASTAVEK"
+"Off "                                                                             ="Vypnuto "
+"Off"                                                                              ="Vypnuto"
+"OFFLINE STATISTICS"                                                               ="OFFLINE STATISTIKA"
+"OIL: "                                                                            ="OLEJ: "
+"Ok"                                                                               ="Ok"
+"OK"                                                                               ="OK"
+"OK"                                                                               ="OK"
+"On"                                                                               ="Zapnuto"
+"Onboard brake bias adjustment not available "                                     ="Vyvazeni brzd neni povoleno v onboard rezimu "
+"Onboard Cameras"                                                                  ="Onboard Kamery"
+"ONLINE GAME NAME"                                                                 ="NAZEV ONLINE HRY"
+"Only show those teams that are currently owned"                                   ="Zobrazit jen tymy, ktere jsou ve vlastnictvi"
+"OPPONENT DETAIL"                                                                  ="DETAIL OPONENTA"
+"OPPONENT VOLUME RATIO"                                                            ="HLASITOST OPONENTA"
+"OPPONENTS"                                                                        ="OPONENTI"
+"Opposite Lock"                                                                    ="Zamek pretacivosti"
+"OPPOSITE LOCK  "                                                                  ="ZAMEK PRETACIVOSTI  "
+"OPPOSITE LOCK"                                                                    ="ZAMEK PRETACIVOSTI"
+"options are available for"                                                        ="nastaveni jsou mozna pro"
+"options for this selection"                                                       ="nastaveni pro tento vyber"
+"OUTPUT SETTINGS"                                                                  ="NASTAVENI VYSTUPU"
+"Overcast "                                                                        ="Zamraceno "
+"Overcast"                                                                         ="Zamraceno"
+"OVERSTEER"                                                                        ="PRETACIVOST"
+"OVERWRITE EXISTING FILE?"                                                         ="PREPSAT EXISTUJICI SOUBOR?"
+"Overwrite File?"                                                                  ="Prepsat soubor?"
+"OWNED:"                                                                           ="KOUPENO:"
+"P"                                                                                ="P"
+"PACKERS"                                                                          ="DORAZY"
+"participate in.  This selection will determine the events"                        ="se ucastni.  Tento vyber urci udalosti"
+"participate in. This selection will determine the events"                         ="se ucastni. Tento vyber urci udalosti"
+"Passenger Select"                                                                 ="Vyber spolujezdce"
+"Passengers Disallowed"                                                            ="Spolujezdci Nepovoleni"
+"PASSWORD (optional)"                                                              ="HESLO (volitelne)"
+"Password: "                                                                       ="Heslo: "
+"Pause"                                                                            ="Pauza"
+"Paused "                                                                          ="Pozastaveno "
+"Performance (DX7)"                                                                ="Performance (DX7)"
+"Ping"                                                                             ="Ping"
+"PING"                                                                             ="PING"
+"Ping: "                                                                           ="Ping: "
+"Pit Menu Unavailable"                                                             ="Pit menu neni povoleno"
+"Pitlane speed limiter is not available on this vehicle "                          ="Omezovac rychlosti na tomto voze neni povolen "
+"Play"                                                                             ="Hrat"
+"Play online and adjust multiplayer options"                                       ="Hrat online a nastavit moznosti multiplayeru"
+"PLAY REPLAY"                                                                      ="PREHRAT REPLAY"
+"Play reverse"                                                                     ="Prehrat obracene"
+"Player"                                                                           ="Hrac"
+"Player"                                                                           ="Hrac"
+"PLAYER"                                                                           ="HRAC"
+"Player Control: "                                                                 ="Kontrola hrace: "
+"PLAYER DETAIL"                                                                    ="DETAIL HRACE"
+"PLAYER NAME"                                                                      ="JMENO HRACE"
+"player profile"                                                                   ="profil hrace"
+"PLAYER PROFILE"                                                                   ="PROFIL HRACE"
+"PLAYER STATS"                                                                     ="STATISTIKA HRACE"
+"PLAYER VOLUME RATIO"                                                              ="HLASITOST HRACE"
+"PLAYERS"                                                                          ="HRACI"
+"Please select an opponents filter that"                                           ="Prosim vyberte filtr oponentu ktery"
+"Please verify that your firewall is setup correctly "                             ="Prosim overte zda vas firewall je spravne nastaven "
+"POINTS "                                                                          ="BODY "
+"POSSIBLE OPPONENTS"                                                               ="OPONENTI K DISPOZICI"
+"POST RESULTS"                                                                     ="POSLAT VYSLEDKY"
+"POWER"                                                                            ="SILA"
+"Practice"                                                                         ="Trenink"
+"PRACTICE"                                                                         ="TRENINK"
+"PRACTICE 1"                                                                       ="TRENINK 1"
+"PRELOAD"                                                                          ="PREDPETI"
+"Prepping Replay "                                                                 ="Pripravuju replay "
+"Prerequisite: "                                                                   ="Predpoklad: "
+"PRESETS"                                                                          ="PREDVOLBA"
+"Press  "                                                                          ="Stisknete  "
+"Press and hold X key to cancel"                                                   ="Stisknete a drzte klavesu X pro zruseni"
+"Press key or controller (ESC to skip)"                                            ="Stisknete klavesu nebo tlacitko (ESC preskocit)"
+"Press key or controller (ESC to skip) - Steer Right"                              ="Stisknete klavesu nebo tlacitko (ESC preskocit) - Zatocit Vpravo"
+"Prev"                                                                             ="Predchozi"
+"Prev Clip"                                                                        ="Predchozi Klip"
+"Price: "                                                                          ="Cena: "
+"PRIVATE TESTING"                                                                  ="SOUKROME TESTOVANI"
+"Professional"                                                                     ="Profesional"
+"Profile already exists "                                                          ="Profil jiz existuje "
+"Projected Conditions:"                                                            ="Planovane pocasi:"
+"proposed by "                                                                     ="navrzeno podle "
+"PUMP"                                                                             ="PUMPA"
+"QUALIFING"                                                                        ="KVALIFIKACE"
+"quality"                                                                          ="kvalita"
+"Quality (DX9)"                                                                    ="Quality (DX9)"
+"Quick chat"                                                                       ="Rychly chat"
+"Quick Chat"                                                                       ="Rychly Chat"
+"Quick Chat #1"                                                                    ="Rychly Chat #1"
+"Quick Chat #2"                                                                    ="Rychly Chat #2"
+"Quick Chat #3"                                                                    ="Rychly Chat #3"
+"Quick Chat #4"                                                                    ="Rychly Chat #4"
+"Quick Chat #5"                                                                    ="Rychly Chat #5"
+"Quick Chat #6"                                                                    ="Rychly Chat #6"
+"Quick Chat #7"                                                                    ="Rychly Chat #7"
+"Quick Chat #8"                                                                    ="Rychly Chat #8"
+"Quick Chat #9"                                                                    ="Rychly Chat #9"
+"QUICKCHAT"                                                                        ="RYCHLYCHAT"
+"QUICKCHAT #1"                                                                     ="RYCHLYCHAT #1"
+"QUICKCHAT #2"                                                                     ="RYCHLYCHAT #2"
+"QUICKCHAT #3"                                                                     ="RYCHLYCHAT #3"
+"QUICKCHAT #4"                                                                     ="RYCHLYCHAT #4"
+"QUICKCHAT #5"                                                                     ="RYCHLYCHAT #5"
+"QUICKCHAT #6"                                                                     ="RYCHLYCHAT #6"
+"R TYRES:"                                                                         ="P PNEU:"
+"Race"                                                                             ="Zavod"
+"       RACE"                                                                      ="       ZAVOD"
+"       RACE"                                                                      ="       ZAVOD"
+"RACE"                                                                             ="ZAVOD"
+"RACE DETAILS"                                                                     ="DETAILY ZAVODU"
+"RACE GRID POSITION"                                                               ="STARTOVNI ROST"
+"RACE LAPS"                                                                        ="Pocet kol"
+"Race Laps (100):"                                                                 ="Pocet kol (100):"
+"RACE LENGTH"                                                                      ="DELKA ZAVODU"
+"RACE LENGTH TYPE"                                                                 ="TYP DELKY ZAVODU"
+"Race Length: "                                                                    ="Delka zavodu: "
+"Race page 11"                                                                     ="Stranka zavodu 11"
+"Race Page 11"                                                                     ="Stranka zavodu 11"
+"RACE RESULTS"                                                                     ="VYSLEDKY ZAVODU"
+"RACE SEASON CURRENT STANDINGS ETC"                                                ="PORADI AKTUALNI SEZONY"
+"Race Series (rFm): "                                                              ="Zavodni serie (rFm): "
+"RACE SETTINGS"                                                                    ="NASTAVENI ZAVODU"
+"RACE START TIME"                                                                  ="CAS STARTU ZAVODU"
+"RACE TIME"                                                                        ="CAS ZAVODU"
+"RACE TIME SCALE"                                                                  ="STUPEN CASU ZAVODU"
+"RACE TIME: "                                                                      ="CAS ZAVODU: "
+"Racecast"                                                                         ="Racecast"
+"RACECAST EMAIL"                                                                   ="RACECAST EMAIL"
+"RaceCast login failed."                                                           ="RaceCast prihlaseni selhalo."
+"RaceCast login succeeded."                                                        ="RaceCast prihlaseni probehlo v poradku."
+"RACECAST PASSWORD"                                                                ="RACECAST HESLO"
+"RaceCast Register"                                                                ="RaceCast registrace"
+"RACECAST SETTINGS"                                                                ="RACECAST NASTAVENI"
+"RaceCast.rFactor.net sign on"                                                     ="RaceCast.rFactor.net prihlasit"
+"Races Completed "                                                                 ="Odjete zavody "
+"RADIATOR SIZE"                                                                    ="VELIKOST CHLADICE"
+"Raining"                                                                          ="Dest"
+"Rainy "                                                                           ="Destivo "
+"Random "                                                                          ="Nahodny "
+"Random"                                                                           ="Nahodny"
+"rates"                                                                            ="rozsahy"
+"RATES"                                                                            ="ROZSAHY"
+"RC Register"                                                                      ="RC Registrace"
+"Realtime Chat"                                                                    ="Okamzity Chat"
+"realtime status"                                                                  ="okamzity stav"
+"REAR"                                                                             ="ZADNI CAST"
+"REAR DOWNFORCE"                                                                   ="ZADNI PRITLAK"
+"REAR LEFT"                                                                        ="LEVE ZADNI"
+"REAR RIGHT"                                                                       ="PRAVE ZADNI"
+"REAR THIRD SPRING"                                                                ="ZADNI TRETI PRUZINA"
+"REAR TIRE COMPOUND"                                                               ="ZADNI TYP PNEUMATIKY"
+"REAR TOE IN"                                                                      ="ZADNI SBIHAVOST"
+"Rearward "                                                                        ="Zpet "
+"Received server verify, setting self as ready... "                                ="Verifikace serveru prijata, pripraveno... "
+"Record fastest lap replay file will end with HOT LAP"                             ="Zaznam nejrychlejsiho kola bude v souboru ukonceno slovy HOT LAP"
+"RECORD HOT LAPS"                                                                  ="NAHRAT NEJLEPSI KOLO"
+"RECORD REPLAYS"                                                                   ="NAHRAT ZAZNAMY"
+"Refresh friends list"                                                             ="Obnovit seznam oblibenych"
+"REFRESH LIST TYPE"                                                                ="OBNOVIT SEZNAM TYPU"
+"Refresh multiplayer game list"                                                    ="Obnovit seznam multiplayerovych her"
+"Refresh Rate:"                                                                    ="Obnovovaci pomer:"
+"Registration Succeeded "                                                          ="Registrace v poradku "
+"Remove"                                                                           ="Odebrat"
+"Remove All"                                                                       ="Odebrat vse"
+"Remove all bookmarks goodbye!"                                                    ="Odebrat vsechny zalozky!"
+"Remove selected bookmark"                                                         ="Odebrat vybrane zalozky"
+"Rename"                                                                           ="Prejmenovat"
+"Rename selected replay file"                                                      ="Prejmenovat vybrany soubor"
+"Repair"                                                                           ="Opravit"
+"REPLAY"                                                                           ="ZAZNAM"
+"REPLAY FIDELITY"                                                                  ="PRESNOST ZAZNAMU"
+"REPLAY FILES"                                                                     ="SOUBORY ZAZNAMU"
+"REPLAY INFORMATION"                                                               ="INFORMACE ZAZNAMU"
+"REPLAY SELECT"                                                                    ="VYBRAT ZAZNAM"
+"REPLAY SETTINGS"                                                                  ="NASTAVENI ZAZNAMU"
+"Request Pit"                                                                      ="Zadat PIT"
+"Request Replay"                                                                   ="Zadat Zaznam"
+"Request the replay of the last race"                                              ="Zadat zaznam posledniho zavodu"
+"REQUIRED RC RATING"                                                               ="POZADOVANE ZKUSENOSTI NA RACE CAST"
+"Reserved Key "                                                                    ="Rezervovana klavesa "
+"Reset all settings to factory defaults"                                           ="Resetuj vsechna nastaveni na defaultni"
+"resolution"                                                                       ="rozliseni"
+"Resolution:"                                                                      ="Rozliseni:"
+"Restart Race"                                                                     ="Restartovat zavod"
+"Restart Session"                                                                  ="Restartovat udalost"
+"Restart the current race weekend"                                                 ="Restartovat aktualni zavodni vikend"
+"Restart Weekend"                                                                  ="Restartovat vikend"
+"RESULTS"                                                                          ="VYSLEDKY"
+"Resume"                                                                           ="Pokracovat"
+"Resume season in progress"                                                        ="Pokracovat v progresu"
+"return"                                                                           ="navrat"
+"Return back to previous page"                                                     ="Navrat na predchozi stranku"
+"Return to monitor screen"                                                         ="Vratit se na sledovaci obrazovku"
+"Return to season select"                                                          ="Vratit se na vyber sezony"
+"REV LIMIT"                                                                        ="OTACKY"
+"REVERSE"                                                                          ="ZPATECKA"
+"Reverse Gear"                                                                     ="Zpatecka"
+"Reverted to owned vehicle "                                                       ="Vraceno zpet do vlastnich vozu "
+"Reverted to previous vehicle "                                                    ="Vraceno zpet do predchozich vozu "
+"Reverted to unlocked vehicle "                                                    ="Vraceno zpet do uzamknutych vozu "
+"Rewind      "                                                                     ="Pretocit      "
+"Rewind"                                                                           ="Pretocit"
+"Rewind Fast "                                                                     ="Pretocit rychle "
+"Rewind Slow "                                                                     ="Pretocit pomalu "
+"RIDE"                                                                             ="JIZDA"
+"RIDE HEIGHT"                                                                      ="SVETLA VYSKA"
+"Right Arrow: "                                                                    ="Sipka Vpravo: "
+"Right click to see lap times for driver"                                          ="Kliknete pravym tlacitkem k zobrazeni jednotlivych casu kol vybraneho pilota"
+"Rolling "                                                                         ="Naklaneni "
+"RPM "                                                                             ="RPM "
+"RULES"                                                                            ="PRAVIDLA"
+"RX AXIS DEADZONE"                                                                 ="RX AXIS - MRTVA ZONA"
+"RX AXIS SENSITIVITY"                                                              ="RX OSA - CITLIVOST"
+"RY AXIS DEADZONE"                                                                 ="RY OSA - MRTVA ZONA"
+"RY AXIS SENSITIVITY"                                                              ="RY OSA - CITLIVOST"
+"RZ AXIS DEADZONE"                                                                 ="RZ OSA - MRTVA ZONA"
+"RZ AXIS SENSITIVITY"                                                              ="RZ OSA - CITLIVOST"
+"S0 AXIS DEADZONE"                                                                 ="S0 OSA - MRTVA ZONA"
+"S0 AXIS SENSITIVITY"                                                              ="S0 OSA - CITLIVOST"
+"S1 AXIS DEADZONE"                                                                 ="S1 OSA - MRTVA ZONA"
+"S1 AXIS SENSITIVITY"                                                              ="S1 OSA - CITLIVOST"
+"SARDIAN HEIGHTS SHORT"                                                            ="SARDIAN HEIGHTS SHORT"
+"Save"                                                                             ="Ulozit"
+"Save As"                                                                          ="Ulozit jako"
+"Save As..."                                                                       ="Ulozit jako..."
+"SAVE REPLAY"                                                                      ="ULOZIT ZAZNAM"
+"Save this server to your bookmarks"                                               ="Ulozit server do zalozek"
+"SAVE VEHICLE SETUP"                                                               ="ULOZIT NASTAVENI VOZU"
+"Saving Hotlap "                                                                   ="Ukladam nejlepsi kolo "
+"Saving Replay "                                                                   ="Ukladam zaznam "
+"Screen Saved "                                                                    ="Screen ulozen "
+"Screenshot"                                                                       ="Screenshot"
+"Searching... "                                                                    ="Hledam... "
+"Season "                                                                          ="Udalost "
+"SEASON SELECT PAGE"                                                               ="VYBER SEZONY"
+"SEASON STATUS:"                                                                   ="STAV UDALOSTI:"
+"Seat Position:  "                                                                 ="Pozice sedadla:  "
+"Second Gear"                                                                      ="Druha rychlost"
+"seconds"                                                                          ="sekund"
+"Seconds"                                                                          ="Sekund"
+"SECTOR "                                                                          ="SEKTOR "
+"SECTOR  :"                                                                        ="SEKTOR  :"
+"SECTOR :"                                                                         ="SEKTOR :"
+"Sector Time"                                                                      ="Cas sektoru"
+"Select All"                                                                       ="Vybrat vse"
+"Select and customize your vehicle and simulation settings"                        ="Vybrat a upravit nastaveni vaseho vozu a simulace"
+"Select from the list on the left.  You will find"                                 ="Vyberte ze seznamu vlevo. Najdete"
+"Select None"                                                                      ="Nevybrat nic"
+"SELECT PROFILE"                                                                   ="VYBRAT PROFIL"
+"select race series"                                                               ="vybrat zavodni serii"
+"select rules and options page"                                                    ="vybrat pravidla a moznosti"
+"select team and vehicle"                                                          ="vybrat tym a vozy"
+"Select the nationality to represent your player."                                 ="Vybrat narodnost vaseho hrace."
+"Select to exit"                                                                   ="Vybrat pro opusteni"
+"Select vehicle and continue"                                                      ="Vybrat vuz a pokracovat"
+"SELECT VEHICLE PAGE"                                                              ="VYBER VOZU"
+"Select which of the installed helmets you wish"                                   ="Vyberte, kterou z nainstalovanych prileb si prejete"
+"Selected Season"                                                                  ="Vybrana sezona"
+"SELF SPLIT:"                                                                      ="MEZICAS:"
+"Sell Car"                                                                         ="Prodat vuz"
+"Sell Upgrade"                                                                     ="Prodat upgrade"
+"Sell vehicle use the info tab to see selling price"                               ="Prodat vuz, pouzit informacni zalozku k zobrazeni prodejni ceny"
+"Sending server OK request "                                                       ="Odesilam na server pozadavek OK "
+"Sensitivity"                                                                      ="Citlivost"
+"Series: "                                                                         ="Serie: "
+"Server has disallowed toggling to AI control "                                    ="Server zakazal prepinani na AI "
+"SERVER LIST"                                                                      ="SEZNAM SERVERU"
+"Server: "                                                                         ="Server: "
+"SESSION"                                                                          ="UDALOST"
+"Session status"                                                                   ="Stav udalosti"
+"Sessions"                                                                         ="Udalosti"
+"SESSIONS"                                                                         ="UDALOSTI"
+"Set downstream data rate to: "                                                    ="Nastavit pomer stahovani (downstream) na: "
+"Set upstream data rate to: "                                                      ="Nastavit pomer nahravani (upstream) na: "
+"Settings"                                                                         ="Nastaveni"
+"SETTINGS"                                                                         ="NASTAVENI"
+"Setups"                                                                           ="Setupy"
+"SETUPS"                                                                           ="SETUPY"
+"Seventh Gear"                                                                     ="Sedma rychlost"
+"SEVER CHAT"                                                                       ="PRERUSIT CHAT"
+"Shader Level:"                                                                    ="Uroven stinovani:"
+"SHADOWS"                                                                          ="STINY"
+"Shift current clip to the left"                                                   ="Posunout aktualni klip doleva"
+"Shift current clip to the right"                                                  ="Posunout aktualni klip doprava"
+"Shift Down"                                                                       ="Podradit"
+"Shift Up"                                                                         ="Preradit"
+"Show All"                                                                         ="Zobrazit vse"
+"Show Not Online"                                                                  ="Zobrazit offline"
+"Show Online"                                                                      ="Zobrazit online"
+"Show Owned"                                                                       ="Zobrazit koupene"
+"Sign on Racecast"                                                                 ="Prihlasit se na Racecast"
+"Sixth Gear"                                                                       ="Sesta rychlost"
+"SKIN"                                                                             ="SKIN"
+"SKIN INFORMATION"                                                                 ="INFORMACE O SKINU"
+"SKIN SELECT"                                                                      ="VYBER SKINU"
+"SKINS"                                                                            ="SKINY"
+"SLOW BUMP"                                                                        ="POMALE PRUZENI"
+"Slow foward"                                                                      ="Dopredu pomalu"
+"Slow Motion  "                                                                    ="Zpomalene  "
+"SLOW REBOUND"                                                                     ="POMALE ODPRUZENI"
+"Slow reverse"                                                                     ="Zpet pomalu"
+"Slowing to pit "                                                                  ="Zpomalit do pitu "
+"SOFT"                                                                             ="MEKKE"
+"Sorry "                                                                           ="Prominte "
+"Sorry you do not own any vehicles"                                                ="Prominte, ale nevlastnite zadny vuz"
+"Sort game by player names"                                                        ="Setridit hru podle jmen hracu"
+"Sort games by circuit name"                                                       ="Setridit hry podle nazvu okruhu"
+"Sort games by name"                                                               ="Setridit hry podle jmena"
+"Sort games by ping time"                                                          ="Setridit hry podle odezvy"
+"Sort games by player names"                                                       ="Setridit hry podle jmen hracu"
+"SOUND EFFECTS VOLUME"                                                             ="HLASITOST ZVUKOVYCH EFEKTU"
+"SPECIAL EFFECTS"                                                                  ="SPECIALNI EFEKTY"
+"SPECTATE"                                                                         ="POZOROVAT"
+"Spectator Cameras"                                                                ="Kamera pozorovatele"
+"SPEED"                                                                            ="RYCHLOST"
+"Speed Limiter"                                                                    ="Omezovac rychlosti"
+"SPEED SENSITIVITY"                                                                ="CITLIVOST RYCHLOSTI"
+"Spin Recovery"                                                                    ="Automaticke otoceni"
+"SPIN RECOVERY  "                                                                  ="AUTOMATICKE OTOCENI  "
+"SPIN RECOVERY"                                                                    ="AUTOMATICKE OTOCENI"
+"Split"                                                                            ="Rozdelit"
+"Split current clip"                                                               ="Rozdelit aktualni klip"
+"SPRING"                                                                           ="PRUZINY"
+"SPRING RATE"                                                                      ="POMER PRUZIN"
+"Springs and ride height"                                                          ="Pruziny a svetla vyska"
+"SRGrandPrix05"                                                                    ="SRGrandPrix05"
+"Stability Control"                                                                ="Kontrola stability"
+"STABILITY CONTROL  "                                                              ="KONTROLA STABILITY  "
+"STABILITY CONTROL"                                                                ="KONTROLA STABILITY"
+"Standing "                                                                        ="Poradi "
+"STANDINGS"                                                                        ="PORADI"
+"Starter"                                                                          ="Starter"
+"STARTING FUEL"                                                                    ="POCATECNI PALIVO"
+"Starting Session... "                                                             ="Startuju udalost... "
+"Static shadows only "                                                             ="Jenom staticke stiny "
+"STATISTICS"                                                                       ="STATISTIKA"
+"Status"                                                                           ="Stav"
+"Stay Behind "                                                                     ="Zustante za "
+"Stay Behind The Safety Car "                                                      ="Zustante za zavadecim vozem "
+"Steer Left"                                                                       ="Zatocit Vlevo"
+"Steer Right"                                                                      ="Zatocit Vpravo"
+"STEERING"                                                                         ="RIZENI"
+"Steering Help"                                                                    ="Pomocnik rizeni"
+"STEERING HELP  "                                                                  ="POMOCNIK RIZENI  "
+"STEERING HELP"                                                                    ="POMOCNIK RIZENI"
+"Steering Help:"                                                                   ="Pomocnik rizeni:"
+"STEERING LOCK"                                                                    ="ZAMEK RIZENI"
+"STIFF"                                                                            ="TVRDY"
+"Stop         "                                                                    ="Zastavit         "
+"STOP 1"                                                                           ="STOP 1"
+"STOP 2"                                                                           ="STOP 2"
+"STOP 3"                                                                           ="STOP 3"
+"Stop the list refresh that is in progress"                                        ="Zastavit obnoveni seznamu"
+"STOP/GO:"                                                                         ="STOP/GO:"
+"Strategy"                                                                         ="Strategie"
+"Street"                                                                           ="Ulice"
+"Strict"                                                                           ="Prisny"
+"Sunny "                                                                           ="Slunecno "
+"SUSPENSION"                                                                       ="ZAVESENI"
+"Swingman"                                                                         ="Swingman"
+"Swingman Camera"                                                                  ="Swingman Kamera"
+"Swingman Down"                                                                    ="Swingman Dolu"
+"Swingman Left"                                                                    ="Swingman Vlevo"
+"Swingman Reset"                                                                   ="Swingman Reset"
+"Swingman Right"                                                                   ="Swingman Vpravo"
+"Swingman Up"                                                                      ="Swingman Nahoru"
+"Swingman Zoom In"                                                                 ="Swingman Priblizit"
+"Swingman Zoom Out"                                                                ="Swingman Oddalit"
+"SYMMETRICAL"                                                                      ="SYMETRICKY"
+"Synchronizing game "                                                              ="Synchronizuju hru "
+"Take your vehicle out on to the track or view a replay"                           ="Vyjet na trat nebo prohlidnout zaznam"
+"Tape Delay: "                                                                     ="Spozdeni pasky: "
+"Tape Delay: 20 s"                                                                 ="Spozdeni pasky: 20 s"
+"TC Override"                                                                      ="Deaktivovat kontrolu trakce"
+"TEAM "                                                                            ="TYM "
+"TEAM"                                                                             ="TYM"
+"TEAM INFORMATION"                                                                 ="INFORMACE O TYMU"
+"TEAM/VEHICLE"                                                                     ="TYM/VUZ"
+"Temporary Boost"                                                                  ="Docasne zatizeni"
+"Test"                                                                             ="Test"
+"Hosting Test"                                                                     ="Test hostovani"
+"Perform Hosting Test to allow announce"                                           ="Zahajit test hostovani"
+"Test port forwarding on your firewall"                                            ="Testovani portu na vasem Firewallu"
+"TEST TIME: "                                                                      ="TESTOVACI CAS: "
+"TEXTURE DETAIL"                                                                   ="DETAIL TEXTURY"
+"TEXTURE FILTER"                                                                   ="FILTR TEXTURY"
+"Thank you "                                                                       ="Dekuji "
+"that are made available."                                                         ="ktery se zpristupnil."
+"that can be raced this season."                                                   ="ktery je mozno jet tuto sezonu."
+"Third Gear"                                                                       ="Treti rychlost"
+"This button indicates that advanced"                                              ="Toto tlacitko indikuje ze pokrocily"
+"This button will return you to the"                                               ="Toto tlacitko vas vrati do"
+"this section."                                                                    ="tato sekce."
+"Throttle"                                                                         ="Plyn"
+"Time "                                                                            ="Cas "
+"TIME"                                                                             ="CAS"
+"Time Acceleration"                                                                ="Cas zrychleni"
+"TIME LEFT: "                                                                      ="UPLYNULO: "
+"TIME REMAINING"                                                                   ="ZBYVA"
+"Time Remaining: "                                                                 ="Zbyva: "
+"Time Scaled "                                                                     ="Casove meritko "
+"Time Scaled"                                                                      ="Casove meritko"
+"Time until pit closes:  "                                                         ="Cas do uzavreni pitu:  "
+"TIRE COMPOUND"                                                                    ="TYP PNEUMATIK"
+"TIRE PRESSURE"                                                                    ="TLAK PNEUMATIKY"
+"TIRE WEAR"                                                                        ="OPOTREBENI PNEUMATIKY"
+"Tires"                                                                            ="Pneumatiky"
+"to associate with your player."                                                   ="asociovat s vasim hracem."
+" to overwrite or ESC to retry. "                                                  ="prepsat nebo ESC pro opakovani. "
+"to toggle "                                                                       ="prepnout "
+"Toggle AI Control"                                                                ="Prepnout na kontrolu AI"
+"Toggle Free Move"                                                                 ="Prepnout na volny pohyb"
+"Toggle HUD MFD"                                                                   ="Prepnout HUD MFD"
+"Toggle HUD Stats"                                                                 ="Prepnout HUD statistiku"
+"Toggle HUD Tach"                                                                  ="Prepnout HUD tachometr"
+"Toggle HWPlugin"                                                                  ="Prepnout HWPlugin"
+"Toggle Mirror"                                                                    ="Prepnout zrcatka"
+"Toggle Overlays"                                                                  ="Prepnout vrstvy"
+"Total Laps : "                                                                    ="Celkem kol : "
+"TRACK"                                                                            ="TRAT"
+"TRACK BAR"                                                                        ="VODICI LISTA"
+"Track Default "                                                                   ="Defaultni trat "
+"Track Geometry "                                                                  ="Geometrie trate "
+"Track Temperature: "                                                              ="Teplota trate: "
+"Track Temperature:"                                                               ="Teplota trate:"
+"Tracking Cameras"                                                                 ="Sledovaci kamera"
+"TRACKSIDE OVERLAYS"                                                               ="POSTRANI POHLEDY"
+"Traction Control"                                                                 ="Kontrola trakce"
+"TRACTION CONTROL  "                                                               ="KONTROLA TRAKCE "
+"TRACTION CONTROL"                                                                 ="KONTROLA TRAKCE"
+"Trilinear"                                                                        ="Trilinearni"
+"Turn off speed limiter: "                                                         ="Vypnout omezovac rychlosti: "
+"Turn on to record race sessions"                                                  ="Zapnout nahravani zavodu"
+"turns "                                                                           ="prevody "
+"TV Cockpit"                                                                       ="TV Cockpit"
+"TYPE OF START"                                                                    ="TYP STARTU"
+"Ultra "                                                                           ="Ultra "
+"UNDERSTEER"                                                                       ="NEDOTACIVOST"
+"Unknown "                                                                         ="Neznamy "
+"Unlimited "                                                                       ="Neomezeny "
+"Unsupported Feature (dont ask)"                                                   ="Nepodporovana moznost (neptejte se)"
+"Up "                                                                              ="Nahoru "
+"Up Arrow: "                                                                       ="Sipka Nahoru: "
+"UPGRADE CREDITS"                                                                  ="KREDITY PRO UPGRADE"
+"Upgrade differences (if any) shown in brackets"                                   ="Upgrade se lisi (pokud ano) zobrazit v zavorkach"
+"UPGRADES"                                                                         ="UPGRADY"
+"UPGRADES INFORMATION"                                                             ="INFORMACE O UPGRADECH"
+"UPGRADES SELECT"                                                                  ="VYBER UPGRADU"
+"Upload range is 10 to 10000 kbps "                                                ="Nahravaci (upload) rozsah je mezi 10 a 10000 kbps "
+"UPLOAD RATING"                                                                    ="RYCHLOST NAHRAVANI"
+"Upshifts"                                                                         ="Razeni nahoru"
+"Use instant replay controls to view action"                                       ="Pouzit ovladani okamziteho zaznamu k zobrazeni akce"
+"Use Race % "                                                                      ="Pouzit Zavod % "
+"Use Track Default "                                                               ="Pouzit defaultni trat "
+"vehicle"                                                                          ="vuz"
+"VEHICLE"                                                                          ="VUZ"
+"Vehicle File Missing "                                                            ="Chybi soubor vozu "
+"VEHICLE FILTERS"                                                                  ="FILTRY VOZU"
+"VEHICLE INFORMATION"                                                              ="INFORMACE O VOZU"
+"Vehicle is now controlled by AI "                                                 ="Vuz je prave rizen AI "
+"Vehicle is roped off"                                                             ="Vuz je odtahovan"
+"VEHICLE KEY"                                                                      ="KLAVESA VOZU"
+"Vehicle Labels"                                                                   ="Stitek vozu"
+"Vehicle not owned "                                                               ="Vuz neni koupen "
+"Vehicle not owned"                                                                ="Vuz neni koupen"
+"VEHICLE SELECT"                                                                   ="VYBER VOZU"
+"Vehicle setup"                                                                    ="Nastaveni vozu"
+"VEHICLE SETUP"                                                                    ="NASTAVENI VOZU"
+"Vehicle setups"                                                                   ="Nastaveni vozu"
+"Vehicle Status Unavailable"                                                       ="Stav vozu neni k dispozici"
+"Vehicle will be sold and season aborted"                                          ="Vuz bude prodan a sezona ukoncena"
+"Vehicle will not be sold"                                                         ="Vuz nebude prodan"
+"Version: "                                                                        ="Verze: "
+"VERSION:"                                                                         ="VERZE:"
+"Veteran"                                                                          ="Veteran"
+"Video"                                                                            ="Video"
+"View"                                                                             ="Pohled"
+"View full screen"                                                                 ="Zobrazit na celou obrazovku"
+"View Next Vehicle"                                                                ="Zobrazit dalsi vuz"
+"View Original Vehicle"                                                            ="Zobrazit puvodni vuz"
+"View Previous Vehicle"                                                            ="Zobrazit predchozi vuz"
+"View season standings"                                                            ="Zobrazit vysledky sezony"
+"Viewing"                                                                          ="Zobrazeni"
+"VIEWING"                                                                          ="ZOBRAZENI"
+"Viewing:"                                                                         ="Zobrazeni:"
+"VIEWING:"                                                                         ="ZOBRAZENI:"
+"VISIBLE VEHICLES"                                                                 ="VIDITELNE VOZY"
+"Voice Chat PTT"                                                                   ="Hlasovy Chat PTT"
+"Vote / Remote Server"                                                             ="Hlasovat / Vzdaleny server"
+"Vote ignored: Only active participants may vote "                                 ="Hlasovani ignorovano: Jenom aktivni ucastnici mohou hlasovat "
+"Vote ignored: There is no vote in progress "                                      ="Hlasovani ignorovano: Zadne hlasovani neprobiha "
+"Vote ignored: You can only vote once per issue "                                  ="Hlasovani ignorovano: Muzete hlasovat jen jednou "
+"vote needed to pass "                                                             ="hlas je treba k prijeti "
+"Vote no"                                                                          ="Hlasovat ne"
+"Vote No"                                                                          ="Hlasovat Ne"
+"VOTE NO"                                                                          ="HLASOVAT NE"
+"vote PASSED "                                                                     ="hlasovani PRIJATO "
+"Vote yes"                                                                         ="Hlasovat ano"
+"Vote Yes"                                                                         ="Hlasovat Ano"
+"VOTE YES"                                                                         ="HLASOVAT ANO"
+"voted NO to "                                                                     ="hlasoval NE pro "
+"voted YES to "                                                                    ="hlasoval ANO pro "
+"voter required "                                                                  ="volic je treba "
+"voters required "                                                                 ="volicu je treba "
+"votes needed to pass "                                                            ="hlas? je treba k prijeti "
+"Voting - remote server"                                                           ="Hlasovani - vzdaleny server"
+"Voting not available on non-dedicated servers "                                   ="Hlasovani neni mozne na ne-dedicatovanym serveru "
+"VSync On"                                                                         ="VSync Zapnuto"
+"WARMUP"                                                                           ="ZAHRIVACI KOLO"
+"Warning "                                                                         ="Varovani "
+"warning: creating this season will abort"                                         ="varovani: vytvoreni teto sezony bude ukonceno"
+"Warning: This vehicle is involved in at"                                          ="Varovani: Tento vuz je uzavren v"
+"was removed from the game: "                                                      ="byl odebran ze hry: "
+"WATER: "                                                                          ="VODA: "
+"WEATHER CONDITIONS"                                                               ="STAV POCASI"
+"WEDGE"                                                                            ="KLIN"
+"WEIGHT"                                                                           ="VAHA"
+"Welcome to rFactor"                                                               ="Vitejte v rFactoru"
+"Wet"                                                                              ="Mokro"
+"Wet Compound"                                                                     ="Mokre obuti"
+"Wheel"                                                                            ="Volant"
+"Will Not Double File For Restart, Too Few Laps Remaining "                        ="Nelze zdvojit soubor pro restart, zbyva prilis malo kol "
+"Windowed"                                                                         ="V okne"
+"WING:"                                                                            ="KRIDLO:"
+"X AXIS DEADZONE"                                                                  ="X OSA - MRTVA ZONA"
+"X AXIS SENSITIVITY"                                                               ="X OSA - CITLIVOST"
+"x10 "                                                                             ="x10 "
+"x15 "                                                                             ="x15 "
+"X16 Anisotropic"                                                                  ="X16 Anisotropicky filtr"
+"x2 "                                                                              ="x2"
+"X2"                                                                               ="X2"
+"X2 Anisotropic"                                                                   ="X2 Anisotropicky filtr"
+"x20 "                                                                             ="x20 "
+"x3 "                                                                              ="x3 "
+"X3"                                                                               ="X3"
+"x30 "                                                                             ="x30 "
+"x4 "                                                                              ="x4 "
+"X4"                                                                               ="X4"
+"X4 Anisotropic"                                                                   ="X4 Anisotropicky filtr"
+"x45 "                                                                             ="x45 "
+"x5 "                                                                              ="x5 "
+"X5"                                                                               ="X5"
+"X6"                                                                               ="X6"
+"x60 "                                                                             ="x60 "
+"X7"                                                                               ="X7"
+"X8 Anisotropic"                                                                   ="X8 Anisotropicky filtr"
+"Y AXIS DEADZONE"                                                                  ="Y OSA - MRTVA ZONA"
+"Y AXIS SENSITIVITY"                                                               ="Y OSA - CITLIVOST"
+"yellow ring"                                                                      ="zluty kruh"
+"Yes"                                                                              ="Ano"
+"Yes"                                                                              ="Ano"
+"You are no longer riding with:  "                                                 ="Uz delsi dobu nejezdite s:  "
+"You are now riding with:  "                                                       ="Prave jedete s:  "
+"You Gain Control In: "                                                            ="Prebiras kontrolu za: "
+"You have been booted "                                                            ="Byl jste zabootovan "
+"You have been booted: "                                                           ="Byl jste zabootovan: "
+"You Lose Control In: "                                                            ="Ztracite kontrolu v: "
+"you want to sell the vehicle and abort"                                           ="chcete prodat vuz a odejit"
+"Your connection should work with rFactor "                                        ="Vase spojeni by melo pracovat s rFactorem "
+"Your speed limiter is on but you haven't assigned a control to turn it off "      ="Vas omezovac rychlosti je zaply, ale nepridelil jste zadnou klavesu pro vypnuti "
+"Z AXIS DEADZONE"                                                                  ="Z OSA - MRTVA ZONA"
+"Z AXIS SENSITIVITY"                                                               ="Z OSA - CITLIVOST"
+"Zero Free Move"                                                                   ="Bez moznosti pohybu"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ pevne dana vylepseni"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

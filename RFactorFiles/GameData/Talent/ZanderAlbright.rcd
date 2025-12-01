@@ -1,0 +1,21 @@
+Zander Albright
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=14-3-1972
+  Starts=81
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=42.31
+  Reputation=72.86
+  Courtesy=72.80
+  Composure=86.31
+  Speed=94.52
+  Crash=5.93
+  Recovery=81.38
+  CompletedLaps=90.96
+  MinRacingSkill=89.21
+}

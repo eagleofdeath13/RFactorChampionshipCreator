@@ -1,0 +1,21 @@
+Darin Winkler
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=2-10-1973
+  Starts=87
+  Poles=26
+  Wins=10
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=31.66
+  Reputation=62.24
+  Courtesy=67.43
+  Composure=69.46
+  Speed=97.12
+  Crash=6.82
+  Recovery=78.85
+  CompletedLaps=92.66
+  MinRacingSkill=90.64
+}

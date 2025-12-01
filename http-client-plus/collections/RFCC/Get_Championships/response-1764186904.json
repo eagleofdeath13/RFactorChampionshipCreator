@@ -1,0 +1,29 @@
+[
+  {
+    "filename": "DemoChampionship",
+    "name": "Demo Championship 2025 - Modified",
+    "status": 0,
+    "player": "Loic",
+    "opponents": 4,
+    "current_race": 0,
+    "player_points": 0
+  },
+  {
+    "filename": "DemoChampionship_Copy",
+    "name": "Demo Championship 2025 - Modified",
+    "status": 0,
+    "player": "Loic",
+    "opponents": 4,
+    "current_race": 0,
+    "player_points": 0
+  },
+  {
+    "filename": "SRGrandPrix05",
+    "name": "Rhez Amateur Derby",
+    "status": 2,
+    "player": "Loic",
+    "opponents": 9,
+    "current_race": 0,
+    "player_points": 0
+  }
+]

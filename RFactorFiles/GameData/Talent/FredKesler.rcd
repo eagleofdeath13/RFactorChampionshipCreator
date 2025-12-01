@@ -1,0 +1,21 @@
+Fred Kesler
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=16-10-1978
+  Starts=57
+  Poles=9
+  Wins=10
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=87.83
+  Reputation=72.52
+  Courtesy=56.10
+  Composure=88.53
+  Speed=97.84
+  Crash=6.81
+  Recovery=74.60
+  CompletedLaps=100.00
+  MinRacingSkill=88.99
+}

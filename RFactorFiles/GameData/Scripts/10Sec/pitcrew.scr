@@ -1,0 +1,12 @@
+
+
+/////////////////////////////// PIT BOX
+Actor  "Pit box"
+{
+  Detail 0   // only show at medium or higher detail
+  Position 0.0 0.0 0.0
+
+  Mesh "Startbox.gmt"
+}
+
+

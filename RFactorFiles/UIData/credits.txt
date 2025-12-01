@@ -1,0 +1,156 @@
+<GRAPHIK>
+isilogo.bmp
+
+
+<TITEL>
+rFACTOR COMMUNITY
+<UNTERTITEL>
+IMAGE SPACE INCORPORATED
+Gjon Camaj
+Joe Campana
+Mike DiPonio
+Laurent Evenisse
+Michael Juliano
+Jeremy Miller
+Dan Peal
+Brad Shuber
+Terence Groening
+Adam Zerlin
+Michael Zielinski
+
+<UNTERTITEL>
+SPECIAL THANKS
+Viktor Adorjan
+Doug Arnao
+Fred Anderson
+Nicolas Andonov
+Massimo Angiolucci
+Art Axelrad
+Joe Barlow Jr
+John Bayley
+Ian Bell
+Gilles Benoit
+Christophe Bertrand
+Stuart Brown
+Michael Borda
+Craig Budwitz
+Justin Cady
+Emily, Noah and Gjulia Camaj
+Janet, Joey, and Nicholas Campana
+Ewan Chalker
+Gavin Chatt
+Lucky Chopp
+Slaven Corluka
+Richard Davie
+Philippe De Smet
+Piet Debelder
+Davy Decorps
+Steve Dienes
+Mindy, Connor, Carol & Mark DiPonio
+Darrell Eernisse
+Jerry Eldred 
+Neil Faichney
+Sven Finkemeyer
+Juan Manuel Gallardo
+Pierre-Henri Genty
+Stuart Griffiths
+Sascha Grindau
+Carol & Jonas Groening
+Felix Heber
+Paul Hoenecke
+Ralph Hummerich
+Borje Johansson
+Chris Johnson
+Thomas Leveille
+John Lucas
+Steven Karlsson
+Tony Kelley
+Alex Kerfoot
+Pete Knepley
+Jan Kohl
+Evan Korn
+Wolfgang Kronthaler
+Lou Magyar
+Alex Martini
+Steven Messinger
+Abbie Miller
+Bradley Mills
+Tom Milner
+Jeff Philips
+Jan Pies
+Marcel Offermans
+Tom Oliver
+Michael Orth
+Guy Piva
+Tony Raharidzery
+Brian Ring
+Henrik Roos
+Thorsten Rueter
+Dániel Sándor
+Michael Schmidt
+Bob Simmerman
+Chris Smith
+Chris Squier
+Kevin Stanley
+Ken Street
+Scott Stockton
+Tim Strother
+Achim Trensz
+Julien Vidot
+Paul Vincent
+Brad Walton
+Steven Whitty
+Betsy and Jake Zielinski 
+
+<UNTERTITEL>
+Community Starts With
+<Your Name Here>
+
+<UNTERTITEL>
+MUSIC
+'Groovey Rubber'
+Created by and Courtesy of John Bayley
+
+'Soundtrack rFactor'
+Created by and Courtesy of GC Sounddesign, Sven Gerlach
+
+Additional Music
+Performed by Richard Blackley
+
+<UNTERTITEL>
+Sound Design
+Vehicle Sounds by
+Greg Hill - Soundwave Concepts
+
+<GRAPHIK>
+MILESBINK.bmp
+<UNTERTITEL>
+RAD Software
+Uses Miles Sound System.
+Copyright (C) 1991-2005 by RAD Game Tools, Inc.
+Uses Bink Video.
+Copyright (C) 1997-2005 by RAD Game Tools, Inc.
+
+<UNTERTITEL>
+Installer
+NSIS Copyright (C) 1999-2005 Nullsoft, Inc.
+
+<UNTERTITEL>
+Intel
+Intel and the Intel logo are trademarks or registered trademarks of 
+Intel Corporation or its subsidiaries in the 
+United States or other countries.
+<UNTERTITEL>
+BMW Sauber F1 Team
+The team name 'BMW Sauber F1 Team' and the design of the 
+BMW Sauber F1 Team racing car are used under license of BMW AG.
+
+PROPRIETARY INFORMATION.
+Any file, information, content, idea, or other parts 
+relating to this product, or its development or format 
+is proprietary to Image Space Incorporated.
+
+*Third-party brands and names are the property of their respective owners.
+
+(c) 2004-2007 Image Space Incorporated
+All Rights Reserved.

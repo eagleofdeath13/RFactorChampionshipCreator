@@ -1,0 +1,184 @@
+# Notes sur le renommage des véhicules isolés
+
+## Problème identifié
+
+rFactor détecte les véhicules isolés comme des doublons des originaux car :
+- Même nom de fichier .veh
+- Même Description
+- Mêmes assets (.dds, .txt)
+
+**Conséquence** : Impossible d'acheter/utiliser les véhicules isolés dans le jeu.
+
+## Solution implémentée
+
+### 1. Génération du préfixe
+- Fonction `_generate_vehicle_prefix(championship_name)`
+- Prend les premières lettres de chaque mot (max 3 caractères)
+- Exemples :
+  - "TestChampionship2025" → "TC"
+  - "MyAwesomeChampionship" → "MAC"
+  - "Championship" → "CH"
+
+### 2. Renommage du fichier .veh
+**Avant** : `GRN_08.veh`
+**Après** : `TC_GRN_08.veh`
+
+### 3. Modification du contenu .veh
+
+#### Classes (déjà fait)
+```
+Classes="TestChampionship2025"
+```
+
+#### Driver (déjà fait)
+```
+Driver="John Doe"
+```
+
+#### Description (nouveau)
+**Avant** : `Description="Team Green #08"`
+**Après** : `Description="TC Team Green #08"`
+
+#### DefaultLivery ✅
+**Avant** : `DefaultLivery="GRN_08.DDS"`
+**Après** : `DefaultLivery="TC_GRN_08.DDS"`
+
+#### PitCrewLivery ✅
+**Avant** : `PitCrewLivery="GRN_08.DDS"`
+**Après** : `PitCrewLivery="TC_GRN_08.DDS"`
+
+#### TrackLivery ✅
+**Avant** : `TrackLivery="Mills_Short, GRN_08_special.DDS"`
+**Après** : `TrackLivery="Mills_Short, TC_GRN_08_special.DDS"`
+
+### 4. Renommage des assets (à faire)
+
+**Fichiers à renommer** :
+- `.dds` (textures)
+- `.tga` (textures)
+- `.bmp` (textures)
+- `.txt` (documentation)
+
+**Exemple** :
+- `GRN_08.DDS` → `TC_GRN_08.DDS`
+- `GRN_08.txt` → `TC_GRN_08.txt`
+
+**Fichiers à NE PAS renommer** :
+- `.gmt`, `.mas`, `.gen` (modèles 3D / archives - généralement non spécifiques au véhicule)
+
+### 5. Assets partagés
+Les fichiers partagés (.hdv, .sfx, .gen, .cam, .ini) ne sont PAS renommés car :
+- Ils sont partagés entre plusieurs véhicules
+- Ils sont référencés par nom dans le .veh
+- Ils sont déjà isolés dans le dossier RFTOOL_XXX
+
+## Structure finale
+
+```
+RFTOOL_TestChampionship2025/
+├── 2005Rhez/
+│   ├── Rhez.hdv              ← Partagé (pas renommé)
+│   ├── Rhez.sfx              ← Partagé (pas renommé)
+│   └── SRGP/
+│       └── Team_Green/
+│           ├── TC_GRN_08.veh         ← Renommé
+│           ├── TC_GRN_08.DDS         ← Renommé
+│           └── TC_GRN_08.txt         ← Renommé
+```
+
+## Modifications en cours
+
+### Fichiers modifiés
+- `src/services/vehicle_isolation_service.py`
+  - `_generate_vehicle_prefix()` ✅
+  - `_isolate_single_vehicle()` - renommage .veh ✅
+  - `_modify_vehicle_file()` - Description ✅
+  - `_modify_vehicle_file()` - DefaultLivery ⏳
+  - `_copy_vehicle_assets()` - renommage assets ⏳
+
+### Prochaines étapes
+1. ~~Modifier DefaultLivery dans le .veh~~ ✅
+2. ~~Renommer les assets lors de la copie~~ ✅
+3. ~~Tester avec le championnat TestChampionship2025~~ ✅
+4. ~~Supprimer et recréer le championnat de test~~ ✅
+
+## Tests réussis
+
+**Championnat créé** : TestChampionship2025 (préfixe "TE")
+
+**Fichiers vérifiés** :
+```
+TE_GRN_08.veh
+TE_GRN_08.dds
+TE_GRN_08.txt
+```
+
+**Contenu .veh vérifié** :
+- `DefaultLivery="TE_GRN_08.dds"` ✅
+- `Description="TE Team Green #08"` ✅
+- `Driver="John Doe"` ✅
+- `Classes="TestChampionship2025"` ✅
+
+**Tous les renommages fonctionnent correctement !**
+
+## ✅ Statut Final - 28 Novembre 2025
+
+**Implémentation** : ✅ COMPLÉTÉE
+**Tests code** : ✅ RÉUSSIS
+**Tests in-game** : ⏳ EN ATTENTE (utilisateur)
+
+Toutes les fonctionnalités de renommage sont implémentées et testées au niveau code. Les fichiers générés sont corrects.
+
+## Prochaine étape - Validation in-game
+
+Tester dans rFactor pour vérifier que :
+1. [ ] Les véhicules sont détectés comme uniques (pas de doublons)
+2. [ ] Le joueur peut acheter/utiliser les véhicules
+3. [ ] Les textures se chargent correctement
+4. [ ] Le championnat se lance sans erreur
+5. [ ] Les noms avec préfixe sont visibles dans le jeu
+
+## Résumé des modifications du code
+
+### Fichier : `src/services/vehicle_isolation_service.py`
+
+1. **Nouvelle fonction** : `_generate_vehicle_prefix(championship_name)`
+   - Génère un préfixe court (2-3 caractères) depuis le nom du championnat
+   - Exemple : "TestChampionship2025" → "TE"
+
+2. **Modifié** : `_isolate_single_vehicle()`
+   - Renomme le fichier .veh avec préfixe
+   - Exemple : `GRN_08.veh` → `TE_GRN_08.veh`
+
+3. **Modifié** : `_copy_vehicle_assets()`
+   - Renomme les assets spécifiques au véhicule (.dds, .tga, .bmp, .txt)
+   - Ne renomme PAS les assets partagés (.gmt, .mas, .gen)
+   - Exemple : `GRN_08.dds` → `TE_GRN_08.dds`
+
+4. **Modifié** : `_modify_vehicle_file()`
+   - Modifie `DefaultLivery` avec le nouveau nom
+   - Modifie `PitCrewLivery` (si présent)
+   - Modifie `TrackLivery` (si présent)
+   - Ajoute préfixe au `Description`
+   - Remplace `Classes` par le nom du championnat uniquement
+
+## Tests à faire dans rFactor
+
+1. [ ] Lance rFactor
+2. [ ] Va dans Race → Championship
+3. [ ] Sélectionne "Test Championship 2025"
+4. [ ] Vérifie que 3 véhicules sont disponibles
+5. [ ] Vérifie que les noms sont préfixés "TE"
+6. [ ] Sélectionne un véhicule et essaie de le conduire
+7. [ ] Vérifie que les textures se chargent correctement
+8. [ ] Lance une course
+
+## Dates
+- **Début** : 28 Novembre 2025
+- **Implémentation complétée** : 28 Novembre 2025
+- **Status** : ✅ Prêt pour test in-game
+
+## Documentation Associée
+- `UPDATE_28NOV2025_VEHICLE_RENAMING.md` - Récapitulatif complet
+- `CLAUDE.md` - Contexte projet mis à jour
+- `NEXT_STEPS.md` - Prochaines étapes

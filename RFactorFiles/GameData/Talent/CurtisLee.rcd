@@ -1,0 +1,21 @@
+Curtis Lee
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=10-6-1980
+  Starts=33
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=53.59
+  Reputation=41.31
+  Courtesy=49.52
+  Composure=87.23
+  Speed=92.81
+  Crash=10.40
+  Recovery=70.68
+  CompletedLaps=90.07
+  MinRacingSkill=87.12
+}

@@ -1,0 +1,21 @@
+Wayne Evans
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=29-6-1969
+  Starts=91
+  Poles=21
+  Wins=23
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=25.92
+  Reputation=86.19
+  Courtesy=65.14
+  Composure=86.18
+  Speed=97.79
+  Crash=9.94
+  Recovery=78.53
+  CompletedLaps=89.92
+  MinRacingSkill=93.71
+}

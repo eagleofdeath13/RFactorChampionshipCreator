@@ -1,0 +1,49 @@
+//
+// The first section defines what maps to load for the new vehicle skinning
+// technology.  The first line defines a "prefix" to be used for all generic maps.
+// Currently, generic maps are used for the livery, wing, driver, driver arms,
+// driver helmet, and pit crew.  The second line will replace the default livery
+// with the new specified, for the track specified.  The format is as follows:
+//
+// DefaultLivery="PREFIX"       // PREFIX is the base texture map name, assumed to be BMP unless specified
+// PitCrewLivery="PREFIX"       // This is only needed if it differs from the default livery PREFIX
+// TrackLivery="TRACK, PREFIX"  // TRACK is the track name as defined in the event GDB
+// TrackLivery="TRACK, PREFIX"  // For example, "2004_Toban"
+// TrackLivery="TRACK, PREFIX"  // You can have an infinite # of these lines
+//
+
+DefaultLivery="Duisburg_69.DDS"
+
+HDVehicle=DC.hdv          
+Graphics=DC_Upgrades.gen
+Spinner=DC_Spinner.gen
+Upgrades=DC_Grap_Upgrades.ini               // Vehicle upgrades information
+GenString=                             // Used to generate GMT names in *.gen file
+Cameras=DC_cams.cam                    // Defaults to cams.cfg in UserData directory
+Sounds=DC.sfx                          //Sounds=default.sfx
+HeadPhysics=DC_headphysics.ini         // Affects driver eyepoint only
+Cockpit=DC_cockpitinfo.ini
+AIUpgradeClass=RC2
+
+
+//////////////////////////TEAM HISTORY AND INFORMATION///////////////////////////////////////////
+
+
+Number=69
+Team="Team Duisburg"
+PitGroup="Group4"
+Driver="Heinrich Blatz"          
+Description="Duisburg #69"
+Engine="ISM"
+Manufacturer="Vayline"
+Classes="RC2 Venom CompactSport RallyCross Lienz 2006"
+
+FullTeamName="Team Duisburg"
+TeamFounded=2005
+TeamHeadquarters="Munich, Germany"
+TeamStarts=0
+TeamPoles=0
+TeamWins=0
+TeamWorldChampionships=0
+
+Category="Vayline,2006 Venom"

@@ -1,0 +1,21 @@
+Drake Finster
+{
+//Driver Info
+  Nationality=British
+  DateofBirth=19-11-1978
+  Starts=55
+  Poles=15
+  Wins=8
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=81.48
+  Reputation=57.50
+  Courtesy=74.76
+  Composure=86.70
+  Speed=97.61
+  Crash=5.39
+  Recovery=77.14
+  CompletedLaps=95.63
+  MinRacingSkill=94.34
+}

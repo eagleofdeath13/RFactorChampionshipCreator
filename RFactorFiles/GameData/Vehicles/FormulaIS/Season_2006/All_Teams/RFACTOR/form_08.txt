@@ -1,0 +1,3 @@
+Description="Formula Rfactor #08 Default Skin"
+
+Painter="ISI Peal"

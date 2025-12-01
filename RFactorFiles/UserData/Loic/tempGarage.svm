@@ -1,0 +1,165 @@
+VehicleClassSetting="2005 Rhez SRGP"
+UpgradeSetting=(0,0)
+//VEH=GAMEDATA\VEHICLES\RHEZ\2005RHEZ\SRGP\TEAM RED\RD_01.VEH
+//UpgradeClass=GT3
+//Rear Wing=0
+//Cockpit=0
+//Side Skirt=0
+//Front End=0
+//Rear End=0
+//Tires=0
+//Suspension=0
+//Brake System=0
+//Hood=0
+//Exhaust=0
+//Computer Chip=0
+//Engine Tuning=0
+//Clutch=0
+//Flywheel=0
+//Weight Reduction=0
+//Transmission=0
+//Differential=0
+//Fuel Tank=0
+//Horn=0
+//Note: settings commented out if using the default
+
+[GENERAL]
+Notes=""
+Symmetric=1
+//CGRightSetting=0//50.0:50.0
+//CGRearSetting=0//61.0:39.0
+//WedgeSetting=0//0.00 turns
+//FrontTireCompoundSetting=0//Street
+//RearTireCompoundSetting=0//Street
+//FuelSetting=34//35L (39laps)
+//NumPitstopsSetting=3//3
+//Pitstop1Setting=34//35L (39laps)
+//Pitstop2Setting=34//35L (39laps)
+//Pitstop3Setting=34//35L (39laps)
+
+[LEFTFENDER]
+//FenderFlareSetting=0//0.0 cm
+
+[RIGHTFENDER]
+//FenderFlareSetting=0//0.0 cm
+
+[FRONTWING]
+//FWSetting=0//1
+
+[REARWING]
+//RWSetting=0//1
+
+[BODYAERO]
+//RadiatorSetting=0//0%
+//BrakeDuctSetting=0//1
+
+[SUSPENSION]
+//FrontAntiSwaySetting=1//2.00 cm
+//RearAntiSwaySetting=1//2.00 cm
+//FrontToeInSetting=0//0.10 deg
+//RearToeInSetting=0//0.00 deg
+//LeftCasterSetting=0//3.0 deg
+//RightCasterSetting=0//3.0 deg
+//LeftTrackBarSetting=0//35.0 cm
+//RightTrackBarSetting=0//35.0 cm
+//Front3rdPackerSetting=0//0.0 cm
+//Front3rdSpringSetting=0//Detached
+//Front3rdSlowBumpSetting=0//1
+//Front3rdFastBumpSetting=0//1
+//Front3rdSlowReboundSetting=0//1
+//Front3rdFastReboundSetting=0//1
+//Rear3rdPackerSetting=0//0.0 cm
+//Rear3rdSpringSetting=0//Detached
+//Rear3rdSlowBumpSetting=0//1
+//Rear3rdFastBumpSetting=0//1
+//Rear3rdSlowReboundSetting=0//1
+//Rear3rdFastReboundSetting=0//1
+
+[CONTROLS]
+//SteerLockSetting=15//20.0 deg
+//RearBrakeSetting=0//73.0:27.0
+//BrakePressureSetting=5//100%
+//HandbrakePressSetting=5//50%
+
+[ENGINE]
+//RevLimitSetting=0//6,500
+//EngineBoostSetting=0//1
+//EngineBrakingMapSetting=0//0
+
+[DRIVELINE]
+//FinalDriveSetting=1//4.00:1
+//ReverseSetting=1//3.45 (13.82)
+Gear1Setting=1//3.45 (13.82)
+Gear2Setting=9//1.94 (7.78)
+Gear3Setting=15//1.37 (5.47)
+Gear4Setting=18//1.06 (4.22)
+Gear5Setting=21//0.82 (3.27)
+//DiffPumpSetting=0//0%
+//DiffPowerSetting=0//0%
+//DiffCoastSetting=0//0%
+//DiffPreloadSetting=0//1
+//RearSplitSetting=0//100.0: 0.0
+
+[FRONTLEFT]
+//CamberSetting=0//-1.0 deg
+//PressureSetting=105//175 kPa
+//PackerSetting=0//0.0 cm
+//SpringSetting=0//35 N/mm
+//SpringRubberSetting=0//Detached
+//RideHeightSetting=0//16.0 cm
+//SlowBumpSetting=0//1
+//FastBumpSetting=0//1
+//SlowReboundSetting=0//1
+//FastReboundSetting=0//1
+//BrakeDiscSetting=0//2.5 cm
+//BrakePadSetting=2//3
+
+[FRONTRIGHT]
+//CamberSetting=0//-1.0 deg
+//PressureSetting=105//175 kPa
+//PackerSetting=0//0.0 cm
+//SpringSetting=0//35 N/mm
+//SpringRubberSetting=0//Detached
+//RideHeightSetting=0//16.0 cm
+//SlowBumpSetting=0//1
+//FastBumpSetting=0//1
+//SlowReboundSetting=0//1
+//FastReboundSetting=0//1
+//BrakeDiscSetting=0//2.5 cm
+//BrakePadSetting=2//3
+
+[REARLEFT]
+//CamberSetting=0//0.0 deg
+//PressureSetting=105//175 kPa
+//PackerSetting=0//0.0 cm
+//SpringSetting=0//40 N/mm
+//SpringRubberSetting=0//Detached
+//RideHeightSetting=0//19.0 cm
+//SlowBumpSetting=0//1
+//FastBumpSetting=0//1
+//SlowReboundSetting=0//1
+//FastReboundSetting=0//1
+//BrakeDiscSetting=0//2.5 cm
+//BrakePadSetting=2//3
+
+[REARRIGHT]
+//CamberSetting=0//0.0 deg
+//PressureSetting=105//175 kPa
+//PackerSetting=0//0.0 cm
+//SpringSetting=0//40 N/mm
+//SpringRubberSetting=0//Detached
+//RideHeightSetting=0//19.0 cm
+//SlowBumpSetting=0//1
+//FastBumpSetting=0//1
+//SlowReboundSetting=0//1
+//FastReboundSetting=0//1
+//BrakeDiscSetting=0//2.5 cm
+//BrakePadSetting=2//3
+
+[BASIC]
+Downforce=0.500000
+Balance=0.500000
+Ride=0.500000
+Gearing=0.500000
+Custom=1
+

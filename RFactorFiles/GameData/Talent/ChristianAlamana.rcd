@@ -1,0 +1,21 @@
+Christian Alamana
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=27-7-1974
+  Starts=61
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=92.51
+  Reputation=56.83
+  Courtesy=64.97
+  Composure=95.80
+  Speed=95.85
+  Crash=7.15
+  Recovery=86.33
+  CompletedLaps=95.90
+  MinRacingSkill=88.00
+}

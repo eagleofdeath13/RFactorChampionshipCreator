@@ -1,0 +1,21 @@
+Brent Jamison
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=16-4-1979
+  Starts=46
+  Poles=6
+  Wins=4
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=61.69
+  Reputation=55.96
+  Courtesy=63.82
+  Composure=71.52
+  Speed=96.93
+  Crash=2.35
+  Recovery=73.88
+  CompletedLaps=95.24
+  MinRacingSkill=90.26
+}

@@ -1,0 +1,3 @@
+Description="Team Yellow #09 Default Skin"
+
+Painter="ISI Brad"

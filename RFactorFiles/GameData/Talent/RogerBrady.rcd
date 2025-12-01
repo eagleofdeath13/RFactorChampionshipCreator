@@ -1,0 +1,21 @@
+Roger Brady
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=30-10-1976
+  Starts=76
+  Poles=16
+  Wins=20
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=50.73
+  Reputation=69.34
+  Courtesy=78.28
+  Composure=84.87
+  Speed=98.43
+  Crash=6.53
+  Recovery=86.91
+  CompletedLaps=97.37
+  MinRacingSkill=90.19
+}

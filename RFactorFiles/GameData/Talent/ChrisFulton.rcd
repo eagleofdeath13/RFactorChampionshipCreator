@@ -1,0 +1,21 @@
+Chris Fulton
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=23-10-1974
+  Starts=73
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=49.91
+  Reputation=69.75
+  Courtesy=57.12
+  Composure=58.70
+  Speed=94.83
+  Crash=5.48
+  Recovery=72.00
+  CompletedLaps=94.91
+  MinRacingSkill=88.88
+}

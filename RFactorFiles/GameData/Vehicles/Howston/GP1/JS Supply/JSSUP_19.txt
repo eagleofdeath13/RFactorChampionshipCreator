@@ -1,0 +1,3 @@
+Description="JS Supply Inc #19 Default Skin"
+
+Painter="ISI Brad"

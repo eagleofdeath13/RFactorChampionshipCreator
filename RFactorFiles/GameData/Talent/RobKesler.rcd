@@ -1,0 +1,21 @@
+Rob Kesler
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=10-2-1973
+  Starts=84
+  Poles=25
+  Wins=19
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=52.47
+  Reputation=72.12
+  Courtesy=66.69
+  Composure=97.72
+  Speed=98.76
+  Crash=5.29
+  Recovery=81.91
+  CompletedLaps=90.73
+  MinRacingSkill=93.96
+}

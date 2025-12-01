@@ -1,0 +1,141 @@
+VehicleClassSetting="2006 NSCRS StockCar"
+UpgradeSetting=(1,0)
+
+[GENERAL]
+Notes=""
+Symmetric=0
+//CGRightSetting=0//55.0:45.0
+//CGRearSetting=30//51.0:49.0
+//WedgeSetting=30//0.00 turns
+//FrontTireCompoundSetting=0//Dry
+//RearTireCompoundSetting=0//Dry
+//FuelSetting=26//13.5 gal (23 laps)
+//NumPitstopsSetting=3//3
+//Pitstop1Setting=26//13.5 gal (23 laps)
+//Pitstop2Setting=26//13.5 gal (23 laps)
+//Pitstop3Setting=26//13.5 gal (23 laps)
+
+[LEFTFENDER]
+FenderFlareSetting=0//0.00 in
+
+[RIGHTFENDER]
+FenderFlareSetting=0//0.00 in
+
+[FRONTWING]
+//FWSetting=0//1
+
+[REARWING]
+RWSetting=0//55 deg
+
+[BODYAERO]
+RadiatorSetting=6//30%
+//BrakeDuctSetting=0//1
+
+[SUSPENSION]
+FrontAntiSwaySetting=7//1.125 in
+//RearAntiSwaySetting=0//Detached
+FrontToeInSetting=18//0.13 deg
+//RearToeInSetting=0//0.00 deg
+LeftCasterSetting=20//2.0 deg
+RightCasterSetting=20//2.0 deg
+LeftTrackBarSetting=0//7.000 in
+RightTrackBarSetting=0//7.000 in
+//Front3rdPackerSetting=0//0.000 in
+//Front3rdSpringSetting=0//Detached
+//Front3rdSlowBumpSetting=0//1
+//Front3rdFastBumpSetting=0//1
+//Front3rdSlowReboundSetting=0//1
+//Front3rdFastReboundSetting=0//1
+//Rear3rdPackerSetting=0//0.000 in
+//Rear3rdSpringSetting=0//Detached
+//Rear3rdSlowBumpSetting=0//1
+//Rear3rdFastBumpSetting=0//1
+//Rear3rdSlowReboundSetting=0//1
+//Rear3rdFastReboundSetting=0//1
+
+[CONTROLS]
+SteerLockSetting=10//10.0 deg
+RearBrakeSetting=50//65.0:35.0
+//BrakePressureSetting=4//100%
+//HandbrakePressSetting=0//0%
+
+[ENGINE]
+//RevLimitSetting=4//7,500
+//EngineBoostSetting=0//1
+//EngineBrakingMapSetting=0//0
+
+[DRIVELINE]
+FinalDriveSetting=32//3.07:1
+//ReverseSetting=12//2.85 (8.74)
+Gear1Setting=6//3.17 (9.73)
+Gear2Setting=34//2.11 (6.48)
+Gear3Setting=68//1.33 (4.10)
+Gear4Setting=87//1.00 (3.07)
+//DiffPumpSetting=0//0%
+//DiffPowerSetting=0//100%
+//DiffCoastSetting=0//0%
+//DiffPreloadSetting=0//1
+
+[FRONTLEFT]
+CamberSetting=45//1.0 deg
+PressureSetting=38//29.0 psi
+//PackerSetting=0//0.000 in
+SpringSetting=20//900 lbs/in
+//SpringRubberSetting=0//Detached
+RideHeightSetting=4//6.000 in
+//SlowBumpSetting=4//5
+//FastBumpSetting=4//5
+//SlowReboundSetting=4//5
+//FastReboundSetting=4//5
+//BrakeDiscSetting=0//1.000 in
+//BrakePadSetting=2//3
+
+[FRONTRIGHT]
+CamberSetting=70//-1.0 deg
+PressureSetting=90//55.0 psi
+//PackerSetting=0//0.000 in
+SpringSetting=64//2000 lbs/in
+//SpringRubberSetting=0//Detached
+//RideHeightSetting=14//6.000 in
+//SlowBumpSetting=4//5
+//FastBumpSetting=4//5
+//SlowReboundSetting=4//5
+//FastReboundSetting=4//5
+//BrakeDiscSetting=0//1.000 in
+//BrakePadSetting=2//3
+
+[REARLEFT]
+CamberSetting=3//1.0 deg
+PressureSetting=38//29.0 psi
+//PackerSetting=0//0.000 in
+SpringSetting=11//375 lbs/in
+//SpringRubberSetting=0//Detached
+RideHeightSetting=0//6.000 in
+SlowBumpSetting=2//3
+FastBumpSetting=2//3
+SlowReboundSetting=3//4
+FastReboundSetting=3//4
+//BrakeDiscSetting=0//1.000 in
+//BrakePadSetting=2//3
+
+[REARRIGHT]
+CamberSetting=1//-1.0 deg
+PressureSetting=86//53.0 psi
+//PackerSetting=0//0.000 in
+SpringSetting=11//375 lbs/in
+//SpringRubberSetting=0//Detached
+RideHeightSetting=0//6.000 in
+SlowBumpSetting=2//3
+FastBumpSetting=2//3
+SlowReboundSetting=3//4
+FastReboundSetting=3//4
+//BrakeDiscSetting=0//1.000 in
+//BrakePadSetting=2//3
+
+[BASIC]
+Downforce=0.500000
+Balance=0.500000
+Ride=0.500000
+Gearing=0.500000
+Custom=1
+

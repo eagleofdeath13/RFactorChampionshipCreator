@@ -1,0 +1,31 @@
+//
+// All information is proprietary to Image Space Incorporated.
+//
+//            (c) 2005 Image Space Incorporated
+//                   All Rights Reserved.
+//
+
+\Sounds\Default - General purpose sounds, to be used as placeholder for new vehicles awaiting 
+  vehicle specific sounds.
+
+\Sounds\Ambient - Ambient sounds not made by the vehicle and not specific to any make of
+  vehicle.  Ex. crowd, pit, airhorns
+
+\Sounds\Secondary - Sounds that the vehicle makes but are not necessarily specific to 
+  that make of vehicle.  Ex. collisions, rumble, wind, stones
+
+\Sounds\"TireMake" - Sounds associated with the tires.  Ex. road, rolling, skidding, grass, gravel
+
+\Sounds\"EngineMake" - All engine sounds for this make of engine. Ex. engine_int, engine_ext
+
+\Sounds\"VehicleMake" - Sounds that the vehicle produces while racing specific to that make
+  of vehicle. Ex. trans, gearbox, backfire, brakes
+
+Notes:
+- There may be situations where the secondary sounds can be moved into specific vehicle
+  directories.
+- Use the suffix "_ex" or "_in" for extenal sounds and no suffix or "_int" or "_out" for internal sounds.
+- For sounds that have upgrades or multiple versions, use a number after the rootname and before any other identifying works.  Ex. ABCEngine3_onhigh_ex, Backfire2_low_in
+- TV Cockpit view uses internal sounds.
+- To conserve memory, some vehicles share sounds for other vehicles.  The Rhez sounds are widely cross referenced.
+

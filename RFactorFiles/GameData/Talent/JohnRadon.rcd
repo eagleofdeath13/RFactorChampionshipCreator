@@ -1,0 +1,21 @@
+John Radon
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=12-7-1974
+  Starts=73
+  Poles=10
+  Wins=10
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=83.21
+  Reputation=80.44
+  Courtesy=59.21
+  Composure=79.56
+  Speed=96.14
+  Crash=6.20
+  Recovery=73.62
+  CompletedLaps=94.41
+  MinRacingSkill=89.96
+}

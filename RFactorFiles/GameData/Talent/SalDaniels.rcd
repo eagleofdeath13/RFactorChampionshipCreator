@@ -1,0 +1,21 @@
+Sal Daniels
+{
+//Driver Info
+  Nationality=Spanish
+  DateofBirth=31-2-1978
+  Starts=38
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=72.85
+  Reputation=64.60
+  Courtesy=63.22
+  Composure=94.84
+  Speed=95.48
+  Crash=9.51
+  Recovery=73.28
+  CompletedLaps=95.37
+  MinRacingSkill=92.92
+}

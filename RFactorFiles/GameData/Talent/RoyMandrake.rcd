@@ -1,0 +1,21 @@
+Roy Mandrake
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=30-12-1986
+  Starts=12
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=79.39
+  Reputation=8.08
+  Courtesy=56.03
+  Composure=75.25
+  Speed=95.77
+  Crash=8.97
+  Recovery=78.51
+  CompletedLaps=92.93
+  MinRacingSkill=93.26
+}

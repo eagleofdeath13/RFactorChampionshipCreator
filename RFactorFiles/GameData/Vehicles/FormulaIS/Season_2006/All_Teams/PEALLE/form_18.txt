@@ -1,0 +1,3 @@
+Description="Formula Pealle #18 Default Skin"
+
+Painter="ISI Peal"

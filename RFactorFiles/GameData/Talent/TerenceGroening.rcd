@@ -1,0 +1,21 @@
+Terence Groening
+{
+ //Driver Info
+ Nationality=American
+ DateofBirth=6-6-79
+ Starts=28
+ Poles=2
+ Wins=1
+ DriversChampionships=0
+ 
+//Driver Stats
+  Aggression=80.00
+  Reputation=99.24
+  Courtesy=80.43
+  Composure=99.46
+  Speed=99.12
+  Crash=6.82
+  Recovery=99.85
+  CompletedLaps=92.66
+  MinRacingSkill=99.64
+}

@@ -1,0 +1,159 @@
+VehicleClassSetting="2006 CompactSport Lienz RallyCross Venom"
+UpgradeSetting=(1518318,0)
+//VEH=GAMEDATA\VEHICLES\VENOM\RC3\RISINGSUN\RISINGSUN_58.VEH
+//UpgradeClass=RC1
+//Rear Wing=2
+//Front End=1
+//Rear End=1
+//Tires=2
+//Suspension=3
+//Brake System=2
+//Hood=2
+//Exhaust=2
+//Differential=4
+//Competition Kits=3
+//Flywheel=2
+//Horn=0
+//Note: settings commented out if using the default
+
+[GENERAL]
+Notes=""
+Symmetric=1
+//CGRightSetting=3//50.0:50.0
+CGRearSetting=6//53.0:47.0
+//WedgeSetting=0//0.00 turns
+FrontTireCompoundSetting=1//Gravel Tires
+RearTireCompoundSetting=1//Gravel Tires
+FuelSetting=54//55L (2laps)
+//NumPitstopsSetting=3//3
+//Pitstop1Setting=49//50L (2laps)
+//Pitstop2Setting=49//50L (2laps)
+//Pitstop3Setting=49//50L (2laps)
+
+[LEFTFENDER]
+//FenderFlareSetting=0//0.0 cm
+
+[RIGHTFENDER]
+//FenderFlareSetting=0//0.0 cm
+
+[FRONTWING]
+//FWSetting=2//3
+
+[REARWING]
+//RWSetting=4//5
+
+[BODYAERO]
+//RadiatorSetting=0//0%
+//BrakeDuctSetting=0//1
+
+[SUSPENSION]
+//FrontAntiSwaySetting=1//2.60 cm
+//RearAntiSwaySetting=5//2.60 cm
+//FrontToeInSetting=2//-0.10 deg
+//RearToeInSetting=6//0.10 deg
+//LeftCasterSetting=50//3.0 deg
+//RightCasterSetting=50//3.0 deg
+//LeftTrackBarSetting=0//0.0 cm
+//RightTrackBarSetting=0//0.0 cm
+//Front3rdPackerSetting=0//0.0 cm
+//Front3rdSpringSetting=0//Detached
+//Front3rdSlowBumpSetting=0//0 N/m/s
+//Front3rdFastBumpSetting=0//0 N/m/s
+//Front3rdSlowReboundSetting=0//0 N/m/s
+//Front3rdFastReboundSetting=0//0 N/m/s
+//Rear3rdPackerSetting=0//0.0 cm
+//Rear3rdSpringSetting=0//Detached
+//Rear3rdSlowBumpSetting=0//0 N/m/s
+//Rear3rdFastBumpSetting=0//0 N/m/s
+//Rear3rdSlowReboundSetting=0//0 N/m/s
+//Rear3rdFastReboundSetting=0//0 N/m/s
+
+[CONTROLS]
+SteerLockSetting=30//35.0 deg
+RearBrakeSetting=25//65.0:35.0
+//BrakePressureSetting=4//90%
+HandbrakePressSetting=10//100%
+
+[ENGINE]
+RevLimitSetting=4//8,000
+//EngineBoostSetting=0//1
+//EngineBrakingMapSetting=0//0
+
+[DRIVELINE]
+//FinalDriveSetting=3//3.80:1
+ReverseSetting=0//3.82 (14.51)
+Gear1Setting=3//3.45 (13.13)
+Gear2Setting=9//2.27 (8.61)
+Gear3Setting=14//1.71 (6.51)
+Gear4Setting=18//1.37 (5.20)
+Gear5Setting=20//1.16 (4.40)
+Gear6Setting=22//0.97 (3.68)
+//DiffPumpSetting=4//50%
+//DiffPowerSetting=0//0%
+//DiffCoastSetting=0//0%
+//DiffPreloadSetting=0//1
+RearSplitSetting=2//45.0:55.0
+
+[FRONTLEFT]
+//CamberSetting=4//-3.0 deg
+PressureSetting=57//157 kPa
+//PackerSetting=0//3.0 cm
+//SpringSetting=2//70 N/mm
+//SpringRubberSetting=0//Detached
+RideHeightSetting=20//21.0 cm
+//SlowBumpSetting=0//1500 N/m/s
+//FastBumpSetting=1//1000 N/m/s
+//SlowReboundSetting=3//4500 N/m/s
+//FastReboundSetting=4//3500 N/m/s
+//BrakeDiscSetting=0//3.3 cm
+//BrakePadSetting=2//3
+
+[FRONTRIGHT]
+//CamberSetting=4//-3.0 deg
+PressureSetting=57//157 kPa
+//PackerSetting=0//3.0 cm
+//SpringSetting=2//70 N/mm
+//SpringRubberSetting=0//Detached
+RideHeightSetting=20//21.0 cm
+//SlowBumpSetting=0//1500 N/m/s
+//FastBumpSetting=1//1000 N/m/s
+//SlowReboundSetting=3//4500 N/m/s
+//FastReboundSetting=4//3500 N/m/s
+//BrakeDiscSetting=0//3.3 cm
+//BrakePadSetting=2//3
+
+[REARLEFT]
+CamberSetting=0//-2.0 deg
+PressureSetting=54//154 kPa
+//PackerSetting=0//3.5 cm
+SpringSetting=0//60 N/mm
+//SpringRubberSetting=0//Detached
+RideHeightSetting=21//22.5 cm
+//SlowBumpSetting=0//1500 N/m/s
+//FastBumpSetting=1//1000 N/m/s
+//SlowReboundSetting=3//4500 N/m/s
+//FastReboundSetting=4//3500 N/m/s
+//BrakeDiscSetting=0//3.3 cm
+//BrakePadSetting=2//3
+
+[REARRIGHT]
+CamberSetting=0//-2.0 deg
+PressureSetting=54//154 kPa
+//PackerSetting=0//3.5 cm
+SpringSetting=0//60 N/mm
+//SpringRubberSetting=0//Detached
+RideHeightSetting=21//22.5 cm
+//SlowBumpSetting=0//1500 N/m/s
+//FastBumpSetting=1//1000 N/m/s
+//SlowReboundSetting=3//4500 N/m/s
+//FastReboundSetting=4//3500 N/m/s
+//BrakeDiscSetting=0//3.3 cm
+//BrakePadSetting=2//3
+
+[BASIC]
+Downforce=0.500000
+Balance=0.500000
+Ride=0.500000
+Gearing=0.500000
+Custom=1
+

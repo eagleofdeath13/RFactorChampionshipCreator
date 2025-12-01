@@ -1,0 +1,21 @@
+Tony Samson
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=15-12-1969
+  Starts=107
+  Poles=25
+  Wins=17
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=28.88
+  Reputation=78.79
+  Courtesy=68.79
+  Composure=90.48
+  Speed=97.66
+  Crash=5.15
+  Recovery=73.24
+  CompletedLaps=92.20
+  MinRacingSkill=88.40
+}

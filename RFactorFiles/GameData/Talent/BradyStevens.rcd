@@ -1,0 +1,21 @@
+Brady Stevens
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=22-11-1986
+  Starts=17
+  Poles=4
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=76.83
+  Reputation=36.18
+  Courtesy=80.27
+  Composure=64.01
+  Speed=96.68
+  Crash=6.64
+  Recovery=81.94
+  CompletedLaps=82.14
+  MinRacingSkill=86.94
+}

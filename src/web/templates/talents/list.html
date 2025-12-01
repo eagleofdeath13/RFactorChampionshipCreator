@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block title %}Talents - rFactor Championship Creator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4">
+            <i class="bi bi-people"></i> Gestion des Talents
+        </h1>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        <input type="text" id="search-input" class="form-control" placeholder="Rechercher un talent...">
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="/talents/new" class="btn btn-primary me-2">
+            <i class="bi bi-plus-circle"></i> Créer un nouveau talent
+        </a>
+        <a href="/api/export/talents" class="btn btn-success">
+            <i class="bi bi-download"></i> Exporter CSV
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Nationalité</th>
+                        <th>Vitesse</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="talents-table-body">
+                    <tr>
+                        <td colspan="4" class="text-center">
+                            <div class="spinner-border" role="status">
+                                <span class="visually-hidden">Chargement...</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="no-results" class="alert alert-info" style="display: none;">
+    Aucun talent trouvé.
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let allTalents = [];
+
+async function loadTalents() {
+    try {
+        const talents = await APIClient.get('/api/talents/');
+        allTalents = talents;
+        renderTalents(talents);
+    } catch (error) {
+        ToastNotification.error('Erreur lors du chargement des talents');
+        console.error(error);
+    }
+}
+
+function renderTalents(talents) {
+    const tbody = document.getElementById('talents-table-body');
+    const noResults = document.getElementById('no-results');
+
+    if (talents.length === 0) {
+        tbody.innerHTML = '';
+        noResults.style.display = 'block';
+        return;
+    }
+
+    noResults.style.display = 'none';
+    tbody.innerHTML = talents.map(talent => `
+        <tr onclick="window.location.href='/talents/${encodeURIComponent(talent.name)}'">
+            <td>${talent.name}</td>
+            <td>${talent.nationality}</td>
+            <td>
+                <div class="progress" style="height: 20px;">
+                    <div class="progress-bar" role="progressbar"
+                         style="width: ${talent.speed}%"
+                         aria-valuenow="${talent.speed}"
+                         aria-valuemin="0"
+                         aria-valuemax="100">
+                        ${talent.speed.toFixed(1)}
+                    </div>
+                </div>
+            </td>
+            <td class="text-end">
+                <button class="btn btn-sm btn-danger" onclick="event.stopPropagation(); deleteTalent('${talent.name}')">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+async function deleteTalent(name) {
+    if (!confirmDelete(name, 'le talent')) {
+        return;
+    }
+
+    try {
+        LoadingOverlay.show('Suppression...');
+        await APIClient.delete(`/api/talents/${encodeURIComponent(name)}`);
+        ToastNotification.success(`Talent "${name}" supprimé`);
+        await loadTalents();
+    } catch (error) {
+        ToastNotification.error(`Erreur lors de la suppression: ${error.message}`);
+    } finally {
+        LoadingOverlay.hide();
+    }
+}
+
+// Search functionality
+document.getElementById('search-input').addEventListener('input', function(e) {
+    const query = e.target.value.toLowerCase();
+    const filtered = allTalents.filter(t =>
+        t.name.toLowerCase().includes(query) ||
+        t.nationality.toLowerCase().includes(query)
+    );
+    renderTalents(filtered);
+});
+
+// Load on page load
+document.addEventListener('DOMContentLoaded', loadTalents);
+</script>
+{% endblock %}

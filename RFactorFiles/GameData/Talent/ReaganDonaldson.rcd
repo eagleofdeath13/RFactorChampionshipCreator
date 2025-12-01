@@ -1,0 +1,21 @@
+Reagan Donaldson
+{
+//Driver Info
+  Nationality=British
+  DateofBirth=4-12-1968
+  Starts=99
+  Poles=2
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=76.40
+  Reputation=84.29
+  Courtesy=65.98
+  Composure=76.22
+  Speed=93.80
+  Crash=8.95
+  Recovery=80.86
+  CompletedLaps=100.00
+  MinRacingSkill=92.44
+}

@@ -1,0 +1,3 @@
+Description="2006 #04 Griffen"
+
+Painter=ISI

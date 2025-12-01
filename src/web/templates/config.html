@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Configuration{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4"><i class="bi bi-gear"></i> Configuration</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Configuration rFactor</h5>
+
+                <div id="current-config" class="alert alert-info">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                    Chargement...
+                </div>
+
+                <p class="text-muted">
+                    La configuration est gérée via le fichier config.json.
+                    Utilisez le script setup_config.py pour configurer l'application.
+                </p>
+
+                <div class="alert alert-warning">
+                    <i class="bi bi-info-circle"></i>
+                    Pour modifier la configuration, exécutez:
+                    <code>python setup_config.py</code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+async function loadConfig() {
+    try {
+        const config = await APIClient.get('/api/config/');
+
+        const configDiv = document.getElementById('current-config');
+
+        if (config.is_configured) {
+            configDiv.className = 'alert alert-success';
+            configDiv.innerHTML = `
+                <h6><i class="bi bi-check-circle"></i> Configuration actuelle</h6>
+                <dl class="row mb-0">
+                    <dt class="col-sm-3">Chemin rFactor:</dt>
+                    <dd class="col-sm-9"><code>${config.rfactor_path}</code></dd>
+
+                    <dt class="col-sm-3">Joueur:</dt>
+                    <dd class="col-sm-9"><code>${config.current_player}</code></dd>
+                </dl>
+            `;
+        } else {
+            configDiv.className = 'alert alert-danger';
+            configDiv.innerHTML = `
+                <h6><i class="bi bi-exclamation-triangle"></i> Non configuré</h6>
+                <p>L'application n'est pas configurée. Veuillez exécuter le script de configuration.</p>
+            `;
+        }
+    } catch (error) {
+        ToastNotification.error('Erreur de chargement de la configuration');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', loadConfig);
+</script>
+{% endblock %}

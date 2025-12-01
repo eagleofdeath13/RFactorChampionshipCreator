@@ -1,0 +1,21 @@
+Terry Underwood
+{
+//Driver Info
+  Nationality=British
+  DateofBirth=12-7-1982
+  Starts=35
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=30.01
+  Reputation=40.62
+  Courtesy=65.15
+  Composure=74.81
+  Speed=93.42
+  Crash=7.78
+  Recovery=66.92
+  CompletedLaps=97.91
+  MinRacingSkill=87.03
+}

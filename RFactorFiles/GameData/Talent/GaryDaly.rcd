@@ -1,0 +1,21 @@
+Gary Daly
+{
+//Driver Info
+  Nationality=German
+  DateofBirth=22-11-1978
+  Starts=57
+  Poles=8
+  Wins=4
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=66.83
+  Reputation=36.18
+  Courtesy=80.27
+  Composure=64.01
+  Speed=96.68
+  Crash=6.64
+  Recovery=81.94
+  CompletedLaps=92.14
+  MinRacingSkill=86.94
+}

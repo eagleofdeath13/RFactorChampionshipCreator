@@ -1,0 +1,3 @@
+Description="Team Auto Sport #20 Default Skin"
+
+Painter="ISI Brad"

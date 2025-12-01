@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Racing theme global styles */
+@layer base {
+  * {
+    @apply box-border;
+  }
+
+  body {
+    @apply font-rajdhani bg-carbon-black text-white antialiased;
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px),
+      repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-orbitron font-bold uppercase tracking-wider;
+  }
+}
+
+/* Custom scrollbar */
+@layer utilities {
+  /* Racing scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-carbon-dark;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-racing-red;
+    border-radius: 0;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-racing-red-dark;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-racing-red text-white;
+  }
+}
+
+/* Racing components */
+@layer components {
+  .racing-card {
+    @apply bg-gradient-carbon border border-white/10 shadow-card relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 0 100%);
+  }
+
+  .racing-card:hover {
+    @apply -translate-y-2 scale-105 shadow-racing-glow border-racing-red;
+  }
+
+  .racing-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1 bg-gradient-racing scale-x-0 origin-left transition-transform duration-500;
+  }
+
+  .racing-card:hover::before {
+    @apply scale-x-100;
+  }
+
+  .racing-btn {
+    @apply font-rajdhani font-bold uppercase tracking-wide border-none px-6 py-3 relative overflow-hidden transition-all duration-300;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+  }
+
+  .racing-btn-primary {
+    @apply racing-btn bg-gradient-racing text-white shadow-racing-glow;
+  }
+
+  .racing-btn-primary:hover {
+    @apply shadow-[0_0_30px_rgba(227,30,36,0.6)] -translate-y-0.5;
+  }
+
+  .racing-btn-success {
+    @apply racing-btn bg-gradient-to-r from-status-success to-green-600 text-carbon-black;
+  }
+
+  .racing-btn-secondary {
+    @apply racing-btn bg-carbon-metal text-chrome-silver border border-chrome-silver/30;
+  }
+
+  .racing-input {
+    @apply bg-carbon-light border border-white/10 border-l-4 border-l-racing-red text-white px-4 py-3 font-rajdhani font-medium transition-all duration-300;
+  }
+
+  .racing-input:focus {
+    @apply bg-carbon-metal border-racing-red outline-none ring-4 ring-racing-red/20;
+  }
+}

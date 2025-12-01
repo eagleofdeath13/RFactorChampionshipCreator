@@ -1,0 +1,4 @@
+Description="Rfactor #02 Default Skin"
+
+Painter="old man"
+

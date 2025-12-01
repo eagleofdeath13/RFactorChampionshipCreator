@@ -1,0 +1,21 @@
+David Hentz
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=3-2-1972
+  Starts=91
+  Poles=18
+  Wins=23
+  DriversChampionships=2
+
+//Driver Stats
+  Aggression=89.69
+  Reputation=92.00
+  Courtesy=77.66
+  Composure=74.72
+  Speed=98.87
+  Crash=6.06
+  Recovery=88.09
+  CompletedLaps=96.04
+  MinRacingSkill=91.41
+}

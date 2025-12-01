@@ -1,0 +1,21 @@
+Clint Cypher
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=5-9-1973
+  Starts=63
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=86.05
+  Reputation=49.03
+  Courtesy=44.76
+  Composure=80.91
+  Speed=93.15
+  Crash=4.46
+  Recovery=74.41
+  CompletedLaps=100.00
+  MinRacingSkill=85.66
+}

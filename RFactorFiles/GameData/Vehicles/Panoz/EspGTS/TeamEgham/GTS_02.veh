@@ -1,0 +1,50 @@
+//
+// The first section defines what maps to load for the new vehicle skinning
+// technology.  The first line defines a "prefix" to be used for all generic maps.
+// Currently, generic maps are used for the livery, wing, driver, driver arms,
+// driver helmet, and pit crew.  The second line will replace the default livery
+// with the new specified, for the track specified.  The format is as follows:
+//
+// DefaultLivery="PREFIX"       // PREFIX is the base texture map name, assumed to be BMP unless specified
+// PitCrewLivery="PREFIX"       // This is only needed if it differs from the default livery PREFIX
+// TrackLivery="TRACK, PREFIX"  // TRACK is the track name as defined in the event GDB
+// TrackLivery="TRACK, PREFIX"  // For example, "2004_Toban"
+// TrackLivery="TRACK, PREFIX"  // You can have an infinite # of these lines
+//
+
+DefaultLivery="GTS_02.DDS"
+
+HDVehicle=EsperanteGTS.hdv
+Graphics=GTS_upgrades.gen
+Spinner=GTS_Spinner.gen
+Upgrades=GTS_Upgrades.ini    // Vehicle upgrades information
+GenString=                   // Used to generate GMT names in *.gen file
+Cameras=GTS_cams.cam         // Defaults to cams.cfg in UserData directory
+Sounds=GTS.sfx               //Sounds=default.sfx
+HeadPhysics=headphysics.ini  // Affects driver eyepoint only
+Cockpit=GTS_cockpitinfo.ini
+AIUpgradeClass=GTS
+
+//////////////////////////TEAM HISTORY AND INFORMATION///////////////////////////////////////////
+
+
+Number=02
+Team="Team Egham"
+PitGroup="Group01"
+Driver="Michael Darrell"
+Description="Panoz GTS #02"
+Engine="Ford 5.0L V8 2006"
+Manufacturer="PIRELLI"
+Classes="Panoz,GTS"
+
+FullTeamName="Team Egham"
+TeamFounded=2003
+TeamHeadquarters="Sparta, Wisconsin"
+TeamStarts=100
+TeamPoles=70
+TeamWins=50
+TeamWorldChampionships=2
+
+
+Category="Panoz,GTS"
+

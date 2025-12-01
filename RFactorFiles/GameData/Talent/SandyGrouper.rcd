@@ -1,0 +1,21 @@
+Sandy Grouper
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=26-11-1969
+  Starts=89
+  Poles=0
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=36.03
+  Reputation=87.08
+  Courtesy=64.05
+  Composure=54.46
+  Speed=92.33
+  Crash=5.28
+  Recovery=74.99
+  CompletedLaps=92.68
+  MinRacingSkill=88.72
+}

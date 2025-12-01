@@ -1,0 +1,21 @@
+Gjon Camaj
+{
+ //Driver Info
+ Nationality=American
+ DateofBirth=6-6-79
+ Starts=28
+ Poles=2
+ Wins=1
+ DriversChampionships=0
+ 
+//Driver Stats
+  Aggression=71.66
+  Reputation=22.24
+  Courtesy=80.43
+  Composure=39.46
+  Speed=90.12
+  Crash=6.82
+  Recovery=48.85
+  CompletedLaps=92.66
+  MinRacingSkill=80.64
+}

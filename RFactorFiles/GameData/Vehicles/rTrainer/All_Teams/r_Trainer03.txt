@@ -1,0 +1,3 @@
+Description="Academy Racer #3"
+
+Painter="ISI Mike D"

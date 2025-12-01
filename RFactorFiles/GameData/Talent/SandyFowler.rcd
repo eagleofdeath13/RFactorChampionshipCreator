@@ -1,0 +1,21 @@
+Sandy Fowler
+{
+//Driver Info
+  Nationality=Japanese
+  DateofBirth=31-10-1978
+  Starts=56
+  Poles=1
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=48.89
+  Reputation=44.47
+  Courtesy=42.62
+  Composure=96.00
+  Speed=92.73
+  Crash=6.90
+  Recovery=69.72
+  CompletedLaps=96.46
+  MinRacingSkill=89.29
+}

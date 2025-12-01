@@ -1,0 +1,21 @@
+David Schlurz
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=29-7-1981
+  Starts=44
+  Poles=4
+  Wins=4
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=56.34
+  Reputation=27.77
+  Courtesy=78.13
+  Composure=94.61
+  Speed=96.23
+  Crash=7.50
+  Recovery=72.32
+  CompletedLaps=99.77
+  MinRacingSkill=93.20
+}

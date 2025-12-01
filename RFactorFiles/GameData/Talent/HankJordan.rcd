@@ -1,0 +1,21 @@
+Hank Jordan
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=3-4-1974
+  Starts=73
+  Poles=13
+  Wins=7
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=75.61
+  Reputation=62.42
+  Courtesy=72.24
+  Composure=55.29
+  Speed=96.01
+  Crash=8.10
+  Recovery=72.70
+  CompletedLaps=94.00
+  MinRacingSkill=91.21
+}

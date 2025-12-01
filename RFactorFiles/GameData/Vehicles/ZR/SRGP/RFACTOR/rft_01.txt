@@ -1,0 +1,3 @@
+Description="Rfactor #01 Default Skin"
+
+Painter="old man"

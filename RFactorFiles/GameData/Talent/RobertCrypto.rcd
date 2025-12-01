@@ -1,0 +1,21 @@
+Robert Crypto
+{
+//Driver Info
+  Nationality=American
+  DateofBirth=13-10-1981
+  Starts=24
+  Poles=3
+  Wins=0
+  DriversChampionships=0
+
+//Driver Stats
+  Aggression=72.01
+  Reputation=38.05
+  Courtesy=49.76
+  Composure=64.20
+  Speed=93.98
+  Crash=4.31
+  Recovery=73.29
+  CompletedLaps=98.45
+  MinRacingSkill=90.41
+}
