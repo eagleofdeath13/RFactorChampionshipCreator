@@ -20,9 +20,21 @@ export default function Championships() {
     },
   })
 
-  const filteredChampionships = championships?.filter((champ) =>
-    champ.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  // Filter out development championships and apply search
+  const filteredChampionships = championships
+    ?.filter((champ) => {
+      // Exclude development/internal championships
+      const isDevelopmentChamp =
+        champ.name.toLowerCase().includes('dev_only') ||
+        champ.name.toLowerCase().includes('any_dev') ||
+        champ.filename?.toLowerCase().includes('dev_only') ||
+        champ.filename?.toLowerCase().includes('any_dev')
+
+      return !isDevelopmentChamp
+    })
+    .filter((champ) =>
+      champ.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
 
   return (
     <div>
@@ -87,11 +99,56 @@ export default function Championships() {
           )}
         </RacingCard>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredChampionships.map((champ, index) => (
-            <ChampionshipCard key={champ.name} championship={champ} delay={index * 0.05} />
-          ))}
-        </div>
+        <>
+          {/* RFM Section - Championship Definitions */}
+          {filteredChampionships.some((c) => c.is_rfm || c.type === 'RFM') && (
+            <div className="mb-8">
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                className="text-2xl font-orbitron font-bold text-white mb-4 flex items-center gap-3"
+              >
+                <Trophy className="w-6 h-6 text-status-info" />
+                Modèles de championnats (RFM)
+                <span className="text-sm font-rajdhani text-chrome-silver">
+                  • Définitions prêtes à lancer
+                </span>
+              </motion.h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredChampionships
+                  .filter((champ) => champ.is_rfm || champ.type === 'RFM')
+                  .map((champ, index) => (
+                    <ChampionshipCard key={champ.name} championship={champ} delay={index * 0.05} />
+                  ))}
+              </div>
+            </div>
+          )}
+
+          {/* CCH Section - Player Progress */}
+          {filteredChampionships.some((c) => !c.is_rfm && c.type === 'CCH') && (
+            <div>
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl font-orbitron font-bold text-white mb-4 flex items-center gap-3"
+              >
+                <Trophy className="w-6 h-6 text-status-success" />
+                Sauvegardes de progression (CCH)
+                <span className="text-sm font-rajdhani text-chrome-silver">
+                  • Vos parties en cours
+                </span>
+              </motion.h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredChampionships
+                  .filter((champ) => !champ.is_rfm && champ.type === 'CCH')
+                  .map((champ, index) => (
+                    <ChampionshipCard key={champ.name} championship={champ} delay={(index + 6) * 0.05} />
+                  ))}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   )
@@ -186,7 +243,10 @@ function ChampionshipCard({ championship, delay }) {
         </div>
 
         <div className="mt-4 pt-4 border-t border-white/10">
-          <Link to={`/championships/${encodeURIComponent(championship.filename)}`}>
+          <Link to={isRFM
+            ? `/championships/rfm/${encodeURIComponent(championship.filename)}`
+            : `/championships/cch/${encodeURIComponent(championship.filename)}`
+          }>
             <span className="text-sm text-racing-red hover:text-racing-red-dark font-bold">
               Voir les détails →
             </span>

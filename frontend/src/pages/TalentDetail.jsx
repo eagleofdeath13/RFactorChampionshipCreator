@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { User, ArrowLeft, Edit, Trash2, Flag, Zap, Target, TrendingUp } from 'lucide-react'
+import { User, ArrowLeft, Edit, Flag, Zap, Target, TrendingUp } from 'lucide-react'
 import { apiEndpoints } from '../services/api'
 import PageHeader from '../components/PageHeader'
 import RacingCard from '../components/RacingCard'
@@ -50,9 +50,15 @@ export default function TalentDetail() {
       <PageHeader
         icon={User}
         title={talent.name}
-        subtitle={`${talent.nationality} • ${talent.team || 'Sans équipe'}`}
+        subtitle={`${talent.personal_info?.nationality || 'Inconnue'} • ${talent.team || 'Sans équipe'}`}
         actions={
           <div className="flex gap-3">
+            <Link to={`/talents/${encodeURIComponent(talent.name)}/edit`}>
+              <RacingButton variant="primary">
+                <Edit className="inline-block w-4 h-4 mr-2" />
+                Modifier
+              </RacingButton>
+            </Link>
             <Link to="/talents">
               <RacingButton variant="secondary">
                 <ArrowLeft className="inline-block w-4 h-4 mr-2" />
@@ -81,7 +87,7 @@ export default function TalentDetail() {
               {/* Speed */}
               <StatBar
                 label="Vitesse"
-                value={talent.speed || 0}
+                value={talent.stats?.speed || 0}
                 icon={Zap}
                 color="racing-red"
               />
@@ -89,7 +95,7 @@ export default function TalentDetail() {
               {/* Crash */}
               <StatBar
                 label="Résistance aux crashes"
-                value={talent.crash || 0}
+                value={talent.stats?.crash || 0}
                 icon={Target}
                 color="status-success"
               />
@@ -97,7 +103,7 @@ export default function TalentDetail() {
               {/* Aggression */}
               <StatBar
                 label="Agressivité"
-                value={talent.aggression || 0}
+                value={talent.stats?.aggression || 0}
                 icon={TrendingUp}
                 color="fluo-yellow"
               />
@@ -112,7 +118,7 @@ export default function TalentDetail() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <InfoItem label="Nom complet" value={talent.name} />
-              <InfoItem label="Nationalité" value={talent.nationality} />
+              <InfoItem label="Nationalité" value={talent.personal_info?.nationality || 'Inconnue'} />
               <InfoItem label="Équipe" value={talent.team || 'N/A'} />
               <InfoItem label="Région" value={talent.region || 'N/A'} />
               <InfoItem label="Voiture" value={talent.car || 'N/A'} />
@@ -165,7 +171,7 @@ export default function TalentDetail() {
             </h4>
             <div className="text-center">
               <div className="text-5xl font-orbitron font-black text-racing-red mb-2">
-                {(((talent.speed || 0) + (talent.crash || 0) + (talent.aggression || 0)) / 3).toFixed(1)}
+                {(((talent.stats?.speed || 0) + (talent.stats?.crash || 0) + (talent.stats?.aggression || 0)) / 3).toFixed(1)}
               </div>
               <div className="text-sm text-chrome-silver">/ 100</div>
             </div>
@@ -178,7 +184,7 @@ export default function TalentDetail() {
               <div>
                 <div className="text-sm text-chrome-silver">Nationalité</div>
                 <div className="font-orbitron font-bold text-white text-lg">
-                  {talent.nationality}
+                  {talent.personal_info?.nationality || 'Inconnue'}
                 </div>
               </div>
             </div>
@@ -207,6 +213,15 @@ export default function TalentDetail() {
 function StatBar({ label, value, icon: Icon, color }) {
   const numValue = value || 0
 
+  // Map color names to actual hex/rgb values
+  const colorMap = {
+    'racing-red': { hex: '#E31E24', rgb: '227, 30, 36' },
+    'status-success': { hex: '#00FF41', rgb: '0, 255, 65' },
+    'fluo-yellow': { hex: '#FFE500', rgb: '255, 229, 0' },
+  }
+
+  const colorInfo = colorMap[color] || colorMap['racing-red']
+
   return (
     <div>
       <div className="flex items-center justify-between mb-2">
@@ -223,9 +238,10 @@ function StatBar({ label, value, icon: Icon, color }) {
           initial={{ width: 0 }}
           animate={{ width: `${numValue}%` }}
           transition={{ duration: 1, delay: 0.3, ease: 'easeOut' }}
-          className={`absolute top-0 left-0 h-full bg-gradient-to-r from-${color} to-${color}/70 rounded-full`}
+          className="absolute top-0 left-0 h-full rounded-full"
           style={{
-            boxShadow: `0 0 10px rgba(227, 30, 36, 0.5)`,
+            background: `linear-gradient(to right, ${colorInfo.hex}, ${colorInfo.hex}B3)`,
+            boxShadow: `0 0 10px rgba(${colorInfo.rgb}, 0.5)`,
           }}
         />
       </div>

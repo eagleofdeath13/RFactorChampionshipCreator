@@ -44,6 +44,50 @@ async def list_championships():
     ]
 
 
+@router.get("/rfm/{name}")
+async def get_rfm_championship(name: str):
+    """
+    Get a specific RFM championship definition.
+
+    Args:
+        name: Name of the RFM file (without .rfm extension)
+
+    Returns:
+        Complete RFM championship definition
+
+    Raises:
+        404: RFM championship not found
+    """
+    service = get_championship_service()
+    rfm = service.get_rfm(name)
+
+    if not rfm:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"RFM Championship '{name}' not found"
+        )
+
+    # Check if this is a custom championship
+    is_custom = name.startswith('M_')
+
+    # Build RFM championship data
+    return {
+        "name": rfm.mod_name,
+        "is_custom": is_custom,
+        "is_rfm": True,
+        "type": "RFM",
+        "seasons": [
+            {
+                "name": season.name,
+                "tracks": season.scene_order,
+                "vehicle_filter": season.vehicle_filter,
+                "min_opponents": season.min_championship_opponents,
+            }
+            for season in rfm.seasons
+        ] if rfm.seasons else [],
+    }
+
+
 @router.get("/{name}")
 async def get_championship(name: str):
     """

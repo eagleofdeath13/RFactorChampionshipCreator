@@ -131,6 +131,31 @@ class ChampionshipService:
         rfm_files = find_files_by_extension(str(self.rfm_dir), '.rfm', recursive=False)
         return sorted([f.stem for f in rfm_files])
 
+    def get_rfm(self, name: str) -> Optional[RFMod]:
+        """
+        Get a complete RFM championship definition.
+
+        Args:
+            name: Name of the RFM file (without .rfm extension)
+
+        Returns:
+            RFMod object or None if not found
+        """
+        # Ensure .rfm extension
+        if not name.endswith('.rfm'):
+            name = f"{name}.rfm"
+
+        filepath = self.rfm_dir / name
+
+        if not filepath.exists():
+            return None
+
+        try:
+            parser = RFMParser(str(filepath))
+            return parser.parse()
+        except Exception:
+            return None
+
     def get_rfm_info(self, name: str) -> Optional[dict]:
         """
         Get basic info about an RFM championship.
@@ -154,8 +179,8 @@ class ChampionshipService:
             parser = RFMParser(str(filepath))
             rfm = parser.parse()
 
-            # Check if this is a custom championship (RFTOOL_)
-            is_custom = name.startswith('RFTOOL_')
+            # Check if this is a custom championship (M_)
+            is_custom = name.startswith('M_')
 
             # Count number of tracks in first season
             num_tracks = 0

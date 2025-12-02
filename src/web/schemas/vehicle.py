@@ -169,3 +169,16 @@ class VehicleManufacturerSchema(BaseModel):
                 "count": 30
             }
         }
+
+
+class VehicleUpdateSchema(BaseModel):
+    """Schema for updating a vehicle."""
+
+    driver: Optional[str] = Field(default=None, description="New driver name")
+
+    class Config:
+        json_schema_extra = {
+            "example": {
+                "driver": "John Doe"
+            }
+        }

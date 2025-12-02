@@ -151,12 +151,16 @@ class TalentListItemSchema(BaseModel):
     name: str
     nationality: str
     speed: float
+    crash: float = Field(default=50.0, ge=0.0, le=100.0)
+    aggression: float = Field(default=50.0, ge=0.0, le=100.0)
 
     class Config:
         json_schema_extra = {
             "example": {
                 "name": "Jean Dupont",
                 "nationality": "France",
-                "speed": 90.0
+                "speed": 90.0,
+                "crash": 30.0,
+                "aggression": 75.0
             }
         }

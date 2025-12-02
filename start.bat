@@ -80,7 +80,7 @@ if not exist "frontend\node_modules" (
 :: Verifier configuration
 if not exist config.json (
     echo Configuration initiale...
-    python setup_config.py
+    python scripts\setup_config.py
     if errorlevel 1 (
         echo [ERREUR] Echec de la configuration
         pause

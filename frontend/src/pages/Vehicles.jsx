@@ -20,10 +20,51 @@ export default function Vehicles() {
   })
 
   const filteredVehicles = vehicles?.filter((vehicle) =>
-    vehicle.team_info?.description?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    vehicle.display_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     vehicle.file_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.team_info?.classes?.toLowerCase().includes(searchTerm.toLowerCase())
+    vehicle.driver?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    vehicle.team?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    vehicle.classes?.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  // Group vehicles by category
+  const groupedVehicles = {}
+  filteredVehicles?.forEach((vehicle) => {
+    // Extract category from path (e.g., GAMEDATA\VEHICLES\M_TestChampionship2025 -> M_TestChampionship2025)
+    // Use both \ and / as separators (backend uses Windows paths)
+    const pathParts = vehicle.relative_path.split(/[/\\]/)
+
+    // Find the first non-empty segment (category/brand folder)
+    let category = 'Unknown'
+    if (pathParts.length > 0) {
+      // Get first segment that's not empty
+      category = pathParts.find(part => part && part.trim() !== '') || 'Unknown'
+    }
+
+    if (!groupedVehicles[category]) {
+      groupedVehicles[category] = []
+    }
+    groupedVehicles[category].push(vehicle)
+  })
+
+  // Separate custom (M_) categories from others
+  const customCategories = []
+  const regularCategories = []
+
+  Object.keys(groupedVehicles).forEach((category) => {
+    if (category.startsWith('M_')) {
+      customCategories.push(category)
+    } else {
+      regularCategories.push(category)
+    }
+  })
+
+  // Sort categories alphabetically within each group
+  customCategories.sort()
+  regularCategories.sort()
+
+  // Combine: custom categories first, then regular ones
+  const sortedCategories = [...customCategories, ...regularCategories]
 
   return (
     <div>
@@ -60,14 +101,46 @@ export default function Vehicles() {
       ) : (
         <>
           <div className="mb-4 text-chrome-silver font-rajdhani">
-            {filteredVehicles?.length || 0} véhicule(s) trouvé(s)
+            {filteredVehicles?.length || 0} véhicule(s) trouvé(s) dans {sortedCategories.length} catégorie(s)
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredVehicles?.map((vehicle, index) => (
-              <VehicleCard key={vehicle.relative_path} vehicle={vehicle} delay={index * 0.03} />
-            ))}
-          </div>
+          {/* Display categories */}
+          {sortedCategories.map((category, categoryIndex) => {
+            const isCustom = category.startsWith('M_')
+            const categoryVehicles = groupedVehicles[category]
+
+            return (
+              <motion.div
+                key={category}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: categoryIndex * 0.05 }}
+                className="mb-8"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <h2 className={`text-2xl font-orbitron font-bold ${
+                    isCustom ? 'text-fluo-yellow' : 'text-white'
+                  }`}>
+                    {category}
+                  </h2>
+                  {isCustom && (
+                    <span className="inline-block px-2 py-1 text-xs font-bold bg-fluo-yellow/20 text-fluo-yellow border border-fluo-yellow uppercase tracking-wide">
+                      Custom
+                    </span>
+                  )}
+                  <span className="text-sm font-rajdhani text-chrome-silver">
+                    • {categoryVehicles.length} véhicule(s)
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {categoryVehicles.map((vehicle, index) => (
+                    <VehicleCard key={vehicle.relative_path} vehicle={vehicle} delay={0} />
+                  ))}
+                </div>
+              </motion.div>
+            )
+          })}
         </>
       )}
     </div>
@@ -88,12 +161,12 @@ function VehicleCard({ vehicle, delay }) {
 
             <div className="flex-1 min-w-0">
               <h4 className="font-rajdhani font-bold text-white truncate">
-                {vehicle.team_info?.description || vehicle.file_name}
+                {vehicle.display_name}
               </h4>
 
-              {vehicle.team_info?.classes && (
+              {vehicle.classes && (
                 <span className="inline-block px-2 py-0.5 text-xs bg-chrome-silver/20 text-chrome-silver mt-1">
-                  {vehicle.team_info.classes}
+                  {vehicle.classes}
                 </span>
               )}
 

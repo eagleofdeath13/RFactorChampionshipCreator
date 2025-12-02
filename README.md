@@ -143,9 +143,25 @@ Le script de configuration :
 ### Lancer l'Application
 
 #### Méthode 1 : Script de Démarrage (Recommandé)
+
+**Mode Production** (avec vérifications et frontend React) :
 ```bash
 start.bat
 ```
+
+**Mode Développement** (rapide, sans vérifications) :
+```bash
+start_dev.bat
+```
+
+Le script `start.bat` vérifie automatiquement :
+- Installation de Python et Node.js
+- Dépendances Python (via uv)
+- Dépendances npm (frontend React)
+- Configuration rFactor (config.json)
+- Libération des ports (3000, 5000)
+
+Le script `start_dev.bat` lance directement les serveurs sans vérifications (plus rapide).
 
 #### Méthode 2 : Lancement Manuel
 ```bash
@@ -154,7 +170,8 @@ python -m uvicorn src.web.app:app --host 127.0.0.1 --port 5000 --reload
 
 ### Accès à l'Application
 
-- **Interface Web** : http://localhost:5000
+- **Interface Web (React)** : http://localhost:3000
+- **Backend API** : http://localhost:5000
 - **Documentation API** : http://localhost:5000/api/docs
 - **ReDoc** : http://localhost:5000/api/redoc
 

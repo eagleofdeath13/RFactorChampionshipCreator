@@ -107,7 +107,7 @@ GameData/Vehicles/
 │               ├── YEL_09.veh
 │               └── YEL_09.dds
 │
-└── RFTOOL_MyChampionship2025/      # Véhicules ISOLÉS pour le championnat
+└── M_MyChampionship2025/      # Véhicules ISOLÉS pour le championnat
     └── 2005RHEZ/                   # Structure copiée
         └── GT3/
             └── TEAM_YELLOW/
@@ -144,12 +144,15 @@ GameData/Vehicles/
 ## Système de Préfixe
 
 ### Convention de Nommage
-- **Préfixe global** : `RFTOOL_` (identifie tous les championnats créés par l'outil)
+- **Préfixe global** : `M_` (M pour Manuel - identifie tous les championnats créés par l'outil)
+  - Limite : 19 caractères max pour le nom du fichier .rfm (incluant préfixe)
+  - Avec `M_` (2 caractères), on peut avoir des noms de championnat jusqu'à 17 caractères
+  - Exemple : `M_MyLongChampName` = 18 caractères (OK)
 - **Préfixe véhicules** : 2-3 lettres générées depuis le nom du championnat (évite doublons)
 - **Catégorie unique** : Nom du championnat (utilisé pour filtrer les véhicules)
 
 Exemples :
-- Dossier : `RFTOOL_MyChampionship2025`
+- Dossier : `M_MyChampionship2025`
 - Préfixe véhicule : `MC`
 - Fichier véhicule : `MC_YEL_09.veh`
 
@@ -157,20 +160,20 @@ Exemples :
 ```
 rFactor/
 ├── rFm/
-│   └── RFTOOL_MyChampionship2025.rfm      # Définition du championnat
+│   └── M_MyChampionship2025.rfm      # Définition du championnat
 │
 ├── GameData/Vehicles/
-│   └── RFTOOL_MyChampionship2025/         # Véhicules isolés
+│   └── M_MyChampionship2025/         # Véhicules isolés
 │       └── [copies modifiées]
 │
 └── UserData/Loic/
-    └── RFTOOL_MyChampionship2025.cch      # Généré par rFactor
+    └── M_MyChampionship2025.cch      # Généré par rFactor
 ```
 
 ### Filtrage dans l'Interface
-- **Véhicules originaux** : Tous SAUF ceux dans `RFTOOL_*`
-- **Véhicules custom** : Ceux dans `RFTOOL_*`
-- **Par championnat** : Ceux dans `RFTOOL_<ChampionshipName>`
+- **Véhicules originaux** : Tous SAUF ceux dans `M_*`
+- **Véhicules custom** : Ceux dans `M_*`
+- **Par championnat** : Ceux dans `M_<ChampionshipName>`
 
 ## Phases du projet
 
@@ -213,7 +216,7 @@ rFactor/
 ### ✅ Phase 5bis : Création de Championnats Custom (COMPLÉTÉE - 28 Nov 2025)
 1. **Système de préfixe**
    - [x] Validation des noms de championnats
-   - [x] Génération du préfixe `RFTOOL_<Name>`
+   - [x] Génération du préfixe `M_<Name>`
    - [x] **Génération préfixe véhicule** (2-3 lettres, ex: "TE")
 
 2. **Isolation de véhicules**
@@ -324,7 +327,7 @@ rFactor/
 - **`.veh`** : Vehicle file - Fichier voiture
 - **`.gdb`** : Track database - Fichier circuit
 - **Isolation** : Copie de véhicules dans un dossier dédié au championnat
-- **RFTOOL_** : Préfixe pour championnats créés par l'outil
+- **M_** : Préfixe pour championnats créés par l'outil
 
 ## Historique des décisions
 
@@ -334,7 +337,9 @@ rFactor/
 - ✅ **Pydantic** : Validation robuste des données
 - ✅ **Windows-1252** : Encodage confirmé pour fichiers rFactor
 - ✅ **Isolation de véhicules** : Évite modification des originaux
-- ✅ **Système de préfixe** : `RFTOOL_` pour dossiers, préfixe court pour véhicules
+- ✅ **Système de préfixe** : `M_` pour dossiers (Manuel), préfixe court pour véhicules
+  - Changé de `RFTOOL_` (7 chars) à `M_` (2 chars) le 2 Déc 2025 pour permettre des noms plus longs
+  - Limite noms championnats : 12 chars → 17 chars
 - ✅ **Renommage véhicules** : Évite doublons détectés par rFactor (28 Nov 2025)
 
 ## Workflow de Création de Championnat
@@ -342,11 +347,12 @@ rFactor/
 ### Étape 1 : Informations de Base
 ```python
 championship_info = {
-    "name": "MyChampionship2025",          # Nom unique
+    "name": "MyChampionship2025",          # Nom unique (max 17 chars)
     "full_name": "My Custom Championship",  # Nom complet
     "description": "A custom championship",
 }
-# → Génère automatiquement "RFTOOL_MyChampionship2025"
+# → Génère automatiquement "M_MyChampionship2025" (20 chars, dépasse limite!)
+# → Mieux : "MyChamp2025" → "M_MyChamp2025" (14 chars, OK)
 ```
 
 ### Étape 2 : Sélection des Véhicules
@@ -368,7 +374,7 @@ assignments = {
 
 ### Étape 4 : Isolation des Véhicules
 Pour chaque véhicule :
-1. Copier le `.veh` + assets dans `RFTOOL_MyChampionship2025/`
+1. Copier le `.veh` + assets dans `M_MyChampionship2025/`
 2. Modifier `Classes="MyChampionship2025 GT3"`
 3. Modifier `Driver="John Doe"`
 
@@ -383,7 +389,7 @@ tracks = [
 
 ### Étape 6 : Génération du `.rfm`
 ```python
-# Créer rFactor/rFm/RFTOOL_MyChampionship2025.rfm
+# Créer rFactor/rFm/M_MyChampionship2025.rfm
 rfm = {
     "mod_name": "MyChampionship2025",
     "vehicle_filter": "MyChampionship2025",  # Filtre unique
@@ -451,7 +457,7 @@ Lorsque vous travaillez sur ce projet :
 
 1. **Toujours préserver les originaux**
    - JAMAIS modifier les fichiers dans les dossiers originaux
-   - Utiliser le système d'isolation (`RFTOOL_<Name>`)
+   - Utiliser le système d'isolation (`M_<Name>`)
 
 2. **Respecter les formats rFactor**
    - Encodage : Windows-1252
@@ -469,7 +475,7 @@ Lorsque vous travaillez sur ce projet :
    - `.rfm` = définition (créé par l'outil)
    - `.cch` = progression (créé par rFactor)
    - Ne JAMAIS créer de `.cch` manuellement
-   - Utiliser le préfixe `RFTOOL_` pour tous les championnats custom
+   - Utiliser le préfixe `M_` pour tous les championnats custom
 
 6. **Prochaines étapes**
    - **Validation in-game** : Tester le championnat généré dans rFactor

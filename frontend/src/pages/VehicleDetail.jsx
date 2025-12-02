@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Car, ArrowLeft, Wrench, Users, Palette, Info } from 'lucide-react'
+import { Car, ArrowLeft, Wrench, Users, Palette, Info, Edit } from 'lucide-react'
 import { apiEndpoints } from '../services/api'
 import PageHeader from '../components/PageHeader'
 import RacingCard from '../components/RacingCard'
@@ -51,12 +51,20 @@ export default function VehicleDetail() {
         title={vehicle.description || 'Véhicule'}
         subtitle={vehicle.classes || 'Sans catégorie'}
         actions={
-          <Link to="/vehicles">
-            <RacingButton variant="secondary">
-              <ArrowLeft className="inline-block w-4 h-4 mr-2" />
-              Retour
-            </RacingButton>
-          </Link>
+          <div className="flex gap-3">
+            <Link to={`/vehicles/${encodeURIComponent(path)}/edit`}>
+              <RacingButton variant="primary">
+                <Edit className="inline-block w-4 h-4 mr-2" />
+                Modifier
+              </RacingButton>
+            </Link>
+            <Link to="/vehicles">
+              <RacingButton variant="secondary">
+                <ArrowLeft className="inline-block w-4 h-4 mr-2" />
+                Retour
+              </RacingButton>
+            </Link>
+          </div>
         }
       />
 
@@ -85,7 +93,7 @@ export default function VehicleDetail() {
           </RacingCard>
 
           {/* Team Info */}
-          {vehicle.team && (
+          {vehicle.team_info && (
             <RacingCard className="p-6">
               <h3 className="text-xl font-orbitron font-bold text-white mb-6 flex items-center gap-2">
                 <Users className="w-6 h-6 text-status-info" />
@@ -93,12 +101,17 @@ export default function VehicleDetail() {
               </h3>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <InfoItem label="Équipe" value={vehicle.team} />
+                {vehicle.team_info.driver && (
+                  <InfoItem label="Pilote" value={vehicle.team_info.driver} />
+                )}
+                {vehicle.team_info.team && (
+                  <InfoItem label="Équipe" value={vehicle.team_info.team} />
+                )}
                 {vehicle.manufacturer && (
                   <InfoItem label="Constructeur" value={vehicle.manufacturer} />
                 )}
-                {vehicle.full_team_name && (
-                  <InfoItem label="Nom complet" value={vehicle.full_team_name} span2 />
+                {vehicle.team_info.full_team_name && (
+                  <InfoItem label="Nom complet" value={vehicle.team_info.full_team_name} span2 />
                 )}
               </div>
             </RacingCard>
@@ -212,15 +225,15 @@ export default function VehicleDetail() {
             </RacingCard>
           )}
 
-          {/* Team Card */}
-          {vehicle.team && (
+          {/* Driver Card */}
+          {vehicle.team_info?.driver && (
             <RacingCard className="p-6 border-l-4 border-status-success">
               <div className="flex items-center gap-3">
                 <Users className="w-8 h-8 text-status-success" />
                 <div>
-                  <div className="text-sm text-chrome-silver">Équipe</div>
+                  <div className="text-sm text-chrome-silver">Pilote</div>
                   <div className="font-orbitron font-bold text-white text-lg">
-                    {vehicle.team}
+                    {vehicle.team_info.driver}
                   </div>
                 </div>
               </div>

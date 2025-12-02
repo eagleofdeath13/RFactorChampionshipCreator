@@ -44,7 +44,9 @@ async def list_talents():
         TalentListItemSchema(
             name=talent.name,
             nationality=talent.personal_info.nationality,
-            speed=talent.stats.speed
+            speed=talent.stats.speed,
+            crash=talent.stats.crash,
+            aggression=talent.stats.aggression
         )
         for talent in talents
     ]
@@ -243,7 +245,9 @@ async def search_talents(q: str):
         TalentListItemSchema(
             name=talent.name,
             nationality=talent.personal_info.nationality,
-            speed=talent.stats.speed
+            speed=talent.stats.speed,
+            crash=talent.stats.crash,
+            aggression=talent.stats.aggression
         )
         for talent in talents
     ]

@@ -31,7 +31,7 @@ async def list_custom_championships():
     """
     List all custom championships created by the tool.
 
-    Returns a list of all RFTOOL_* championships.
+    Returns a list of all M_* championships.
     """
     creator = get_championship_creator()
     championships = creator.isolation_service.list_isolated_championships()
@@ -43,11 +43,11 @@ async def list_custom_championships():
     return [
         CustomChampionshipListSchema(
             name=name,
-            full_name=f"RFTOOL_{name}",
-            rfm_file=f"RFTOOL_{name}.rfm"
+            full_name=f"M_{name}",
+            rfm_file=f"M_{name}.rfm"
         )
         for name in championships
-        if (rfm_dir / f"RFTOOL_{name}.rfm").exists()
+        if (rfm_dir / f"M_{name}.rfm").exists()
     ]
 
 
@@ -57,7 +57,7 @@ async def create_custom_championship(data: CustomChampionshipCreateSchema):
     Create a new custom championship.
 
     This will:
-    1. Validate the championship name (max 12 chars for RFTOOL_ prefix)
+    1. Validate the championship name (max 17 chars for M_ prefix)
     2. Isolate selected vehicles with driver assignments
     3. Copy all technical dependencies (.tbc, .ini, .pm, .mas)
     4. Generate the RFM file with proper settings
@@ -101,7 +101,7 @@ async def create_custom_championship(data: CustomChampionshipCreateSchema):
         # Build response
         config = get_config()
         rfactor_path = Path(config.get_rfactor_path())
-        vehicles_dir = rfactor_path / "GameData" / "Vehicles" / f"RFTOOL_{data.name}"
+        vehicles_dir = rfactor_path / "GameData" / "Vehicles" / f"M_{data.name}"
 
         return CustomChampionshipCreateResponseSchema(
             message="Championship created successfully",
@@ -140,11 +140,11 @@ async def delete_custom_championship(name: str):
     Delete a custom championship.
 
     This will remove:
-    1. The RFM file (RFTOOL_{name}.rfm)
-    2. The isolated vehicles directory (RFTOOL_{name}/)
+    1. The RFM file (M_{name}.rfm)
+    2. The isolated vehicles directory (M_{name}/)
 
     Args:
-        name: Championship name (without RFTOOL_ prefix)
+        name: Championship name (without M_ prefix)
 
     Raises:
         404: Championship not found

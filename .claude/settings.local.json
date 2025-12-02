@@ -22,7 +22,20 @@
       "Bash(ping:*)",
       "Bash(npm run dev:*)",
       "Bash(start.bat)",
-      "Bash(cmd /c start.bat)"
+      "Bash(cmd /c start.bat)",
+      "Bash(cmd /c start_dev.bat)",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__take_snapshot",
+      "mcp__chrome-devtools__click",
+      "mcp__chrome-devtools__list_console_messages",
+      "mcp__chrome-devtools__get_console_message",
+      "mcp__chrome-devtools__list_network_requests",
+      "mcp__chrome-devtools__evaluate_script",
+      "mcp__chrome-devtools__navigate_page",
+      "mcp__chrome-devtools__wait_for",
+      "mcp__chrome-devtools__take_screenshot",
+      "mcp__chrome-devtools__fill",
+      "Bash(type \"C:\\Program Files (x86)\\Steam\\steamapps\\common\\rFactor\\GameData\\Vehicles\\ZR\\SRGP\\Team_Yellow\\YLO_09.veh\")"
     ],
     "deny": [],
     "ask": []

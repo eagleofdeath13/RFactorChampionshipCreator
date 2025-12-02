@@ -94,7 +94,7 @@ class VehicleIsolationService:
             raise FileNotFoundError(f"Vehicles directory not found: {self.vehicles_dir}")
 
         # Create championship prefix
-        champ_prefix = f"RFTOOL_{championship_name}"
+        champ_prefix = f"M_{championship_name}"
         champ_dir = self.vehicles_dir / champ_prefix
 
         # Create championship directory
@@ -741,7 +741,7 @@ class VehicleIsolationService:
         if not championship_name:
             raise ValueError("Championship name cannot be empty")
 
-        champ_prefix = f"RFTOOL_{championship_name}"
+        champ_prefix = f"M_{championship_name}"
         champ_dir = self.vehicles_dir / champ_prefix
 
         if champ_dir.exists():
@@ -755,16 +755,16 @@ class VehicleIsolationService:
 
     def list_isolated_championships(self) -> List[str]:
         """
-        List all isolated championships (directories starting with RFTOOL_).
+        List all isolated championships (directories starting with M_).
 
         Returns:
-            List of championship names (without RFTOOL_ prefix)
+            List of championship names (without M_ prefix)
         """
         championships = []
 
         for item in self.vehicles_dir.iterdir():
-            if item.is_dir() and item.name.startswith("RFTOOL_"):
-                champ_name = item.name.replace("RFTOOL_", "")
+            if item.is_dir() and item.name.startswith("M_"):
+                champ_name = item.name.replace("M_", "")
                 championships.append(champ_name)
 
         return championships

@@ -33,8 +33,8 @@ class CustomChampionshipCreateSchema(BaseModel):
     name: str = Field(
         ...,
         min_length=1,
-        max_length=12,  # Limit for RFTOOL_ prefix (19 - 7 = 12)
-        description="Championship name (max 12 chars for RFTOOL_ prefix compatibility)"
+        max_length=17,  # Limit for M_ prefix (19 - 2 = 17)
+        description="Championship name (max 17 chars for M_ prefix compatibility)"
     )
     full_name: Optional[str] = Field(
         None,

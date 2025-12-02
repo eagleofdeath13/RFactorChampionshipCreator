@@ -12,6 +12,7 @@ from ..schemas.vehicle import (
     VehicleConfigSchema,
     VehicleClassSchema,
     VehicleManufacturerSchema,
+    VehicleUpdateSchema,
 )
 from ...services.vehicle_service import VehicleService
 
@@ -219,3 +220,41 @@ async def reload_vehicles():
         "message": "Vehicles reloaded successfully",
         "total_vehicles": len(vehicles)
     }
+
+
+@router.put("/{file_name:path}", response_model=VehicleResponseSchema)
+async def update_vehicle(file_name: str, update_data: VehicleUpdateSchema):
+    """
+    Update a vehicle.
+
+    Parameters:
+    - file_name: Vehicle filename or relative path
+    - update_data: Fields to update (currently supports: driver)
+
+    Returns:
+        Updated vehicle data
+    """
+    service = VehicleService()
+    try:
+        # Update the vehicle
+        updated_vehicle = service.update(
+            relative_path=file_name,
+            driver=update_data.driver
+        )
+
+        return _vehicle_to_response(updated_vehicle)
+    except FileNotFoundError as e:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(e)
+        )
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=str(e)
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error updating vehicle: {str(e)}"
+        )

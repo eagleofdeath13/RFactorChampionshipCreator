@@ -9,6 +9,7 @@ from typing import Optional
 
 from ..models.vehicle import Vehicle
 from ..parsers.veh_parser import VehParser
+from ..generators.veh_generator import VehGenerator
 from ..utils.config import get_config
 
 
@@ -19,6 +20,7 @@ class VehicleService:
         """Initialize the vehicle service."""
         self.config = get_config()
         self.parser = VehParser()
+        self.generator = VehGenerator()
         self._vehicles_cache: Optional[list[Vehicle]] = None
 
     def get_vehicles_directory(self) -> Path:
@@ -240,3 +242,43 @@ class VehicleService:
     def clear_cache(self):
         """Clear the vehicles cache to force reload on next access."""
         self._vehicles_cache = None
+
+    def update(self, relative_path: str, driver: Optional[str] = None) -> Vehicle:
+        """
+        Update a vehicle file with new information.
+
+        Args:
+            relative_path: Relative path to the vehicle file from GameData/Vehicles
+            driver: New driver name (if None, keeps existing driver)
+
+        Returns:
+            Updated Vehicle object
+
+        Raises:
+            FileNotFoundError: If vehicle file not found
+            ValueError: If update fails
+        """
+        # Get the vehicle
+        vehicle = self.get_by_relative_path(relative_path)
+        if not vehicle:
+            raise FileNotFoundError(f"Vehicle not found: {relative_path}")
+
+        # Update the fields
+        if driver is not None:
+            vehicle.team_info.driver = driver
+
+        # Write the updated vehicle back to disk
+        vehicles_dir = self.get_vehicles_directory()
+        file_path = vehicles_dir / vehicle.relative_path
+
+        self.generator.write_file(vehicle, file_path)
+
+        # Clear cache to ensure fresh data on next read
+        self.clear_cache()
+
+        # Re-parse the file to ensure it was written correctly
+        updated_vehicle = self.parser.parse_file(file_path)
+        if not updated_vehicle:
+            raise ValueError(f"Failed to verify updated vehicle file: {file_path}")
+
+        return updated_vehicle

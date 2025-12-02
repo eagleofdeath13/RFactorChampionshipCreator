@@ -35,14 +35,17 @@ export const apiEndpoints = {
   championships: {
     list: () => api.get('/championships/'),
     get: (name) => api.get(`/championships/${encodeURIComponent(name)}`),
-    create: (data) => api.post('/championships/custom', data),
-    delete: (name) => api.delete(`/championships/${encodeURIComponent(name)}`),
+    getRfm: (name) => api.get(`/championships/rfm/${encodeURIComponent(name)}`),
+    listCustom: () => api.get('/championships/custom'),
+    createCustom: (data) => api.post('/championships/custom', data),
+    deleteCustom: (name) => api.delete(`/championships/custom/${encodeURIComponent(name)}`),
   },
 
   // Vehicles
   vehicles: {
     list: () => api.get('/vehicles/'),
     get: (path) => api.get(`/vehicles/${encodeURIComponent(path)}`),
+    update: (path, data) => api.put(`/vehicles/${encodeURIComponent(path)}`, data),
   },
 
   // Tracks

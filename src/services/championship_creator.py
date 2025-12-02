@@ -96,12 +96,12 @@ class ChampionshipCreator:
 
         # Validate name length for multiplayer compatibility
         # RFM filename limit: 19 characters (excluding .rfm extension)
-        rfm_filename = f"RFTOOL_{championship_name}"
+        rfm_filename = f"M_{championship_name}"
         if len(rfm_filename) > 19:
             raise ValueError(
                 f"Championship name too long: '{rfm_filename}' ({len(rfm_filename)} chars). "
                 f"Maximum allowed: 19 characters. "
-                f"Please use a shorter name (max {19 - len('RFTOOL_')} characters)."
+                f"Please use a shorter name (max {19 - len('M_')} characters)."
             )
 
         if not vehicle_assignments:
@@ -110,7 +110,7 @@ class ChampionshipCreator:
             raise ValueError("At least one track is required")
 
         # Check if championship already exists
-        rfm_filename = f"RFTOOL_{championship_name}.rfm"
+        rfm_filename = f"M_{championship_name}.rfm"
         rfm_path = self.rfm_dir / rfm_filename
         if rfm_path.exists():
             raise ValueError(f"Championship '{championship_name}' already exists at {rfm_path}")
@@ -262,7 +262,7 @@ class ChampionshipCreator:
             raise ValueError("Championship name is required")
 
         # Delete RFM file
-        rfm_filename = f"RFTOOL_{championship_name}.rfm"
+        rfm_filename = f"M_{championship_name}.rfm"
         rfm_path = self.rfm_dir / rfm_filename
 
         rfm_deleted = False
@@ -297,8 +297,8 @@ class ChampionshipCreator:
 
         # List RFM files
         if self.rfm_dir.exists():
-            for rfm_file in self.rfm_dir.glob("RFTOOL_*.rfm"):
-                champ_name = rfm_file.stem.replace("RFTOOL_", "")
+            for rfm_file in self.rfm_dir.glob("M_*.rfm"):
+                champ_name = rfm_file.stem.replace("M_", "")
                 championships.append(champ_name)
 
         return championships

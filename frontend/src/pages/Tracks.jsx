@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Flag, Search, MapPin } from 'lucide-react'
 import { useState } from 'react'
@@ -23,6 +24,19 @@ export default function Tracks() {
     track.venue_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     track.file_name?.toLowerCase().includes(searchTerm.toLowerCase())
   )
+
+  // Group tracks by venue
+  const groupedTracks = {}
+  filteredTracks?.forEach((track) => {
+    const venue = track.venue_name || 'Autres circuits'
+    if (!groupedTracks[venue]) {
+      groupedTracks[venue] = []
+    }
+    groupedTracks[venue].push(track)
+  })
+
+  // Sort venues alphabetically
+  const sortedVenues = Object.keys(groupedTracks).sort()
 
   return (
     <div>
@@ -58,15 +72,33 @@ export default function Tracks() {
         </RacingCard>
       ) : (
         <>
-          <div className="mb-4 text-chrome-silver font-rajdhani">
-            {filteredTracks?.length || 0} circuit(s) trouvé(s)
+          <div className="mb-6 text-chrome-silver font-rajdhani">
+            {filteredTracks?.length || 0} circuit(s) trouvé(s) • {sortedVenues.length} localisation(s)
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {filteredTracks?.map((track, index) => (
-              <TrackCard key={track.file_name} track={track} delay={index * 0.03} />
-            ))}
-          </div>
+          {/* Grouped by venue */}
+          {sortedVenues.map((venue, venueIndex) => (
+            <div key={venue} className="mb-8">
+              <motion.h2
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: venueIndex * 0.05 }}
+                className="text-xl font-orbitron font-bold text-white mb-4 flex items-center gap-3"
+              >
+                <MapPin className="w-5 h-5 text-fluo-green" />
+                {venue}
+                <span className="text-sm font-rajdhani text-chrome-silver">
+                  • {groupedTracks[venue].length} tracé(s)
+                </span>
+              </motion.h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {groupedTracks[venue].map((track, index) => (
+                  <TrackCard key={track.file_name} track={track} delay={(venueIndex * 0.1) + (index * 0.03)} />
+                ))}
+              </div>
+            </div>
+          ))}
         </>
       )}
     </div>
@@ -80,30 +112,36 @@ function TrackCard({ track, delay }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay, duration: 0.4 }}
     >
-      <RacingCard className="p-4 border-l-4 border-status-danger">
-        <div className="flex items-start gap-3">
-          <Flag className="w-8 h-8 text-status-danger flex-shrink-0" />
+      <Link to={`/tracks/${encodeURIComponent(track.relative_path)}`}>
+        <RacingCard className="p-4 border-l-4 border-status-danger hover:border-racing-red hover:bg-carbon-gray/30 transition-all cursor-pointer">
+          <div className="flex items-start gap-3">
+            <Flag className="w-8 h-8 text-status-danger flex-shrink-0" />
 
-          <div className="flex-1">
-            <h4 className="font-orbitron font-bold text-white">
-              {track.display_name}
-            </h4>
+            <div className="flex-1">
+              <h4 className="font-orbitron font-bold text-white group-hover:text-racing-red">
+                {track.display_name}
+              </h4>
 
-            {track.venue_name && (
-              <div className="flex items-center gap-1 mt-1 text-sm text-chrome-silver">
-                <MapPin className="w-3 h-3" />
-                {track.venue_name}
+              {track.venue_name && (
+                <div className="flex items-center gap-1 mt-1 text-sm text-chrome-silver">
+                  <MapPin className="w-3 h-3" />
+                  {track.venue_name}
+                </div>
+              )}
+
+              {track.layout && (
+                <div className="text-xs text-fluo-yellow mt-1">
+                  {track.layout}
+                </div>
+              )}
+
+              <div className="text-xs text-racing-red mt-2 font-bold">
+                Voir les détails →
               </div>
-            )}
-
-            {track.layout && (
-              <div className="text-xs text-fluo-yellow mt-1">
-                {track.layout}
-              </div>
-            )}
+            </div>
           </div>
-        </div>
-      </RacingCard>
+        </RacingCard>
+      </Link>
     </motion.div>
   )
 }

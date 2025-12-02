@@ -75,7 +75,7 @@ class ChampionshipInfoSchema(BaseModel):
     player_points: int
     type: Optional[str] = None  # 'RFM' or 'CCH'
     is_rfm: Optional[bool] = False  # True if this is an RFM file (championship definition)
-    is_custom: Optional[bool] = False  # True if this is a custom RFTOOL_ championship
+    is_custom: Optional[bool] = False  # True if this is a custom M_ championship
     num_tracks: Optional[int] = None  # Number of tracks in the championship
 
     class Config:
