@@ -61,8 +61,8 @@ dmypy.json
 .env.local
 
 # Distribution / packaging
-*.exe
-*.spec
+# Keep .spec file for PyInstaller config
+# *.spec removed to keep rfactor_app.spec in repo
 
 # Logs
 *.log
@@ -97,3 +97,19 @@ instance/
 *.db
 *.sqlite
 *.sqlite3
+
+# Node / Frontend
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+frontend/dist/
+frontend/.vite/
+
+# PyInstaller
+*.exe
+build/
+dist/
+
+# Lock files (keep uv.lock)
+package-lock.json

@@ -35,7 +35,8 @@
       "mcp__chrome-devtools__wait_for",
       "mcp__chrome-devtools__take_screenshot",
       "mcp__chrome-devtools__fill",
-      "Bash(type \"C:\\Program Files (x86)\\Steam\\steamapps\\common\\rFactor\\GameData\\Vehicles\\ZR\\SRGP\\Team_Yellow\\YLO_09.veh\")"
+      "Bash(type \"C:\\Program Files (x86)\\Steam\\steamapps\\common\\rFactor\\GameData\\Vehicles\\ZR\\SRGP\\Team_Yellow\\YLO_09.veh\")",
+      "Bash(uv run pyinstaller:*)"
     ],
     "deny": [],
     "ask": []

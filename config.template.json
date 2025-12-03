@@ -1,0 +1,6 @@
+{
+  "rfactor_path": "C:/Program Files (x86)/Steam/steamapps/common/rFactor",
+  "_comment": "Replace the path above with your actual rFactor installation directory",
+  "_example_windows": "C:/Program Files (x86)/Steam/steamapps/common/rFactor",
+  "_example_custom": "D:/Games/rFactor"
+}
