@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Car, Search } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Car, Search, SlidersHorizontal, X } from 'lucide-react'
 import { useState } from 'react'
 import { apiEndpoints } from '../services/api'
 import PageHeader from '../components/PageHeader'
@@ -10,34 +10,54 @@ import LoadingSpinner from '../components/LoadingSpinner'
 
 export default function Vehicles() {
   const [searchTerm, setSearchTerm] = useState('')
+  const [showAdvanced, setShowAdvanced] = useState(false)
+  const [filters, setFilters] = useState({
+    searchDriver: true,
+    searchTeam: true,
+    searchDescription: true,
+  })
 
   const { data: vehicles, isLoading, error } = useQuery({
-    queryKey: ['vehicles'],
+    queryKey: ['vehicles', searchTerm, filters],
     queryFn: async () => {
-      const response = await apiEndpoints.vehicles.list()
-      return response.data
+      if (searchTerm) {
+        // Use advanced search API
+        const params = new URLSearchParams()
+        params.append('search', searchTerm)
+        params.append('search_driver', filters.searchDriver)
+        params.append('search_team', filters.searchTeam)
+        params.append('search_description', filters.searchDescription)
+
+        const response = await fetch(`/api/vehicles/?${params.toString()}`)
+        if (!response.ok) throw new Error('Search failed')
+        return response.json()
+      } else {
+        // Regular list
+        const response = await apiEndpoints.vehicles.list()
+        return response.data
+      }
     },
   })
 
-  const filteredVehicles = vehicles?.filter((vehicle) =>
-    vehicle.display_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.file_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.driver?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.team?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    vehicle.classes?.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const handleFilterChange = (name, value) => {
+    setFilters((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const clearFilters = () => {
+    setSearchTerm('')
+    setFilters({
+      searchDriver: true,
+      searchTeam: true,
+      searchDescription: true,
+    })
+  }
 
   // Group vehicles by category
   const groupedVehicles = {}
-  filteredVehicles?.forEach((vehicle) => {
-    // Extract category from path (e.g., GAMEDATA\VEHICLES\M_TestChampionship2025 -> M_TestChampionship2025)
-    // Use both \ and / as separators (backend uses Windows paths)
+  vehicles?.forEach((vehicle) => {
     const pathParts = vehicle.relative_path.split(/[/\\]/)
-
-    // Find the first non-empty segment (category/brand folder)
     let category = 'Unknown'
     if (pathParts.length > 0) {
-      // Get first segment that's not empty
       category = pathParts.find(part => part && part.trim() !== '') || 'Unknown'
     }
 
@@ -59,11 +79,8 @@ export default function Vehicles() {
     }
   })
 
-  // Sort categories alphabetically within each group
   customCategories.sort()
   regularCategories.sort()
-
-  // Combine: custom categories first, then regular ones
   const sortedCategories = [...customCategories, ...regularCategories]
 
   return (
@@ -80,16 +97,87 @@ export default function Vehicles() {
         transition={{ delay: 0.2 }}
         className="mb-6"
       >
-        <div className="relative">
+        <div className="relative mb-4">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-chrome-silver" />
           <input
             type="text"
             placeholder="Rechercher un véhicule..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="racing-input w-full pl-12"
+            className="racing-input w-full pl-12 pr-12"
           />
+          <button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className={`absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded transition-colors ${
+              showAdvanced
+                ? 'text-racing-cyan bg-racing-cyan/10'
+                : 'text-chrome-silver hover:text-racing-cyan'
+            }`}
+            title="Filtres avancés"
+          >
+            <SlidersHorizontal className="w-5 h-5" />
+          </button>
         </div>
+
+        {/* Advanced Filters */}
+        <AnimatePresence>
+          {showAdvanced && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <RacingCard className="p-6 mb-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h4 className="font-orbitron font-bold text-racing-cyan">Filtres de recherche</h4>
+                  <button
+                    onClick={clearFilters}
+                    className="text-sm text-chrome-silver hover:text-status-danger transition-colors flex items-center gap-2"
+                  >
+                    <X className="w-4 h-4" />
+                    Réinitialiser
+                  </button>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-bold text-chrome-silver mb-2">
+                    Rechercher dans :
+                  </label>
+                  <div className="flex flex-wrap gap-4">
+                    <label className="flex items-center gap-2 text-sm text-chrome-silver cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={filters.searchDriver}
+                        onChange={(e) => handleFilterChange('searchDriver', e.target.checked)}
+                        className="rounded border-racing-cyan/30 bg-dark-secondary text-racing-cyan focus:ring-racing-cyan"
+                      />
+                      Pilote
+                    </label>
+                    <label className="flex items-center gap-2 text-sm text-chrome-silver cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={filters.searchTeam}
+                        onChange={(e) => handleFilterChange('searchTeam', e.target.checked)}
+                        className="rounded border-racing-cyan/30 bg-dark-secondary text-racing-cyan focus:ring-racing-cyan"
+                      />
+                      Équipe
+                    </label>
+                    <label className="flex items-center gap-2 text-sm text-chrome-silver cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={filters.searchDescription}
+                        onChange={(e) => handleFilterChange('searchDescription', e.target.checked)}
+                        className="rounded border-racing-cyan/30 bg-dark-secondary text-racing-cyan focus:ring-racing-cyan"
+                      />
+                      Description
+                    </label>
+                  </div>
+                </div>
+              </RacingCard>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.div>
 
       {isLoading ? (
@@ -101,7 +189,7 @@ export default function Vehicles() {
       ) : (
         <>
           <div className="mb-4 text-chrome-silver font-rajdhani">
-            {filteredVehicles?.length || 0} véhicule(s) trouvé(s) dans {sortedCategories.length} catégorie(s)
+            {vehicles?.length || 0} véhicule(s) trouvé(s) dans {sortedCategories.length} catégorie(s)
           </div>
 
           {/* Display categories */}
@@ -118,24 +206,28 @@ export default function Vehicles() {
                 className="mb-8"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <h2 className={`text-2xl font-orbitron font-bold ${
-                    isCustom ? 'text-fluo-yellow' : 'text-white'
-                  }`}>
+                  <h3 className={`font-orbitron font-bold text-xl ${isCustom ? 'text-fluo-yellow' : 'text-racing-cyan'}`}>
+                    {isCustom && <span className="text-sm mr-2">🏆</span>}
                     {category}
-                  </h2>
+                    <span className="ml-2 text-sm text-chrome-silver font-rajdhani">
+                      ({categoryVehicles.length})
+                    </span>
+                  </h3>
                   {isCustom && (
-                    <span className="inline-block px-2 py-1 text-xs font-bold bg-fluo-yellow/20 text-fluo-yellow border border-fluo-yellow uppercase tracking-wide">
-                      Custom
+                    <span className="text-xs px-2 py-1 bg-fluo-yellow/10 border border-fluo-yellow/30 rounded text-fluo-yellow">
+                      Championnat Custom
                     </span>
                   )}
-                  <span className="text-sm font-rajdhani text-chrome-silver">
-                    • {categoryVehicles.length} véhicule(s)
-                  </span>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   {categoryVehicles.map((vehicle, index) => (
-                    <VehicleCard key={vehicle.relative_path} vehicle={vehicle} delay={0} />
+                    <VehicleCard
+                      key={`${vehicle.file_path}-${index}`}
+                      vehicle={vehicle}
+                      delay={index * 0.02}
+                      isCustom={isCustom}
+                    />
                   ))}
                 </div>
               </motion.div>
@@ -147,39 +239,44 @@ export default function Vehicles() {
   )
 }
 
-function VehicleCard({ vehicle, delay }) {
+function VehicleCard({ vehicle, delay, isCustom }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.4 }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay, duration: 0.3 }}
     >
-      <Link to={`/vehicles/${encodeURIComponent(vehicle.relative_path)}`}>
-        <RacingCard className="p-4 border-l-4 border-fluo-yellow hover:border-racing-red transition-colors cursor-pointer">
-          <div className="flex items-start gap-3">
-            <Car className="w-8 h-8 text-fluo-yellow flex-shrink-0" />
-
-            <div className="flex-1 min-w-0">
-              <h4 className="font-rajdhani font-bold text-white truncate">
-                {vehicle.display_name}
-              </h4>
-
-              {vehicle.classes && (
-                <span className="inline-block px-2 py-0.5 text-xs bg-chrome-silver/20 text-chrome-silver mt-1">
-                  {vehicle.classes}
-                </span>
-              )}
-
-              <p className="text-xs text-chrome-silver/60 mt-2 truncate">
-                {vehicle.relative_path}
+      <Link to={`/vehicles/${encodeURIComponent(vehicle.file_path)}`}>
+        <RacingCard
+          className={`p-4 border-l-4 hover:border-l-8 transition-all ${
+            isCustom ? 'border-fluo-yellow' : 'border-status-info'
+          }`}
+        >
+          <div className="mb-2">
+            <h4 className="font-orbitron font-bold text-white truncate">
+              {vehicle.display_name || vehicle.file_name}
+            </h4>
+            {vehicle.driver && (
+              <p className="text-sm text-chrome-silver">
+                <span className="text-racing-cyan">Pilote:</span> {vehicle.driver}
               </p>
-            </div>
+            )}
+            {vehicle.team && (
+              <p className="text-sm text-chrome-silver truncate">
+                <span className="text-racing-cyan">Équipe:</span> {vehicle.team}
+              </p>
+            )}
           </div>
 
-          <div className="mt-3 pt-3 border-t border-white/10">
-            <span className="text-xs text-chrome-silver">
-              Cliquez pour plus de détails →
-            </span>
+          {vehicle.classes && (
+            <div className="mt-2 pt-2 border-t border-white/10">
+              <span className="text-xs text-chrome-silver/70">Classes: </span>
+              <span className="text-xs text-status-info">{vehicle.classes}</span>
+            </div>
+          )}
+
+          <div className="mt-2 text-xs text-chrome-silver/50 truncate">
+            {vehicle.file_name}
           </div>
         </RacingCard>
       </Link>

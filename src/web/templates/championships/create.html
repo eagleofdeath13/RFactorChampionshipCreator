@@ -68,7 +68,10 @@
                                placeholder="Test Championship 2025">
                         <div class="form-text">Optionnel. Sera utilisé comme nom affiché dans rFactor.</div>
                     </div>
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-danger" onclick="clearDraftWithConfirmation()">
+                            <i class="bi bi-x-circle"></i> Abandonner
+                        </button>
                         <button type="button" class="btn btn-primary" onclick="nextStep()">
                             Suivant <i class="bi bi-arrow-right"></i>
                         </button>
@@ -99,9 +102,14 @@
                     <strong>0</strong> véhicule(s) sélectionné(s)
                 </div>
                 <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                        <i class="bi bi-arrow-left"></i> Précédent
-                    </button>
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="bi bi-arrow-left"></i> Précédent
+                        </button>
+                        <button type="button" class="btn btn-outline-danger ms-2" onclick="clearDraftWithConfirmation()">
+                            <i class="bi bi-x-circle"></i> Abandonner
+                        </button>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="nextStep()" id="btn-step-2">
                         Suivant <i class="bi bi-arrow-right"></i>
                     </button>
@@ -122,9 +130,14 @@
                     <!-- Will be populated dynamically -->
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                        <i class="bi bi-arrow-left"></i> Précédent
-                    </button>
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="bi bi-arrow-left"></i> Précédent
+                        </button>
+                        <button type="button" class="btn btn-outline-danger ms-2" onclick="clearDraftWithConfirmation()">
+                            <i class="bi bi-x-circle"></i> Abandonner
+                        </button>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="nextStep()">
                         Suivant <i class="bi bi-arrow-right"></i>
                     </button>
@@ -165,9 +178,14 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                    <button type="button" class="btn btn-secondary" onclick="prevStep()">
-                        <i class="bi bi-arrow-left"></i> Précédent
-                    </button>
+                    <div>
+                        <button type="button" class="btn btn-secondary" onclick="prevStep()">
+                            <i class="bi bi-arrow-left"></i> Précédent
+                        </button>
+                        <button type="button" class="btn btn-outline-danger ms-2" onclick="clearDraftWithConfirmation()">
+                            <i class="bi bi-x-circle"></i> Abandonner
+                        </button>
+                    </div>
                     <button type="button" class="btn btn-primary" onclick="nextStep()" id="btn-step-4">
                         Suivant <i class="bi bi-arrow-right"></i>
                     </button>
@@ -330,6 +348,9 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<!-- Championship Session Manager -->
+<script src="/static/js/championship-session.js"></script>
+
 <script>
 let currentStep = 1;
 const championshipData = {
@@ -357,6 +378,9 @@ function escapeHtml(text) {
 
 // Load vehicles and tracks on page load
 document.addEventListener('DOMContentLoaded', async () => {
+    // Check for existing draft
+    checkForDraft();
+
     await loadVehicles();
     await loadTracks();
 });
@@ -498,6 +522,9 @@ function nextStep() {
     // Save current step data
     saveStepData(currentStep);
 
+    // Save to session
+    window.championshipSession.goToStep(currentStep + 1);
+
     // Hide current step
     document.getElementById(`step-${currentStep}`).classList.add('d-none');
     document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('active');
@@ -519,6 +546,10 @@ function prevStep() {
 
     // Show previous step
     currentStep--;
+
+    // Save to session
+    window.championshipSession.goToStep(currentStep);
+
     document.getElementById(`step-${currentStep}`).classList.remove('d-none');
     document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
     document.querySelector(`.step[data-step="${currentStep}"]`).classList.remove('completed');
@@ -566,9 +597,16 @@ function saveStepData(step) {
         case 1:
             championshipData.name = document.getElementById('championship-name').value;
             championshipData.full_name = document.getElementById('championship-full-name').value || championshipData.name;
+
+            // Save to session manager
+            window.championshipSession.setName(championshipData.name);
+            window.championshipSession.setFullName(championshipData.full_name);
             break;
         case 2:
-            // Vehicle assignments will be created in step 3
+            // Save selected vehicles
+            const selectedVehicles = Array.from(document.querySelectorAll('.vehicle-item.selected'))
+                .map(el => allVehicles[el.dataset.index]);
+            window.championshipSession.setSelectedVehicles(selectedVehicles);
             break;
         case 3:
             championshipData.vehicle_assignments = Array.from(document.querySelectorAll('.driver-assignment')).map(el => {
@@ -579,10 +617,20 @@ function saveStepData(step) {
                     driver_name: el.querySelector('.driver-input').value
                 };
             });
+
+            // Save to session manager
+            const assignments = {};
+            championshipData.vehicle_assignments.forEach(a => {
+                assignments[a.vehicle_path] = a.driver_name;
+            });
+            window.championshipSession.setVehicleDriverAssignments(assignments);
             break;
         case 4:
             championshipData.tracks = Array.from(document.querySelectorAll('#selected-tracks-list [data-name]'))
                 .map(el => el.dataset.name);
+
+            // Save to session manager
+            window.championshipSession.setSelectedTracks(championshipData.tracks);
             break;
     }
 }
@@ -674,6 +722,10 @@ async function createChampionship() {
 
     try {
         const response = await APIClient.post('/api/championships/custom', championshipData);
+
+        // Clear draft on success
+        window.championshipSession.clear();
+
         ToastNotification.success('Championnat créé avec succès !');
         setTimeout(() => {
             window.location.href = '/championships';

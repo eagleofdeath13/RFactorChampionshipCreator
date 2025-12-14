@@ -15,7 +15,7 @@ rFactor Championship Creator est une application web Python qui permet de créer
 
 ## Statut du Projet
 
-**Version Actuelle** : 1.0.0 (28 Novembre 2025) 🎉
+**Version Actuelle** : 1.3.3 (14 Décembre 2025) 🎉
 
 ### ✅ Fonctionnalités Complètes
 
@@ -255,5 +255,5 @@ Loïc
 
 ---
 
-**Version** : 1.0.0 (28 Novembre 2025)
+**Version** : 1.3.3 (14 Décembre 2025)
 **Statut** : ✅ Version complète fonctionnelle | 68 tests passants | 20+ endpoints API | 15+ pages web

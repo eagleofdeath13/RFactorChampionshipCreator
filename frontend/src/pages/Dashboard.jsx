@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Users,
   Trophy,
@@ -13,11 +13,45 @@ import {
   Zap,
   CheckCircle2,
   Info,
+  Play,
+  Trash2,
+  AlertCircle,
+  Clock,
 } from 'lucide-react'
 import { apiEndpoints } from '../services/api'
 import { useState, useEffect } from 'react'
 
+const SESSION_KEY = 'championship_create_session'
+
 export default function Dashboard() {
+  const [savedSession, setSavedSession] = useState(null)
+
+  // Check for saved championship creation session
+  useEffect(() => {
+    const checkSession = () => {
+      const sessionData = localStorage.getItem(SESSION_KEY)
+      if (sessionData) {
+        try {
+          setSavedSession(JSON.parse(sessionData))
+        } catch (error) {
+          console.error('Error parsing session:', error)
+          localStorage.removeItem(SESSION_KEY)
+        }
+      }
+    }
+
+    checkSession()
+
+    // Re-check every 5 seconds in case session is cleared elsewhere
+    const interval = setInterval(checkSession, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  const clearSession = () => {
+    localStorage.removeItem(SESSION_KEY)
+    setSavedSession(null)
+  }
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -37,6 +71,9 @@ export default function Dashboard() {
           className="h-1 bg-gradient-racing shadow-racing-glow"
         />
       </motion.div>
+
+      {/* Resume Championship Widget */}
+      <ResumeChampionshipWidget session={savedSession} onClearSession={clearSession} />
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -350,6 +387,126 @@ function SystemStatus({ delay }) {
         </div>
       </div>
     </motion.div>
+  )
+}
+
+function ResumeChampionshipWidget({ session, onClearSession }) {
+  const navigate = useNavigate()
+
+  if (!session) return null
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return 'Date inconnue'
+    const date = new Date(timestamp)
+    const now = new Date()
+    const diffMs = now - date
+    const diffMins = Math.floor(diffMs / 60000)
+    const diffHours = Math.floor(diffMins / 60)
+    const diffDays = Math.floor(diffHours / 24)
+
+    if (diffMins < 1) return 'À l\'instant'
+    if (diffMins < 60) return `Il y a ${diffMins} min`
+    if (diffHours < 24) return `Il y a ${diffHours}h`
+    if (diffDays === 1) return 'Hier'
+    if (diffDays < 7) return `Il y a ${diffDays} jours`
+
+    return date.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' })
+  }
+
+  const getStepInfo = (stepIndex) => {
+    const steps = ['Informations', 'Véhicules', 'Pilotes', 'Circuits', 'Récapitulatif']
+    return steps[stepIndex] || 'Étape inconnue'
+  }
+
+  const handleResume = () => {
+    navigate('/championships/create')
+  }
+
+  const handleClear = () => {
+    const confirmed = window.confirm(
+      '⚠️ Êtes-vous sûr de vouloir supprimer la session sauvegardée ?\n\nToutes les données de création seront perdues.'
+    )
+    if (confirmed) {
+      onClearSession()
+    }
+  }
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.5 }}
+        className="racing-card border-l-4 border-l-racing-red bg-gradient-to-r from-racing-red/10 to-transparent"
+      >
+        <div className="p-6">
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex items-start gap-4 flex-1">
+              <div className="w-12 h-12 bg-racing-red rounded-full flex items-center justify-center flex-shrink-0">
+                <AlertCircle className="w-6 h-6 text-white" />
+              </div>
+
+              <div className="flex-1">
+                <h3 className="font-orbitron font-bold text-xl text-white mb-2 flex items-center gap-2">
+                  Création de championnat en cours
+                </h3>
+
+                <div className="space-y-2 mb-4">
+                  <p className="text-chrome-silver">
+                    Vous avez une création de championnat non terminée
+                    {session.formData?.name && (
+                      <span className="text-white font-bold ml-1">
+                        "{session.formData.name}"
+                      </span>
+                    )}
+                  </p>
+
+                  <div className="flex items-center gap-4 text-sm">
+                    <div className="flex items-center gap-2 text-chrome-silver">
+                      <Clock className="w-4 h-4" />
+                      {formatTimestamp(session.timestamp)}
+                    </div>
+                    {session.currentStep !== undefined && (
+                      <div className="text-status-info font-bold">
+                        Étape: {getStepInfo(session.currentStep)}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex items-center gap-3 text-xs text-chrome-silver/70">
+                    {session.selectedVehicles?.length > 0 && (
+                      <span>• {session.selectedVehicles.length} véhicule(s)</span>
+                    )}
+                    {session.selectedTracks?.length > 0 && (
+                      <span>• {session.selectedTracks.length} circuit(s)</span>
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={handleResume}
+                    className="flex items-center gap-2 px-4 py-2 bg-racing-red text-white font-orbitron font-bold text-sm hover:bg-racing-red/90 transition-colors rounded"
+                  >
+                    <Play className="w-4 h-4" />
+                    Reprendre la création
+                  </button>
+
+                  <button
+                    onClick={handleClear}
+                    className="flex items-center gap-2 px-4 py-2 bg-transparent border border-status-danger text-status-danger font-orbitron font-bold text-sm hover:bg-status-danger/10 transition-colors rounded"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   )
 }
 

@@ -84,6 +84,35 @@ class TrackService:
 
         return track
 
-    def search(self, query: str, force_reload: bool = False) -> list[Track]:
+    def search(
+        self,
+        query: str,
+        search_track_name: bool = True,
+        search_venue_name: bool = True,
+        search_layout: bool = True,
+        search_file_name: bool = True,
+        force_reload: bool = False
+    ) -> list[Track]:
+        """
+        Search tracks with configurable field selection.
+
+        Args:
+            query: Search query string
+            search_track_name: Search in track name field
+            search_venue_name: Search in venue name field
+            search_layout: Search in layout field
+            search_file_name: Search in file name field
+            force_reload: Force reload from disk
+
+        Returns:
+            List of matching tracks
+        """
         tracks = self.list_all(force_reload)
-        return self.parser.search(tracks, query)
+        return self.parser.search(
+            tracks,
+            query,
+            search_track_name=search_track_name,
+            search_venue_name=search_venue_name,
+            search_layout=search_layout,
+            search_file_name=search_file_name
+        )

@@ -1,5 +1,36 @@
 # Guide des Scripts de Démarrage
 
+## 🎯 Gestion des Versions
+
+### Version Centralisée
+
+Le numéro de version est maintenant centralisé dans un seul fichier :
+- **Source unique** : `src/__version__.py`
+- Tous les autres fichiers sont automatiquement synchronisés
+
+### Changer la Version
+
+Pour changer le numéro de version de l'application :
+
+1. **Modifier uniquement** `src/__version__.py` :
+   ```python
+   __version__ = "1.4.0"  # Nouvelle version
+   ```
+
+2. **Synchroniser** tous les fichiers :
+   ```bash
+   uv run python scripts/sync_version.py
+   ```
+
+3. **Mettre à jour** le CHANGELOG.md manuellement avec les nouveautés
+
+4. **Créer la distribution** - la version sera automatiquement à jour !
+
+**Note** : Les scripts de build (`build_executable.bat`, `create_distribution.bat`, `quick_build.bat`)
+appellent automatiquement `sync_version.py` avant chaque build pour garantir la cohérence.
+
+---
+
 ## 📍 Emplacement des Scripts
 
 Les scripts de démarrage sont situés à **deux endroits** :
@@ -191,5 +222,5 @@ npm run dev
 
 ---
 
-**Version** : 1.0.0
-**Date** : 2 Décembre 2025
+**Version** : 1.3.3
+**Date** : 14 Décembre 2025

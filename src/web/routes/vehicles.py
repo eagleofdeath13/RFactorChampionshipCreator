@@ -57,15 +57,21 @@ async def list_vehicles(
     vehicle_class: Optional[str] = Query(None, description="Filter by vehicle class"),
     manufacturer: Optional[str] = Query(None, description="Filter by manufacturer"),
     search: Optional[str] = Query(None, description="Search query"),
+    search_driver: bool = Query(True, description="Search in driver name"),
+    search_team: bool = Query(True, description="Search in team name"),
+    search_description: bool = Query(True, description="Search in description"),
     reload: bool = Query(False, description="Force reload from disk"),
 ):
     """
-    List all vehicles.
+    List all vehicles with advanced search options.
 
     Query parameters:
     - vehicle_class: Filter by vehicle class (e.g., "SRGP")
     - manufacturer: Filter by manufacturer
-    - search: Search in driver name, team name, and description
+    - search: Search query (searches in selected fields)
+    - search_driver: Include driver name in search (default: true)
+    - search_team: Include team name in search (default: true)
+    - search_description: Include description in search (default: true)
     - reload: Force reload from disk (default: false, uses cache)
     """
     service = VehicleService()
@@ -77,7 +83,13 @@ async def list_vehicles(
         elif manufacturer:
             vehicles = service.filter_by_manufacturer(manufacturer, force_reload=reload)
         elif search:
-            vehicles = service.search(search, force_reload=reload)
+            vehicles = service.search(
+                search,
+                search_driver=search_driver,
+                search_team=search_team,
+                search_description=search_description,
+                force_reload=reload
+            )
         else:
             vehicles = service.list_all(force_reload=reload)
 

@@ -41,13 +41,17 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="nationality" class="form-label">Nationalité *</label>
-                            <input type="text" class="form-control" id="nationality" name="nationality" required>
+                            <input type="text" class="form-control" id="nationality" name="nationality"
+                                   list="nationalities-list" placeholder="Ex: American, British, French..." required>
+                            <datalist id="nationalities-list">
+                                <!-- Options loaded dynamically -->
+                            </datalist>
+                            <div class="form-text">Choisissez ou tapez une nationalité</div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="date_of_birth" class="form-label">Date de naissance *</label>
-                            <input type="text" class="form-control" id="date_of_birth" name="date_of_birth"
-                                   pattern="\d{1,2}-\d{1,2}-\d{4}" placeholder="DD-MM-YYYY" required>
-                            <div class="form-text">Format: JJ-MM-AAAA (ex: 15-3-1990)</div>
+                            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+                            <div class="form-text">Sélectionnez une date</div>
                         </div>
                     </div>
                     <div class="row">
@@ -73,8 +77,11 @@
 
             <!-- Statistiques de course -->
             <div class="card mb-3">
-                <div class="card-header bg-success text-white">
+                <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
                     <h5 class="mb-0"><i class="bi bi-speedometer2"></i> Statistiques de course</h5>
+                    <button type="button" class="btn btn-light btn-sm" id="regenerate-btn" title="Régénérer les valeurs aléatoires">
+                        <i class="bi bi-dice-5"></i> Régénérer
+                    </button>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -152,6 +159,48 @@
 const mode = "{{ mode }}";
 const talentName = "{{ talent_name if mode == 'edit' else '' }}";
 
+// Date conversion functions
+// rFactor format: DD-MM-YYYY or D-M-YYYY
+// HTML5 date input format: YYYY-MM-DD
+function rfactorDateToISO(rfactorDate) {
+    // Input: "15-3-1990" or "15-03-1990"
+    // Output: "1990-03-15"
+    const parts = rfactorDate.split('-');
+    if (parts.length !== 3) return '';
+
+    const day = parts[0].padStart(2, '0');
+    const month = parts[1].padStart(2, '0');
+    const year = parts[2];
+
+    return `${year}-${month}-${day}`;
+}
+
+function isoDateToRFactor(isoDate) {
+    // Input: "1990-03-15"
+    // Output: "15-3-1990"
+    const parts = isoDate.split('-');
+    if (parts.length !== 3) return '';
+
+    const year = parts[0];
+    const month = parseInt(parts[1], 10); // Remove leading zero
+    const day = parseInt(parts[2], 10);   // Remove leading zero
+
+    return `${day}-${month}-${year}`;
+}
+
+// Load nationalities for datalist
+async function loadNationalities() {
+    try {
+        const nationalities = await APIClient.get('/api/talents/nationalities/');
+        const datalist = document.getElementById('nationalities-list');
+        datalist.innerHTML = nationalities.map(nat =>
+            `<option value="${nat}">`
+        ).join('');
+    } catch (error) {
+        console.error('Failed to load nationalities:', error);
+    }
+}
+
 // Update range values display
 const ranges = ['speed', 'aggression', 'reputation', 'courtesy', 'composure', 'crash', 'recovery', 'completed_laps', 'min_racing_skill'];
 ranges.forEach(name => {
@@ -162,7 +211,57 @@ ranges.forEach(name => {
     });
 });
 
-// Load talent data if editing
+// Function to load random stats
+async function loadRandomStats() {
+    try {
+        const data = await APIClient.get('/api/talents/random-stats/');
+
+        // Fill personal info
+        document.getElementById('nationality').value = data.personal_info.nationality;
+        // Convert rFactor date format to ISO for date input
+        document.getElementById('date_of_birth').value = rfactorDateToISO(data.personal_info.date_of_birth);
+        document.getElementById('starts').value = data.personal_info.starts;
+        document.getElementById('poles').value = data.personal_info.poles;
+        document.getElementById('wins').value = data.personal_info.wins;
+        document.getElementById('drivers_championships').value = data.personal_info.drivers_championships;
+
+        // Fill stats
+        Object.keys(data.stats).forEach(key => {
+            const element = document.getElementById(key);
+            if (element) {
+                element.value = data.stats[key];
+                const valueSpan = document.getElementById(`${key}-value`);
+                if (valueSpan) {
+                    valueSpan.textContent = parseFloat(data.stats[key]).toFixed(1);
+                }
+            }
+        });
+    } catch (error) {
+        ToastNotification.error('Erreur lors de la génération des valeurs aléatoires');
+        console.error(error);
+    }
+}
+
+// Regenerate button handler
+document.getElementById('regenerate-btn').addEventListener('click', async () => {
+    // Confirmation in edit mode to avoid accidental data loss
+    if (mode === 'edit') {
+        const confirmed = confirm(
+            '⚠️ Attention : Cela va remplacer toutes les valeurs actuelles du talent.\n\n' +
+            'Êtes-vous sûr de vouloir régénérer des valeurs aléatoires ?'
+        );
+        if (!confirmed) {
+            return;
+        }
+    }
+
+    LoadingOverlay.show('Génération...');
+    await loadRandomStats();
+    LoadingOverlay.hide();
+    ToastNotification.success('Nouvelles valeurs générées');
+});
+
+// Load talent data if editing, or random stats if creating
 async function loadTalentData() {
     if (mode === 'edit') {
         try {
@@ -172,7 +271,8 @@ async function loadTalentData() {
             // Fill form with talent data
             document.getElementById('name').value = talent.name;
             document.getElementById('nationality').value = talent.personal_info.nationality;
-            document.getElementById('date_of_birth').value = talent.personal_info.date_of_birth;
+            // Convert rFactor date format to ISO for date input
+            document.getElementById('date_of_birth').value = rfactorDateToISO(talent.personal_info.date_of_birth);
             document.getElementById('starts').value = talent.personal_info.starts;
             document.getElementById('poles').value = talent.personal_info.poles;
             document.getElementById('wins').value = talent.personal_info.wins;
@@ -195,6 +295,11 @@ async function loadTalentData() {
         } finally {
             LoadingOverlay.hide();
         }
+    } else if (mode === 'create') {
+        // Load random stats for new talent
+        LoadingOverlay.show('Génération de valeurs initiales...');
+        await loadRandomStats();
+        LoadingOverlay.hide();
     }
 }
 
@@ -206,7 +311,8 @@ document.getElementById('talent-form').addEventListener('submit', async (e) => {
         name: document.getElementById('name').value,
         personal_info: {
             nationality: document.getElementById('nationality').value,
-            date_of_birth: document.getElementById('date_of_birth').value,
+            // Convert ISO date format to rFactor format before sending
+            date_of_birth: isoDateToRFactor(document.getElementById('date_of_birth').value),
             starts: parseInt(document.getElementById('starts').value),
             poles: parseInt(document.getElementById('poles').value),
             wins: parseInt(document.getElementById('wins').value),
@@ -251,6 +357,9 @@ document.getElementById('talent-form').addEventListener('submit', async (e) => {
 });
 
 // Load data on page load
-document.addEventListener('DOMContentLoaded', loadTalentData);
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadNationalities();
+    await loadTalentData();
+});
 </script>
 {% endblock %}

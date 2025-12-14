@@ -1,13 +1,28 @@
 import { useState, useEffect } from 'react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { UserPlus, Save, X, Shuffle } from 'lucide-react'
+import { UserPlus, Save, X, Dices } from 'lucide-react'
 import { apiEndpoints } from '../services/api'
 import PageHeader from '../components/PageHeader'
 import RacingCard from '../components/RacingCard'
 import RacingInput from '../components/RacingInput'
 import RacingButton from '../components/RacingButton'
+
+// Helper functions for date conversion
+const rfactorDateToISO = (rfDate) => {
+  // Convert DD-MM-YYYY to YYYY-MM-DD
+  if (!rfDate || !rfDate.includes('-')) return ''
+  const [day, month, year] = rfDate.split('-')
+  return `${year}-${month}-${day}`
+}
+
+const isoDateToRFactor = (isoDate) => {
+  // Convert YYYY-MM-DD to DD-MM-YYYY
+  if (!isoDate || !isoDate.includes('-')) return ''
+  const [year, month, day] = isoDate.split('-')
+  return `${day}-${month}-${year}`
+}
 
 export default function TalentCreate() {
   const navigate = useNavigate()
@@ -34,6 +49,16 @@ export default function TalentCreate() {
   })
 
   const [errors, setErrors] = useState({})
+
+  // Load nationalities list
+  const { data: nationalities = [] } = useQuery({
+    queryKey: ['nationalities'],
+    queryFn: async () => {
+      const response = await fetch('/api/talents/nationalities/?from_existing=true')
+      if (!response.ok) throw new Error('Failed to load nationalities')
+      return response.json()
+    },
+  })
 
   const createMutation = useMutation({
     mutationFn: async (data) => {
@@ -83,22 +108,38 @@ export default function TalentCreate() {
     }
   }
 
-  const generateRandomStats = () => {
-    // Générer des valeurs aléatoires entre 40 et 95 pour des pilotes réalistes
-    const randomStat = () => (Math.random() * 55 + 40).toFixed(2)
+  // Load random stats on mount
+  useEffect(() => {
+    loadRandomStats()
+  }, [])
 
-    setFormData((prev) => ({
-      ...prev,
-      aggression: randomStat(),
-      reputation: randomStat(),
-      courtesy: randomStat(),
-      composure: randomStat(),
-      speed: randomStat(),
-      crash: randomStat(),
-      recovery: randomStat(),
-      completed_laps: (Math.random() * 20 + 75).toFixed(2), // Entre 75-95%
-      min_racing_skill: randomStat(),
-    }))
+  const loadRandomStats = async () => {
+    try {
+      const response = await fetch('/api/talents/random-stats/')
+      if (!response.ok) throw new Error('Failed to load random stats')
+      const data = await response.json()
+
+      // Ne mettre à jour QUE les stats de course, préserver tout le reste
+      setFormData((prev) => ({
+        ...prev,
+        // Statistiques de course uniquement
+        aggression: data.stats.aggression,
+        reputation: data.stats.reputation,
+        courtesy: data.stats.courtesy,
+        composure: data.stats.composure,
+        speed: data.stats.speed,
+        crash: data.stats.crash,
+        recovery: data.stats.recovery,
+        completed_laps: data.stats.completed_laps,
+        min_racing_skill: data.stats.min_racing_skill,
+      }))
+    } catch (error) {
+      console.error('Error loading random stats:', error)
+    }
+  }
+
+  const generateRandomStats = () => {
+    loadRandomStats()
   }
 
   const handleSubmit = (e) => {
@@ -155,24 +196,47 @@ export default function TalentCreate() {
                 placeholder="Jean Dupont"
               />
 
-              <RacingInput
-                label="Nationalité"
-                name="nationality"
-                value={formData.nationality}
-                onChange={handleChange}
-                error={errors.nationality}
-                required
-                placeholder="France"
-              />
+              <div>
+                <label className="block text-sm font-bold text-racing-cyan mb-2">
+                  Nationalité <span className="text-status-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="nationality"
+                  value={formData.nationality}
+                  onChange={handleChange}
+                  list="nationalities-list"
+                  required
+                  placeholder="Ex: American, French, British..."
+                  className={`w-full px-4 py-3 bg-dark-secondary border ${
+                    errors.nationality ? 'border-status-danger' : 'border-racing-cyan/30'
+                  } rounded-lg focus:outline-none focus:border-racing-cyan text-white transition-colors`}
+                />
+                <datalist id="nationalities-list">
+                  {nationalities.map((nat) => (
+                    <option key={nat} value={nat} />
+                  ))}
+                </datalist>
+                {errors.nationality && (
+                  <p className="text-status-danger text-sm mt-1">{errors.nationality}</p>
+                )}
+              </div>
 
               <RacingInput
                 label="Date de naissance"
                 name="date_of_birth"
-                value={formData.date_of_birth}
-                onChange={handleChange}
+                type="date"
+                value={rfactorDateToISO(formData.date_of_birth)}
+                onChange={(e) => {
+                  const isoDate = e.target.value
+                  const rfDate = isoDateToRFactor(isoDate)
+                  setFormData((prev) => ({ ...prev, date_of_birth: rfDate }))
+                  if (errors.date_of_birth) {
+                    setErrors((prev) => ({ ...prev, date_of_birth: undefined }))
+                  }
+                }}
                 error={errors.date_of_birth}
                 required
-                placeholder="15-03-1990"
               />
 
               <RacingInput
@@ -224,8 +288,8 @@ export default function TalentCreate() {
                 onClick={generateRandomStats}
                 className="text-sm"
               >
-                <Shuffle className="inline-block w-4 h-4 mr-2" />
-                Générer aléatoirement
+                <Dices className="inline-block w-4 h-4 mr-2" />
+                Régénérer
               </RacingButton>
             </div>
 

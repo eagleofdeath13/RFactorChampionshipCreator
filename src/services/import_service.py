@@ -7,10 +7,11 @@ Supports importing driver lists from CSV format into rFactor talent files.
 import csv
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from ..models.talent import Talent, TalentPersonalInfo, TalentStats
 from .talent_service import TalentService
+from ..utils.talent_randomizer import TalentRandomizer
 
 
 @dataclass
@@ -19,25 +20,29 @@ class ImportResult:
 
     success_count: int = 0
     error_count: int = 0
-    errors: List[Tuple[int, str, str]] = None  # (row_number, talent_name, error_message)
-
-    def __post_init__(self):
-        if self.errors is None:
-            self.errors = []
+    overwrite_count: int = 0
+    errors: List[Tuple[int, str, str]] = field(default_factory=list)  # (row_number, talent_name, error_message)
+    warnings: List[Tuple[int, str, str]] = field(default_factory=list)  # (row_number, talent_name, warning_message)
 
     @property
     def total(self) -> int:
         """Total number of rows processed."""
         return self.success_count + self.error_count
 
-    def add_success(self):
+    def add_success(self, overwrite: bool = False):
         """Mark a successful import."""
         self.success_count += 1
+        if overwrite:
+            self.overwrite_count += 1
 
     def add_error(self, row_num: int, name: str, error: str):
         """Add an error to the result."""
         self.error_count += 1
         self.errors.append((row_num, name, error))
+
+    def add_warning(self, row_num: int, name: str, warning: str):
+        """Add a warning to the result."""
+        self.warnings.append((row_num, name, warning))
 
 
 class ImportService:
@@ -92,13 +97,14 @@ class ImportService:
         return True, None
 
     @staticmethod
-    def parse_csv_row(row: Dict[str, str], row_num: int) -> Talent:
+    def parse_csv_row(row: Dict[str, str], row_num: int, fill_missing: bool = True) -> Talent:
         """
         Parse a CSV row into a Talent object.
 
         Args:
             row: Dictionary of column_name -> value
             row_num: Row number (for error reporting)
+            fill_missing: If True, use TalentRandomizer to fill missing/empty fields
 
         Returns:
             Talent object
@@ -114,33 +120,66 @@ class ImportService:
         if not name:
             raise ValueError(f"Row {row_num}: Name is required")
 
-        # Parse personal info
+        # Prepare data dict for randomizer
+        data = {'name': name}
+
+        # Helper to get value or None/empty
+        def get_value(key, convert_fn=str, default=''):
+            val = row.get(key, default).strip()
+            if not val or val == '':
+                return None
+            try:
+                return convert_fn(val)
+            except (ValueError, TypeError):
+                return None
+
+        # Extract all fields (None if missing/empty)
+        data['nationality'] = get_value('nationality')
+        data['date_of_birth'] = get_value('date_of_birth')
+        data['starts'] = get_value('starts', int, 0)
+        data['poles'] = get_value('poles', int, 0)
+        data['wins'] = get_value('wins', int, 0)
+        data['drivers_championships'] = get_value('drivers_championships', int, 0)
+        data['aggression'] = get_value('aggression', float)
+        data['reputation'] = get_value('reputation', float)
+        data['courtesy'] = get_value('courtesy', float)
+        data['composure'] = get_value('composure', float)
+        data['speed'] = get_value('speed', float)
+        data['crash'] = get_value('crash', float)
+        data['recovery'] = get_value('recovery', float)
+        data['completed_laps'] = get_value('completed_laps', float)
+        data['min_racing_skill'] = get_value('min_racing_skill', float)
+
+        # Fill missing fields with randomizer if requested
+        if fill_missing:
+            data = TalentRandomizer.fill_missing_fields(data)
+
+        # Create talent objects
         try:
             personal_info = TalentPersonalInfo(
-                nationality=row.get('nationality', 'Unknown'),
-                date_of_birth=row.get('date_of_birth', '01-01-1980'),
-                starts=int(row.get('starts', 0)),
-                poles=int(row.get('poles', 0)),
-                wins=int(row.get('wins', 0)),
-                drivers_championships=int(row.get('drivers_championships', 0)),
+                nationality=data['nationality'],
+                date_of_birth=data['date_of_birth'],
+                starts=int(data['starts']) if data['starts'] is not None else 0,
+                poles=int(data['poles']) if data['poles'] is not None else 0,
+                wins=int(data['wins']) if data['wins'] is not None else 0,
+                drivers_championships=int(data['drivers_championships']) if data['drivers_championships'] is not None else 0,
             )
-        except ValueError as e:
+        except (ValueError, TypeError) as e:
             raise ValueError(f"Row {row_num}: Invalid personal info - {e}")
 
-        # Parse stats (with defaults)
         try:
             stats = TalentStats(
-                aggression=float(row.get('aggression', 50.0)),
-                reputation=float(row.get('reputation', 50.0)),
-                courtesy=float(row.get('courtesy', 50.0)),
-                composure=float(row.get('composure', 50.0)),
-                speed=float(row.get('speed', 50.0)),
-                crash=float(row.get('crash', 50.0)),
-                recovery=float(row.get('recovery', 50.0)),
-                completed_laps=float(row.get('completed_laps', 90.0)),
-                min_racing_skill=float(row.get('min_racing_skill', 50.0)),
+                aggression=float(data['aggression']),
+                reputation=float(data['reputation']),
+                courtesy=float(data['courtesy']),
+                composure=float(data['composure']),
+                speed=float(data['speed']),
+                crash=float(data['crash']),
+                recovery=float(data['recovery']),
+                completed_laps=float(data['completed_laps']),
+                min_racing_skill=float(data['min_racing_skill']),
             )
-        except ValueError as e:
+        except (ValueError, TypeError) as e:
             raise ValueError(f"Row {row_num}: Invalid stats - {e}")
 
         # Create talent
@@ -153,7 +192,8 @@ class ImportService:
     def import_from_csv(
         self,
         csv_path: str,
-        skip_existing: bool = True,
+        overwrite_existing: bool = True,
+        fill_missing: bool = True,
         validate_only: bool = False,
     ) -> ImportResult:
         """
@@ -161,7 +201,8 @@ class ImportService:
 
         Args:
             csv_path: Path to the CSV file
-            skip_existing: If True, skip talents that already exist
+            overwrite_existing: If True, overwrite talents that already exist (default: True)
+            fill_missing: If True, use randomizer to fill missing/empty fields (default: True)
             validate_only: If True, only validate without creating files
 
         Returns:
@@ -192,23 +233,36 @@ class ImportService:
             # Process each row
             for row_num, row in enumerate(reader, start=2):  # Start at 2 (header is row 1)
                 try:
-                    # Parse talent from row
-                    talent = self.parse_csv_row(row, row_num)
+                    # Parse talent from row (with optional field filling)
+                    talent = self.parse_csv_row(row, row_num, fill_missing=fill_missing)
 
                     # Check if talent already exists
-                    if skip_existing and self.talent_service.exists(talent.name):
-                        result.add_error(
-                            row_num,
-                            talent.name,
-                            "Talent already exists (skipped)"
-                        )
-                        continue
+                    talent_exists = self.talent_service.exists(talent.name)
 
-                    # Create talent (if not validate-only mode)
-                    if not validate_only:
-                        self.talent_service.create(talent)
-
-                    result.add_success()
+                    if talent_exists:
+                        if overwrite_existing:
+                            # Overwrite existing talent
+                            if not validate_only:
+                                self.talent_service.update(talent.name, talent)
+                            result.add_success(overwrite=True)
+                            result.add_warning(
+                                row_num,
+                                talent.name,
+                                "Talent already exists - overwritten with CSV data"
+                            )
+                        else:
+                            # Skip existing talent
+                            result.add_error(
+                                row_num,
+                                talent.name,
+                                "Talent already exists (skipped - overwrite disabled)"
+                            )
+                            continue
+                    else:
+                        # Create new talent
+                        if not validate_only:
+                            self.talent_service.create(talent)
+                        result.add_success(overwrite=False)
 
                 except ValueError as e:
                     result.add_error(row_num, row.get('name', 'Unknown'), str(e))

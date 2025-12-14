@@ -2,13 +2,28 @@ import { useState, useEffect } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Edit, Save, X } from 'lucide-react'
+import { Edit, Save, X, Dices } from 'lucide-react'
 import { apiEndpoints } from '../services/api'
 import PageHeader from '../components/PageHeader'
 import RacingCard from '../components/RacingCard'
 import RacingInput from '../components/RacingInput'
 import RacingButton from '../components/RacingButton'
 import LoadingSpinner from '../components/LoadingSpinner'
+
+// Helper functions for date conversion
+const rfactorDateToISO = (rfDate) => {
+  // Convert DD-MM-YYYY to YYYY-MM-DD
+  if (!rfDate || !rfDate.includes('-')) return ''
+  const [day, month, year] = rfDate.split('-')
+  return `${year}-${month}-${day}`
+}
+
+const isoDateToRFactor = (isoDate) => {
+  // Convert YYYY-MM-DD to DD-MM-YYYY
+  if (!isoDate || !isoDate.includes('-')) return ''
+  const [year, month, day] = isoDate.split('-')
+  return `${day}-${month}-${year}`
+}
 
 export default function TalentEdit() {
   const { name } = useParams()
@@ -34,6 +49,16 @@ export default function TalentEdit() {
   })
 
   const [errors, setErrors] = useState({})
+
+  // Load nationalities list
+  const { data: nationalities = [] } = useQuery({
+    queryKey: ['nationalities'],
+    queryFn: async () => {
+      const response = await fetch('/api/talents/nationalities/?from_existing=true')
+      if (!response.ok) throw new Error('Failed to load nationalities')
+      return response.json()
+    },
+  })
 
   const { data: talent, isLoading } = useQuery({
     queryKey: ['talent', name],
@@ -113,6 +138,41 @@ export default function TalentEdit() {
     }
   }
 
+  const loadRandomStats = async () => {
+    try {
+      const response = await fetch('/api/talents/random-stats/')
+      if (!response.ok) throw new Error('Failed to load random stats')
+      const data = await response.json()
+
+      // Ne mettre à jour QUE les stats de course, préserver tout le reste
+      setFormData((prev) => ({
+        ...prev,
+        // Statistiques de course uniquement
+        aggression: data.stats.aggression,
+        reputation: data.stats.reputation,
+        courtesy: data.stats.courtesy,
+        composure: data.stats.composure,
+        speed: data.stats.speed,
+        crash: data.stats.crash,
+        recovery: data.stats.recovery,
+        completed_laps: data.stats.completed_laps,
+        min_racing_skill: data.stats.min_racing_skill,
+      }))
+    } catch (error) {
+      console.error('Error loading random stats:', error)
+    }
+  }
+
+  const generateRandomStats = () => {
+    // Confirmation en mode édition
+    const confirmed = window.confirm(
+      '⚠️ Attention : Cela va remplacer toutes les valeurs actuelles par des valeurs aléatoires.\n\nÊtes-vous sûr de vouloir continuer ?'
+    )
+    if (confirmed) {
+      loadRandomStats()
+    }
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setErrors({})
@@ -173,24 +233,47 @@ export default function TalentEdit() {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <RacingInput
-                label="Nationalité"
-                name="nationality"
-                value={formData.nationality}
-                onChange={handleChange}
-                error={errors.nationality}
-                required
-                placeholder="France"
-              />
+              <div>
+                <label className="block text-sm font-bold text-racing-cyan mb-2">
+                  Nationalité <span className="text-status-danger">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="nationality"
+                  value={formData.nationality}
+                  onChange={handleChange}
+                  list="nationalities-list"
+                  required
+                  placeholder="Ex: American, French, British..."
+                  className={`w-full px-4 py-3 bg-dark-secondary border ${
+                    errors.nationality ? 'border-status-danger' : 'border-racing-cyan/30'
+                  } rounded-lg focus:outline-none focus:border-racing-cyan text-white transition-colors`}
+                />
+                <datalist id="nationalities-list">
+                  {nationalities.map((nat) => (
+                    <option key={nat} value={nat} />
+                  ))}
+                </datalist>
+                {errors.nationality && (
+                  <p className="text-status-danger text-sm mt-1">{errors.nationality}</p>
+                )}
+              </div>
 
               <RacingInput
                 label="Date de naissance"
                 name="date_of_birth"
-                value={formData.date_of_birth}
-                onChange={handleChange}
+                type="date"
+                value={rfactorDateToISO(formData.date_of_birth)}
+                onChange={(e) => {
+                  const isoDate = e.target.value
+                  const rfDate = isoDateToRFactor(isoDate)
+                  setFormData((prev) => ({ ...prev, date_of_birth: rfDate }))
+                  if (errors.date_of_birth) {
+                    setErrors((prev) => ({ ...prev, date_of_birth: undefined }))
+                  }
+                }}
                 error={errors.date_of_birth}
                 required
-                placeholder="15-03-1990"
               />
 
               <RacingInput
@@ -232,9 +315,20 @@ export default function TalentEdit() {
           </RacingCard>
 
           <RacingCard className="p-6 mb-6">
-            <h3 className="text-xl font-orbitron font-bold text-white mb-6">
-              Statistiques de Course
-            </h3>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-orbitron font-bold text-white">
+                Statistiques de Course
+              </h3>
+              <RacingButton
+                type="button"
+                variant="secondary"
+                onClick={generateRandomStats}
+                className="text-sm"
+              >
+                <Dices className="inline-block w-4 h-4 mr-2" />
+                Régénérer
+              </RacingButton>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <RacingInput

@@ -60,6 +60,22 @@ class Config:
             "current_player": None,
             "last_championship": None,
             "recent_championships": [],
+            "randomizer_bounds": {
+                "overall_skill": {"min": 40, "max": 95},
+                "speed_variance": 8,
+                "composure_variance": 10,
+                "crash_base": 50,
+                "crash_variance": 15,
+                "completed_laps_base": 95,
+                "completed_laps_variance": 8,
+                "completed_laps_min": 75,
+                "completed_laps_max": 99,
+                "recovery_variance": 12,
+                "aggression": {"min": 30, "max": 90},
+                "courtesy": {"min": 40, "max": 85},
+                "min_racing_skill_variance": 5,
+                "reputation_variance": 10,
+            },
         }
 
     def save(self) -> None:
@@ -200,6 +216,26 @@ class Config:
     def reset(self) -> None:
         """Reset configuration to defaults."""
         self.data = self._default_config()
+        self.save()
+
+    def get_randomizer_bounds(self) -> dict:
+        """
+        Get the randomizer bounds configuration.
+
+        Returns:
+            Dictionary with randomizer bounds
+        """
+        default = self._default_config()["randomizer_bounds"]
+        return self.data.get("randomizer_bounds", default)
+
+    def set_randomizer_bounds(self, bounds: dict) -> None:
+        """
+        Set the randomizer bounds configuration.
+
+        Args:
+            bounds: Dictionary with randomizer bounds
+        """
+        self.data["randomizer_bounds"] = bounds
         self.save()
 
 

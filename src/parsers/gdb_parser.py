@@ -107,15 +107,41 @@ class GdbParser:
         return tracks
 
     @staticmethod
-    def search(tracks: Iterable[Track], query: str) -> list[Track]:
+    def search(
+        tracks: Iterable[Track],
+        query: str,
+        search_track_name: bool = True,
+        search_venue_name: bool = True,
+        search_layout: bool = True,
+        search_file_name: bool = True
+    ) -> list[Track]:
+        """
+        Search tracks with configurable field selection.
+
+        Args:
+            tracks: Iterable of Track objects
+            query: Search query string
+            search_track_name: Search in track name field
+            search_venue_name: Search in venue name field
+            search_layout: Search in layout field
+            search_file_name: Search in file name field
+
+        Returns:
+            List of matching tracks
+        """
         q = query.lower()
         res = []
         for t in tracks:
-            if (
-                q in (t.track_name or "").lower()
-                or q in (t.venue_name or "").lower()
-                or q in (t.layout or "").lower()
-                or q in (t.file_name or "").lower()
-            ):
+            match = False
+            if search_track_name and q in (t.track_name or "").lower():
+                match = True
+            if search_venue_name and q in (t.venue_name or "").lower():
+                match = True
+            if search_layout and q in (t.layout or "").lower():
+                match = True
+            if search_file_name and q in (t.file_name or "").lower():
+                match = True
+
+            if match:
                 res.append(t)
         return res

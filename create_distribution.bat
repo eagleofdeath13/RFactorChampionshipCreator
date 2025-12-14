@@ -1,3 +1,4 @@
+
 @echo off
 title Create Distribution Package
 cls
@@ -10,6 +11,11 @@ echo This script will create a ready-to-distribute ZIP package
 echo containing everything needed to run the application.
 echo.
 echo ====================================================================
+echo.
+
+:: Step 0: Get version number
+for /f %%i in ('uv run python scripts/get_version.py') do set APP_VERSION=%%i
+echo Version: %APP_VERSION%
 echo.
 
 :: Step 1: Build the executable
@@ -27,7 +33,7 @@ echo.
 echo [2/3] Preparing distribution package...
 echo.
 
-set DIST_DIR=dist\rfactor_championship_creator_v1.0
+set DIST_DIR=dist\rfactor_championship_creator_v%APP_VERSION%
 set BUILD_DIR=dist\rfactor_championship_creator
 
 if exist "%DIST_DIR%" (
@@ -59,14 +65,15 @@ echo [3/3] Creating ZIP archive...
 echo.
 
 :: Check if 7-Zip or PowerShell is available
+set ZIP_FILE=dist\rFactor_Championship_Creator_v%APP_VERSION%.zip
 where 7z >nul 2>&1
 if %errorlevel% == 0 (
     echo   Using 7-Zip to create archive...
-    7z a -tzip "dist\rFactor_Championship_Creator_v1.0.zip" "%DIST_DIR%\*" >nul
+    7z a -tzip "%ZIP_FILE%" "%DIST_DIR%\*" >nul
     echo   Archive created with 7-Zip!
 ) else (
     echo   Using PowerShell to create archive...
-    powershell -command "Compress-Archive -Path '%DIST_DIR%\*' -DestinationPath 'dist\rFactor_Championship_Creator_v1.0.zip' -Force"
+    powershell -command "Compress-Archive -Path '%DIST_DIR%\*' -DestinationPath '%ZIP_FILE%' -Force"
     if errorlevel 1 (
         echo   [WARNING] Failed to create ZIP archive
         echo   You can manually ZIP the folder: %DIST_DIR%
@@ -82,8 +89,9 @@ echo ====================================================================
 echo    DISTRIBUTION PACKAGE READY!
 echo ====================================================================
 echo.
+echo Version:             %APP_VERSION%
 echo Distribution folder: %DIST_DIR%\
-echo ZIP archive:         dist\rFactor_Championship_Creator_v1.0.zip
+echo ZIP archive:         %ZIP_FILE%
 echo.
 echo To distribute:
 echo   - Share the ZIP file, OR

@@ -12,8 +12,17 @@ echo.
 echo ====================================================================
 echo.
 
+:: Step 0: Synchronize version across all files
+echo [0/5] Synchronizing version numbers...
+echo.
+uv run python scripts/sync_version.py
+if errorlevel 1 (
+    echo [WARNING] Version sync failed, continuing anyway...
+)
+echo.
+
 :: Step 1: Build React Frontend
-echo [1/4] Building React Frontend...
+echo [1/5] Building React Frontend...
 echo.
 call build_frontend.bat
 if errorlevel 1 (
@@ -24,7 +33,7 @@ if errorlevel 1 (
 echo.
 
 :: Step 2: Install/Update Python dependencies
-echo [2/4] Installing/Updating Python dependencies...
+echo [2/5] Installing/Updating Python dependencies...
 echo.
 call uv sync
 if errorlevel 1 (
@@ -36,7 +45,7 @@ echo   Dependencies installed successfully!
 echo.
 
 :: Step 3: Clean previous build
-echo [3/4] Cleaning previous build...
+echo [3/5] Cleaning previous build...
 if exist "dist\rfactor_championship_creator" (
     echo   Removing old build directory...
     rmdir /s /q "dist\rfactor_championship_creator"
@@ -48,16 +57,21 @@ if exist "build" (
 echo   Clean complete!
 echo.
 
-:: Step 4: Run PyInstaller
-echo [4/4] Building executable with PyInstaller...
+:: Step 4: Get version for display
+for /f %%i in ('uv run python scripts/get_version.py') do set APP_VERSION=%%i
+echo   Building version: %APP_VERSION%
+echo.
+
+:: Step 5: Run PyInstaller
+echo [5/5] Building executable with PyInstaller...
 echo   This may take several minutes...
 echo.
-uv run pyinstaller rfactor_app.spec --clean
+uv run pyinstaller rfactor_app.spec --clean -y
 if errorlevel 1 (
     echo [ERROR] PyInstaller build failed
     echo.
     echo Trying with direct Python call...
-    python -m PyInstaller rfactor_app.spec --clean
+    python -m PyInstaller rfactor_app.spec --clean -y
     if errorlevel 1 (
         echo [ERROR] PyInstaller build failed with both methods
         pause

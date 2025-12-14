@@ -7,6 +7,280 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.3.3] - 2025-12-14
+
+### 🎯 Amélioration Majeure du Randomizer
+
+#### Import CSV avec Gestion des Doublons et Auto-Fill
+- **Gestion intelligente des doublons** :
+  - Par défaut (`overwrite_existing=True`), les talents existants sont **écrasés** avec les données du CSV
+  - Les talents écrasés génèrent un **warning** (pas une erreur)
+  - Nouveau compteur `overwrite_count` dans les résultats d'import
+- **Auto-completion des champs manquants** :
+  - Paramètre `fill_missing=True` (par défaut) utilise le randomizer modulaire
+  - Permet d'importer un CSV avec **seulement les noms** des pilotes
+  - Tous les champs vides sont générés automatiquement de façon cohérente
+  - Exemple : CSV avec `name,nationality` → Les stats, date, carrière sont générées automatiquement
+- **Structure du résultat d'import** :
+  - `success_count` : Nombre de talents importés avec succès
+  - `overwrite_count` : Nombre de talents existants écrasés
+  - `error_count` : Nombre d'erreurs fatales
+  - `errors` : Liste des erreurs (ligne, nom, message)
+  - `warnings` : Liste des avertissements (ligne, nom, message)
+
+### 🎯 Amélioration Majeure du Randomizer
+
+#### Randomizer d'Interface (Bouton "Régénérer")
+- **Ne randomise PLUS que les statistiques de course** (9 stats)
+  - speed, crash, aggression, reputation, courtesy, composure, recovery, completed_laps, min_racing_skill
+  - **Préserve TOUT le reste** : nom, nationalité, date de naissance, départs, poles, victoires, championnats
+- **Comportement corrigé** :
+  - Créer un talent : randomise les stats au chargement
+  - Bouton "Régénérer" : ne change QUE les stats de course
+  - Plus de perte de données lors de la régénération
+
+#### Randomizer Modulaire (pour CSV Import - futur)
+- **Nouvelle fonction `random_field(field_name)`** - Randomise un champ spécifique
+  - Supporte tous les champs : nationality, date_of_birth, starts, poles, wins, drivers_championships, + 9 stats
+  - Utilise le contexte pour cohérence (ex: poles basés sur starts)
+- **Nouvelle fonction `fill_missing_fields(data)`** - Remplit les champs manquants
+  - Parfait pour l'import CSV : laisse seulement le nom, tout le reste est généré intelligemment
+  - Génère des valeurs cohérentes entre elles
+
+#### API
+- **Endpoint modifié** : `GET /api/talents/random-stats/`
+  - Retourne maintenant `{"stats": {...}}` au lieu de `{"personal_info": {...}, "stats": {...}}`
+  - Ne génère plus les infos personnelles
+
+#### Frontend
+- **TalentCreate.jsx** et **TalentEdit.jsx** mis à jour
+  - Ne mettent à jour que les stats de course lors de la régénération
+  - Préservent toutes les informations personnelles et de carrière
+
+### 📚 Documentation
+- Docstrings complètes dans `talent_randomizer.py`
+- Commentaires explicites sur le comportement de chaque fonction
+
+---
+
+## [1.3.2] - 2025-12-14
+
+### 🐛 Corrections Critiques
+
+#### ChampionshipService
+- **Correction du crash au chargement des championnats** quand `current_player` n'est pas configuré
+  - `TypeError: unsupported operand type(s) for /: 'WindowsPath' and 'NoneType'` corrigé
+  - Le service détecte maintenant automatiquement le premier joueur disponible
+  - Si aucun joueur n'existe, crée automatiquement un profil "DefaultPlayer"
+  - Permet à l'application de fonctionner immédiatement après installation
+
+#### Fichier de Configuration
+- **`config.template.json` corrigé** pour inclure tous les champs nécessaires
+  - Ajout de `current_player: null` (sera auto-détecté)
+  - Ajout de `last_championship: null`
+  - Ajout de `recent_championships: []`
+  - Instructions d'utilisation clarifiées dans le fichier
+  - Évite les erreurs au premier lancement de la distribution
+
+### 🔧 Améliorations
+
+#### Robustesse
+- Le paramètre `player_name` de `ChampionshipService.__init__()` est maintenant optionnel
+- Méthode `_get_or_create_default_player()` ajoutée pour fallback automatique
+- L'application fonctionne même sans configuration de joueur explicite
+- Template de configuration complet et cohérent avec le code
+
+---
+
+## [1.3.1] - 2025-12-14
+
+### 🐛 Corrections de Bugs
+
+#### Formulaires Talents
+- **Préservation de la date de naissance** lors de la régénération des statistiques
+  - Le bouton "🎲 Régénérer" conserve maintenant la date existante
+  - Évite la perte de données lors de la régénération
+- **Lisibilité du champ nationalité** corrigée
+  - Ajout de la couleur `dark-secondary` (#1A1A1A) dans Tailwind config
+  - Meilleur contraste texte blanc sur fond sombre
+
+#### Assets et Ressources
+- **Création du favicon** `trophy.svg` (404 corrigé)
+  - Design de trophée avec gradients thème racing
+  - Couleurs: jaune fluo (#FFE700) et rouge racing (#E31E24)
+
+### 🔧 Améliorations Techniques
+
+#### Gestion des Versions
+- **Centralisation du numéro de version** dans `src/__version__.py`
+  - Source unique de vérité pour toute l'application
+  - Import dynamique dans `src/web/app.py`
+- **Script de synchronisation** `scripts/sync_version.py`
+  - Synchronise automatiquement la version dans tous les fichiers
+  - Met à jour: `pyproject.toml`, `package.json`, `README.md`, `CLAUDE.md`, `SCRIPTS_GUIDE.md`
+  - Usage: `uv run python scripts/sync_version.py`
+- **Mise à jour de tous les fichiers** à version 1.3.1
+
+### 📚 Documentation
+- Mise à jour des numéros de version dans toute la documentation
+- Date mise à jour: 14 Décembre 2025
+
+---
+
+## [1.3.0] - 2025-12-13
+
+### 🎉 Améliorations Majeures UX et Recherche
+
+Cette version apporte des améliorations significatives à l'expérience utilisateur et aux fonctionnalités de recherche.
+
+### ✨ Ajouté
+
+#### Randomisation des Talents
+- **Module TalentRandomizer** pour génération aléatoire de statistiques cohérentes
+- Endpoint API `/api/talents/random-stats/` pour obtenir des valeurs aléatoires
+- Génération intelligente avec relations entre stats :
+  - Speed et composure corrélés avec niveau global
+  - Crash inversement proportionnel à la compétence
+  - Réputation basée sur victoires et championnats
+  - Historique de carrière réaliste (départs, poles, victoires)
+- **22 nationalités** disponibles
+- **Bouton "🎲 Régénérer"** dans le formulaire de création/édition
+- **Chargement automatique** de valeurs aléatoires à la création d'un talent
+- **Pop-up de confirmation** en mode édition pour éviter pertes de données
+
+#### Améliorations Formulaire Talents
+- **Input de type date** avec date picker natif (au lieu de texte)
+- **Conversion automatique** entre formats :
+  - rFactor : `DD-MM-YYYY` (ex: `15-3-1990`)
+  - HTML5 : `YYYY-MM-DD` (ex: `1990-03-15`)
+- **Liste déroulante nationalités** avec autocomplétion (`<datalist>`)
+- Endpoint `/api/talents/nationalities/` pour obtenir les nationalités
+- Option `?from_existing=true` pour utiliser les nationalités des talents existants
+- Placeholder et indication améliorés pour meilleure UX
+
+#### Recherche Multi-Champs Avancée
+
+##### Talents (`/api/talents/search/`)
+- **Recherche textuelle configurables** :
+  - `search_name` - Recherche dans le nom (défaut: true)
+  - `search_nationality` - Recherche dans la nationalité (défaut: true)
+- **Filtres numériques** :
+  - `min_speed` / `max_speed` - Filtrage par vitesse
+  - `min_aggression` / `max_aggression` - Filtrage par agressivité
+- Exemple : `/api/talents/search/?q=american&min_speed=75&max_speed=95`
+
+##### Véhicules (`/api/vehicles/`)
+- **Recherche multi-champs** :
+  - `search_driver` - Dans nom du pilote (défaut: true)
+  - `search_team` - Dans nom de l'équipe (défaut: true)
+  - `search_description` - Dans description (défaut: true)
+- Tous les champs activables individuellement
+- Exemple : `/api/vehicles/?search=yellow&search_driver=true&search_team=false`
+
+##### Circuits (`/api/tracks/`)
+- **Recherche multi-champs** :
+  - `search_track_name` - Dans nom du circuit (défaut: true)
+  - `search_venue_name` - Dans nom du lieu (défaut: true)
+  - `search_layout` - Dans variante (défaut: true)
+  - `search_file_name` - Dans nom de fichier (défaut: true)
+- Tous les champs activables individuellement
+- Exemple : `/api/tracks/?search=long&search_layout=true&search_file_name=false`
+
+#### Sauvegarde de Session pour Création de Championnat
+- **Module ChampionshipSessionManager** (`championship-session.js`)
+- **Sauvegarde automatique** dans `localStorage` du navigateur
+- Tracking complet de l'état :
+  - Nom et nom complet du championnat
+  - Véhicules sélectionnés
+  - Assignations pilotes ↔ véhicules
+  - Circuits sélectionnés et ordre
+  - Étape actuelle (1-5)
+  - Timestamp de dernière modification
+- **Restauration automatique** avec dialogue de confirmation :
+  - Pop-up informative au chargement
+  - Affiche : nom, âge du brouillon, étape, véhicules, circuits
+  - Options : "Reprendre" ou "Recommencer"
+- **Navigation améliorée** :
+  - Boutons "Précédent" sur toutes les étapes (2-5)
+  - Bouton "Abandonner" sur toutes les étapes avec confirmation
+  - Impossible de perdre ses données en cours de création
+- **Effacement automatique** quand le championnat est créé avec succès
+
+#### Widget de Reprise sur Dashboard
+- **Affichage conditionnel** : visible uniquement si brouillon existe
+- **Informations complètes** :
+  - Nom du championnat en cours
+  - Âge du brouillon formaté ("Il y a 2 heures", "Il y a 15 minutes")
+  - Étape actuelle (ex: "Étape 3/5")
+  - Nombre de véhicules sélectionnés
+  - Nombre de circuits sélectionnés
+- **Actions rapides** :
+  - Bouton "Reprendre" → Retour au formulaire avec toutes les données
+  - Bouton "Abandonner" → Suppression avec confirmation
+- Design cohérent avec le thème racing
+
+### 🔧 Modifié
+
+#### Backend
+- **TalentService** : Recherche multi-champs avec filtres numériques
+- **VehicleService** : Support recherche configurables par champ
+- **TrackService** : Support recherche configurables par champ
+- **GDBParser** : Méthode `search()` étendue avec paramètres de champs
+
+#### Frontend
+- **Formulaire création talents** : UX considérablement améliorée
+- **Formulaire création championnat** : Navigation bidirectionnelle complète
+- **Dashboard** : Widget de reprise de championnat
+
+### 🚀 Workflow Utilisateur Amélioré
+
+#### Scénario 1 : Création de championnat normale
+1. Commence la création → Rempli étape 1
+2. Passe à l'étape 2 → **Sauvegarde auto**
+3. Continue normalement → **Sauvegarde à chaque étape**
+4. Finalise → **Brouillon effacé automatiquement**
+
+#### Scénario 2 : Interruption puis reprise
+1. Commence la création → Arrive à l'étape 3
+2. Ferme le navigateur / quitte la page
+3. Revient plus tard → **Pop-up de confirmation au chargement**
+4. Choisit "Reprendre" → **Retour direct à l'étape 3 avec toutes les données**
+
+#### Scénario 3 : Visualisation depuis le dashboard
+1. Va sur le dashboard
+2. Voit le widget avec toutes les infos du brouillon
+3. Clique sur "Reprendre" → **Reprend là où il s'était arrêté**
+
+### 📦 Fichiers Modifiés
+
+#### Backend
+- `src/web/routes/talents.py` - Recherche avancée + nationalités + random stats
+- `src/web/routes/vehicles.py` - Recherche multi-champs
+- `src/web/routes/tracks.py` - Recherche multi-champs
+- `src/parsers/gdb_parser.py` - Support multi-champs
+- `src/services/track_service.py` - Support multi-champs
+- `src/utils/talent_randomizer.py` - **NOUVEAU** - Générateur aléatoire
+
+#### Frontend
+- `src/web/static/js/championship-session.js` - **NOUVEAU** - Gestionnaire de session
+- `src/web/templates/talents/form.html` - Randomisation + date + nationalités
+- `src/web/templates/championships/create.html` - Intégration session + navigation
+- `src/web/templates/dashboard.html` - Widget de reprise
+
+### 📚 Documentation
+- `CHANGELOG.md` - Cette version
+
+### 🎯 Impact
+
+Ces améliorations transforment l'expérience utilisateur :
+- **Création de talents** : Plus rapide et plus intuitive (randomisation)
+- **Recherche** : Plus puissante et flexible (multi-champs)
+- **Création de championnats** : Sans risque de perte de données (sauvegarde session)
+- **Navigation** : Fluide avec retours possibles
+- **Dashboard** : Vue d'ensemble avec reprise facile
+
+---
+
 ## [1.0.0] - 2025-11-28
 
 ### 🎉 Version Initiale Complète

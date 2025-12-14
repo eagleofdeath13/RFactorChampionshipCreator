@@ -1,6 +1,6 @@
 {
   "name": "rfactor-championship-creator-frontend",
-  "version": "1.0.0",
+  "version": "1.3.3",
   "type": "module",
   "scripts": {
     "dev": "vite",

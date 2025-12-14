@@ -12,12 +12,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 
 from .routes import talents, championships, championship_creator, import_export, config as config_routes, vehicles, tracks
+from ..__version__ import __version__
 
 # Create FastAPI app
 app = FastAPI(
     title="rFactor Championship Creator",
     description="Web interface for managing rFactor championships and talents",
-    version="1.0.0",
+    version=__version__,
     docs_url="/api/docs",
     redoc_url="/api/redoc",
 )

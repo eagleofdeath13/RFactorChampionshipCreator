@@ -12,12 +12,17 @@ export default {
           red: '#E31E24',
           'red-dark': '#B01419',
           'red-glow': 'rgba(227, 30, 36, 0.4)',
+          cyan: '#00D9FF',
         },
         carbon: {
           black: '#0A0A0A',
           dark: '#151515',
           light: '#1F1F1F',
           metal: '#2A2A2A',
+        },
+        dark: {
+          primary: '#0A0A0A',
+          secondary: '#1A1A1A',
         },
         chrome: {
           silver: '#C0C0C0',

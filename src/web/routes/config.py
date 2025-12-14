@@ -2,6 +2,7 @@
 
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
+from typing import Dict, Any
 
 from ...utils.config import get_config
 from ...utils.rfactor_validator import RFactorValidator
@@ -132,3 +133,72 @@ async def validate_rfactor_path(path: str):
         "is_valid": is_valid,
         "errors": errors
     }
+
+
+@router.get("/randomizer-bounds", response_model=Dict[str, Any])
+async def get_randomizer_bounds():
+    """
+    Get the current randomizer bounds configuration.
+
+    Returns:
+        Dictionary with randomizer bounds for all stats
+    """
+    config = get_config()
+    return config.get_randomizer_bounds()
+
+
+@router.put("/randomizer-bounds", response_model=Dict[str, Any])
+async def update_randomizer_bounds(bounds: Dict[str, Any]):
+    """
+    Update the randomizer bounds configuration.
+
+    Args:
+        bounds: New randomizer bounds configuration
+
+    Returns:
+        Updated bounds
+
+    Raises:
+        400: Invalid bounds configuration
+    """
+    config = get_config()
+
+    # Basic validation
+    required_keys = [
+        "overall_skill", "speed_variance", "composure_variance",
+        "crash_base", "crash_variance", "completed_laps_base",
+        "completed_laps_variance", "completed_laps_min", "completed_laps_max",
+        "recovery_variance", "aggression", "courtesy",
+        "min_racing_skill_variance", "reputation_variance"
+    ]
+
+    missing_keys = [key for key in required_keys if key not in bounds]
+    if missing_keys:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Missing required keys: {', '.join(missing_keys)}"
+        )
+
+    try:
+        config.set_randomizer_bounds(bounds)
+        return config.get_randomizer_bounds()
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Failed to update randomizer bounds: {str(e)}"
+        )
+
+
+@router.post("/randomizer-bounds/reset", response_model=Dict[str, Any])
+async def reset_randomizer_bounds():
+    """
+    Reset randomizer bounds to default values.
+
+    Returns:
+        Default bounds
+    """
+    config = get_config()
+    default_config = config._default_config()
+    config.set_randomizer_bounds(default_config["randomizer_bounds"])
+    return config.get_randomizer_bounds()

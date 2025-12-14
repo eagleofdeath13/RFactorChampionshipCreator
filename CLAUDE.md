@@ -481,3 +481,89 @@ Lorsque vous travaillez sur ce projet :
    - **Validation in-game** : Tester le championnat généré dans rFactor
    - **Sprint 6** : Packaging et portabilité (PyInstaller, scripts .bat)
    - **Documentation utilisateur** : Guide d'utilisation complet
+
+7. **🚨 ARCHITECTURE FRONTEND - IMPORTANT 🚨**
+   - **L'application utilise REACT** pour le frontend (pas les templates Jinja2)
+   - **TOUJOURS modifier le frontend React** dans `frontend/src/`
+   - Les templates Jinja2 dans `src/web/templates/` sont obsolètes (compatibilité uniquement)
+   - **Workflow correct** :
+     1. Modifier les fichiers React dans `frontend/src/pages/` et `frontend/src/components/`
+     2. Build React : `cd frontend && npm run build`
+     3. Build exécutable : `uv run pyinstaller rfactor_app.spec --clean -y`
+     4. Préparer distribution : `uv run python scripts/prepare_distribution.py`
+   - **ERREUR À NE PAS RÉPÉTER** : Ne pas modifier les templates Jinja2 puis découvrir que React est utilisé
+   - Le React build est servi depuis `frontend/dist/` et inclus dans l'exécutable PyInstaller
+
+### ✅ Sprint 6 : Améliorations UX React (Complété - 13 Déc 2025)
+- [x] **Randomiseur de talents** (React)
+  - Chargement automatique au démarrage de création
+  - Bouton "Régénérer" avec icône dés
+  - Confirmation en mode édition
+  - API endpoint `/api/talents/random-stats/`
+- [x] **Date picker + Nationalité** (React)
+  - Input type="date" avec conversion DD-MM-YYYY ↔ YYYY-MM-DD
+  - Datalist de nationalités depuis API `/api/talents/nationalities/`
+- [x] **Recherche multi-champs avancée Talents** (React)
+  - Filtres : nom, nationalité, vitesse (min/max), agressivité (min/max)
+  - Panneau de filtres dépliable avec animation
+  - Indicateur visuel des filtres actifs
+- [x] **Gestion intelligente des ports**
+  - Détection automatique de port occupé
+  - Basculement automatique sur port libre (5001-5010)
+  - Messages clairs à l'utilisateur
+
+**Fichiers React modifiés** :
+- `frontend/src/pages/TalentCreate.jsx` - Randomiseur + date picker + nationalité
+- `frontend/src/pages/TalentEdit.jsx` - Idem avec confirmation
+- `frontend/src/pages/Talents.jsx` - Recherche multi-champs avancée
+- `src/main.py` - Gestion des ports avec fallback automatique
+
+**API endpoints créés** :
+- `GET /api/talents/random-stats/` - Génère stats aléatoires cohérentes
+- `GET /api/talents/nationalities/?from_existing=true` - Liste nationalités
+- `GET /api/talents/search/?q=...&search_name=...&min_speed=...` - Recherche avancée
+
+### ✅ Sprint 7 : Recherche Avancée et Session Management (Complété - 13 Déc 2025)
+- [x] **Recherche multi-champs pour Véhicules** (React)
+  - Filtres : pilote, équipe, description
+  - Panneau dépliable avec AnimatePresence
+  - API endpoint `/api/vehicles/?search=...&search_driver=...`
+- [x] **Recherche multi-champs pour Circuits** (React)
+  - Filtres : nom circuit, localisation, configuration, nom fichier
+  - Interface cohérente avec autres pages de recherche
+  - API endpoint `/api/tracks/?search=...&search_track_name=...`
+- [x] **Sauvegarde de session - Création de Championnat** (React)
+  - Sauvegarde automatique dans localStorage à chaque changement d'état
+  - Restauration automatique au retour sur la page
+  - Notification de session restaurée (disparaît après 5s)
+  - Bouton "Abandonner" avec confirmation pour effacer la session
+  - Nettoyage automatique après création réussie
+  - Stockage de : étape actuelle, nom, véhicules sélectionnés, circuits, assignments
+- [x] **Widget de reprise sur Dashboard** (React)
+  - Détection automatique de session sauvegardée
+  - Affichage du nom du championnat en cours
+  - Timestamp relatif ("Il y a 2h", "Hier", etc.)
+  - Affichage de l'étape actuelle et du nombre de véhicules/circuits
+  - Bouton "Reprendre la création" pour naviguer vers la page
+  - Bouton "Supprimer" pour effacer la session
+  - Auto-rafraîchissement toutes les 5 secondes
+- [x] **Build final React + PyInstaller**
+  - Frontend compilé : `frontend/dist/` (509.58 kB JS, 29.33 kB CSS)
+  - Exécutable PyInstaller : `dist/rfactor_championship_creator/rfactor_championship_creator.exe` (6.69 MB)
+
+**Fichiers React modifiés** :
+- `frontend/src/pages/Vehicles.jsx` - Recherche avancée véhicules
+- `frontend/src/pages/Tracks.jsx` - Recherche avancée circuits
+- `frontend/src/pages/ChampionshipCreate.jsx` - Session management complet
+- `frontend/src/pages/Dashboard.jsx` - Widget de reprise de session
+
+**Constantes partagées** :
+- `championship_create_session` - Clé localStorage pour sauvegarde session
+
+**Fonctionnalités clés** :
+- Pattern cohérent de recherche avancée sur toutes les pages de liste
+- Gestion complète de session pour éviter perte de données lors de création championnat
+- UX améliorée avec notifications et indicateurs visuels
+- Animations fluides avec Framer Motion (AnimatePresence)
+
+**Version** : 1.3.3

@@ -1,7 +1,7 @@
 """API routes for talents management."""
 
 from fastapi import APIRouter, HTTPException, status
-from typing import List
+from typing import List, Dict, Any
 from dataclasses import asdict
 
 from ..schemas.talent import (
@@ -15,6 +15,7 @@ from ..schemas.talent import (
 from ...services.talent_service import TalentService
 from ...models.talent import Talent, TalentPersonalInfo, TalentStats
 from ...utils.config import get_config
+from ...utils.talent_randomizer import TalentRandomizer
 
 router = APIRouter()
 
@@ -228,18 +229,59 @@ async def delete_talent(name: str):
 
 
 @router.get("/search/", response_model=List[TalentListItemSchema])
-async def search_talents(q: str):
+async def search_talents(
+    q: str,
+    search_name: bool = True,
+    search_nationality: bool = True,
+    min_speed: float = None,
+    max_speed: float = None,
+    min_aggression: float = None,
+    max_aggression: float = None
+):
     """
-    Search talents by name or nationality.
+    Advanced search for talents with multi-field support.
 
     Args:
-        q: Search query
+        q: Search query (text to search in name/nationality)
+        search_name: Whether to search in name field (default: True)
+        search_nationality: Whether to search in nationality field (default: True)
+        min_speed: Minimum speed value filter
+        max_speed: Maximum speed value filter
+        min_aggression: Minimum aggression value filter
+        max_aggression: Maximum aggression value filter
 
     Returns:
         List of matching talents
     """
     service = get_talent_service()
-    talents = service.search(q)
+    all_talents = service.list_all_talents()
+
+    query_lower = q.lower()
+    matching_talents = []
+
+    for talent in all_talents:
+        # Text search
+        text_match = False
+        if search_name and query_lower in talent.name.lower():
+            text_match = True
+        if search_nationality and query_lower in talent.personal_info.nationality.lower():
+            text_match = True
+
+        # If query is provided but no text match, skip
+        if q and not text_match:
+            continue
+
+        # Numeric filters
+        if min_speed is not None and talent.stats.speed < min_speed:
+            continue
+        if max_speed is not None and talent.stats.speed > max_speed:
+            continue
+        if min_aggression is not None and talent.stats.aggression < min_aggression:
+            continue
+        if max_aggression is not None and talent.stats.aggression > max_aggression:
+            continue
+
+        matching_talents.append(talent)
 
     return [
         TalentListItemSchema(
@@ -249,5 +291,50 @@ async def search_talents(q: str):
             crash=talent.stats.crash,
             aggression=talent.stats.aggression
         )
-        for talent in talents
+        for talent in matching_talents
     ]
+
+
+@router.get("/random-stats/", response_model=Dict[str, Any])
+async def get_random_stats():
+    """
+    Generate random RACING statistics only (for UI randomizer).
+
+    Returns:
+        Dictionary with ONLY racing stats (9 performance stats)
+
+    This endpoint generates coherent random values for the 9 racing performance stats:
+    - speed, crash, aggression, reputation, courtesy, composure,
+      recovery, completed_laps, min_racing_skill
+
+    Does NOT generate personal info (name, nationality, date, career stats).
+    Those fields should be preserved when using the "Régénérer" button.
+    """
+    return {"stats": TalentRandomizer.random_racing_stats()}
+
+
+@router.get("/nationalities/", response_model=List[str])
+async def get_nationalities(from_existing: bool = False):
+    """
+    Get list of available nationalities.
+
+    Args:
+        from_existing: If True, return nationalities from existing talents.
+                      If False, return predefined list of common nationalities.
+
+    Returns:
+        List of nationality names
+    """
+    if from_existing:
+        # Get unique nationalities from existing talents
+        try:
+            service = get_talent_service()
+            talents = service.list_all_talents()
+            nationalities = set(t.personal_info.nationality for t in talents)
+            return sorted(nationalities)
+        except Exception:
+            # Fallback to predefined list if error
+            pass
+
+    # Return predefined list of common nationalities
+    return sorted(TalentRandomizer.NATIONALITIES)

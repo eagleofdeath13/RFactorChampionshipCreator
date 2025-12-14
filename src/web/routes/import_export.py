@@ -29,7 +29,8 @@ def get_import_service() -> ImportService:
 @router.post("/import/talents")
 async def import_talents_csv(
     file: UploadFile = File(...),
-    skip_existing: bool = True,
+    overwrite_existing: bool = True,
+    fill_missing: bool = True,
     validate_only: bool = False
 ):
     """
@@ -37,14 +38,20 @@ async def import_talents_csv(
 
     Args:
         file: CSV file to import
-        skip_existing: Skip talents that already exist
+        overwrite_existing: Overwrite talents that already exist (default: True)
+        fill_missing: Use randomizer to fill missing/empty fields (default: True)
         validate_only: Only validate without creating files
 
     Returns:
-        Import result with success/error counts
+        Import result with success/error/warning counts
 
     Raises:
         400: Invalid file or validation error
+
+    Notes:
+        - If overwrite_existing=True, existing talents will be updated with CSV data
+        - If fill_missing=True, empty/missing fields will be randomly generated
+        - Warnings are issued for overwritten talents
     """
     # Validate file type
     if not file.filename.endswith('.csv'):
@@ -64,7 +71,8 @@ async def import_talents_csv(
         import_service = get_import_service()
         result = import_service.import_from_csv(
             temp_path,
-            skip_existing=skip_existing,
+            overwrite_existing=overwrite_existing,
+            fill_missing=fill_missing,
             validate_only=validate_only
         )
 
@@ -76,16 +84,28 @@ async def import_talents_csv(
             {
                 "row": row_num,
                 "name": name,
-                "error": error
+                "message": error
             }
             for row_num, name, error in result.errors
+        ]
+
+        # Format warnings for response
+        warnings = [
+            {
+                "row": row_num,
+                "name": name,
+                "message": warning
+            }
+            for row_num, name, warning in result.warnings
         ]
 
         return {
             "success_count": result.success_count,
             "error_count": result.error_count,
+            "overwrite_count": result.overwrite_count,
             "total": result.total,
-            "errors": errors
+            "errors": errors,
+            "warnings": warnings
         }
 
     except ValueError as e:
@@ -114,7 +134,7 @@ async def validate_talents_csv(file: UploadFile = File(...)):
     Raises:
         400: Invalid file
     """
-    return await import_talents_csv(file, skip_existing=True, validate_only=True)
+    return await import_talents_csv(file, overwrite_existing=True, fill_missing=True, validate_only=True)
 
 
 @router.get("/export/talents")

@@ -19,31 +19,59 @@ from ..utils.rfactor_validator import RFactorValidator
 class ChampionshipService:
     """Service for managing championships."""
 
-    def __init__(self, rfactor_path: str, player_name: str, validate: bool = True):
+    def __init__(self, rfactor_path: str, player_name: Optional[str] = None, validate: bool = True):
         """
         Initialize the ChampionshipService.
 
         Args:
             rfactor_path: Path to the rFactor installation directory
-            player_name: Name of the player profile
+            player_name: Name of the player profile (if None, auto-detects or creates default)
             validate: Whether to validate the rFactor installation (default: True)
 
         Raises:
             ValueError: If validate=True and the path is invalid
         """
         self.rfactor_path = Path(rfactor_path)
-        self.player_name = player_name
 
         # Validate rFactor installation if requested
         if validate:
             RFactorValidator.validate_or_raise(str(self.rfactor_path))
 
+        # Auto-detect or create player if not specified
+        if player_name is None:
+            player_name = self._get_or_create_default_player()
+
+        self.player_name = player_name
         self.userdata_dir = self.rfactor_path / "UserData" / player_name
         self.rfm_dir = self.rfactor_path / "rFm"
 
         if not self.userdata_dir.exists():
             # Create player directory if it doesn't exist
             self.userdata_dir.mkdir(parents=True, exist_ok=True)
+
+    def _get_or_create_default_player(self) -> str:
+        """
+        Get the first available player or create a default one.
+
+        Returns:
+            Player profile name
+        """
+        userdata_path = self.rfactor_path / "UserData"
+
+        # If UserData doesn't exist, create it with DefaultPlayer
+        if not userdata_path.exists():
+            userdata_path.mkdir(parents=True, exist_ok=True)
+            return "DefaultPlayer"
+
+        # List existing player directories
+        player_dirs = [d for d in userdata_path.iterdir() if d.is_dir()]
+
+        # If players exist, return the first one
+        if player_dirs:
+            return player_dirs[0].name
+
+        # No players found, create DefaultPlayer
+        return "DefaultPlayer"
 
     def list_all(self) -> List[str]:
         """

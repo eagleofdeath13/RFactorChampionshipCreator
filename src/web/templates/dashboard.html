@@ -82,6 +82,32 @@
     </div>
 </div>
 
+<!-- Resume Championship Draft Widget (shown only if draft exists) -->
+<div class="row mt-4" id="championship-draft-widget" style="display: none;">
+    <div class="col-12">
+        <div class="alert alert-warning border-warning shadow-sm">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h4 class="alert-heading mb-2">
+                        <i class="bi bi-clock-history"></i> Championnat en cours de création
+                    </h4>
+                    <p class="mb-2" id="draft-info">
+                        <!-- Populated dynamically -->
+                    </p>
+                </div>
+                <div>
+                    <a href="/championships/create/new" class="btn btn-warning me-2">
+                        <i class="bi bi-play-fill"></i> Reprendre
+                    </a>
+                    <button type="button" class="btn btn-outline-danger" onclick="discardDraft()">
+                        <i class="bi bi-trash"></i> Abandonner
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Quick Actions Section -->
 <div class="row mt-4">
     <div class="col-12 mb-3">
@@ -193,8 +219,14 @@
 {% endblock %}
 
 {% block extra_scripts %}
+<!-- Championship Session Manager -->
+<script src="/static/js/championship-session.js"></script>
+
 <script>
 document.addEventListener('DOMContentLoaded', async function() {
+    // Check for championship draft
+    checkForChampionshipDraft();
+
     // Counter animation function
     function animateCounter(element, targetValue, duration = 1000) {
         const startValue = 0;
@@ -271,5 +303,41 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 });
+
+// Check if there's a championship draft to resume
+function checkForChampionshipDraft() {
+    const session = window.championshipSession;
+
+    if (!session || !session.hasDraft()) {
+        return;
+    }
+
+    const info = session.getDraftInfo();
+    const widget = document.getElementById('championship-draft-widget');
+    const draftInfo = document.getElementById('draft-info');
+
+    // Populate draft info
+    draftInfo.innerHTML = `
+        <strong>📋 ${info.name}</strong><br>
+        <small class="text-muted">
+            ${info.age} • Étape ${info.step}/5 •
+            ${info.vehicleCount} véhicule(s) • ${info.trackCount} circuit(s)
+        </small>
+    `;
+
+    // Show widget
+    widget.style.display = 'block';
+}
+
+// Discard draft with confirmation
+function discardDraft() {
+    if (confirm('⚠️ Êtes-vous sûr de vouloir supprimer ce brouillon de championnat ?\n\nCette action est irréversible.')) {
+        window.championshipSession.clear();
+        document.getElementById('championship-draft-widget').style.display = 'none';
+        if (window.ToastNotification) {
+            ToastNotification.success('Brouillon supprimé');
+        }
+    }
+}
 </script>
 {% endblock %}

@@ -1,6 +1,14 @@
 {
   "rfactor_path": "C:/Program Files (x86)/Steam/steamapps/common/rFactor",
-  "_comment": "Replace the path above with your actual rFactor installation directory",
+  "current_player": null,
+  "last_championship": null,
+  "recent_championships": [],
+  "_comment": "Configuration file for rFactor Championship Creator",
+  "_instructions": [
+    "1. Set 'rfactor_path' to your rFactor installation directory",
+    "2. 'current_player' will be auto-detected if left as null",
+    "3. Do not modify 'last_championship' and 'recent_championships' manually"
+  ],
   "_example_windows": "C:/Program Files (x86)/Steam/steamapps/common/rFactor",
   "_example_custom": "D:/Games/rFactor"
 }

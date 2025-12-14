@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -12,11 +12,16 @@ import {
   Plus,
   Trash2,
   Search,
-  ArrowUpDown
+  ArrowUpDown,
+  X,
+  AlertCircle
 } from 'lucide-react'
 import clsx from 'clsx'
 import TalentSelector from '../components/TalentSelector'
 import { apiEndpoints } from '../services/api'
+
+// Session storage key
+const SESSION_KEY = 'championship_create_session'
 
 const STEPS = [
   { id: 'info', label: 'Informations', icon: Trophy },
@@ -30,6 +35,7 @@ export default function ChampionshipCreate() {
   const navigate = useNavigate()
   const [currentStep, setCurrentStep] = useState(0)
   const [errors, setErrors] = useState({})
+  const [sessionRestored, setSessionRestored] = useState(false)
 
   // État du formulaire
   const [formData, setFormData] = useState({
@@ -46,6 +52,54 @@ export default function ChampionshipCreate() {
   // État pour la sélection de circuits
   const [trackSearch, setTrackSearch] = useState('')
   const [selectedTracks, setSelectedTracks] = useState([])
+
+  // Load session on mount
+  useEffect(() => {
+    const savedSession = localStorage.getItem(SESSION_KEY)
+    if (savedSession) {
+      try {
+        const session = JSON.parse(savedSession)
+        setCurrentStep(session.currentStep || 0)
+        setFormData(session.formData || {
+          name: '',
+          full_name: '',
+          vehicle_assignments: [],
+          tracks: [],
+        })
+        setSelectedVehicles(session.selectedVehicles || [])
+        setSelectedTracks(session.selectedTracks || [])
+        setSessionRestored(true)
+        // Auto-hide notification after 5 seconds
+        setTimeout(() => setSessionRestored(false), 5000)
+      } catch (error) {
+        console.error('Error loading session:', error)
+        localStorage.removeItem(SESSION_KEY)
+      }
+    }
+  }, [])
+
+  // Save session on state changes
+  useEffect(() => {
+    const session = {
+      currentStep,
+      formData,
+      selectedVehicles,
+      selectedTracks,
+      timestamp: new Date().toISOString(),
+    }
+    localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+  }, [currentStep, formData, selectedVehicles, selectedTracks])
+
+  // Clear session handler
+  const clearSession = () => {
+    const confirmed = window.confirm(
+      '⚠️ Êtes-vous sûr de vouloir abandonner la création du championnat ?\n\nToutes les données seront perdues.'
+    )
+    if (confirmed) {
+      localStorage.removeItem(SESSION_KEY)
+      navigate('/championships')
+    }
+  }
 
   // Charger les véhicules originaux (sans préfixe M_)
   const { data: vehicles = [], isLoading: loadingVehicles } = useQuery({
@@ -73,6 +127,8 @@ export default function ChampionshipCreate() {
       return response.data
     },
     onSuccess: (data) => {
+      // Clear session on success
+      localStorage.removeItem(SESSION_KEY)
       navigate('/championships')
     },
     onError: (error) => {
@@ -284,14 +340,39 @@ export default function ChampionshipCreate() {
       {/* Header */}
       <div className="bg-gradient-to-r from-racing-red to-racing-red/80 text-white py-8">
         <div className="max-w-7xl mx-auto px-6">
-          <h1 className="font-orbitron font-black text-4xl mb-2">
-            Créer un Championnat
-          </h1>
-          <p className="text-chrome-silver">
-            Configuration d'un nouveau championnat personnalisé
-          </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="font-orbitron font-black text-4xl mb-2">
+                Créer un Championnat
+              </h1>
+              <p className="text-chrome-silver">
+                Configuration d'un nouveau championnat personnalisé
+              </p>
+            </div>
+            <button
+              onClick={clearSession}
+              className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 border border-white/30 rounded transition-colors"
+            >
+              <X className="w-5 h-5" />
+              <span className="font-orbitron font-bold text-sm">Abandonner</span>
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Session restored notification */}
+      {sessionRestored && (
+        <div className="bg-status-success/10 border-b-2 border-status-success">
+          <div className="max-w-7xl mx-auto px-6 py-3">
+            <div className="flex items-center gap-3 text-status-success">
+              <AlertCircle className="w-5 h-5 flex-shrink-0" />
+              <p className="font-rajdhani text-sm">
+                Session restaurée. Vous pouvez continuer là où vous vous êtes arrêté.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Stepper */}
       <div className="bg-dark-charcoal/50 border-b-2 border-white/10">

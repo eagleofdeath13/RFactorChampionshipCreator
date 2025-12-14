@@ -35,13 +35,35 @@ def _track_to_response(track) -> TrackResponseSchema:
 
 @router.get("/", response_model=List[TrackListItemSchema])
 async def list_tracks(
-    search: Optional[str] = Query(None, description="Search by name/venue/layout"),
+    search: Optional[str] = Query(None, description="Search query"),
+    search_track_name: bool = Query(True, description="Search in track name"),
+    search_venue_name: bool = Query(True, description="Search in venue name"),
+    search_layout: bool = Query(True, description="Search in layout"),
+    search_file_name: bool = Query(True, description="Search in file name"),
     reload: bool = Query(False, description="Force reload from disk"),
 ):
+    """
+    List all tracks with advanced search options.
+
+    Query parameters:
+    - search: Search query (searches in selected fields)
+    - search_track_name: Include track name in search (default: true)
+    - search_venue_name: Include venue name in search (default: true)
+    - search_layout: Include layout in search (default: true)
+    - search_file_name: Include file name in search (default: true)
+    - reload: Force reload from disk (default: false, uses cache)
+    """
     service = TrackService()
     try:
         if search:
-            tracks = service.search(search, force_reload=reload)
+            tracks = service.search(
+                search,
+                search_track_name=search_track_name,
+                search_venue_name=search_venue_name,
+                search_layout=search_layout,
+                search_file_name=search_file_name,
+                force_reload=reload
+            )
         else:
             tracks = service.list_all(force_reload=reload)
         return [_track_to_list_item(t) for t in tracks]
