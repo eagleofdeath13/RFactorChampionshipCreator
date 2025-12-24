@@ -18,7 +18,7 @@ export default function Layout() {
 
       {/* Footer */}
       <footer className="bg-gradient-carbon border-t-4 border-racing-red py-6 mt-auto text-center text-chrome-silver text-sm tracking-wide">
-        <span className="text-racing-red font-bold">rFactor Championship Creator</span> v1.3.3 |{' '}
+        <span className="text-racing-red font-bold">rFactor Championship Creator</span> v1.4.0 |{' '}
         <span className="text-chrome-silver">68 tests passants</span> |
         Powered by <span className="text-fluo-yellow font-bold">React</span> &{' '}
         <span className="text-racing-red font-bold">FastAPI</span>

@@ -7,10 +7,11 @@ and modifies their Classes and Driver fields.
 
 import shutil
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Set
 
 from ..parsers.veh_parser import VehParser
 from ..models.vehicle import Vehicle
+from ..utils.dependency_collector import DependencyCollector
 
 
 class VehicleIsolationService:
@@ -26,6 +27,7 @@ class VehicleIsolationService:
         self.rfactor_path = Path(rfactor_path)
         self.vehicles_dir = self.rfactor_path / "GameData" / "Vehicles"
         self.veh_parser = VehParser()
+        self.dependency_collector = DependencyCollector()
 
     def _generate_vehicle_prefix(self, championship_name: str) -> str:
         """
@@ -768,3 +770,63 @@ class VehicleIsolationService:
                 championships.append(champ_name)
 
         return championships
+
+    def copy_all_dependencies(
+        self,
+        vehicle_path: Path,
+        target_dir: Path,
+        vehicles_root: Path
+    ) -> Set[Path]:
+        """
+        Copy ALL dependencies for a vehicle to target directory.
+
+        Uses the DependencyCollector to recursively find and copy all files
+        needed by a vehicle (HDV, GEN, INI, MAS, assets, etc.).
+
+        Args:
+            vehicle_path: Path to the source .veh file
+            target_dir: Target directory (championship root)
+            vehicles_root: Root Vehicles directory
+
+        Returns:
+            Set of paths that were copied
+
+        Raises:
+            IOError: If copying fails
+        """
+        # Collect all dependencies
+        all_deps = self.dependency_collector.collect_all_dependencies(vehicle_path, vehicles_root)
+
+        copied_files = set()
+
+        for dep_path in all_deps:
+            # Compute relative path from vehicles_root
+            try:
+                rel_path = dep_path.relative_to(vehicles_root)
+            except ValueError:
+                # File is outside vehicles_root (shouldn't happen, but handle gracefully)
+                print(f"Warning: Dependency outside vehicles root: {dep_path}")
+                continue
+
+            # Compute target path
+            target_path = target_dir / rel_path
+
+            # Skip if already copied
+            if target_path.exists():
+                continue
+
+            # Create parent directories
+            try:
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+            except Exception as e:
+                print(f"Warning: Failed to create directory {target_path.parent}: {e}")
+                continue
+
+            # Copy file
+            try:
+                shutil.copy2(dep_path, target_path)
+                copied_files.add(target_path)
+            except Exception as e:
+                print(f"Warning: Failed to copy {dep_path} to {target_path}: {e}")
+
+        return copied_files

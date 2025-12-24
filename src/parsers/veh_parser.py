@@ -163,102 +163,173 @@ class VehParser:
             file_path_obj = Path(file_path)
             vehicle.file_name = file_path_obj.name
 
-            # Calculate relative path from GameData/Vehicles
+            # Calculate relative path from Vehicles directory
             try:
-                # Find GameData/Vehicles in the path
+                # Find Vehicles in the path (works for both GameData/Vehicles and RFactorContent/Vehicles)
                 parts = file_path_obj.parts
-                if 'GameData' in parts and 'Vehicles' in parts:
-                    gd_idx = parts.index('GameData')
+                if 'Vehicles' in parts:
                     v_idx = parts.index('Vehicles')
-                    if v_idx == gd_idx + 1:
-                        # Get everything after Vehicles/
-                        rel_parts = parts[v_idx + 1:]
-                        vehicle.relative_path = str(Path(*rel_parts)) if rel_parts else ""
 
-                        # Resolve HDV absolute path if reference present
-                        if config.hdvehicle:
-                            # Base directory is the Vehicles directory (C:\...\GameData\Vehicles)
-                            vehicles_root = Path(*parts[:v_idx + 1])
-                            # Normalize separators in reference
-                            ref = config.hdvehicle.replace('/', '\\')
-                            ref_path = Path(ref)
+                    # Get everything after Vehicles/
+                    rel_parts = parts[v_idx + 1:]
+                    vehicle.relative_path = str(Path(*rel_parts)) if rel_parts else ""
 
-                            def _resolve_hdv_from_vehicle_dir(base_dir: Path, ref_p: Path, root: Path) -> Path:
-                                """Resolve HDV path by walking up from vehicle directory to Vehicles root when ref is a bare filename."""
-                                # If ref includes dirs, resolve from Vehicles root directly
-                                if ref_p.is_absolute():
-                                    return ref_p
-                                if len(ref_p.parts) > 1:
-                                    return root / ref_p
+                    # Resolve technical file paths (HDV, Graphics, Sounds, etc.)
+                    # Base directory is the Vehicles directory
+                    vehicles_root = Path(*parts[:v_idx + 1])
 
-                                # Bare filename: walk up from .veh directory to Vehicles root
-                                current = base_dir
-                                try:
-                                    root_resolved = root.resolve()
-                                except Exception:
-                                    root_resolved = root
+                    # Determine mod root (first child of Vehicles/)
+                    # This prevents searching outside the mod directory
+                    mod_root = None
+                    if len(parts) > v_idx + 1:
+                        mod_root = Path(*parts[:v_idx + 2])  # Vehicles/ModName
 
-                                while True:
-                                    candidate = current / ref_p
-                                    try:
-                                        if candidate.exists():
-                                            return candidate
-                                    except Exception:
-                                        # If existence check fails, still return candidate to expose path
-                                        return candidate
+                    def _resolve_technical_file(base_dir: Path, ref_str: str, vehicles_root: Path, mod_root: Path | None) -> tuple[str, bool]:
+                        """
+                        Resolve technical file path generically.
 
-                                    # Stop when we've reached the Vehicles root
-                                    try:
-                                        if current.resolve() == root_resolved:
-                                            break
-                                    except Exception:
-                                        # Fallback to string comparison if resolve fails
-                                        if str(current) == str(root):
-                                            break
+                        Strategy:
+                        1. Search from .veh directory upwards to mod root
+                        2. If not found, search in Vehicles root (global files)
 
-                                    parent = current.parent
-                                    if parent == current:
-                                        break
-                                    current = parent
+                        This approach works for both structures:
+                        - Vanilla: Vehicles/ModName/Season/Class/Team/file.veh
+                        - All_Teams: Vehicles/ModName/All_Teams/Team/file.veh
 
-                                # Fallback to Vehicles root + filename
-                                return root / ref_p
+                        Args:
+                            base_dir: Directory containing the .veh file
+                            ref_str: File reference from .veh (e.g., "Boxer\\Boxer.hdv")
+                            vehicles_root: Root Vehicles directory
+                            mod_root: Root of the mod (first child of Vehicles/)
 
-                            hdv_path = _resolve_hdv_from_vehicle_dir(file_path_obj.parent, ref_path, vehicles_root)
+                        Returns:
+                            Tuple of (resolved_path_str, exists_bool)
+                        """
+                        if not ref_str:
+                            return "", False
+
+                        # Normalize separators
+                        ref = ref_str.replace('/', '\\')
+                        ref_path = Path(ref)
+
+                        # If absolute path, use as-is
+                        if ref_path.is_absolute():
                             try:
-                                config.hdvehicle_resolved = str(hdv_path)
-                                config.hdvehicle_exists = hdv_path.exists()
+                                return str(ref_path), ref_path.exists()
                             except Exception:
-                                config.hdvehicle_resolved = str(hdv_path)
-                                config.hdvehicle_exists = False
+                                return str(ref_path), False
+
+                        # Strategy 1: Walk up from .veh directory to mod root
+                        current = base_dir
+                        try:
+                            vehicles_root_resolved = vehicles_root.resolve()
+                        except Exception:
+                            vehicles_root_resolved = vehicles_root
+
+                        try:
+                            mod_root_resolved = mod_root.resolve() if mod_root else None
+                        except Exception:
+                            mod_root_resolved = mod_root
+
+                        while True:
+                            # Try resolving the reference from current directory
+                            candidate = current / ref_path
+                            try:
+                                if candidate.exists():
+                                    return str(candidate), True
+                            except Exception:
+                                pass
+
+                            # Stop at mod root (don't go above it)
+                            if mod_root_resolved:
+                                try:
+                                    if current.resolve() == mod_root_resolved:
+                                        break
+                                except Exception:
+                                    if str(current) == str(mod_root):
+                                        break
+
+                            # Stop at Vehicles root
+                            try:
+                                if current.resolve() == vehicles_root_resolved:
+                                    break
+                            except Exception:
+                                if str(current) == str(vehicles_root):
+                                    break
+
+                            # Move to parent
+                            parent = current.parent
+                            if parent == current:
+                                break
+                            current = parent
+
+                        # Strategy 2: Try from mod root directly (if we haven't checked it yet)
+                        if mod_root:
+                            candidate = mod_root / ref_path
+                            try:
+                                if candidate.exists():
+                                    return str(candidate), True
+                            except Exception:
+                                pass
+
+                        # Strategy 3: Fallback to Vehicles root (global files)
+                        candidate = vehicles_root / ref_path
+                        try:
+                            return str(candidate), candidate.exists()
+                        except Exception:
+                            return str(candidate), False
+
+                    # Resolve ALL technical file paths
+                    if config.hdvehicle:
+                        config.hdvehicle_resolved, config.hdvehicle_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.hdvehicle, vehicles_root, mod_root
+                        )
+                    if config.graphics:
+                        config.graphics_resolved, config.graphics_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.graphics, vehicles_root, mod_root
+                        )
+                    if config.spinner:
+                        config.spinner_resolved, config.spinner_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.spinner, vehicles_root, mod_root
+                        )
+                    if config.upgrades:
+                        config.upgrades_resolved, config.upgrades_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.upgrades, vehicles_root, mod_root
+                        )
+                    if config.sounds:
+                        config.sounds_resolved, config.sounds_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.sounds, vehicles_root, mod_root
+                        )
+                    if config.cameras:
+                        config.cameras_resolved, config.cameras_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.cameras, vehicles_root, mod_root
+                        )
+                    if config.head_physics:
+                        config.head_physics_resolved, config.head_physics_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.head_physics, vehicles_root, mod_root
+                        )
+                    if config.cockpit:
+                        config.cockpit_resolved, config.cockpit_exists = _resolve_technical_file(
+                            file_path_obj.parent, config.cockpit, vehicles_root, mod_root
+                        )
             except (ValueError, IndexError):
                 vehicle.relative_path = ""
-                # Fallback HDV resolve with global config if possible
+                # Fallback: try to resolve HDV with just Vehicles root if path info unavailable
                 try:
                     if config.hdvehicle:
                         rfactor_path = self.config.get_rfactor_path()
                         if rfactor_path:
                             vehicles_root = Path(rfactor_path) / 'GameData' / 'Vehicles'
+                            # Simple fallback: just try from Vehicles root
                             ref = config.hdvehicle.replace('/', '\\')
                             ref_path = Path(ref)
-                            # Use same resolution strategy as above
-                            def _resolve_hdv_from_root_only(ref_p: Path, root: Path) -> Path:
-                                if ref_p.is_absolute():
-                                    return ref_p
-                                if len(ref_p.parts) > 1:
-                                    return root / ref_p
-                                # Bare filename: try one-level heuristic using folder name equal to filename stem
-                                candidate = root / ref_p.stem / ref_p
-                                try:
-                                    if candidate.exists():
-                                        return candidate
-                                except Exception:
-                                    pass
-                                return root / ref_p
-
-                            hdv_path = _resolve_hdv_from_root_only(ref_path, vehicles_root)
-                            config.hdvehicle_resolved = str(hdv_path)
-                            config.hdvehicle_exists = hdv_path.exists()
+                            candidate = vehicles_root / ref_path
+                            try:
+                                config.hdvehicle_resolved = str(candidate)
+                                config.hdvehicle_exists = candidate.exists()
+                            except Exception:
+                                config.hdvehicle_resolved = str(candidate)
+                                config.hdvehicle_exists = False
                 except Exception:
                     pass
 

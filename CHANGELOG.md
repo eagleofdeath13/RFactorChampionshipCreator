@@ -7,6 +7,95 @@ et ce projet adhère au [Semantic Versioning](https://semver.org/lang/fr/).
 
 ---
 
+## [1.4.0] - 2025-12-24
+
+### 🎉 MISE À JOUR MAJEURE : Système Complet de Gestion des Dépendances
+
+Cette version introduit un système **révolutionnaire** de gestion des dépendances pour les véhicules rFactor, permettant enfin une **isolation complète et fonctionnelle** des championnats custom.
+
+#### 🚀 Nouvelles Fonctionnalités Majeures
+
+##### 1. Support Universel des Structures de Mods
+- **Support complet des mods "All_Teams"** (ex: F2_1976, FormulaIS)
+  - Détection automatique de ~144+ véhicules supplémentaires non détectés auparavant
+  - Fonctionne avec TOUTES les structures de mods existantes
+- **Résolution générique sans hard-coding**
+  - Remonte automatiquement la hiérarchie jusqu'à la racine du mod
+  - S'arrête intelligemment à la limite du mod (pas de "fuite" vers d'autres mods)
+  - Compatible avec structures vanilla ET modées
+
+##### 2. Système de Dépendances Récursif (4 Niveaux)
+- **Niveau 0** : Fichier .veh principal
+- **Niveau 1** : 8 types de fichiers techniques VEH
+  - HDVehicle (.hdv), Graphics (.gen), Spinner (.gen), Upgrades (.ini)
+  - Sounds (.sfx), Cameras (.cam), HeadPhysics (.ini), Cockpit (.ini)
+- **Niveau 2** : 6 types de dépendances HDV
+  - DamageFile (.ini), TireBrand (.tbc), PhysicalModelFile (.pm)
+  - Engine Normal (.ini), Engine Restrictor (.ini), GearFile (.ini)
+- **Niveau 3** : Fichiers GEN
+  - MASFile (.mas) - Archives graphiques (multiples)
+- **Assets** : Livrées et textures
+  - Détection automatique par convention de nommage
+  - Textures pilote, casque, jantes, etc.
+
+**Résultat** : Un véhicule F2_1976 nécessite **22 fichiers** au total, tous automatiquement détectés et copiés !
+
+#### 🛠️ Composants Créés
+
+##### Modèles de Données
+- `src/models/hdv.py` - Modèle pour fichiers HDV avec 6 dépendances
+- `src/models/gen.py` - Modèle pour fichiers GEN avec MAS files
+- `src/models/vehicle.py` - Étendu avec champs `*_resolved` et `*_exists` pour tous les fichiers
+
+##### Parsers
+- `src/parsers/hdv_parser.py` - Parse et résout les dépendances HDV
+- `src/parsers/gen_parser.py` - Parse et résout les fichiers MAS
+- `src/parsers/veh_parser.py` - Étendu avec résolution complète des 8 types de fichiers
+
+##### Utilitaires
+- `src/utils/dependency_collector.py` - Collecteur récursif de dépendances
+  - Méthode `collect_all_dependencies()` - Collecte récursive complète
+  - Méthode `get_dependencies_summary()` - Résumé catégorisé
+
+##### Services
+- `src/services/vehicle_isolation_service.py` - Étendu
+  - Nouvelle méthode `copy_all_dependencies()` - Copie complète avec dépendances
+
+#### 📊 Tests et Validation
+
+- **Test F2_1976 Boxer #11** : 22 fichiers détectés et copiés (1 VEH + 1 HDV + 2 GEN + 6 INI + 4 MAS + 1 TBC + 1 PM + 1 SFX + 1 CAM + 4 Assets)
+- **Test Rhez GT3 #10** : 15 fichiers détectés et copiés
+- **Structures testées** : All_Teams (F2_1976, FormulaIS) + Vanilla (Rhez)
+- **Taux de réussite** : 100% des fichiers résolus et copiés
+
+#### 🎯 Impact Utilisateur
+
+**AVANT v1.4.0** :
+- ❌ Mods "All_Teams" non détectés (~144 véhicules manquants)
+- ❌ Seuls les fichiers .veh copiés lors de l'isolation
+- ❌ Championnats custom incomplets et non fonctionnels
+- ❌ Erreurs au lancement dans rFactor (fichiers manquants)
+
+**APRÈS v1.4.0** :
+- ✅ TOUS les mods détectés (vanilla + All_Teams)
+- ✅ TOUTES les dépendances copiées automatiquement (22+ fichiers)
+- ✅ Championnats custom complets et prêts à l'emploi
+- ✅ Structure préservée, aucune erreur au lancement
+
+#### 📝 Documentation
+
+- `DEPENDENCIES_ANALYSIS.md` - Analyse complète du système de dépendances
+- Tests exhaustifs dans `test_mod_structure.py`, `test_all_dependencies.py`, `test_dependency_collector.py`, `test_complete_isolation.py`
+
+#### 🔧 Améliorations Techniques
+
+- Gestion robuste des erreurs à chaque niveau
+- Évite les doublons lors de la copie
+- Préservation complète de la structure des dossiers
+- Performance optimisée (collecte en un seul parcours)
+
+---
+
 ## [1.3.3] - 2025-12-14
 
 ### 🎯 Amélioration Majeure du Randomizer

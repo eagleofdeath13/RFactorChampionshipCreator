@@ -15,11 +15,11 @@ rFactor Championship Creator est une application web Python qui permet de créer
 
 ## Statut du Projet
 
-**Version Actuelle** : 1.3.3 (14 Décembre 2025) 🎉
+**Version Actuelle** : 1.4.0 (24 Décembre 2025) 🎄🎉
 
 ### ✅ Fonctionnalités Complètes
 
-- [x] **Gestion des talents** - CRUD complet, import/export CSV
+- [x] **Gestion des talents** - CRUD complet, import/export CSV, randomizer intelligent
 - [x] **Gestion des championnats** - Lecture, duplication, suppression
 - [x] **Création de championnats custom** - Interface complète avec isolation véhicules
 - [x] **Gestion des véhicules** - Liste, recherche, filtrage
@@ -28,13 +28,25 @@ rFactor Championship Creator est une application web Python qui permet de créer
 - [x] **Import/Export CSV** - Template, validation, rapports d'erreurs
 - [x] **Système de configuration** - Détection auto rFactor, validation
 - [x] **Système d'isolation véhicules** - Renommage avec préfixe (évite doublons)
+- [x] **🆕 Support complet des mods** - Détection universelle (vanilla + All_Teams)
+- [x] **🆕 Gestion des dépendances** - Copie récursive automatique de TOUS les fichiers (HDV, GEN, INI, MAS, assets)
+- [x] **🆕 Championnats fonctionnels** - Isolation complète avec toutes les dépendances (~22 fichiers par véhicule)
 
-**Tests** : 68 tests passants | **API** : 20+ endpoints REST | **Pages** : 15+ HTML
+**Tests** : 68+ tests passants | **API** : 20+ endpoints REST | **Pages** : 15+ HTML | **Mods** : 144+ véhicules supplémentaires détectés
 
-### 🔄 À Venir (v1.1.0)
+### 🆕 Nouveautés v1.4.0
+
+Cette version majeure révolutionne la gestion des véhicules moddés :
+
+- **Support universel** : TOUS les mods fonctionnent maintenant (F2_1976, FormulaIS, etc.)
+- **Dépendances complètes** : 4 niveaux de dépendances résolus automatiquement
+- **Championnats prêts** : Les championnats custom sont maintenant 100% fonctionnels dans rFactor
+- **Performance** : Détection et copie optimisées de 22+ fichiers par véhicule
+
+### 🔄 À Venir
 
 - [ ] Package PyInstaller (exécutable standalone)
-- [ ] Tests in-game rFactor (validation finale)
+- [ ] Tests in-game rFactor avec mods (validation finale)
 - [ ] Documentation vidéo
 - [ ] Support multi-profils
 
@@ -255,5 +267,5 @@ Loïc
 
 ---
 
-**Version** : 1.3.3 (14 Décembre 2025)
+**Version** : 1.4.0 (14 Décembre 2025)
 **Statut** : ✅ Version complète fonctionnelle | 68 tests passants | 20+ endpoints API | 15+ pages web

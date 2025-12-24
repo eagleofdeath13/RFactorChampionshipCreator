@@ -30,18 +30,49 @@ class VehicleConfig:
 
     default_livery: str = ""  # Default livery file (e.g., "Campana_27.DDS")
     gen_string: str = ""  # GenString value from .veh
-    hdvehicle: str = ""  # HDV file reference
-    # Derived/extra information about HDV reference
-    hdvehicle_resolved: str = ""  # Resolved absolute path to HDV when possible
-    hdvehicle_exists: bool = False  # Whether the resolved HDV file exists on disk
-    graphics: str = ""  # Graphics file reference
-    spinner: str = ""  # Spinner file reference
-    upgrades: str = ""  # Upgrades file reference
-    sounds: str = ""  # Sounds file reference
-    cameras: str = ""  # Cameras file reference
-    head_physics: str = ""  # Head physics file reference
-    cockpit: str = ""  # Cockpit file reference
-    ai_upgrade_class: str = ""  # AI upgrade class
+
+    # HDV file reference
+    hdvehicle: str = ""
+    hdvehicle_resolved: str = ""  # Resolved absolute path
+    hdvehicle_exists: bool = False  # Whether file exists
+
+    # Graphics file reference (.gen)
+    graphics: str = ""
+    graphics_resolved: str = ""
+    graphics_exists: bool = False
+
+    # Spinner file reference (.gen)
+    spinner: str = ""
+    spinner_resolved: str = ""
+    spinner_exists: bool = False
+
+    # Upgrades file reference (.ini)
+    upgrades: str = ""
+    upgrades_resolved: str = ""
+    upgrades_exists: bool = False
+
+    # Sounds file reference (.sfx)
+    sounds: str = ""
+    sounds_resolved: str = ""
+    sounds_exists: bool = False
+
+    # Cameras file reference (.cam)
+    cameras: str = ""
+    cameras_resolved: str = ""
+    cameras_exists: bool = False
+
+    # Head physics file reference (.ini)
+    head_physics: str = ""
+    head_physics_resolved: str = ""
+    head_physics_exists: bool = False
+
+    # Cockpit file reference (.ini)
+    cockpit: str = ""
+    cockpit_resolved: str = ""
+    cockpit_exists: bool = False
+
+    # AI upgrade class
+    ai_upgrade_class: str = ""
 
 
 @dataclass

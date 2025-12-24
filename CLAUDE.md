@@ -566,4 +566,4 @@ Lorsque vous travaillez sur ce projet :
 - UX améliorée avec notifications et indicateurs visuels
 - Animations fluides avec Framer Motion (AnimatePresence)
 
-**Version** : 1.3.3
+**Version** : 1.4.0

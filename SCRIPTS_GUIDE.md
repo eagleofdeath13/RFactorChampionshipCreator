@@ -222,5 +222,5 @@ npm run dev
 
 ---
 
-**Version** : 1.3.3
-**Date** : 14 Décembre 2025
+**Version** : 1.4.0
+**Date** : 24 Décembre 2025
